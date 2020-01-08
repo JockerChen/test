@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var week1=changeWeek("星期一");
+		console.log(week1);
+		var week2=changeWeek("Sunday");
+		console.log(week2);
+		
+		var today = new Date();
+		var ww = new Date().getDay();
+		
+		var week3=changeWeek(ww);
+		console.log(week3);
+	})
+	//根据星期汉字转成星期英文对应
+function changeWeek(name) {
+    var names = {
+        '星期一': function () {
+            return 'Monday';
+        },
+        '星期二': function () {
+            return 'Tuesday';
+        },
+        '星期三': function () {
+            return 'Wednesday';
+        },
+        '星期四': function () {
+            return 'Thursday';
+        },
+        '星期五': function () {
+            return 'Friday';
+        },
+        '星期六': function () {
+            return 'Saturday';
+        },
+        '星期日': function () {
+            return 'Sunday';
+        },
+        'Monday': function () {
+            return '星期一';
+        },
+        'Tuesday': function () {
+            return '星期二';
+        },
+        'Wednesday': function () {
+            return '星期三';
+        },
+        'Thursday': function () {
+            return '星期四';
+        },
+        'Friday': function () {
+            return '星期五';
+        },
+        'Saturday': function () {
+            return '星期六';
+        },
+        'Sunday': function () {
+            return '星期日';
+        },
+        '0': function () {
+            return '星期日';
+        },
+        '1': function () {
+            return '星期一';
+        },
+        '2': function () {
+            return '星期二';
+        },
+        '3': function () {
+            return '星期三';
+        },
+        '4': function () {
+            return '星期四';
+        },
+        '5': function () {
+            return '星期五';
+        },
+        '6': function () {
+            return '星期六';
+        }
+    }
+    if (typeof names[name] !== 'function') {
+        return false;
+    }
+
+    return names[name]();
+}
+</script>

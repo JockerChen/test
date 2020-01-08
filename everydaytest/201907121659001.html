@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script> 
+		<title></title>
+	</head>
+	<body>
+		<table id="info">
+			<tbody>
+				<tr>
+					<td>1</td>
+					<p>1</p>
+					<td>2</td>			
+				</tr>
+				<tr><td>3</td></tr>
+					<p>1</p>
+				<tr><td>5</td></tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$("#info").on("click",'td,p',function(){
+			alert($(this).text());
+		})
+		
+	})
+</script>

@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>对象工厂</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	// var o ={name:"aaa",age:12};
+	// var o2=o;
+	// console.log(o2);
+	function PersonFactory(pName,page)
+	{
+		return {
+			name:pName,
+			age:page
+		}
+	}
+	var o3=PersonFactory("CN",31);
+	
+	var o4=PersonFactory("LXH",'35');
+	console.log(o3);
+	console.log(o4);
+	//只有函数才有prototype属性是一个函数的属性
+	function Person(){
+		var age=30;
+		this.age=22;
+		this.name="CN";
+	}
+	Person.prototype.headCount=1;
+	var p1=new Person();
+	var p2=new Person();
+	//伪类__proto__
+	console.log(p1.__proto__.headCount);
+</script>

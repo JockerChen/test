@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//创建父类
+	//创建子类
+	// 建立关系
+	function P(){
+		
+	}
+	function C(){
+		
+	}
+	//inherit
+	//缺点:子类属性暴露给父类（不推荐）
+	C.prototype=P.prototype;
+	var c1=new C();
+	console.log(c1 instanceof C);
+	console.log(c1 instanceof P);
+	// 第二种不会把子类暴露给父类，实现形式通过NEW一个对象对另一个对象进行一个桥接
+	// 确点，通过桥接创建的这个对象内存不能被释放。
+	C.prototype=new P();
+	var c2=new C();
+	c2.prototype.XXX="11111";
+	var p2=new P();
+	// console.log(p2.XXX);
+	//第三种构建一个函数
+	function F(){	
+		
+	}
+	F.prototype=P.prototype;
+	var f=new F();
+	C.prototype=f;
+	//实现形式为(原理如下)
+	// c.prototype=Object.create(P.prototype);
+	//用函数模拟类
+</script>

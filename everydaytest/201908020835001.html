@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 使页面适配手机屏幕 -->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title></title>
+        <!-- 引入JQuery的JS文件 -->
+	    <script type="text/javascript" charset="utf-8" src="js/jquery-1.7.2.min.js"></script>
+    </head>
+
+    <body>
+        <!-- 这里是通过点击某个Div来隐式创建一个 input 控件，然后实现直接访问相机的功能。-->
+        <div id="demoForClick">
+            <div id="btnID">这里是直接获取iOS相机功能</div>
+        </div>
+        <!-- 换行 -->
+        <br/><br/><br/>
+        <div>
+            <!-- 直接访问相机功能进行拍照 -->
+            <label>照相机</label>
+            <input type="file" id='PhotoInfo' accept="image/*" capture='camera' />
+        </div>
+        <!-- 换行 -->
+        <br/><br/><br/>
+         <div>
+            <label>上传</label>
+            <input type="button" id='btnUpload' value="上传" />
+        </div>
+        <!-- 换行 -->
+        <br/><br/><br/>
+    </body>
+</html>
+<script type="text/javascript">
+$(function(){
+	//获取学校ID
+	getSchoolId();
+	//点击上传按钮
+	$('#btnUpload').on("click",function(){
+		// 获取File引用:
+		var fileInput =$("#PhotoInfo");
+		var file = fileInput[0].files[0];
+		// 读取文件:
+		var reader = new FileReader();
+		reader.onload = function(e) {
+		　　var　data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...}'      
+			console.log(data);
+			//调用人脸选取框,并进行显示
+			getPersonFaceList(images);
+		};
+		// 以DataURL的形式读取文件:
+		reader.readAsDataURL(file);
+		console.log(file);
+	})
+	//点击人脸列表中的一条
+	$('#PersonFaceList').on('click','li',function(){
+		$(this).addClass("active").siblings().removeClass("active");
+	})
+	
+	//确认选取某个人后点击确定
+	$('#PersonFaceSureBtn').on('click',function(){
+		var SearchFacesInfo={};
+		SearchFacesInfo.PersonName=$('#PersonFaceList li.active').find(".PersonName").text();
+		SearchFacesInfo.PersonAccountNo=$('#PersonFaceList li.active').find(".PersonAccountNo").text();
+		SearchFacesInfo.PersonDeptName=$('#PersonFaceList li.active').find(".PersonDeptName").text();
+		SearchFacesInfo.PersonName=$('#PersonFaceList li.active').attr("data-personImg").text();
+		var sSearchFacesInfo = JSON.stringify(SearchFacesInfo);
+		localStorage.setItem("SearchFacesInfo",sSearchFacesInfo);
+	})
+	//点击评价递交按钮
+	
+})
+
+//上传base64功能获取人脸识别结果
+function getPersonFaceList(images)
+{
+	var htmlStr='';
+	//取得服务器设置 Ip
+	var tempServer = localStorage.getItem("ServerIp");
+	//此处配置接口名称
+	var url = tempServer + "StudentService.ashx";
+	var data = {};
+	data.action = "SearchFaces";
+	data.image = images;
+	data.maxFaceNum = "1";		
+	data.minFaceSize = "80";		
+	data.maxPersonNum = "5";		
+	$.ajax(url, {
+		data: data,
+		dataType: 'json', //服务器返回json格式数据
+		type: 'POST', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		success: function(data) {
+			var result = data.Result;
+			if(result == "0") {
+				var row = data.rows;
+				for(var i = 0; i < row.length; i++) {
+					var sPersonObject=row[i].persons;
+					for(var j=0;j<sPersonObject.length;j++)
+					{
+						var  sPersonImg="http://"+row[i].SchoolDomain+"/uploadFile/PersonInfo/"+row[i].AccountNo+".jpg";
+						htmlStr+='<li data-personImg="'+sPersonImg+'">';
+						htmlStr+='	<i class="jbIcon"></i>';
+						htmlStr+='	<div class="StudentBox">';
+						htmlStr+='		<div class="StudentImg">';
+						htmlStr+='			<img src="'+sPersonImg+'"  onerror="this.src=\'img/img.png\'" />';
+						htmlStr+='		</div>';
+						htmlStr+='		<div class="StudentInfo">';
+						htmlStr+='			<p class="PersonName">'+row[i].PersonName+'</p>';
+						htmlStr+='			<p class="PersonAccountNo">'+row[i].AccountNo+'</p>';
+						htmlStr+='			<p class="PersonDeptName">'+row[i].DeptName+'</p>';
+						htmlStr+='		</div>';
+						htmlStr+='		<p class="Similarity">相似度：<span>'+row[i].Score+'%</span></p>';
+						htmlStr+='	</div>';
+						htmlStr+='</li>';
+					}
+				}
+				$('#PersonFaceList').html(htmlStr);
+				$('#PersonFaceList li:first').addClass("active");	
+				$('#PersonFaceBox').show();
+			} else if(result == "1") {
+				//报错
+				var resultMsg = data.resultMsg;
+				cue(resultMsg);
+				return false;
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+			cue("网络异常,在线获取人脸识别结果信息失败，请稍后重试！");
+			return false;
+		}
+	}) 
+}
+//获取学校ID
+function getSchoolId(){
+	//取得服务器设置 Ip
+	var tempServer = localStorage.getItem("ServerIp");
+	//此处配置接口名称
+	var url = tempServer + "NewDZBPService.ashx";
+	var data = {};
+	data.action = "GetGroup";
+	$.ajax(url, {
+		data: data,
+		dataType: 'json', //服务器返回json格式数据
+		type: 'GET', //HTTP请求类型
+		timeout: 10000, //超时时间设置为10秒；
+		success: function(data) {
+			var result = data.resultCode;
+			if(result == "0") {
+				var row = data.rows;
+				var sSchoolId=row[0];
+				localStorage.setItem("SchoolId",sSchoolId);
+			} else if(result == "1") {
+				//报错
+				var resultMsg = data.resultMsg;
+				cue(resultMsg);
+				return false;
+			}
+		},
+		error: function(xhr, type, errorThrown) {
+			cue("网络异常,获取学校UUID信息失败！");
+			return false;
+		}
+	}) 
+}
+
+//获取评价一级筛选按钮
+function getValueItem()
+{
+	
+}
+</script>

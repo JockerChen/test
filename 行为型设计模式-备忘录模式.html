@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>备忘录模式</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//在不破坏对象的封装情况下在对象之外捕获并保存该对象内部的状态，以便日后在调用的时候对象使用或对象恢复到以前的状态。
+	// 缓存类的设计
+	//主要应用于分页功能
+	var Page=function(){
+		//信息缓存对象
+		var cache={};
+		/*
+			主函数的设计，page 当前页面的设计
+			fn 页面调用的回调函数
+		*/
+		return function(page,fn){
+			if(cache[page]){
+				//恢复到当前页面显示的状态
+				//执行回调函数
+				fn && fn();
+			}else{
+				//缓存中无当前缓存的文件
+				$.post('',{page:page},function(res){
+					if(res.errNo==0){
+						showPage(page,res.data);
+						cache[page]=res.data;
+						fn && fn();
+					}else{
+						//异常处理
+					}
+				})
+			}
+		}
+	}();
+	//界面显示相关
+	function showPage(page,data){
+		
+	}
+</script>

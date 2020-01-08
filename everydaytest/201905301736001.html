@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>命名冲突</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		// alert(f);
+		function f(){
+			console.log("1111111111111"+f);
+		}
+		var f=5;
+		function f(){
+			console.log("2222222");
+		}
+		////////////////////////////////////////
+		// ffff(1,2);
+		
+
+		
+	})
+	// function ffff(a,b)
+	// {
+	// 	console.log(a);
+	// 	console.log(b);
+	// 	var b=100;
+	// 	function a(){
+	// 		
+	// 	}
+	// 	
+	// }
+	function f1(){
+		function f2(){
+			b=1000;
+
+		}
+		// console.log(typeof b);
+		// console.log(b);
+		f2();
+	}
+			f1();
+</script>

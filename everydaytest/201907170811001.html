@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		//防止浮点数溢出
+		var num=0.1+0.2;
+		console.log(num);
+		// var a=Math.abs;
+		var a=new Date();
+		// alert(typeofInfo(a));
+		var info = "8";
+		info=parseInt("9","16");
+		// alert(info);
+		var timeInfo=timeFormat("2019-01-01 10:00:00","due");
+		console.log(timeInfo);
+	})
+	//完整的数据类型检查工具
+	function typeofInfo(o)
+	{
+		var _toString=Object.prototype.toString;
+		var _type={
+			"undefined" : "undefined",
+			"number" : "number",
+			"boolean" : "boolean",
+			"string" : "string",
+			"[object Function]" : "function",
+			"[object Regexp]" : "regexp",
+			"[object Array]" : "array",
+			"[object Date]" : "date",
+			"[object Error]" : "error"
+		};
+		return _type[typeof o] || _type[_toString.call(o)] || (o ? "object" :null);
+	}
+	
+
+//时间戳格式化函数
+function timeFormat(time,reg) {
+	var times = "";
+	if ( reg == "due" ) {
+		var ago = now() - time;
+		if ( ago / ( 3600 * 24 * 365 ) > 1 ) return parseInt(ago / ( 3600 * 24 * 365 )) + "年前";
+		else if ( ago / ( 3600 * 24 * 30 ) > 1 ) return parseInt(ago / ( 3600 * 24 * 30 )) + "个月前";
+		else if ( ago / ( 3600 * 24 * 7 ) > 1 ) return parseInt(ago / ( 3600 * 24 * 7 )) + "周前";
+		else if ( ago / ( 3600 * 24 ) > 1 ) return parseInt(ago / ( 3600 * 24 )) + "天前";
+		else if ( ago / 3600 > 1 ) return parseInt(ago / 3600) + "小时前";
+		else if ( ago / 60 > 1 ) return parseInt(ago / 60) + "分钟前";
+		else if ( ago > 1 ) return ago + "秒前";
+		else return "刚刚";
+		return times;
+	}
+	if ( reg == "after" ) {
+		var after = time - now();
+		var returnStr = "";
+		if ( after / ( 3600 * 24 * 365 ) > 1 ) {
+			returnStr += (parseInt(after / ( 3600 * 24 * 365 )) + "年");
+			after = after % ( 3600 * 24 * 365 );
+		}
+		if ( after / ( 3600 * 24 * 30 ) > 1 ) {
+			returnStr += (parseInt(after / ( 3600 * 24 * 30 )) + "个月");
+			after = after % ( 3600 * 24 * 30 );
+		}
+		if ( after / ( 3600 * 24 * 7 ) > 1 ) {
+			returnStr += (parseInt(after / ( 3600 * 24 * 7 )) + "周");
+			after = after % ( 3600 * 24 * 7 );
+		}
+		if ( after / ( 3600 * 24 ) > 1 ) {
+			returnStr += (parseInt(after / ( 3600 * 24 )) + "天");
+			after = after % ( 3600 * 24 );
+		}
+		if ( after / 3600 > 1 ) {
+			returnStr += (parseInt(after / 3600) + "小时");
+			after = after % 3600;
+		}
+		if ( after / 60 > 1 ) {
+			returnStr += (parseInt(after / 60) + "分");
+			after = after % 60;
+		}
+		if ( after > 1 ) returnStr += (after + "秒");
+		return returnStr;
+	}
+	reg = reg ? reg : "%Y-%m-%d %H:%i:%s";
+	with ( new Date(parseInt(time) * 1000) ) {
+		times = reg.replace(/%Y/g,getFullYear())
+				   .replace(/%m/g,( getMonth() + 1 ).leading())
+				   .replace(/%d/g,getDate().leading())
+				   .replace(/%H/g,getHours().leading())
+				   .replace(/%i/g,getMinutes().leading())
+				   .replace(/%s/g,getSeconds().leading());
+	}
+	return times;
+}
+//当前时间戳
+function now() {
+	return parseInt(new Date().getTime() / 1000);
+}
+</script>

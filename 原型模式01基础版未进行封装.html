@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		//进行调用
+		var iImagesArray=["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg"];
+		var iSlideArray=["left.jpg","right.jpg"];
+		
+		var fadeImg=new FadeLoopImage(iImagesArray,'FadeInfo',iSlideArray);
+		fadeImg.changeImage();
+	})
+	
+	
+	var LoopImages=function(imgArr,container)
+	{
+		this.imagesArray=imgArr;
+		this.container=container;
+		this.creatImage=function(){};
+		this.changeImage=function(){};
+	}
+	//上下滑动切换类
+	var SlideLoopImage=function(imgArr,container)
+	{
+		LoopImages.call(this,imgArr,container);
+		this.changeImage=function()
+		{
+			console.log("slideLoopImage");
+		}	
+	}
+	//渐隐切换类
+	var FadeLoopImage=function(imgArr,container,arrow)
+	{
+		LoopImages.call(this,imgArr,container);	
+		this.arrow=arrow;
+		this.changeImage=function()
+		{
+			console.log("FadeLoopImage");
+		}	
+	}
+</script>
+<!-- 原型模式用原型实例指向创建对象的类，适用于创建对象的类共享原型对象的属性和方法 -->

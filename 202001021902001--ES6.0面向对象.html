@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+   class User{
+     //属性
+    constructor(name,pwd){
+      this.Name=name;
+      this.Pwd=pwd;
+    }
+    //方法
+    showName()
+    {
+      alert(this.Name);
+    }
+    showPwd()
+    {
+      alert(this.Pwd);
+    }
+   }
+
+  //  let userInfo=new User("小明","123");
+  //  userInfo.showName();
+  //  userInfo.showPwd();
+   //console.log(userInfo.showName());
+   //consloe.log(userInfo.showPwd());
+
+
+/**
+ * @Author: [JokerChen]
+ * @description: 继承
+ * @param {type} 
+ * @return: 
+ */   
+class VipUser extends User
+{
+  constructor(name,pwd,level){
+    //执行父类的构造函数
+    super(name,pwd);
+    this.Level=level;
+  }
+  showLevel()
+  {
+    alert(this.Level);
+  }
+}
+let userInfo1=new VipUser("小明1111","12334",3);
+userInfo1.showLevel();
+</script>

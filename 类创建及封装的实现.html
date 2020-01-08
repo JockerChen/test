@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	window.onload=function(){
+		var book=new Book("1","平淡故事",19.1);
+		book.display();
+		book.collection();
+	}
+	var Book=function(id,bookname,price)
+	{
+		this.id=id;
+		this.bookname=bookname;
+		this.price=price;
+	}
+	//为原型对象属性进行赋值
+	//展示这本书
+	Book.prototype.display=function(){
+		console.log("Price:"+this.price);
+	}
+	//收藏次数
+	Book.prototype.collection=function(){
+		console.log("ID:"+this.id+"收藏次数:100");
+	}
+	//为原型对象属性进行赋值
+	//将一个对象赋值给类原型对象
+	// Book.prototype={
+	// 	display:function(){}
+	// };
+	//将一个对象赋值给类原型对象
+	
+	
+</script>

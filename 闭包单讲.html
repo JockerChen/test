@@ -1,0 +1,106 @@
+/**
+ * @Author: [JokerChen]
+ * @description: 
+ * @param {type} 
+ * @return: 
+ */
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="1">1</div>
+		<div id="2">2</div>		
+		<div id="3">3</div>
+	</body>
+<script type="text/javascript">
+	//闭包是什么时候创建的
+	//闭包的本质是环境作用域联
+	//闭包的好处（减少全局变量）
+	//闭包的注意点
+	// 对于捕获的变量是个引用不是复制
+	// 父函数每调用一次会产生新的闭包
+	// 循环的问题
+	
+	//封装
+		// function f1()
+		// {
+		// 	var a=1;
+		// 	var b=2;
+		// 	function f2()
+		// 	{
+		// 		var c=1;
+		// 		function f3()
+		// 		{	
+		// 			console.log(a+b-c);
+		// 		}
+		// 		f3();
+		// 	}
+		// 	f2();
+		// }
+		// f1();
+		//
+		// function add()
+		// {
+		// 	var a=0;
+		// 	a++;
+		// 	console.log(a);
+			
+		// }
+		// add();
+		// add();
+		//闭包进行优化改造
+		// function add()
+		// {
+		// 	var a=0;
+		// 	return function()
+		// 	{
+		// 		a++;
+		// 		console.log(a);
+		// 	}
+		// }
+		// var result=add();
+		// result();
+		// result();
+		// result();
+		// result();
+		(function(){
+			var m=0;
+			function getM()
+			{
+				return m;
+			}
+			function setM(val)
+			{
+				m=val;
+			}
+			window.g=getM;
+			window.s=setM;
+		})()
+		s(11);
+		console.log(g());
+		//循环的问题(修改之前) 如果没有进行闭包处理的时候循环调用会出现直接输出4的情况
+		// var i;
+		// for (i = 1; i <= 3; i++) {
+		// 	var ele=document.getElementById(i);
+		// 	ele.onclick=function()
+		// 	{
+		// 		alert(i);
+		// 	}
+		// }
+		
+		//循环的问题(修改之后)修改后正常匿名函数内部方法调用时候一定要return一个方法出来
+		var i;
+		for (i = 1; i <= 3; i++) {
+			var ele=document.getElementById(i);
+			ele.onclick=(function(id){
+				return function(){
+					alert(id);
+				}
+			})(i);
+		}
+		
+</script>
+</html>

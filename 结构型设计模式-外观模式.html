@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>外观模式--门面模式</title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<input type="button" name="" value="测试Button" id="TestBtn" />
+	</body>
+</html>
+<script type="text/javascript">
+	// 为一组复杂的子系统接口提供一个更高级的统一接口这个接口使得对子系统接口的访问更容易.
+	// 在javascript中有时也会用到对于底层的兼容性问题进行封装,使得用户统一操作
+	$(function(){
+		// //点击测试按钮
+		// $('#TestBtn').on("click",function(){
+		// 	alert("123123123");
+		// })
+		var myInput=document.getElementById('TestBtn');
+		addEvent(myInput,'click',function(){
+			console.log("绑定第一个事件！");
+		})
+		addEvent(myInput,'click',function(){
+			console.log("绑定第二个事件！");
+		})
+		addEvent(myInput,'click',function(){
+			console.log("绑定第三个事件！");
+		})
+		
+		A.css('TestBtn','color','red');
+		A.attr('TestBtn','name','名称的属性设置');
+		
+	})
+	function addEvent(dom,type,fn){
+		//对于支持DOM2级事件处理程序addEventListener方法的浏览器
+		if(dom.addEventListener){
+			dom.addEventListener(type,fn,false);
+		}
+		else if(dom.attachEvent){
+			dom.attachEvent('on'+type,fn);
+		}
+		else{
+			dom['on'+type]=fn;
+		}
+	}
+	
+	//减轻接口复杂度
+	//获取事件对象
+	var getEvent=function(){
+		//标准浏览器返回event ie下返回window.event
+		return  event || window.event;
+	}
+	//获取元素信息
+	var getTarget=function(event){
+		var event =getEvent(event);
+		return event.target ||event.srcElement;
+	}
+	//阻止事件冒泡的方法·
+	var preventDefault=function()
+	{
+		var event =getEvent(event);
+		if(event.preventDefault){
+			event.preventDefault();
+		}
+		else
+		{
+			event.returnValue=false;
+		}
+	}
+	//减轻接口复杂度
+	//作用3
+	//外观模式小型代码库 ()
+	var A={
+		g:function(id){
+			return document.getElementById(id);
+		},
+		css:function(id,key,value){
+			document.getElementById(id).style[key]=value;
+			return this;
+		},
+		attr:function(id,key,value){
+			document.getElementById(id)[key]=value;
+			return this;
+		},
+		html:function(id,html){
+			document.getElementById(id).innerHTML=html;
+			return this;
+		},
+		on:function(id,type,fn){
+			document.getElementById(id)['on'+type]=fn;
+			return this;
+		}
+	}
+	
+	
+	</script>
+

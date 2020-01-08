@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//扩展call方法的作用
+	// 1 继承
+	// 2 修改函数运行时的this指针
+	
+	$(function(){
+		//进行调用
+		var iImagesArray=["01.jpg","02.jpg","03.jpg","04.jpg","05.jpg"];
+		var iSlideArray=["left.jpg","right.jpg"];
+		var fadeImg=new FadeLoopImage(iImagesArray,'FadeInfo',iSlideArray);
+		console.log(fadeImg.container); 
+		fadeImg.changeImage();
+		console.log(fadeImg.getContainer());
+	})
+	//图片轮播
+	var LoopImages=function(imgArr,container)
+	{
+		this.imagesArray=imgArr;
+		this.container=container;
+	}
+	LoopImages.prototype={
+		creatImage:function(){
+			console.log("LoopImages类creatImage方法");
+		},
+		changeImage:function(){
+			console.log("LoopImages类changeImage方法");
+		},
+		getImageLength:function(){
+			return this.imagesArray.length;
+		}
+	}
+	//上下滑动类
+	var SlideLoopImage=function(imgArr,container)
+	{
+		LoopImages.call(this,imgArr,container);
+	} 
+	SlideLoopImage.prototype=new LoopImages();
+	SlideLoopImage.prototype.changeImage=function(){
+		console.log("SlideLoopImage类changeImage方法");
+	}
+	//渐隐类
+	var FadeLoopImage=function(imgArr,container,arrow)
+	{
+		LoopImages.call(this,imgArr,container);
+		//切换箭头私有变量
+		this.arrow=arrow;
+	} 
+	FadeLoopImage.prototype=new LoopImages();
+	FadeLoopImage.prototype.changeImage=function(){
+		console.log("FadeLoopImage类changeImage方法");
+	}
+	FadeLoopImage.prototype.getContainer=function()
+	{
+		return this.container;
+	}
+</script>

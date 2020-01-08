@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+
+	})
+
+	//应用模块(基础类模块)
+	var Application=function(param)
+	{
+		this.applicationId=param.applicationId;//应用模块id
+		this.applicationName=param.applicationName;//应用模块名称
+		this.applicationIcon=param.applicationIcon;//应用模块图标
+		this.applicationType=param.applicationType;//应用模块类型
+		this.applicationUrl=param.applicationUrl;	 //应用模块url
+		this.applicationPackname=param.applicationPackname;//应用模块包名
+		this.applicationAddress=param.applicationAddress;//应用位置(班级管理、学生端、教师端)
+		this.applicationSort=param.applicationSort;//(排序位置)
+	}
+	//应用功能(为界面添加对应的菜单)
+	Application.prototype.AppendHtml=function(id,eq,html,url){
+		var returnHtml= typeReturnHtml(name,this.applicationName,this.applicationUrl,this.applicationIcon,this.applicationType);
+		$('#'+id).find('li:eq('+eq+')').append(returnHtml);
+		//根据不同的应用设置不同的样式及图标
+		$('#'+id).find('li:eq('+eq+')').find('i').css({"background":"url("+url+") no-repeat","width":"30px","height":"40px","background-size":"100% 100%"});
+	}
+	//根据不同的类别返回对应的Html类别
+	function typeReturnHtml(name,applicationName,applicationUrl,applicationIcon,applicationType) {
+		var htmlsrc="";
+	    var names = {
+	        '班级管理': function () {
+				htmlsrc += '<li data-Type="'+applicationType+'" data-html="StudentLeave.html" data-name="'+applicationName+'">';
+				htmlsrc += '	<a><i class="Menu-icon"></i>'+applicationName+'</a>';
+				htmlsrc += '</li>';
+	            return htmlsrc;
+	        },
+	        '学生端': function () {
+				htmlsrc += '<li data-Type="'+applicationType+'" data-html="StudentLeave.html" data-name="'+applicationName+'">';
+				htmlsrc += '	<a><i class="Menu-icon"></i>'+applicationName+'</a>';
+				htmlsrc += '</li>';
+	            return htmlsrc;
+	        },
+	        '教师端': function () {
+				htmlsrc += '<li data-Type="'+applicationType+'" data-html="StudentLeave.html" data-name="'+applicationName+'">';
+				htmlsrc += '	<a><div class="menu"><i class="te-icon er02"></i>'+applicationName+'</div><label></label></a>';
+				htmlsrc += '</li>';
+	            return htmlsrc;
+	        }
+	    }
+	    if (typeof names[name] !== 'function') {
+	        return false;
+	    }
+	
+	    return names[name]();
+	}
+	
+</script>

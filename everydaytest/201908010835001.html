@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/adapter.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+</html>
+
+<script type="text/javascript">
+$(function(){
+	
+	
+})
+//获取登录身份列表
+function getIdentityList()
+{
+	var htmlStr='';
+	var SchoolType=localStorage.getItem("SchoolType");
+	if(SchoolType=="大学")
+	{
+		htmlStr+='<dl data-html="newschool/dzbpxs/universitystudent.html">';
+		htmlStr+='	<dt class="guanliyuan"></dt>';
+		htmlStr+='	<dd>学生</dd>';
+		htmlStr+='	<p class="choose-role"></p>';
+		htmlStr+='</dl>';
+		htmlStr+='<dl data-html="newschool/dzbpjs/universitystudent.html">';
+		htmlStr+='	<dt class="jiaoshi"></dt>';
+		htmlStr+='	<dd>教师</dd>';
+		htmlStr+='	<p class="choose-role"></p>';
+		htmlStr+='</dl>';
+	}
+	else
+	{
+		htmlStr+='<dl data-html="newschool/dzbpjz/jiazhang.html">';
+		htmlStr+='	<dt class="jiazhang"></dt>';
+		htmlStr+='	<dd>家长</dd>';
+		htmlStr+='	<p class="choose-role"></p>';
+		htmlStr+='</dl>';
+		htmlStr+='<dl>';
+		htmlStr+='<dl data-html="newschool/dzbpjs/jiaoshi.html">';
+		htmlStr+='	<dt class="jiaoshi"></dt>';
+		htmlStr+='	<dd>教师</dd>';
+		htmlStr+='	<p class="choose-role"></p>';
+		htmlStr+='</dl>';
+	}
+	jq('#ChooseBox').html(htmlStr);
+}
+
+</script>
+

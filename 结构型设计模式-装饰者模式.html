@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>装饰者模式</title>
+	</head>
+	<body>
+		<input type="text" id="tel_Input" placeholder="请输入电话号" />
+		<input type="text" id="name_Input" placeholder="请输入姓名"  />
+		<input type="text" id="address_Input" placeholder="请输入地址"  />
+	</body>
+</html>
+
+<script type="text/javascript">
+	// 这样动态向对象添加职责的方式就是装饰者模式 
+	// 就好比天冷了，我们穿上一层层衣服
+	$(function(){
+		decorator("tel_Input",function(){
+			$(this).hide();
+			console.log("1");
+		})
+		decorator("name_Input",function(){
+			console.log("2");
+		})
+		decorator("address_Input",function(){
+			console.log("3");
+		})
+		
+		// 第二种装饰者模式(高耦合),每一个子类都需要和父类耦合(）可以通过此方法再进行扩展)
+		//缺点
+		// 超类子类强耦合，超类改变导致子类改变
+		// 超类内部细节对子类可见，破坏了封装性
+		// 完成功能复用同时，可能会创造大量子类
+		// 装饰链叠加了函数作用域，如果过长也会产生性能问题
+		// 如果原函数上保存了属性，返回新函数后属性会丢失
+		var myMacbook = new Insurance(new BlurayDrive(new Memory(new Macbook())));
+		console.log(myMacbook.cost());
+	})
+	
+	//装饰者模式构建(第一种)(此种模式可进行应用的扩展，为不同的场景进行扩展不同的功能，并且不会破坏原有的操作)
+	//可以横向扩展到跳转后进行blur处理
+	var decorator = function(input, fn){
+		// 获取事件源
+		var input=document.getElementById(input);
+		// 若事件源已经绑定事件
+		if(typeof input.onclick ==='function')
+		{
+			//缓存事件源原有的回调函数
+			var oldClickFn=input.onclick;
+			// 为事件源定义新的事件
+			input.onclick=function(){
+				//事件源原有回调函数
+				oldClickFn();
+				//执行事件源新增的回调函数
+				fn();
+			}
+		}
+		else
+		{
+			// 事件源为绑定事件，则直接为事件源添加新的回调函数 
+			input.onclick=fn;	
+		}
+	}
+	
+	//装饰者模式构建(第二种)父类和子类耦合关系比较明显，并且在设计的时候已经将对应的this.cost方曝露出来
+	function Macbook() {
+		this.cost = function () {
+			return 1000;
+		};
+	}
+
+	function Memory(macbook) {
+		this.cost = function () {
+			return macbook.cost() + 75;
+		};
+	}
+
+	function BlurayDrive(macbook) {
+		this.cost = function () {
+			return macbook.cost() + 300;
+		};
+	}
+
+	function Insurance(macbook) {
+		this.cost = function () {
+			return macbook.cost() + 250;
+		};
+	}
+</script>

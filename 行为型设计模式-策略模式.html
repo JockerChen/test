@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>策略模式</title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var priceInfo=PriceStrategy('return50',"612.12");
+		console.log(priceInfo);
+	})
+	var PriceStrategy=function(){
+		//内部算法对象
+		var strategy={
+			return30:function(price){
+				//满一百减30
+				return price-(parseInt(price/100)*30)
+			},
+			return50:function(price){
+				//满一百减50
+				return price-(parseInt(price/100)*50);
+			},
+			percent90:function(price){
+				//九折
+				return price*100*90/10000;
+			},
+			percent70:function(price){
+				//九折
+				return price*100*70/10000;
+			},
+			percent10:function(price){
+				//一折
+				return price*100*10/10000;
+			}
+		}
+		return function(algorithm,price){
+			return strategy[algorithm] && strategy[algorithm](price);
+		}
+	}();
+</script>

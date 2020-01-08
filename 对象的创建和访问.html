@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var p={
+		name:"cssaa",
+		work:function(){
+			console.log('workinf');
+		},
+		_age:19,
+		get age(){
+			return this._age;
+		},
+		set age(val){
+			if(val<0 ||val>150) throw new Error('invalid value') 
+			this._age=val;
+		}
+		
+	};
+	console.log(p.name);
+	p.age=11;
+	console.log(p.age);
+	
+	//Object方法为对象添加属性
+	Object.defineProperty(p,'yy',{
+		value:100,writable:true
+	})
+	//Object defineProperties参数只有下面的几个，不可以随意进行增加
+	//get set writable enuerable(可枚举) configurable value
+	Object.defineProperties(p,{
+		salary:{
+			value:1001,
+			writable:false
+		},
+		gender:{
+			value:9001,
+			writable:true
+		}
+	});
+</script>

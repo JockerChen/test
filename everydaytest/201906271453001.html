@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<div>
+			<img id="imgChange" src="img/1.jpg" >
+			
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$('#imgChange').on("click",function(){
+			$(this).fadeTo(1000, 0,"linear", function(){
+				$(this).fadeTo(2000,1,"linear").attr("src","img/2.jpg");
+			});
+		})
+		
+	})
+	
+	
+</script>

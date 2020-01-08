@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	$(function(){
+		getUserInfo("11231","2","3",function(){
+			return "我是大天才";
+		});
+
+	})
+	function getUserInfo()
+	{
+		var arg=arguments;
+		alert(arguments[2]);
+	}
+
+	
+</script>

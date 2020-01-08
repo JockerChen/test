@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>模板方法模式</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		new CancelAlert({
+			title:'提示标题',
+			content:'提示内容',
+			success:function(){
+				console.log('ok');
+			},
+			fail:function(){
+				console.log('点击取消按钮');
+			}
+		}).init();
+	})
+	/*模板类基类方法构建完成*/
+	//模板类定义
+	var Alert=function(data){
+		if(!data)return;
+		//设置内容
+		this.content=data.content;
+		//设置提示框面板
+		this.pannel=document.createElement("div");
+		//创建提示内容插件
+		this.contentNode=document.createElement("p");
+		//创建确定按钮插件
+		this.confirmBtn=document.createElement("span");
+		//创建关闭按钮插件
+		this.closeBtn=document.createElement("b");
+		//为提示框按钮添加类
+		this.pannel.className='alert';
+		//为关闭按钮添加类
+		this.closeBtn.className='a-close';
+		//为确定按钮添加类
+		this.confirmBtn.className='a-confirm';
+		//为确定按钮添加文案
+		this.confirmBtn.innerHTML=data.confirm || "确认";
+		//为提示内容添加文本
+		this.contentNode.innerHTML=data.content;
+		//点击确认后执行
+		this.success=data.success || function(){};
+		//点击取消后执行
+		this.fail=data.fail ||function(){};
+	}
+	//模板类原型方法
+	Alert.prototype={
+		init:function(){
+			//初始化
+			//生成提示框
+			this.pannel.appendChild(this.closeBtn);
+			this.pannel.appendChild(this.contentNode);
+			this.pannel.appendChild(this.confirmBtn);
+			//插入页面中
+			document.body.appendChild(this.pannel);
+			this.bindEvent();
+			this.show();
+		},
+		bindEvent: function(){
+			//事件绑定
+			var me=this;
+			//关闭按钮
+			this.closeBtn.onclick=function(){
+				//执行关闭取消方法
+				me.fail();
+				me.hide();
+			}
+			//确定按钮操作
+			this.confirmBtn.onclick=function(){
+				//执行确定 方法
+				me.success();
+				me.hide();
+			}
+		},
+		hide:function () {
+			//隐藏
+			this.pannel.style.display='none';
+		},
+		show:function () {
+			//隐藏
+			this.pannel.style.display='block';
+		} 
+	}
+	/*模板类基类方法构建完成*/
+	/***不同模板类方法构建**/
+	//右侧按键提示框
+	var RightAlert=function(data){
+		//继承基本提示框构造函数
+		Alert.call(this,data);
+		//设置确定按钮的位置问题
+		this.confirmBtn.className=this.confirmBtn.className+'right';
+	}
+	//继承基本提示框方法
+	RightAlert.prototype=new Alert();
+	//右侧按键提示框
+	//带标题提示框(子类扩展基类方法，并继承了父类的init方法)
+	var TitleAlert=function(data){
+		//继承基本提示框构造函数
+		Alert.call(this,data);
+		//设置标题内容
+		this.title=data.title;
+		//常见标题组件
+		this.titleNode=document.createElement('h3');
+		//添加标题组件
+		this.titleNode.innerHTML=this.title;
+	}
+	//继承基本提示框方法
+	TitleAlert.prototype=new Alert();
+	TitleAlert.prototype.init=function(){
+		//插入标题
+		this.pannel.insertBefore(this.titleNode,this.pannel.firstChild);
+		//继承父类init方法
+		Alert.prototype.init.call(this);
+	}
+	//带标题提示框(子类扩展基类方法，并继承了父类的init方法)
+	//第三类带取消按钮模块的(模块也可以通过子类模板进行创建)
+	var CancelAlert=function(data){
+		TitleAlert.call(this,data);
+		//设置取消按钮内容
+		this.cancel=data.cancel;
+		//创建取消按钮组件
+		this.cancelBtn=document.createElement('span');
+		//设置取消按钮样式
+		this.cancelBtn.className='cancel';
+		//设置按钮内容
+		this.cancelBtn.innerHTML=this.cancel ||'取消';
+	}
+	CancelAlert.prototype=new Alert();
+	CancelAlert.prototype.init=function(){
+		TitleAlert.prototype.init.call(this);
+		this.pannel.appendChild(this.cancelBtn);
+	}
+	//重新追加取消按钮绑定事件
+	CancelAlert.prototype.bindEvent=function()
+	{
+		var me=this;
+		//标题提示框绑定事件方法继承
+		TitleAlert.prototype.bindEvent.call(me);
+		//取消按钮绑定事件
+		this.cancelBtn.onclick=function()
+		{
+			me.fail();
+			me.hide();
+		}
+	}
+	//第三类带取消按钮模块的
+	/***不同模板类方法构建**/
+	//模板模式的核心是基础方法的重用将核心的方法封装在基类,子类通过继承的形式达到与基类共享方法及功能
+</script>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		//创建子类
+		var instance=new SubClass();
+		console.log(instance.getSubValue());
+		console.log(instance.getSuperValue());
+	
+		//判定类之间的关系
+		console.log(instance instanceof SuperClass);
+		console.log(instance instanceof SubClass);
+		//子类和父类理论上没有半毛钱关系
+		console.log(SubClass instanceof SuperClass);
+		//父类的实例赋值给子类的原型方法
+		console.log(SubClass.prototype instanceof SuperClass);
+		//object类是任何类的父类
+		console.log(instance instanceof Object);
+		
+		console.log(SubClass instanceof Object);
+		
+		//子类更改父类的其他对象
+		var instance1=new SubClassInfo();
+		
+		var instance2=new SubClassInfo();
+		console.log(instance2.books);
+		instance1.books.push("我是新来的");
+		console.log(instance2.books); 
+		
+	})
+	//子类的原型对象
+	function SuperClass(){
+		this.superValue=true;
+	}
+	//为父类添加共有方法
+	SuperClass.prototype.getSuperValue=function(){
+		return this.superValue;
+	}
+	//声明子类
+	function SubClass()
+	{
+		this.subValue=false;
+	}
+	//继承父类
+	SubClass.prototype=new SuperClass();
+	//为子类添加共有方法
+	SubClass.prototype.getSubValue=function(){
+		return this.subValue;
+	}
+	//继承实现原理
+	// javascript继承的实现:声明两个类,将一个类的实例赋值给第二个类的原型,
+	// 类的原型对象的作用就是为类的原型添加共有的方法,但类不能直接访问这些属性和方法,必须通过原型进行访问而我们实例化一个父类的原型对象时候,新创建的对象
+	// 复制了父类的构造函数内的属性和方法并且将原有_proto_指向父类的原型对象,这样就 拥有了父类的原型对象的方法和属性了,并且之个新的创建给子类的原型,那么子类的
+	// 原型就可以访问到父类的原型属性和方法.
+	
+	//继承的两个缺点
+// 	(1)由于子类通过器原型对父类进行实例化继承了父类,所以说父类的共有属性要是引用类型,就回在子类中被所有实例公用
+// 	(2)一个子类的实例更改子类原型从父类构造函数中继承来的共有属性就回影响到其他的子类.
+	
+	//父类
+	function SuperClassInfo()
+	{
+		this.books=["html","js","css"];
+	}
+	//子类
+	function SubClassInfo(){}
+	SubClassInfo.prototype=new SuperClassInfo();
+
+	
+
+
+</script>

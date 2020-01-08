@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>简单工厂模式</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var ball=SportFactory('WorldCup');
+		console.log(ball.intro);
+		ball.getMember();
+	})
+	
+	var Basketball=function(){
+		this.intro="流行于美国";
+	}
+	Basketball.prototype={
+		getMember:function(){
+			console.log("成员为5人");
+		},
+		getBallSize:function(){
+			console.log("篮球比足球大");
+		},
+		play:function(){
+			console.log("篮球用手打");
+		}
+	}
+	
+	var Football=function(){
+		this.intro="足球世界都很流行";
+	}
+	Football.prototype={
+		getMember:function(){
+			console.log("成员为11人");
+		},
+		getBallSize:function(){
+			console.log("足球比网球大");
+		},
+		play:function(){
+			console.log("足球用脚踢");
+		}
+	}
+	
+	var TableTennis=function(){
+		this.intro="足球世界都很流行";
+	}
+	TableTennis.prototype={
+		getMember:function(){
+			console.log("成员为2人");
+		},
+		getBallSize:function(){
+			console.log("乒乓球最小");
+		},
+		play:function(){
+			console.log("乒乓球用拍打");
+		}
+	}
+	
+	//运动工厂
+	var SportFactory=function(name){
+		switch (name){
+			case 'NBA':
+				return new Basketball();
+			case 'WorldCup':
+				return new Football();
+			case 'PingPang':
+				return new TableTennis();
+			default:
+				break;
+		}
+	}
+</script>

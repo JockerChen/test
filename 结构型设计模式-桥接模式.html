@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>桥接模式</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//桥接模式最主要解决实现层于抽象层的解耦分离,使得两部分都可以独立的变化,桥接模式主要是对结构的变化的解耦,
+	// 区别于创建者模式和抽象工厂模式.
+	//创建者模式主要是在对象创建是进行处理.而桥接模式则是在结构上进行处理.
+	$(function(){
+		// var personInfo =new Person(10,12,"中国话");
+		// personInfo.init();
+		var oSpiriteInfo =new Spirite(10,12,"orange","square","精灵语");
+		oSpiriteInfo.init();
+		
+		//特权函数(相当于为外部提供的接口)
+		var c1 = new PublicClass();
+		c1.bridgeMethod(); //执行了一个很复杂的操作
+	})
+	/*************************桥接组织多个单元*******************************/
+	// 多维变量类
+	// 运动单元
+	function Speed(x,y)
+	{
+		this.x=x;
+		this.y=y;
+	}
+	Speed.prototype.run=function(){
+		console.log("运动起来!横向移动:"+this.x+"纵向移动:	"+this.y);
+	}
+	//着色单位
+	function Color(cl)
+	{
+		this.color=cl;
+	}
+	//进行着色处理
+	Color.prototype.draw=function(){
+		console.log("进行着色处理!");
+	}
+	//变形单元
+	function Shape(sp)
+	{
+		this.shape=sp;
+	}
+	Shape.prototype.change=function(){
+		console.log("改变形状！");
+	}
+	//说话单元
+	function Speek(wd)
+	{
+		this.word=wd;
+	}
+	Speek.prototype.say=function(){
+		console.log(this.word);
+	}
+	//创建一个球的类可以运动也可以着色
+	function Ball(x,y,c)
+	{
+		this.speed=new Speed(x,y);
+		this.color=new Color(c);
+	}
+	//创建一个人物类可以运动和说话(相当于桥接类)
+	function Person(x,y,f)
+	{
+		this.speed=new Speed(x,y);
+		this.font=new Speek(f);
+	}
+	Person.prototype.init=function(){
+		this.speed.run();
+		this.font.say();
+	}
+	
+	//创建一个精灵类运动着色,改变形状和说精灵语(相当于桥接类)
+	function Spirite(x,y,c,s,f)
+	{
+		this.speed=new Speed(x,y);
+		this.color=new Color(c);
+		this.font=new Speek(f);
+		this.shape=new Shape(s);		
+	}
+	
+	Spirite.prototype.init=function(){
+		this.speed.run();
+		this.font.say();
+		this.shape.change();
+	}
+	/*************************桥接组织多个单元*******************************/
+	/*************************特权函数*******************************/
+	var PublicClass = function() {
+		//私有变量
+		var privateMethod = function () {
+			console.log('执行了一个很复杂的操作');
+		};
+		// 通过特权函数 去访问这个私用的独立单元(公开方法)
+		this.bridgeMethod = function () {
+			return privateMethod();
+		}
+	}
+	/*************************特权函数*******************************/		
+</script>

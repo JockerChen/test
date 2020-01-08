@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>工厂方法模式</title>
+	</head>
+	<body>
+	</body>
+</html>
+<!-- 工厂方法模式本意是说将实际创建的对象工作推迟到子类当中。这样核心类就变成了抽象类，不过对于js不必这么深究js没有
+传统创建抽象类的方法轻易创建抽象类，js可以将工厂方法看做一个实例化的工厂类 -->
+<script type="text/javascript">
+	$(function(){
+       var sFactory1=Factory('Java','HelloWorld');
+	   
+	   var sFactory2=Factory('Net','HelloWorld Net');
+	})
+	
+	// 安全的工厂方法
+	var Factory=function(type,content)
+	{
+		if(this instanceof Factory)
+		{
+			var s=new this[type](content);
+			return s;
+		}
+		else
+		{
+			return new Factory(type,content);
+		}
+	}
+	//工厂原型中创建所有类型的数据对象的基类
+	Factory.prototype={
+		Java:function(content){
+			//具体实现
+			console.log("Javacontent:"+content);
+		},
+		Net:function(content)
+		{
+			//具体实现
+			console.log("NetContent:"+content);
+		},
+		Python:function(content)
+		{
+			//具体实现
+			console.log("PythonContent:"+content);
+		}
+	}
+
+	//对照上面的代码的的简单工厂的程序写法
+	var Java=function(content)
+	{
+		console.log("Javacontent:"+content);
+	}
+	var Net=function(content)
+	{
+		console.log("NetContent:"+content);
+	}
+	var Python=function(content)
+	{
+		//具体实现
+		console.log("PythonContent:"+content);
+	}
+	//简单工厂类别
+	function CheckFactory(type,content)
+	{
+		switch (name){
+			case 'Java':
+				return new Java(content);
+			case 'Net':
+				return new Net(content);
+			case 'Python':
+				return new Python(content);
+			default:
+				break;
+		}
+	}
+
+</script>

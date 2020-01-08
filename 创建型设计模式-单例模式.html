@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var count=Conf.get("MAX_NUM");
+		console.log(count);
+		//惰性加载调用
+		var oLazySingle=LazySingle().publicProperty;
+		console.log(oLazySingle);
+		
+	})
+	///////////静态变量一般都大写
+	// 单例在js中的应用
+	// 1 模块化构建代码,作用相当于命名空间,大公司利用单例模式进行模块划分
+	// baidu.dom.address
+	// baidu.dom.append
+	// baidu.event.stopPropagation
+	// baidu.event.preventDefault
+	// baidu.event.tirm
+	// baidu.string.encodeHtml
+	// 
+	// 2 创建一个小型的代码库
+	// var A={
+	// 	Util:
+	// 	{
+	// 		Util_method1:function(){},
+	// 		Util_method2:function(){}
+	// 	},
+	// 	Tool:
+	// 	{
+	// 		Tool_method1:function(){},
+	// 		Tool_method2:function(){}
+	// 	},
+	// 	Ajax:
+	// 	{
+	// 		get:function(){},
+	// 		post:function(){}
+	// 	}
+	// 	Others:
+	// 	{
+	// 		OtherMethod1:function(){},
+	// 		OtherMethod2:function(){}
+	// 	}
+	// }
+	// // 调用方法
+	// A.Ajax.get();
+	// A.Tool.Tool_method1();
+	//
+	//3 管理静态变量
+	var Conf=(function(){
+		//私有变量
+		var Conf={
+			MAX_NUM:100,
+			MIN_NUM:0,
+			COUNT:1000
+		}
+		//返回取值器对象
+		return {
+			//取值器方法
+			get :function(name)
+			{
+				return Conf[name] ? Conf[name] :null;
+			}
+		}
+	})();
+	//4惰性单例,惰性载入单例方法
+	var LazySingle=(function(){
+		//单例实例引用
+		var _instance=null;
+		//私有函数
+		function Single()
+		{
+			return {
+				publicMethod:function(){},
+				publicProperty:'1.0'
+			}
+		}
+		//获取单例对象接口
+		return function(){
+			if(!_instance)
+			{
+				_instance=Single();
+			}
+			return _instance;
+		}
+	})();
+	
+	
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<table id="CheckInInfo">
+			<tr>
+				<th>Header</th>
+			</tr>
+			<tr>
+				<td data-id="1">Data1</td>
+				<td data-id="2">Data2</td>				
+				<td data-id="3">Data3</td>
+				<td data-id="4">Data4</td>
+				<td data-id="5">Data5</td>
+			</tr>
+		</table>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		$("#CheckInInfo tr td[data-id=1]").hide();
+	})
+</script>

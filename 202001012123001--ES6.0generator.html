@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生成器</title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+/**
+ * @Author: [JokerChen]
+ * @description:生成器 可以暂停当前的函数,可以跟function相邻，可以跟函数名相邻。
+ * yield:暂停，放弃执行
+ * next() 函数,向下执行
+ * 场景，请求数据
+ * 
+ * @param {type} 
+ * @return: 
+ */	
+  show();
+  //
+  function* show() {
+    alert("a");
+    yield;
+    console.log();
+    alert("b");     
+  }
+
+  let showObj=show();
+  console.log(showObj);
+  showObj.next();
+  showObj.next();
+</script>

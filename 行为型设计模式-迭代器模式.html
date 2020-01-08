@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>迭代器模式</title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul id="container">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li></li>
+			<li>6</li>
+		</ul>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var demo=new Iterator('li',"container");
+		demo.dealEach(function(text,color){ this.innerHTML=text;this.style.background=color;  },"第一次试","blue");
+	})
+	
+	//迭代器模式，处理频繁的循环处理
+	var Iterator=function(items,container){
+		var container=container && document.getElementById(container) ||document;
+		//获取元素
+		var items=container.getElementsByTagName(items);
+		// 获取元素长度
+		var length=items.length;
+		// 当前索引值
+		var index =0;
+		//缓存原生数组splice方法
+		var splice=[].splice;
+		return {
+			//获取第一个元素
+			first:function(){
+				index=0;//校正当前索引
+				return items[index];//获取第一元素
+			},
+			//获取最后一个元素
+			last:function(){
+				index=length-1;
+				return items[index]
+			},
+			//获取前一个元素
+			pre:function(){
+				if(--index>0){
+					return items[index];
+				}else{ 
+					index=0;
+					return null;
+				}
+			},
+			//获取后一个元素
+			next:function(){
+				if(++index<length){
+					return items[index];
+				}else{
+					index=length-1;
+					return null;
+				}
+			},
+			//获取某个元素
+			get:function(num){
+				//如果num>0正向获取，否则逆向获取
+				index = num>= 0 ? num % length :num % length +length;
+				return items[index];
+			},
+			//对每个元素执行某一个方法
+			dealEach:function(fn){
+				var args=splice.call(arguments,1);
+				for(var i=0;i<length;i++){
+					//对元素执行回调函数
+					fn.apply(items[i],args);
+				}
+			},
+			//对某个元素执行某一个方法
+			dealItem:function(num,fn){
+				fn.apply(this.get(num),splice.call(arguments,2));
+			},
+			//排他方式处理某一个元素
+			exclusive:function(num,allFn,numFn){
+				//对所有元素执行回调函数
+				this.dealEach(allFn);
+				//如果num类型为数组
+				if(Object.prototype.toString.call(num) === "[object Array]"){
+					//根据for循环便利数组
+					for (var i = 0, len = num.length;i<len; i++) {
+						//分别处理数组中的每个元素
+						this.dealItem(num[i],numFn);
+					}
+				}else{
+					//分别处理数组中的每个元素
+					this.dealItem(num,numFn);
+				}
+			}
+		}
+	}
+	//数组迭代器
+	var eachArray=function(arr,fn){
+		var i=0,len=arr.length;
+		for(;i<len;i++){
+			//依次执行回调函数，注意回调函数中传入的参数第一个为索引，第二个为索引对应的值
+			if(fn.call(arr[i],i,arr[i])===false){
+				break;
+			}
+		}
+	}
+	//对象迭代器
+	var eachObject=function(obj,fn){
+		for(var i in obj){
+			if(fn.call(obj[i],i,obj[i])===false){
+				break;
+			}
+		}
+	}
+	
+</script>

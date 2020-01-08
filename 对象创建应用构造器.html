@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var o={};
+	var o1=new Object();
+	// constructor是只有对象才有构造器
+	
+	console.log(o.constructor===o1.constructor);
+	console.log(Number.constructor);
+	//构造器的调用
+	var o={name:"aaa"};
+	var o1=o.constructor();
+	console.log(o1);
+	//调用构造器相当于创建对象而非对于对象的拷贝（**********）
+
+</script>

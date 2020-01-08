@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	// var o={
+	// 	name:"cn",
+	// 	print:function()
+	// 	{
+	// 		console.log(this.name);
+	// 	}
+	// }
+	
+	function log(a,b){
+		console.log(this[a]);
+		console.log(this[b]);
+	}
+	function p()
+	{
+		this.name="111";
+	}
+	var q={};
+	p.call(q);//等价于q.p进行调用
+</script>

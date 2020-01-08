@@ -1,0 +1,33 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-07 17:16:54
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-01-08 16:18:14
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		    <script src="js/jquery-1.7.2.min.js"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	var url="data/data.json";
+	$.ajax(url,{
+	    type: "Get",
+			data:{
+				"action":"aaaa",
+				"name":"info"
+			},
+	    dataType: "json",
+	    success (data) {
+				console.log(data)
+	    },
+	    error (data) {}
+	});
+</script>
+

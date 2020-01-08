@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<ul id="WeekdayList">
+		<li data-week="2019-07-15"><p>日</p><p>30</p></li>
+		<li data-week="2019-07-16"><p>一</p><p>1</p></li>
+		<li data-week="2019-07-17"><p>二</p><p>2</p></li>
+		<li data-week="2019-07-18"><p>三</p><p>3</p></li>
+		<li data-week="2019-07-19"><p>四</p><p>4</p></li>
+		<li data-week="2019-07-20"><p>五</p><p>5</p></li>
+		<li data-week="2019-07-21"><p>六</p><p>6</p></li>
+		</ul>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		// console.log(getWeekDay('2019-7-15'));
+		var dNowDay="2019-07-18";
+		var aWeekDay=getWeekDay(dNowDay);
+		
+		$('#WeekdayList li[data-week="'+dNowDay+'"]').prevAll().addClass("ash");
+		
+		console.log(dNowDay);
+		for(var i=0;i<aWeekDay.length;i++)
+		{
+			console.log(aWeekDay[i]);
+		}
+	})
+	//获取一周时间返回原始日期数组
+	function getWeekDay(dateString) {
+		var dateStringReg = /^\d{4}[/-]\d{1,2}[/-]\d{1,2}$/;
+		if (dateString.match(dateStringReg)) {
+			var presentDate = new Date(dateString),
+				today = presentDate.getDay() !== 0 ? presentDate.getDay() : 7;
+
+			return Array.from(new Array(7), function(val, index) {
+				return formatDate(new Date(presentDate.getTime() - (today - index-1) * 24 * 60 * 60 * 1000));
+			});
+
+		} else {
+			throw new Error('dateString should be like "yyyy-mm-dd" or "yyyy/mm/dd"');
+		}
+
+		function formatDate(date) {
+			return new Date(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()).Format("yyyy-MM-dd") ;
+		}
+	}
+</script>

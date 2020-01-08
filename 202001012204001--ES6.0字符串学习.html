@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6.0JSON</title>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+    
+</body>
+<script>
+    //startWith 以什么进行开头的
+    //endWith 以什么进行结尾
+    let testStr="http://ww.55kad.com";
+    if(testStr.startsWith("http://")){
+        console.log("普通网址");
+    }
+    else if(testStr.startsWith("https://"))
+    {
+        console.log("加密网址");
+    }
+    else if(testStr.startsWith("git://"))
+    {
+        console.log("git网址");
+    }
+    else if(testStr.startsWith("svn://"))
+    {
+        console.log("svn网址");
+    }
+    //邮箱上传后显示上传图标（endWith）.jpg .png .zip .txt
+    let textEndWith="";
+    // 字符串模板
+    let a=12;
+    let strInfo=`a${a}bc`;
+    console.log(strInfo);
+    let sSchoolName='晓羊教育';
+    let sCheckInfo='省级平台';
+    let infoDo=`信息内嵌，此公司${sSchoolName}
+                打造的平台是${sCheckInfo}`;
+    console.log(infoDo);
+</script>
+</html>

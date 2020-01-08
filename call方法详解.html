@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//扩展call方法的作用
+	// 1 继承
+	// 2 修改函数运行时的this指针
+	//
+	// call方法实例
+	$(function(){
+		f(1,2,3);
+		o(4);
+		f.call(o);
+	})
+	//父类
+	function f(a,b,c)
+	{
+		var info="name";
+		this.a=a;
+		this.b=b;
+		this.c=c;
+		this.add=function(){
+			console.log("add方法");
+		}
+	}
+	//子类扩展
+	function o(d)
+	{
+		this.d=d;
+		console.log(this);
+	}
+	
+</script>

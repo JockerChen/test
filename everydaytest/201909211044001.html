@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){	
+		var startTime1='2019/09/21 10:30';
+		var info=PadZero(startTime1);
+		var startTime = new Date('2019/09/21 10:30:00'); // 开始时间
+		var endTime = new Date('2019/09/21 12:05:00'); // 结束时间
+		var timeinfo=timeDiff(startTime,endTime);
+		console.log(timeinfo);
+		console.log("我是中国人".replace(/我(?=是中国)/, "haorooms")) // 输出： 'haorooms中国人'，匹配的是中国前面的'我是'
+		
+	})
+	function timeDiff(startTime,endTime)
+	{
+		var timeh=Math.floor((endTime - startTime) / 1000 / 60 / 60);
+		var timem=Math.floor((endTime - startTime) / 1000 / 60)%60;
+		// console.log(timec+"小时"+timem+"分钟"); // 小时
+		
+		return timeh+"小时"+timem+"分钟";
+	}
+	
+	function PadZero(str) {
+	    //补零
+	    return new RegExp(/^\d$/g).test(str) ? `0${str}` : str;
+	}
+	
+
+	
+	
+	// console.log("我是中国人".replace(/(?!中国)/, "haorooms")) // 输出：'haorooms我是中国人'
+	
+	// console.log("我是中国人".replace(/(?:中国)/, "haorooms")) // 输出：'我是haorooms人'，匹配'中国'本身
+	
+	// console.log("我是中国人".replace(/(?<=中国)人/, "haorooms")) // 输出：'我是中国haorooms'，匹配的是中国后面的'人'
+	
+	// console.log("我是中国人".replace(/(?<!中国)/, "haorooms")) // 输出：'haorooms我是中国人'
+</script>

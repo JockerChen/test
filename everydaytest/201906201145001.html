@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var request = window.indexedDB.open('DZBP_DB', 1);
+	request.onupgradeneeded = function (event) {
+		var db = event.target.result;
+		//创建表名称 
+		var SchoolInfo = db.createObjectStore('SchoolInfo', {keyPath: 'id', autoIncrement: true});
+		SchoolInfo.createIndex('SchoolId', 'SchoolId', { unique: false });
+		SchoolInfo.createIndex('SchoolName', 'SchoolName', { unique: true });
+		SchoolInfo.createIndex('SchoolType', 'SchoolType', { unique: true });
+		SchoolInfo.createIndex('SchoolBadge', 'SchoolBadge', { unique: true });
+		SchoolInfo.createIndex('SchoolLocation', 'SchoolLocation', { unique: true });
+		SchoolInfo.createIndex('SchoolProfile', 'SchoolProfile', { unique: true });
+		SchoolInfo.createIndex('FontSize', 'FontSize', { unique: true });
+		SchoolInfo.createIndex('SchoolDescription', 'SchoolDescription', { unique: true });
+		SchoolInfo.createIndex('PrincipalName', 'PrincipalName', { unique: true });
+		SchoolInfo.createIndex('PrincipalDescription', 'PrincipalDescription', { unique: true });
+		SchoolInfo.createIndex('PrincipalPic', 'PrincipalPic', { unique: true });
+		SchoolInfo.createIndex('ServerPrincipalPic', 'ServerPrincipalPic', { unique: true });
+		SchoolInfo.createIndex('SchoolMotto', 'SchoolMotto', { unique: true });
+		SchoolInfo.createIndex('DownLoadDate', 'DownLoadDate', { unique: true });	
+	}
+	
+	var data=[{
+		SchoolId:"11",
+		SchoolName:"沈阳卡得智能科技",
+		SchoolType:"独资企业",
+		SchoolBadge:"学校图片",
+		SchoolLocation:"浑南新区远航中路3-6-2",
+		SchoolProfile:"企业图片",
+		FontSize:"12",
+		SchoolDescription:"学校描述",
+		SchoolMotto:"学校简介",
+		DownLoadDate:"2019-06-20"
+	},{
+		SchoolId:"11",
+		SchoolName:"沈阳卡得智能科技",
+		SchoolType:"独资企业",
+		SchoolBadge:"学校图片",
+		SchoolLocation:"浑南新区远航中路3-6-2",
+		SchoolProfile:"企业图片",
+		FontSize:"12",
+		SchoolDescription:"学校描述",
+		SchoolMotto:"学校简介",
+		DownLoadDate:"2019-06-20"
+	},{
+		SchoolId:"11",
+		SchoolName:"沈阳卡得智能科技",
+		SchoolType:"独资企业",
+		SchoolBadge:"学校图片",
+		SchoolLocation:"浑南新区远航中路3-6-2",
+		SchoolProfile:"企业图片",
+		FontSize:"12",
+		SchoolDescription:"学校描述",
+		SchoolMotto:"学校简介",
+		DownLoadDate:"2019-06-20"
+	}];
+	$(function(){
+			
+		add(data);
+		
+	})
+
+	function add(data) {
+	  var db = event.target.result;
+	  var request = db.transaction(['SchoolInfo'], 'readwrite')
+		.objectStore('SchoolInfo')
+		.add(data);
+
+	  request.onsuccess = function (event) {
+		console.log('数据写入成功');
+	  };
+
+	  request.onerror = function (event) {
+		console.log('数据写入失败');
+	  }
+	}
+</script>

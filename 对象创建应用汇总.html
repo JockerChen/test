@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js"></script>
+		<title>函数的方法的创建</title>
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script>
+	$(function(){
+		//直接调用函数形式
+		// CheckObject.checkName();
+		// CheckObject.checkEmail();
+		// CheckObject.checkPassword();
+		//对象声明(对象属性直接声明形式和函数表达式)
+		var oCheck=CheckObject;
+			oCheck.checkName().checkEmail().checkPassword();	
+		var oCheck2=CheckObject2;
+			oCheck2.checkName().checkEmail().checkPassword();
+			
+		// CheckObject.checkName().checkEmail().checkPassword();
+		//函数表达式声明方式
+		var oCheck3=CheckObject3();
+			oCheck3.checkName().checkEmail().checkPassword();
+			
+		var oCheck4=new CheckClass();
+			oCheck4.checkName().checkEmail().checkPassword();
+			
+		var oCheck5=CheckObjectPro;	
+		oCheck5.prototype.checkName().checkEmail().checkPassword();
+		// CheckObjectOther.checkName();
+		// CheckObjectOther.checkEmail();
+		// CheckObjectOther.checkPassword();
+		/*************************动态添加链式方法(函数声明及调用方法)******************************/
+		var method=new Function();
+		method.AddMethod("CheckPhone",function(){
+			console.log("CheckPhoneNew");
+		}).AddMethod("CheckTelephone",function(){
+			console.log("CheckTelephoneNew");
+		})
+		//动态追加方法及调用
+		method.CheckPhone(); 
+		method.CheckTelephone(); 
+		/************************动态添加链式方法(函数声明及调用方法)*******************************/
+		/*************************动态添加链式方法(类声明及调用方法)******************************/
+		var MethodClass=function(){};
+		MethodClass.AddMethodNew("CheckPhoneClass",function(){
+			console.log("CheckPhoneClass");
+		}).AddMethodNew("CheckTelephoneClass",function(){
+			console.log("CheckTelephoneClass");
+		})
+		//动态追加方法及调用
+		var oMethodClass=new MethodClass();
+		oMethodClass.CheckPhoneClass(); 
+		oMethodClass.CheckTelephoneClass(); 
+		/************************动态添加链式方法(类声明及调用方法)*******************************/
+		
+		
+	})
+	
+	//单纯的声明对象及方法
+	var CheckObject={
+		checkName:function(){
+			console.log("checkName");
+			return this;
+		},
+		checkEmail:function(){
+			console.log("checkEmail");
+			return this;
+		},
+		checkPassword:function(){
+			console.log("checkPassword");
+			return this;
+		}
+	}
+	
+	//对象的第二种声明形式(也支持链式)
+	var CheckObject2=function(){};
+	CheckObject2.checkName=function(){
+		console.log("checkName2");
+		return this;
+	};
+	CheckObject2.checkEmail=function(){
+		console.log("checkEmail2");
+		return this;
+	};
+	CheckObject2.checkPassword=function(){
+		console.log("checkPassword2");
+		return this;
+	};
+	
+	//对象的第三种声明形式(也支持链式)
+	var CheckObject3=function(){
+		return 	{
+			checkName:function(){
+				console.log("checkName3");
+				return this;
+			},
+			checkEmail:function(){
+				console.log("checkEmail3");
+				return this;
+			},
+			checkPassword:function(){
+				console.log("checkPassword3");
+				return this;
+			}
+		}
+	}
+	//类定义
+	var CheckClass=function(){
+		this.checkName=function(){
+			console.log("checkName4");
+			return this;
+		},
+		this.checkEmail=function(){
+			console.log("checkEmail4");
+			return this;
+		},
+		this.checkPassword=function(){
+			console.log("checkPassword4");
+			return this;
+		}
+	}
+	//原型方法
+	var CheckObjectPro=function(){};
+	CheckObjectPro.prototype={
+		checkName:function(){
+			console.log("checkName5");
+			return this;
+		},
+		checkEmail:function(){
+			console.log("checkEmail5");
+			return this;
+		},
+		checkPassword:function(){
+			console.log("checkPassword5");
+			return this;
+		}
+	}
+	
+	//抽象一个函数的方法进行动态添加后续的方法(函数调用方式)
+	Function.prototype.AddMethod=function(name,fn){
+		this[name] =fn;
+		return this;
+	}
+	
+	//抽象一个函数的方法进行动态添加后续的方法(类调用方式)
+	Function.prototype.AddMethodNew=function(name,fn)
+	{
+		this.prototype[name]=fn;
+		return this;
+	}
+	
+</script>

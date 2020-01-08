@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var dateExtend=new DateExtend(new Date("2019-4-2"));
+		console.log(dateExtend.month);
+		console.log(dateExtend.nowDay);
+	})
+	//日期扩展类别
+	var DateExtend=function(date){
+		this.year=date.getFullYear();
+		this.month=(date.getMonth()+1).length==1?(date.getMonth()+1):"0"+(date.getMonth()+1);
+		this.day=date.getDate().length==1?date.getDate():"0"+date.getDate();	
+		this.nowDay=this.year+"-"+this.month+"-"+this.day;
+	}
+	
+	//上一天
+	DateExtend.prototype.PrevDate=function(){
+	}
+	//下一天
+	DateExtend.prototype.NextDate=function(){
+		
+	}
+	
+</script>

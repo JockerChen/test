@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<div id="div">
+			<li>
+				<p class="num">1</p>
+				<p class="classTime">08:00~08:45</p>
+				<p class="subjectName" style="color: #9e9ea5;font-size: 23px;">本节暂无课程</p>
+				<p class="teacherName">-</p>
+			</li>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		// var arr = jQuery.makeArray(document.getElementsByTagName("div"));
+		// var info=$('#info').html();
+		console.log(jQuery.makeArray($('#info')));
+		// var info1=$('#info').index('<br/>').length;
+		// alert(info1);
+		$('#info').outerHTML();
+	})
+	jQuery.fn.outerHTML = function(s) {
+		return (s) ? this.before(s).remove() : $("<Hill_man>").append(this.eq(0).clone()).html();
+	}
+</script>

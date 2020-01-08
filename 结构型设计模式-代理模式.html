@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>代理模式</title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//由于一个对象不能直接引用另一个对象,所以需要通过代理对象在这两个对象之间起到中介作用.
+	// 本文将利用Proxy实现前端中3种代理模式的使用场景，分别是：缓存代理、验证代理、实现私有属性。
+
+	$(function(){
+		// (new zhongjie()).maifang();
+		// star.buyShoes(new Shoes('皮鞋')); 
+		// assistant.buyShoes(new Shoes('高跟鞋')); // "买到了一双高跟鞋"
+		assistant.init(new Ad(5)); // "拒绝小制作！"
+		assistant.init(new Ad(500)); // "广告费500万元"
+		
+		console.log(proxyAdd(1, 2, 3)); // 6
+		console.log(proxyAdd(1, 2, 3)); // 6	
+	})
+	//代理模式需要三方
+    //1.买家
+    function maijia(){
+        this.name = "小明";
+        this.money = "30万";
+    }
+	//2.中介
+    function zhongjie(){
+    }
+    zhongjie.prototype.maifang = function(){
+        //new fongdong(new maijia()).maifang("20万");
+        new fongdong(new maijia()).maifang("20万");
+    }
+	
+	//3.卖家
+    function fongdong(maijia){
+        this.maijia_name = maijia.name;
+        this.maijia_money = maijia.money;
+        this.maifang = function(money){
+//            alert("收到了来自【"+this.maijia_name+"】"+money+"人民币");
+            alert("收到了来自【"+this.maijia_name+"】"+this.maijia_money+"人民币");
+        }
+    }
+// 代理模式应用二
+// 定义一个鞋子类
+// var Shoes = function(name){
+//     this.name = name;
+// };
+// 
+// Shoes.prototype.getName = function() {
+//     return this.name;
+// };
+// // 添加了一个business方法，通过当前的时间来判断是否能买到鞋子。
+// Shoes.prototype.business = function() {
+//     var curTime = new Date().getHours();
+//     return  curTime >= 8 && curTime <= 12 ? that.getName() : '"非营业时间！"';
+//     
+// }
+// 
+// // 定义一个助理对象
+// var assistant = {
+//     buyShoes: function(shoes) {
+//         star.buyShoes(shoes.getName())
+//     }
+// };
+// 
+// // 定义一个明星对象
+// var star = {
+//     buyShoes: function(name) {
+//         console.log('买到了一双' + name);
+//     }
+// };
+// 保护代理模式
+// 定义一个广告类
+var Ad = function(price){
+    this.price = price;
+};
+
+Ad.prototype.getPrice = function() {
+    return this.price;
+};
+
+// 定义一个助理对象
+var assistant = {
+    init: function(ad) {
+        var money = ad.getPrice();
+        if(money > 300) {
+            this.receiveAd(money);
+        } else {
+            this.rejectAd();
+        }
+    },
+    receiveAd: function(price) {
+        star.receiveAd(price);
+    },
+    rejectAd: function() {
+        star.rejectAd();
+    }
+};
+
+// 定义一个明星对象
+var star = {
+    receiveAd: function(price) {
+        console.log('广告费' + price + '万元');
+    },
+    rejectAd: function() {
+        console.log('拒绝小制作！');
+    }
+};
+
+//缓存代理
+var multAdd = function() {
+    var res = 0;
+    for (var i = 0, l = arguments.length; i < l; i++) {
+        res = res + arguments[i]
+    }
+
+    return res;
+};
+
+var proxyAdd = (function() {
+    var cache = {};
+    return function() {
+        var args = Array.prototype.join.call(arguments, ',');
+        if(args in cache) {
+            return cache[args];
+        }
+        return caches[args] = multAdd.apply(this, arguments);
+    }
+})();
+
+</script>
+

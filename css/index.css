@@ -1,0 +1,967 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+    font-family: "微软雅黑";
+}
+body,
+html {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+select,option{
+	background: rgba(0,0,0,0) !important;
+}
+.Fill-Box{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.divWelcome{
+	width: 100%;
+	height: 100%;
+    background: url(../img/ks-timebodybg.png);
+    background-size: 100% 100%;
+    z-index: 99;
+}
+.SchoolBox {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1000;
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.Setting-Box-Title{
+	width: 100%;
+    height: 120px;
+    line-height: 120px;
+    font-size: 3pc;
+    text-align: center;
+    color: #414141;
+    position: absolute;
+    top: -160px;
+}
+.School {
+    width:70%;
+    height:90%;
+    margin: 3% auto 0;
+    position: relative;
+    background: #f8f8f8;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 0 8px rgba(19, 19, 24, 0.31);
+    -moz-box-shadow: 4px 0 8px rgba(19, 19, 24, 0.31);
+    -o-box-shadow: 4px 0 8px rgba(19, 19, 24, 0.31);
+    box-shadow: 4px 0 8px rgba(19, 19, 24, 0.31);
+    overflow: hidden;
+}
+
+.School-top {
+    width: 100%;
+    height:6pc;
+    border-bottom: 2px solid #dcdcdc;
+    background-image: -webkit-linear-gradient(90deg, #e2e2e2, #fdfdfd);
+    background-image: linear-gradient(90deg, #e2e2e2, #fdfdfd);
+    text-align: center;
+    font-size:3pc;
+    line-height: 6pc;
+    font-weight: normal;
+    color: #494949;
+}
+/**/
+.School-nav{
+    width:80%;
+    height:80%;
+    position: relative;
+    overflow: hidden;
+    margin:65px auto 0;
+}
+.School-nav div.School-nav-l,.School-nav div.School-nav-r{
+    width: 45%;
+    margin:0 2.5%;
+    height:70%;
+    background: #FFFFFF;
+    -webkit-box-shadow: 1px 0 43px rgba(19, 19, 24, 0.13);
+    -moz-box-shadow: 1px 0 43px rgba(19, 19, 24, 0.13);
+    -o-box-shadow: 1px 0 43px rgba(19, 19, 24, 0.13);
+    box-shadow:  1px 0 43px rgba(19, 19, 24, 0.13);
+    float: left;
+    text-align: center;
+    overflow: hidden;
+}
+.School-nav div h3{
+    font-size:2pc;
+    font-weight:200;
+    color: #006FE1;
+    margin:6% 0;
+}
+.ewmBox{
+    width:350px;
+    height:350px;
+    border:1px solid #dcdcdc;
+    background: #f7f7f7;
+    margin:0 auto;
+    overflow: hidden;
+}
+.ewmBox img{
+    display: block;
+    width:320px;
+    height:320px;
+    margin:15px auto;
+    background-size:100% 100%;
+}
+.School-nav-r ul{
+    width:60%;
+    margin: 0 auto;
+    padding:20px;
+    background:#fafafa;
+    border:1px solid #f1f1f1;
+    overflow:hidden;
+}
+.School-nav-r li{
+    margin-top: 15px;
+    overflow: hidden;
+}
+.School-nav-r li:first-children{
+    margin-top:0;
+}
+.School-nav-r li label,.School-nav-r li input{
+    display: block;
+    float: left;
+    text-align: left;
+}
+.School-nav-r li label{
+
+    font-size: 1.3pc;
+    line-height: 45px;
+    overflow: hidden;
+}
+.School-nav-r li label i{
+    display: block;
+    float: left;
+    margin-top:5px;
+    margin-right: 10px;
+}
+.School-nav-r li label i.user{
+    background: url(../img/school-USER.png) no-repeat;
+    width: 34px;
+    height: 32px;
+    background-size:100% 100%;
+}
+.School-nav-r li label i.classroom{
+    background: url(../img/school-card.png) no-repeat;
+    width: 32px;
+    height: 22px;
+    margin-top: 10px;
+    background-size:100% 100%;
+}
+.School-nav-r li label i.time{
+    background: url(../img/school-time.png) no-repeat;
+    width: 32px;
+    height: 32px;
+    background-size:100% 100%;
+}
+.School-nav-r li input{
+    width:98;
+  padding:0 5px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 1.5pc;
+    background:#efefef;
+    border: 1px solid #e5e5e5;
+}
+/**/
+.School-bottom{
+    width:80%;
+   position:absolute;
+   bottom:20px;
+   left:0;
+   right:0;
+   margin:0 auto;
+    overflow: hidden;
+}
+.School-bottom dl{
+    padding: 1% 0;
+    width: 45%;
+    margin:0 2.5%;
+    text-align: center;
+    overflow: hidden;
+    float: left;
+}
+.School-bottom dl dt{
+    font-size:1.5pc;
+    color: #001135;
+}
+.School-bottom dl dd{
+    font-size: 2.5pc;
+    line-height:5pc;
+}
+.blue{
+    color: #007AFF;
+}
+.red{
+    color: orangered;
+}
+.seeting {
+    position: absolute;
+    right:20px;
+    top:15px;
+    overflow: hidden;
+    z-index:1;
+}
+.seeting a {
+    display: block;
+    background:url(../img/gear.png) no-repeat;
+    width:58px;
+    height:58px;
+    background-size: 100% 100%;
+}
+/**/
+/*遮挡层*/
+.ZDC {
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1001;
+    -moz-opacity: 0.7;
+    opacity: .70;
+    filter: alpha(opacity=70);
+}
+.tc-StudentBox {
+    display: none;
+    width:40%;
+    padding: 20px 0;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    height:50%;
+    margin: auto;
+    background: #FFFFFF;
+    border-radius:10px;
+    position: absolute;
+    z-index: 1005;
+    overflow: hidden;
+}
+.tc-IndexSetBox {
+    display:none;
+    position: absolute;
+    width: 94%;
+    height: 92%;
+    padding: 40px 30px;
+    background: #FFFFFF;
+    margin: auto;
+    top: 120px;
+    left: 0;
+    bottom: 32px;
+    right: 0;
+    z-index: 1010;
+    box-sizing: border-box;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #d7f7ff;
+}
+.tc-IndexSetBox_H {
+    display:none;
+    width:80%;
+    padding:20px 0;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    height:50%;
+    margin: auto;
+    background: #FFFFFF;
+    border-radius:10px;
+    position: absolute;
+    z-index: 1005;
+    overflow: hidden;
+}
+.tc-PasswordBox {
+    display:none;
+    width:55%;
+    padding:20px 0;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    height:25%;
+    margin: auto;
+    background: #FFFFFF;
+    border-radius:10px;
+    position: absolute;
+    z-index: 1010;
+    overflow: hidden;
+}
+/**/
+.float-left label.pass-word{
+	display:block;
+	width:100%;
+	text-align:left;
+	overflow:hidden;
+}
+.float-left input.pass-input{
+	display:block;
+	width:90%;
+	padding:0 10px;
+	overflow:hidden;
+}
+.investment_con_list-form {
+   position: absolute;
+   top: 20px;
+   bottom: 20px;
+   left: 20px;
+   right: 400px;
+   float: left;
+   margin: auto;
+   overflow-y: auto;
+   z-index: 1020;
+}
+.investment_con_list-form-list {
+    width: 100%;
+    margin: 0 0 27px 0;
+    overflow: hidden;
+    position: relative;
+}
+.investment_con_list h3 {
+    text-align: center;
+    width: 100%;
+    margin: 10% 0;
+    font-family: "微软雅黑";
+    font-weight: normal;
+    font-size: 1.2vw;
+    color: #393939;
+}
+.investment_con_list-form-list label {
+    display: block;
+    font-size:1.2pc;
+   line-height: 60px;
+}
+.investment_con_list-form-list input,.investment_con_list-form-list div.selectBox{
+    width:80%;
+    padding: 0 5px;
+    background: #fafafa;
+    border-radius: 5px;
+    border: 1px solid #333333;
+    outline: none;
+    height:60px;
+    font-family: "微软雅黑";
+    font-size: 1pc;
+}
+.investment_con_list-form-list input{
+	height: 58px;
+}
+.seeting-button {
+    position: absolute;
+    top: 20px;
+    bottom:20px;
+    right: 0;
+    width:300px;
+    height:75%;
+    margin:auto;
+    overflow-y: auto;
+    z-index: 1021;
+}
+.seeting-button-H{
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    width:480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.seeting-button a{
+    display: block;
+    background:url(../img/Button-Hover02.png) no-repeat;
+    width:270px;
+    height:80px;
+    line-height:70px;
+    font-size:1.5pc;
+    text-align: center;
+    background-size: 100% 100%;
+    color: #FFFFFF;
+    margin:15px auto;
+    overflow:hidden;
+}
+.seeting-button-H a{
+    display: block;
+    background:url(../img/Button-Hover02.png) no-repeat;
+    width: 200px;
+    height:66px;
+    line-height:55px;
+    font-size:1.5pc;
+    text-align: center;
+    background-size: 100% 100%;
+    color: #FFFFFF;
+    float:left;
+    margin:15px 20px;
+    overflow:hidden;
+}
+.password-button{
+    position: absolute;
+    bottom:30px;
+    left: 0;
+    right: 0;
+    width:480px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.password-button a{
+    display: block;
+    background:url(../img/Button-Hover02.png) no-repeat;
+    width: 200px;
+    height:66px;
+    line-height:55px;
+    font-size:1.5pc;
+    text-align: center;
+    background-size: 100% 100%;
+    color: #FFFFFF;
+    float:left;
+    margin:0 20px;
+    overflow:hidden;
+}
+/**/
+.float-left label{
+	float:left;
+	width:200px;
+	text-align:right;
+}
+.form-list-right{
+	position: absolute;
+    left: 200px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.float-left input,.float-left div.selectBox{
+	float:left;
+	width:100%;
+	margin-left:10px;
+	box-sizing: border-box;
+	margin: 0;
+	color: #414141;
+}
+div.selectBox select{
+	border: none;
+	background:none;
+	width:100%;
+	height:58px;
+    font-family: "微软雅黑";
+    font-size: 1pc;
+}
+/**/
+.return-button{
+    position:absolute;
+    left:20px;
+    top:20px;
+    z-index:1002;
+    overflow:hidden;
+}
+.return-button a{
+       display: block;
+       background:url(../img/return-home.png) no-repeat;
+       width:58px;
+       height:58px;
+       background-size: 100% 100%;
+       overflow:hidden;
+}
+
+/*测试专用*/
+.bigBox{
+	display: none;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    width:100%;
+    height:100%;
+    background:#000000;
+    z-index:1009;
+}
+.bigtn01{
+     position:absolute;
+     top:1pc;
+     left:1pc;
+     width:100px;
+     height:100px;
+     border-radius:100px;
+     background:#ffffff;
+     outline:2px sloid #ffffff;
+ }
+ .bigtn02{
+     position:absolute;
+     top:1pc;
+     right:1pc;
+     width:100px;
+     height:100px;
+     border-radius:100px;
+     background:#ffffff;
+     outline:2px sloid #ffffff;
+ }
+ .bigtn03{
+     position:absolute;
+     bottom:1pc;
+     left:1pc;
+     width:100px;
+     height:100px;
+     border-radius:100px;
+     background:#ffffff;
+     outline:2px sloid #ffffff;
+ }
+.bigtn04{
+    position:absolute;
+    bottom:1pc;
+    right:1pc;
+    width:100px;
+    height:100px;
+    border-radius:100px;
+    background:#ffffff;
+    outline:2px sloid #ffffff;
+}
+.bignavBox{
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    width:60%;
+    height:40pc;
+    margin:auto;
+    background:#ffffff;
+}
+.short-box{
+   	width: 50%;
+   	float: left;
+}
+
+.divPasswordLeftBox{
+	position: absolute;
+	left: 30px;
+	right: 330px;
+	top: 30px;
+	bottom: 30px;
+}
+.divPasswordLeft{
+	width: 100%;
+	height: 120px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+.divPasswordLeft .pass-word{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	font-size: 1.2pc;
+	margin-bottom: 20px;
+}
+.divPasswordLeft .pass-input{
+	width: 92%;
+	height: 60px;
+	border-radius: 4px;
+	box-sizing: border-box;
+	background: rgba(0,0,0,0);
+	border: solid 1px #CCCCCC;
+	font-size: 1.2pc;
+	padding-left: 6px;
+}
+.btns{
+	height: 192px;
+}
+.Setting-Small-Title{
+	width: 100%;
+	height: 50px;
+	font-size: 1.4pc;
+	color: #414141;
+	padding: 0 14px;
+	box-sizing: border-box;
+    font-weight: 600;
+    border-bottom: solid 1px #E0E0E0;
+    float: left;
+    margin-bottom: 20px;
+}
+.Setting-Small-Title span{
+    width: 4px;
+    height: 24px;
+    background: #03A9F4;
+    float: left;
+    margin-right: 12px;
+    margin-top: 3px;
+}
+/*模式选择*/
+.ModeSelection{
+	display:none;
+    position: relative;
+    width: 94%;
+    height: 92%;
+    padding: 40px 30px;
+    background: #FFFFFF;
+    margin: auto;
+    top: 120px;
+    left: 0;
+    bottom: 32px;
+    right: 0;
+    z-index: 1011;
+    box-sizing: border-box;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #d7f7ff;
+}
+.ModeSelectionTitle{
+	width: 100%;
+    height: 120px;
+    line-height: 120px;
+    font-size: 3pc;
+    text-align: center;
+    color: #414141;
+    position: absolute;
+    top: -160px;
+    background: #f1f9ff;
+}
+.ModeSelectionContent{
+	position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    float: left;
+    margin: auto;
+    overflow: hidden;
+    z-index: 1020;
+}
+.ModeSelectionBox{
+	width: 68vw;
+	height: 60vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+.ModeSelectionBox .LocalModeBox{
+    width: 28vw;
+    height: 54vh;
+    float: left;
+    background: linear-gradient(135deg,#91cbf9,#088def);
+    border-radius: 1.5vw;
+    overflow: hidden;
+    box-shadow: 0 0.6vh 1vh #91cbf9;
+    margin-top: 0;
+}
+.ModeSelectionBox .CloudModeBox{
+	width: 28vw;
+	height: 54vh;
+	float: right;
+	background: linear-gradient(135deg,#88ddc5,#02c4b6);
+	border-radius: 1.5vw;
+	overflow: hidden;
+	box-shadow: 0 0.6vh 1vh #88ddc5;
+    margin-top: 0;
+}
+.ModeSelectionBox .LocalModeBox i{
+	display: block;
+	width: 110px;
+	height: 110px;
+	background: url(../img/bdmsIcon.png) no-repeat;
+	background-size: 100% 100%;
+	margin: 30px auto 0;
+}
+.ModeSelectionBox .LocalModeBox p.ModeText{
+	width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 1.8pc;
+}
+.ModeSelectionBox .CloudModeBox i{
+    display: block;
+    width: 110px;
+    height: 110px;
+    background: url(../img/ymsIcon.png) no-repeat;
+    background-size: 100% 100%;
+    margin: 30px auto 0;
+}
+.ModeSelectionBox .CloudModeBox p.ModeText{
+	width: 100%;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 1.8pc;
+}
+.SchoolNumBox{
+	width: 80%;
+	height: 64px;
+	overflow: hidden;
+	margin: 0 auto 20px;
+}
+.SchoolNumBox label{
+	display: block;
+	width: 34%;
+	height: 64px;
+	line-height: 64px;
+	font-size: 1.1vw;
+	color: #FFFFFF;
+	float: left;
+}
+.SchoolNumText{
+    width: 45%;
+    height: 64px;
+    margin: 0;
+    border: solid 1px #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    overflow: hidden;
+    float: left;
+}
+.InputLong{
+    width: 66%;
+}
+.SchoolNumText input{
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: none;
+	background: rgba(0,0,0,0);
+	box-sizing: border-box;
+	font-size: 1.2vw;
+	color: #FFFFFF;
+	padding-left:1vw;
+}
+.SchoolNumText input::-webkit-input-placeholder{
+	color: #FFFFFF;
+}
+.SchoolNumBtns{
+	width: 20%;
+	height: 64px;
+	float: right;
+}
+.SchoolNumBtns p{
+    width: 100%;
+    height: 64px;
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 64px;
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    color: #FFFFFF;
+    border: solid 1px #ffffff;
+    box-sizing: border-box;
+    font-size: 1.2vw;
+    float: left;
+}
+.subimtBtn{
+	width: 80%;
+    height: 64px;
+    line-height: 64px;
+    margin: 0 auto;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 1.2vw;
+    background: rgba(255,255,255,0.1);
+    border: solid 1px #ffffff;
+    border-radius: 4px;
+    margin-top: 3vw;
+}
+.Tips{
+	width: 50vw;
+    position: absolute;
+    bottom: 2vw;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    font-size: 1.3vw;
+    line-height: 2.4vw;
+    color: #808080;
+}
+.Tips span{
+	display: block;
+}
+
+/*分辨率1366*768*/
+@media only screen and (max-width: 790px){
+	.float-left label{
+		width: 160px;
+	}
+	.investment_con_list-form-list label{
+		font-size: 1pc;
+	}
+	.form-list-right{
+		left: 160px;
+	}
+	.tc-IndexSetBox .investment_con_list-form{
+		right: 220px;
+	}
+	div.selectBox select{
+		font-size: 1pc;
+	}
+	.investment_con_list-form-list input, .investment_con_list-form-list div.selectBox{
+		font-size: 1pc;
+	}
+	.tc-IndexSetBox .seeting-button{
+		width: 210px;
+	}
+	.seeting-button a{
+		font-size: 1.2pc;
+		height: 70px;
+		line-height: 60px;
+		margin: 10px auto;
+		width: 200px;
+	}
+	.investment_con_list-form-list{
+		margin: 0 0 10px 0;
+	}
+	.tc-IndexSetBox{
+		height: 89%;
+	}
+	#divPassword{
+		width: 82%;
+	}
+}
+@media only screen and (max-width: 810px) and (min-width: 790px){
+	.float-left label{
+		width: 160px;
+	}
+	.investment_con_list-form-list label{
+		font-size: 1pc;
+	}
+	.form-list-right{
+		left: 160px;
+	}
+	.tc-IndexSetBox .investment_con_list-form{
+		right: 220px;
+	}
+	div.selectBox select{
+		font-size: 1pc;
+	}
+	.investment_con_list-form-list input, .investment_con_list-form-list div.selectBox{
+		font-size: 1pc;
+	}
+	.tc-IndexSetBox .seeting-button{
+		width: 210px;
+	}
+	.seeting-button a{
+		width: 190px;
+		font-size: 1.2pc;
+		height: 70px;
+		line-height: 60px;
+		margin: 10px auto;
+	}
+	.investment_con_list-form-list{
+		margin: 0 0 10px 0;
+	}
+	.tc-IndexSetBox{
+		height: 89%;
+	}
+	#divPassword{
+		width: 82%;
+	}
+}
+@media only screen and (min-width: 1920px){
+	.tc-IndexSetBox,.ModeSelection{
+		height: 87vh;
+	}
+	.investment_con_list-form-list{
+		margin: 0 0 24px 0;
+		width: 33.33%;
+		float: left;
+	}
+	.seeting-button{
+		height: 78%;
+	}
+}
+@media only screen and (min-width: 1280px) and (max-width:1366px){
+	.tc-IndexSetBox{
+		height: 82%;
+	}
+	.seeting-button a{
+		height: 66px;
+		line-height: 66px;
+	}
+	.investment_con_list-form-list{
+		width: 50%;
+		float: left;
+	}
+}
+@media only screen and (min-width: 1070px) and (max-width:1090px){
+	.ModeSelectionBox{
+		height: 84vh;
+	}
+	.ModeSelectionBox .LocalModeBox,.ModeSelectionBox .CloudModeBox{
+		width: 100%;
+		height: 34vh;
+		margin: 0;
+	}
+	.ModeSelectionBox .CloudModeBox{
+		margin-top: 3vh;
+	}
+	.ModeSelectionBox .LocalModeBox i,.ModeSelectionBox .CloudModeBox i{
+		width: 6vh;
+		height: 6vh;
+		margin: 3vh auto 0;
+	}
+	.ModeSelectionBox .LocalModeBox p.ModeText,.ModeSelectionBox .CloudModeBox p.ModeText{
+		height: 5vh;
+		line-height: 5vh;
+		font-size: 2vh;
+	}
+	.SchoolNumBox{
+		height: 4vh;
+	}
+	.SchoolNumBox label,.SchoolNumText,.SchoolNumBtns,.SchoolNumBtns p{
+		height: 4vh;
+		line-height: 4vh;
+		font-size: 2.6vw;
+	}
+	.SchoolNumText input{
+		font-size: 2.6vw;
+		padding-left: 2vw;
+	}
+	.subimtBtn {
+		height: 4vh;
+	    line-height: 4vh;
+	    font-size: 1.6vh;
+	    border-radius: 7px;
+	    margin-top: 3vh;
+	}
+	.Tips{
+		width: 68vw;
+		font-size: 2.6vw;
+		line-height: 3vh;
+		bottom: 0;
+	}
+}
+@media only screen and (min-width: 1910px) and (max-width: 1930px){
+	body{
+		height: 1080px;
+	}
+	.ModeSelection{
+		height: 940px;
+	}
+	.ModeSelectionBox{
+		height: 648px;
+	}
+	.ModeSelectionBox .LocalModeBox,.ModeSelectionBox .CloudModeBox{
+		height: 570px;
+	}
+}
+@media only screen and (min-width: 1070px) and (max-width: 1090px){
+	body{
+		height: 1920px;
+	}
+}

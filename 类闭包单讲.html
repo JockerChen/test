@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	$(function(){
+		Utils.add("苹果");
+		Utils.add("鸭梨");
+		console.log(Utils.get_showDate());
+		Utils.remove("鸭梨");
+		console.log(Utils.get_showDate());
+	})
+	
+// 	//闭包实现类创建及相关加载
+// 	var Book=(function(){
+// 		//静态私有变量
+// 		var bookNum=0;
+// 		//静态私有方法
+// 		function checkBook(){}
+// 		//创建类
+// 		function book(newId,newName,newPrice){
+// 			//私有变量
+// 			var name,price;
+// 			//私有方法
+// 			function checkId(id){}
+// 			this.setName=function(){};
+// 			this.getName=function(){};
+// 			this.setPrice=function(){};
+// 			this.getPrice=function(){};
+// 			//公有属性
+// 			this.id=newId;
+// 			//公有方法
+// 			this.copy=function(){};
+// 			bookNum++;
+// 			if(bookNum>100)
+// 				throw new Error("我们只出100本书；");
+// 			this.setName(name);
+// 			this.setPrice(price);
+// 		}
+// 		//构建原型
+// 		_book.prototype={
+// 			//静态共有属性
+// 			isJSBook:false,
+// 			//静态共有方法
+// 			display:function(){}
+// 		};
+// 		return _book;
+// 	}) ();
+let Utils=(function(){
+	var list=[];
+	return {
+		add:function(item){
+			if(list.indexOf(item)>-1) return;
+			list.push(item);
+		},
+		remove:function(item){
+			if(list.indexOf(item) < 0) return; // 如果要删除的数组数组之内不存在，那么就返回
+			list.splice(list.indexOf(item),1);
+		},
+		get_length:function(){
+			return list.length;
+		},
+		get_showDate:function(){
+			return list;
+		}
+	}
+})();
+</script>

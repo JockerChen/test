@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />  
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<button id="testInfo">点击测试按钮	</button>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		
+		
+		$('#testInfo').on("click",function(){
+			throttle(fn(), 1000);
+		})
+		
+		
+	})
+	// 思路：在规定时间内只触发一次
+function throttle (fn, delay) {
+  // 利用闭包保存时间
+  let prev = Date.now()
+  return function () {
+    let context = this
+    let arg = arguments
+    let now = Date.now()
+    if (now - prev >= delay) {
+      fn.apply(context, arg)
+      prev = Date.now()
+    }
+  }
+}
+
+function fn () {
+  console.log('节流')
+}
+addEventListener('scroll', throttle(fn, 10000)) ;
+</script>

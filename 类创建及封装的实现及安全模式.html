@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var newbook=new Book("1","漫画算法","99");
+		newbook.setName();
+		newbook.setPrice();	
+		console.log(newbook.getName());
+		console.log(newbook.getPrice());	
+		console.log(newbook.checkChinese());
+		console.log(newbook.display());
+		// console.log(Book.resetTime);
+		// console.log(newbook.resetTime());
+		// console.log(newbook.checkId());
+	})
+
+	//类声明及构造函数(安全模式)主要应对的是 创建对象时忘记追加new 关键字进行创建
+	var Book=function(id,name,price){
+		//安全模式创建对象
+		if(this instanceof Book)
+		{
+			this.id=id;
+			this.name=name;
+			this.price=price;
+		}
+		else
+		{
+			return new Book(id,name,price);
+		}
+		//私有属性
+		var num=1;
+		//私有方法
+		function _checkId(){};
+		//私有方法(其中静态方法或静态属性只能通过类进行调用，不能对象进行调用)
+		function _checkChinese(){
+			return Book.isChinese;
+		};
+		//特权方法
+		this.getName=function(){
+			return this.name;
+		};
+		this.getPrice=function(){
+			return this.price;
+		};
+		this.setName=function(){
+			this.name=name;
+		};
+		this.setPrice=function(){
+			this.price=price;
+		};
+		
+		//对象公有属性
+		this.id=id;
+		//对象的公有方法
+		this.copy=function(){};
+		//是否为中文
+		this.checkChinese=function(){
+			return _checkChinese();
+		};
+	}
+	//类静态公有属性(对象不能访问)
+	Book.isChinese=false;
+	//类静态共有方法
+	Book.resetTime=function(){
+		console.log("new time");
+	}
+	//为对象阔扩展方法
+	Book.prototype={
+		//共有属性:
+		isJsBook:false,
+		display:function(){
+			console.log("ID:"+this.id+"Name:"+this.getName()+"Price:"+this.getPrice());
+		}
+	}
+</script>

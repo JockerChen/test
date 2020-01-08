@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var arrayObject =[{"name":"乔永寿","type":"自己","subject":"英语","time":"2018-05-08","scale":0.8},{"name":"刘翰飞","type":"教师","subject":"英语","time":"2018-05-04","scale":0.9},{"name":"徐丰羽","type":"辅导员","subject":"英语","time":"2018-03-08","scale":0.65},{"name":"王宏胜","type":"教师","subject":"英语","time":"2018-04-08","scale":0.4},{"name":"唐俊艾","type":"自己","subject":"英语","time":"2018-03-18","scale":0.3},{"name":"邵昊苍","type":"教师","subject":"数学","time":"2017-09-08","scale":0.9},{"name":"钟飞鸣","type":"教师","subject":"英语","time":"2017-11-08","scale":0.65},{"name":"任星波","type":"辅导员","subject":"语文","time":"2018-01-08","scale":0.6},{"name":"江若云","type":"辅导员","subject":"英语","time":"2018-02-08","scale":0.6}];
+	
+	// console.log(arrayObject);
+	$(function(){
+		// var ret2 = arrayObject.findIndex((v) => {
+		// 	return v.subject == "英语";
+		// });
+		// console.log(ret2);	
+		// 
+		 var  JavaScriptApplicants = arrayObject.filter(e => e.subject.includes("语文"));
+		 console.log(JavaScriptApplicants[0].type);
+	})
+	
+	
+</script>

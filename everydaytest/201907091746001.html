@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+	<body>
+		<div class="divWelcome">
+			<!--模式选择-->
+			<div class="ModeSelection" id="EnterModel">
+				<div class="Fill-Box">
+					<p class="ModeSelectionTitle">应用模式选择</p>
+					<div class="ModeSelectionContent">
+						<div class="ModeSelectionBox">
+							<div class="LocalModeBox" >
+								<i></i>
+								<p class="ModeText">本地模式</p>
+								<div class="SchoolNumBox">
+									<label>服务器地址：</label>
+									<div class="SchoolNumText InputLong">
+										<input type="text" id="LocalServerPath" placeholder="键入服务器地址" />
+									</div>
+								</div>
+								<div class="SchoolNumBox">
+									<label>设备编号：</label>
+									<div class="SchoolNumText InputLong">
+										<input type="text" id="LocalControllerNo" placeholder="键入设备编号" />
+									</div>
+								</div>
+								<div class="subimtBtn" id="LocalModel">进入系统</div>
+							</div>
+							<div class="CloudModeBox">
+								<i></i>
+								<p class="ModeText">云模式</p>
+								<div class="SchoolNumBox">
+									<label>学校编号：</label>
+									<div class="SchoolNumText">
+										<input type="text" id="SchoolNo" placeholder="键入学校编号" />
+									</div>
+									<div class="SchoolNumBtns" id="SureSchoolNo">
+										<p>确 定</p>
+									</div>
+								</div>
+								<div class="SchoolNumBox">
+									<label>设备编号：</label>
+									<div class="SchoolNumText InputLong">
+										<input type="number" id="CloudControllerNo" placeholder="键入设备编号" />
+									</div>
+								</div>
+								<div class="subimtBtn" id="CloudModel">进入系统</div>
+							</div>
+						</div>
+						<p class="Tips">
+							<span>本地模式：键入服务器地址与设备编号，点击进入系统以获取本地系统信息并登陆系统</span>
+							<span>云模式：键入学校编号与设备编号，点击进入系统以获取云系统信息并登陆系统</span>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="divWelcome" class="SchoolBox">
+				<div id="divOption" class="tc-IndexSetBox">
+					<div class="Fill-Box">
+						<p class="Setting-Box-Title">基础设置</p>
+						<div class="investment_con_list-form">
+							<p class="Setting-Small-Title"><span></span>基本信息</p>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-user">服务器地址：</label>
+								<div class="form-list-right">
+									<input type="text" id="txtServerPath" placeholder="请输入服务器地址" />
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-lock">设备编号：</label>
+								<div class="form-list-right">
+									<input type="text" id="txtControlNo" placeholder="请输入设备编号" />
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">是否播放语音：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="PlaySound">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<p class="Setting-Small-Title"><span></span>刷卡相关</p>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-user">读卡器串口：</label>
+								<div class="form-list-right">
+									<div class="selectBox" style="width: 49%;">
+										<select id="txtReadCardPort">
+											<option>无</option>
+											<option>/dev/ttyS0</option>
+											<option>/dev/ttyS1</option>
+											<option>/dev/ttyS2</option>
+											<option>/dev/ttyS3</option>
+											<option>/dev/ttyS4</option>
+											<option>/dev/ttyUSB0</option>
+											<option>/dev/ttyUSB1</option>
+										</select>
+									</div>
+									<div class="selectBox" style="width: 49%; margin-left: 2%;">
+										<select id="txtReadCardBaudRate">
+											<option>9600</option>
+											<option>19200</option>
+											<option>38400</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-user">第二读卡器串口：</label>
+								<div class="form-list-right">
+									<div class="selectBox" style="width: 49%;">
+										<select id="txtReadCardPort_Second">
+											<option>无</option>
+											<option>/dev/ttyS0</option>
+											<option>/dev/ttyS1</option>
+											<option>/dev/ttyS2</option>
+											<option>/dev/ttyS3</option>
+											<option>/dev/ttyS4</option>
+											<option>/dev/ttyUSB0</option>
+											<option>/dev/ttyUSB1</option>
+										</select>
+									</div>
+									<div class="selectBox" style="width: 49%; margin-left: 2%;">
+										<select id="txtReadCardBaudRate_Second">
+											<option>9600</option>
+											<option>19200</option>
+											<option>38400</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-user">2.4G设备串口：</label>
+								<div class="form-list-right">
+									<div class="selectBox" style="width: 49%;">
+										<select id="txtOtherPort">
+											<option>无</option>
+											<option>/dev/ttyS0</option>
+											<option>/dev/ttyS1</option>
+											<option>/dev/ttyS2</option>
+											<option>/dev/ttyS3</option>
+											<option>/dev/ttyS4</option>
+											<option>/dev/ttyUSB0</option>
+											<option>/dev/ttyUSB1</option>
+										</select>
+									</div>
+									<div class="selectBox" style="width: 49%; margin-left: 2%;">
+										<select id="txtOtherBaudRate">
+											<option>9600</option>
+											<option>19200</option>
+											<option>38400</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<p class="Setting-Small-Title"><span></span>人脸识别相关</p>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">是否人脸识别：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="CheckFace">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">是否活体检测：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="Livingbody">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">屏幕方向：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="txtScreenRotation">
+											<option>0</option>
+											<option>90</option>
+											<option>180</option>
+											<option>270</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">摄像头方向：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="txtCameraOrientation">
+											<option>0</option>
+											<option>90</option>
+											<option>180</option>
+											<option>270</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">摄像头垂直镜像：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="CameraImageY">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">摄像头水平镜像：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="CameraImageX">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">人脸识别角度：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="txtFaceASF">
+											<option>0</option>
+											<option>90</option>
+											<option>180</option>
+											<option>270</option>
+											<option>360</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">抓拍照片方向：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="txtSnapASF">
+											<option>0</option>
+											<option>90</option>
+											<option>180</option>
+											<option>270</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!--<div class="investment_con_list-form-list float-left short-box">-->
+								<!--<label class="form-list-user">第三方扩展含标题头：</label>-->
+								<!--<div class="form-list-right">-->
+									<!--<div class="selectBox">-->
+										<!--<select id="txtContainTitle">-->
+											<!--<option value="是">是</option>-->
+											<!--<option value="否">否</option>-->
+										<!--</select>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!--<div class="investment_con_list-form-list float-left short-box">-->
+								<!--<label class="form-list-user">是否深度学习：</label>-->
+								<!--<div class="form-list-right">-->
+									<!--<div class="selectBox">-->
+										<!--<select id="UpdateFace">-->
+											<!--<option value="是">是</option>-->
+											<!--<option value="否">否</option>-->
+										<!--</select>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</div>-->
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">识别框垂直镜像：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="FaceImageY">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">识别框水平镜像：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="FaceImageX">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left short-box">
+								<label class="form-list-user">文字水平镜像：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="txtUploadRecvCamera">
+											<option value="是">是</option>
+											<option value="否">否</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="investment_con_list-form-list float-left">
+								<label class="form-list-user">阀值设置：</label>
+								<div class="form-list-right">
+									<div class="selectBox">
+										<select id="selFaceScore">
+											<option>55</option>
+											<option>60</option>
+											<option>65</option>
+											<option>70</option>
+											<option>75</option>
+											<option>80</option>
+											<option>85</option>
+											<option>90</option>
+											<option>95</option>
+										</select>
+									</div>									
+								</div>
+							</div>
+							<!--<div id="AgentCreatQrcode"></div>-->
+						</div>
+						<div id="divButton" class="seeting-button">
+							<a id="btnSaveOption">保存参数设置</a>
+							<a id="btnRunSystem">进入系统首页</a>
+							<!--<a id="btnTest">拍照读卡测试</a>-->
+							<a id="btnTest_24G">2.4G模块测试</a>
+							<a id="btnTest_MenJin">门禁模块测试</a>
+							<a id="btnRetModelSet">返回模式设置</a>
+							<a id="btnExitSystem">退出系统</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/indexnew.js"></script>
+</html>

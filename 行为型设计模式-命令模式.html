@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>命令模式</title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<button id="btn1">button1</button>
+	    <button id="btn2">button2</button>
+	    <button id="btn3">button3</button>
+		<button id="btn4">button4</button>
+		<button id="btn5">button5</button>
+	</body>
+</html>
+<script type="text/javascript">
+	$(function(){
+		var btn1 = document.getElementById('btn1');
+		var btn2 = document.getElementById('btn2');
+		var btn3 = document.getElementById('btn3');
+		var btn4 = document.getElementById('btn4');	
+		var btn5 = document.getElementById('btn5');	
+		var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar);
+		var addSubMenuCommand = new AddSubMenuCommand(SubMenu);
+		var delSubMenuCommand = new DelSubMenuCommand(SubMenu);
+		var changeSubMenuCommand = new ChangeSubMenuCommand(SubMenu);		
+		//注册按钮的行为操作(直接设置按钮命令)
+		setCommand( btn1, refreshMenuBarCommand );
+		setCommand( btn2, addSubMenuCommand );
+		setCommand( btn3, delSubMenuCommand );
+		setCommand( btn4, changeSubMenuCommand );
+		setCommand( btn5, changeSubMenuCommand );
+	})
+	//设定命令组
+	var setCommand = function(button, command) {
+	    button.onclick = function() {
+	        command.execute();
+	    };
+	};                                 
+	var MenuBar = {
+	    refresh: function() {
+	        console.log('refresh刷新操作');
+	    }
+	};
+
+	var SubMenu = {
+	    add: function() {
+	        console.log('add');
+	    },
+	    del: function() {
+	        console.log('del');
+	    },
+		change:function(){
+			console.log('change');
+		}
+	}
+	var RefreshMenuBarCommand = function(receiver) {
+		this.receiver = receiver;
+	}
+
+	RefreshMenuBarCommand.prototype.execute = function() {
+		this.receiver.refresh();
+	}
+
+	var AddSubMenuCommand = function(receiver) {
+		this.receiver = receiver;
+	}
+
+	AddSubMenuCommand.prototype.execute = function() {
+		this.receiver.add();
+	}
+
+	var DelSubMenuCommand = function(receiver) {
+		this.receiver = receiver;
+	}
+
+	DelSubMenuCommand.prototype.execute = function(){
+		this.receiver.del();
+	}
+	//changeSubMenuCommand
+	var ChangeSubMenuCommand = function(receiver) {
+		this.receiver = receiver;
+	}
+	ChangeSubMenuCommand.prototype.execute = function(){
+		this.receiver.change();
+	}
+	
+	
+	/*****************************命令模式**************************************/
+	var command=function(receiverObj){
+		this.receiver=receiverObj;
+	}
+	command.prototype={
+		exec:function(){
+			this.receiver.doSomthing();//接收者的具体操作
+		},
+		undo:function(){
+			this.reciver.backout();//撤销操作
+		}
+	};
+	//触发者
+	var invoker=function(cmdObj){
+		this.command=cmdObj;
+	}
+	invoker.prototype={
+		hander:function(){
+			//调用者的一个操作
+			this.command.exec();
+			//不需要知道操作的对象是谁，有接收者负责，仅执行操作即可，
+			//这样可以随意更改command参数，只要它实现了exec方法；
+		}
+	}
+	
+	
+	/*****************************命令模式**************************************/
+</script>

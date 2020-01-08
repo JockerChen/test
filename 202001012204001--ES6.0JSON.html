@@ -1,0 +1,47 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-03 19:08:17
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-01-03 19:14:58
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6.0JSON</title>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+    
+</body>
+<script>
+  /**
+   * @Author: [JokerChen]
+   * @description: JSON.stringify(json)  JSON
+   * @param {type} 
+   * @return: 
+   */
+  
+    let json={a:12,b:5};
+	// let str=encodeURIComponent(JSON.stringify(json)) ;
+  let str=JSON.stringify(json);
+
+  let strInfo=JSON.parse(str);
+  let a=12;
+  let b=5;
+  //简写
+  let jsonTest={a,b,c:15,
+    showInfo(){
+      console.log(this.a);
+    }
+  };
+  console.log(jsonTest);
+
+
+	alert(str); 
+  alert(strInfo.a); 
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+		<input type="text" id="checkAccount" placeholder="请输入信息" /> 
+			<button type="button" id="name_Input">删除信息按钮</button>
+	</body>		
+</html>
+<script type="text/javascript">
+	$(function(){
+		var datainfo=new Date().Format("yyyyMMddHHmmss");
+		console.log(datainfo);
+		console.log(isNumber("111"));
+		$('#name_Input').on("click",function(){
+			$('#checkAccount').empty();
+			
+		})
+	})
+	
+	
+	function isNum(a) {   
+		var reg = /^-?\d+$/;     
+		return reg.test(a); 
+	}
+	
+	function isNumber(value) {
+	    var patrn = /^[0-9]*$/;
+	    if (patrn.exec(value) == null || value == "") {
+	        return false
+	    } else {
+	        return true
+	    }
+	}
+</script>
