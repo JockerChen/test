@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/sea.js" type="text/javascript"></script>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    //按需加载
+    seajs.use('moudleSea.js',function(moudleSea){
+        alert(moudleSea.a);
+        alert(moudleSea.b);
+        moudleSea.Show("a","777");
+    })
+
+</script>
