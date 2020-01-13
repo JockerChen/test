@@ -1,3 +1,10 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-08 19:06:43
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-01-13 17:55:41
+ * @Description: 
+ -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -13,7 +20,7 @@
  * @description:生成器 可以暂停当前的函数,可以跟function相邻，可以跟函数名相邻。
  * yield:暂停，放弃执行
  * next() 函数,向下执行
- * 场景，请求数据
+ * 场景，请求数据无感的情况下处理异步操作,应用的最多的是数据交互
  * 
  * @param {type} 
  * @return: 
@@ -21,14 +28,22 @@
   show();
   //
   function* show() {
-    alert("a");
+    console.log("a");
     yield;
-    console.log();
-    alert("b");     
+    console.log("b");     
   }
 
   let showObj=show();
   console.log(showObj);
   showObj.next();
   showObj.next();
+
+
+// 官方版本的runner
+async  showInfo=> {
+    console.log("a");
+    await
+    console.log("b");
+}
+// showInfo(); 
 </script>
