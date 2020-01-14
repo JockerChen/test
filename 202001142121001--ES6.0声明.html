@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6.0声明</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+//不存在变量提升
+console.log(ui);
+var ui=1;
+// console.log(uii);
+// let uii=123123;
+
+// 暂时性死区
+// var tmp = 123;
+
+// if (true) {
+//   tmp = 'abc'; // ReferenceError
+//   let tmp;
+// }
+
+// if (true) {
+//   // TDZ开始
+//   tmp = 'abc'; // ReferenceError
+//   console.log(tmp); // ReferenceError
+
+//   let tmp; // TDZ结束
+//   console.log(tmp); // undefined
+
+//   tmp = 123;
+//   console.log(tmp); // 123
+// }
+
+// 不允许重复声明
+// IIFE 写法
+(function () {
+  var tmp = "";
+}());
+
+
+{
+    let tmp="";
+
+}
+
+</script>
