@@ -1,3 +1,11 @@
+
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-09 13:52:55
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-01-13 18:16:36
+ * @Description: 
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +20,17 @@
 </body>
 </html>
 <script>
-    //按需加载
+    /**
+     * @Author: [JokerChen]
+     * @description: 
+     * @param {type} 
+     * @return: 
+     */
+    //按需加载(从html引用js用User)  从js引用js 则用require 进行引用 引用时可以省略掉.js
+    //内部原理:
     seajs.use('moudleSea.js',function(moudleSea){
-        alert(moudleSea.a);
-        alert(moudleSea.b);
+        console.log(moudleSea.a);
+        console.log(moudleSea.b);
         moudleSea.Show("a","777");
     })
 
