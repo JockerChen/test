@@ -32,38 +32,38 @@ let p1=new Promise(function(resolve,reject){
     });
 });
 
-let p2=new Promise(function(resolve,reject){
-    var url="data/json.json";
-    $.ajax(url,{
-        type: "get",
-        dataType: "json",
-        success (data) {
-          resolve(data);
-        },
-        error (data) {
-          reject(data);
-        }
-    });
-});
+// let p2=new Promise(function(resolve,reject){
+//     var url="data/json.json";
+//     $.ajax(url,{
+//         type: "get",
+//         dataType: "json",
+//         success (data) {
+//           resolve(data);
+//         },
+//         error (data) {
+//           reject(data);
+//         }
+//     });
+// });
 
-// p1.then(function (arr) {
-// 	console.log(arr);
-//     //成功了
-//     // alert("成功了");
-// },function () {
-//   //失败了reject();函数
-//   alert("失败了");
-// } );
+p1.then(function (arr) {
+	console.log(arr);
+    //成功了
+    // alert("成功了");
+},function () {
+  //失败了reject();函数
+  alert("失败了");
+} );
 
-Promise.all([p1,p2]).then(function(arr){
-  //必须都成功(根据解构对象进行接收)
-  let [res1,res2]=arr;
-  console.log(res1);
-  console.log(res2);
-},function (arr) {
-  //至少有一个失败
-  let [res1,res2]=arr;
-})
+// Promise.all([p1,p2]).then(function(arr){
+//   //必须都成功(根据解构对象进行接收)
+//   let [res1,res2]=arr;
+//   console.log(res1);
+//   console.log(res2);
+// },function (arr) {
+//   //至少有一个失败
+//   let [res1,res2]=arr;
+// })
 //强迫症的
 function CreatPromise(url) {
     return  new Promise(function(resolve,reject){
@@ -79,24 +79,24 @@ function CreatPromise(url) {
         });
     });
 }
-//精简完的
-Promise.all([
-  CreatPromise("data/data.json"),
-  CreatPromise("data/json.json")]).then(function(arr){
-  //必须都成功(根据解构对象进行接收)
-  let [res1,res2]=arr;
-},function (arr) {
-  //至少有一个失败
-  let [res1,res2]=arr;
-})
-//终极目标（jquery高版本的是支持promise的（ajax追加））
-Promise.all([
-	$.ajax(),$.ajax()
-]).then(results=>{
-	//成功了
-},err=>{
-	//失败了
-});
+// //精简完的
+// Promise.all([
+//   CreatPromise("data/data.json"),
+//   CreatPromise("data/json.json")]).then(function(arr){
+//   //必须都成功(根据解构对象进行接收)
+//   let [res1,res2]=arr;
+// },function (arr) {
+//   //至少有一个失败
+//   let [res1,res2]=arr;
+// })
+// //终极目标（jquery高版本的是支持promise的（ajax追加））
+// Promise.all([
+// 	$.ajax(),$.ajax()
+// ]).then(results=>{
+// 	//成功了
+// },err=>{
+// 	//失败了
+// });
 
 //竟速哪个快读取的哪个
 // Promise.race([

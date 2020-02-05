@@ -1,0 +1,67 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-02-05 12:16:54
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-02-05 13:40:25
+ * @Description: ES6.0函数参数学习
+	
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+</body>
+
+</html>
+<script type="text/javascript">
+	//参数展开或数组展开
+	// 1、收集参数function show(a,b,...args); Rest Parameters必须是最后一个参数
+	// 2、展开后的效果相当于直接把数组的内容直接键入
+	// 3、赋值的过程中没办法进行处理 	
+
+	//默认参数
+
+
+	function show(a, b, ...args) {
+		console.log("a:" + a);
+		console.log("b:" + b);
+		//剩下的参数为args
+		//args只能作为最后一个形参（收集剩余参数）
+		let arr=args;
+		let arr1=[1,2,3];
+		let arr2=[4,5,6];
+		//相当于数组合并
+		let arrResult=[...arr1,...arr2];
+		console.log(arrResult);
+		console.log("args:" + args.length);
+	}
+	//扩展应用
+	function nameInfo(...args) {
+		//展开后回调
+		let info=fn(...args);
+		console.log(info);
+	}
+	function fn(a,b)
+	{
+		return a+b;
+	}
+	
+	nameInfo(1,22,12);
+	show(1, 2, 12,11,3,44,11,23,41);
+
+	//默认参数
+	function defaultFunction(a=100,b="字符串") {
+		console.log("a:"+a,"b:"+b); 
+	}
+	//有参数的情况下就进行传参，没有参数的情况下就不进行传参
+	defaultFunction(11);
+
+
+
+	
+</script>
