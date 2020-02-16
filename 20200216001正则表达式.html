@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="NGCGLValue" cols="40" rows="10"></textarea>
+    <input type="button" id="NGCGLBtn" value="敏感词过滤" />
+    <textarea name="" id="NGCGLValue2" cols="40" rows="10"></textarea>
+
+
+
+    <textarea name="" id="NGCGLValueHtml" cols="40" rows="10"></textarea>
+    <input type="button" id="NGCGLBtnHtml" value="过滤html" />
+    <textarea name="" id="NGCGLValue2Html" cols="40" rows="10"></textarea>
+
+</body>
+<script>
+// search     查找  返回当前位置
+// substring  获取子字符串
+// charAt     获取某个字符串
+// split      分割字符串获得数组
+
+
+
+
+var str="abcdef";
+
+
+
+
+
+//正则写法1（js风格）正则对象第二个参数是option也就是选项概念
+//i (忽略大小写)
+//g  global(找到全部的) 放在规则后
+//+ 量词 （若干）含义 放在规则前
+//| 或的含义 
+//[] 方括号 
+// 1、元字符（或）[abc] 或pc  
+// 2、范围内的
+// 3、排除[^a-z]  
+// 4、组合用法[^a-z0-9]
+//. 转义字符的任意字符
+
+
+//常用的转义字符
+// 转义的用法\d   \D数字[^0-9]
+//转义的用法\W  英文、数字、下划线   \W数字[^]
+//转义的用法\s  空白字符  \S 对\s的取反
+
+//量词意思  就是出现次数
+// {N} 正好出现N次  \d{8}   [1-9]\d{7} 效验电话号码
+//{N,M} 最少N次最多M次 [1-9]\d{4,10} //QQ号规则
+//{N,}最少N次  最多不限
+// +  //{1,}+相当于最少1次最多不限
+// ? //{0,1} 可有可无  010-87312233  87312233  010-87312233-86   含义是问号前面的东西可有可无(区号和分机号可有可无)  (0\d{2,3}-)?[1-9]\d{7}-/d{1,5}?
+// * (不推荐使用)
+
+
+var re=new RegExp('A','i');
+//写法2（perl风格）
+// var re1=/a/;
+// var re2=/a/i;//同上忽略大小写功能
+// search 只能找出位置
+// alert(str.search(re));
+//例子2match (第一个出现的数字) 
+var strItem="adsf 43 23 vcxzzxcv33";
+//转义的用法\d  数字
+var red=/\d+/g;
+//第二种写法(作用相同)
+// var red =/[0-9]/g;
+
+// alert(strItem.match(red));
+//例子replace (第一个出现的数字) 一般替换的化配合正则才能发挥最大的用途
+var strReplace="aaa abc erw";
+
+var reReplace=/a/g;
+// alert(strReplace.replace(reReplace,'0'));
+//敏感词过滤
+document.getElementById("NGCGLBtn").onclick=function(){
+    var re=/百度|淘宝|政府|主席/g;
+    var sNGCGLValue =document.getElementById("NGCGLValue").value;
+    document.getElementById("NGCGLValue2").value=sNGCGLValue.replace(re,'****')
+}
+//[]的用法
+var reOr=/[abc]pc/g;
+//[]排除的用法
+var reDel=/[^abc]pc/g;
+var strOr="apc bpc cpc dpc xpc upc";
+alert(strOr.match(reOr));
+alert(strOr.match(reDel));
+
+//过滤html标签的方法
+
+document.getElementById("NGCGLBtnHtml").onclick=function(){
+    //除了尖括号以外的所有字符
+    var re =/<[^<>]+>/g;
+    // var re=/<.+>/g;
+
+    var sNGCGLValue =document.getElementById("NGCGLValueHtml").value;
+    document.getElementById("NGCGLValue2Html").value=sNGCGLValue.replace(re,'')
+}
+//邮箱效验 规则一串英文、数字、@  一串英文、数字 . 一串英文 不需要检验大小写的
+            //  \w+            @  [0-9 a-z]+    \. [a-z]   
+
+
+// chenning@51kad.com 
+// jokerChen_01@51kad.com
+
+// text函数用法 re.text(str)  返回真假  检验是满足当前的正则表达式，只要字符串的一部分满足则返回true
+
+^ //行首
+$ //行尾
+
+var re = /\w+@[0-9a-z]+\.[a-z]/;//没加行首和行尾的时候 局部满足则认为都满足
+// 改造后的
+var reChange=/^\w+@[0-9a-z]+\.[a-z]+$/i;
+
+</script>
+</html>
