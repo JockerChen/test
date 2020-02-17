@@ -11,8 +11,6 @@
     <input type="button" id="NGCGLBtn" value="敏感词过滤" />
     <textarea name="" id="NGCGLValue2" cols="40" rows="10"></textarea>
 
-
-
     <textarea name="" id="NGCGLValueHtml" cols="40" rows="10"></textarea>
     <input type="button" id="NGCGLBtnHtml" value="过滤html" />
     <textarea name="" id="NGCGLValue2Html" cols="40" rows="10"></textarea>
@@ -23,19 +21,14 @@
 // substring  获取子字符串
 // charAt     获取某个字符串
 // split      分割字符串获得数组
-
-
-
-
+//match
 var str="abcdef";
-
-
-
-
-
 //正则写法1（js风格）正则对象第二个参数是option也就是选项概念
+
 //i (忽略大小写)
 //g  global(找到全部的) 放在规则后
+
+
 //+ 量词 （若干）含义 放在规则前
 //| 或的含义 
 //[] 方括号 
@@ -104,16 +97,12 @@ document.getElementById("NGCGLBtnHtml").onclick=function(){
     document.getElementById("NGCGLValue2Html").value=sNGCGLValue.replace(re,'')
 }
 //邮箱效验 规则一串英文、数字、@  一串英文、数字 . 一串英文 不需要检验大小写的
-            //  \w+            @  [0-9 a-z]+    \. [a-z]   
-
-
+//  \w+  @  [0-9 a-z]+    \. [a-z]   
 // chenning@51kad.com 
 // jokerChen_01@51kad.com
-
 // text函数用法 re.text(str)  返回真假  检验是满足当前的正则表达式，只要字符串的一部分满足则返回true
-
-^ //行首
-$ //行尾
+// ^ //行首
+// $ //行尾
 
 var re = /\w+@[0-9a-z]+\.[a-z]/;//没加行首和行尾的时候 局部满足则认为都满足
 // 改造后的
