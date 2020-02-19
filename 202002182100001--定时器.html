@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>定时器</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position:absolute;
+            left: 0px;
+            top: 150px;
+
+        }
+    
+    </style>
+</head>
+<body>
+    <button id="btn1">开启</button>
+    <button id="btn2">关闭</button>
+    
+        <div id="div1">
+            
+        </div>
+</body>
+<script>
+    //定时器
+    var timeInterval='';
+
+    var timeOut='';
+window.onload=function(){
+    var oBtn1=document.getElementById("btn1");
+    var oBtn2=document.getElementById("btn2");
+    var oDiv1=document.getElementById("div1");
+    oBtn1.onclick=function(){
+        // 开启
+        timeInterval=setInterval(() => {
+            console.log("1");        
+        }, 2000);
+        timeOut=setTimeout(()=>{
+            console.log("2");
+        },1000);
+    }
+    oBtn2.onclick=function(){
+        // 关闭
+        clearInterval(timeInterval);
+        clearTimeout(timeOut);
+    }
+
+    oDiv1.onclick=function(){
+        setInterval(() => {
+            oDiv1.style.left=oDiv1.offsetLeft+10+'px';
+        }, 30);
+        // offsetLeft是左边距
+        // alert(this.offsetLeft);
+    }
+}
+//日期对象
+var dateInfo=new Date();
+console.log(dateInfo.getFullYear());
+console.log(dateInfo.getMonth()+1);
+console.log(dateInfo.getDate());
+console.log(dateInfo.getHours());
+console.log(dateInfo.getMinutes());
+console.log(dateInfo.getSeconds());
+//事件连等(简化)
+// oBtn1.onclick=oBtn2.onclick=function(){
+
+// }
+
+
+// 样式
+// *{top:0;left:0}
+// #div1{position:relative}
+// #div1 ul{position:absolute}
+// #div ul li{float:left;width:178px;height:108px;list-style:none;}
+//无缝滚动实现
+var oDiv=document.getElementById("div1");
+var oUl=document.getElementsByTagName('ul')[0];
+var aLi=document.getElementsByTagName('li');
+oUl.innerHTML=oUl.innerHTML+oUl.innerHTML;
+oUl.style.width=aLi[0].offsetWidth*aLi.length+"px";
+setInterval(() => {
+    //此处相当于障眼法（滚动到一半的时候往前扯一半）
+    if(oUl.offsetLeft<-oUl.offsetWidth/2)
+    {
+        oUl.style.left='0';
+    }
+    if(oUl.offsetLeft>0)
+    {
+        oUl.style.left=-oUl.offsetWidth/2+'px';
+    }
+    oUl.style.left=oUl.offsetLeft-2+'px';//向左滚
+    oUl.style.left=oUl.offsetLeft+2+'px';//向右滚
+}, 30);
+
+</script>
+</html>

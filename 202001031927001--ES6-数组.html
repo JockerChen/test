@@ -1,3 +1,10 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-08 19:06:43
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-02-13 13:13:56
+ * @Description: ES6.0数组功能详解，一共4个功能函数
+ -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,7 +13,11 @@
 	</head>
 	<body>
 	</body>
-<script>
+<script type="text/javascript">
+//  1、map					映射 
+//  2、reduce				汇总 
+//  3、filter				过滤器 
+//  4、forEach			迭代  
 	window.onload=function(){
     //将拼接的字符串转成数组Array.of
     let arrOf= Array.of(3,11,8);
@@ -18,7 +29,6 @@
     let arrayTwo=[3002,1,2,333];
     let newArray=arrayOne.concat(arrayTwo);
     console.log(newArray);
-
 		var arrIfo=[12,58,99,86,45,91];
 		//映射
 		var info=["不及格","不及格","及格","及格","不及格","及格"];
@@ -26,13 +36,13 @@
 		var arrPerson=[45,46,135,2];
 		// 映射成
 		var mapArray=[{
-			name:"Joker",level:1,role:1
-		},{
-			name:"Joker1",level:2,role:2
-		},{
-			name:"Joker2",level:3,role:3
-		},{
-			name:"Joker3",level:4,role:4
+				name:"Joker",level:1,role:1
+			},{
+				name:"Joker1",level:2,role:2
+			},{
+				name:"Joker2",level:3,role:3
+			},{
+				name:"Joker3",level:4,role:4
 		}];
 		//map用法(配合箭头函数)
 		let result=arrIfo.map(item=>item>=60?'及格':'不及格');
@@ -45,12 +55,12 @@
 		//第一个参数中间结果每一次的中间结果
 		//第二个参数item
 		//第三个参数角标
-		let reduceResult= arrPerson.reduce(function(tem,item,index){
+		let reduceResult= arrPerson.reduce(function(tem,item,index){ 
 			return  tem+item;
 		})
 		
 		let reduceResultA=arrPerson.reduce(function(tem,item,index){
-			//平均数
+			//平均数（最后一次进行处理）  
 			if(index==arrPerson.length-1)
 			{
 				return  (tem+item)/arrPerson.length;

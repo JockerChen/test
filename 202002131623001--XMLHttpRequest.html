@@ -1,0 +1,85 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-02-13 16:23:45
+ * @LastEditors  : [JokerChen]
+ * @LastEditTime : 2020-02-14 09:51:48
+ * @Description: ajax原理以及XMLHttpRequest原生的东西是怎么模拟的
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>XMLHttpRequest原生的东西是怎么模拟的</title>
+</head>
+<body>
+  <input type="button" value="按钮" id="Btn1" >
+</body>
+</html>
+<script>
+window.onload=function(){
+  let btn= document.getElementById("Btn1");
+  btn.onclick=function(){
+    console.log("1");
+    //1、创建对象
+   let xmlhttp=new XMLHttpRequest();
+   alert(xmlhttp.readyState);
+   let urlInfo="data/json.json";
+    //2、连接请求
+    //参数open函数的三个参数
+    // 1、http请求时get还是POST 
+    // 2、请求的url地址
+    // 3、同步还是异步
+    xmlhttp.open("GET",urlInfo,true);//true  是异步的，false是同步的
+    //返回状态1
+    alert(xmlhttp.readyState);
+    //3、发送（body）数据
+    xmlhttp.send("11111");
+    alert(xmlhttp.readyState);
+    //4、接收
+    //通过事件来完成数据接收的过程（通讯状态改变的时候触发）
+    // 状态如下：
+    // 0、初始状态、对象刚创建完。
+    // 1、已经连接到服务器上
+    // 2、数据发送完成
+    // 3、接收完成（响应头接收完）
+    // 4、接受完成（响应体接收完）
+    //status返回状态
+    //1、消息
+    //2、成功
+    //3、重定向
+      //301
+      //302
+      //304
+      let strInfo;
+    xmlhttp.onreadystatechange=function(){
+      //过程
+      alert(xmlhttp.readyState);
+      if(xmlhttp.readyState===4){
+          alert(xmlhttp.status);
+          if((xmlhttp.status>=200 && xmlhttp<=300)||(xmlhttp.status==200)){
+            alert("接受完成，成功不成功不知道！");
+            //和统一的DOM相同
+            let p=xmlhttp.responseXML.getElementsByTagName('person')[0];
+            let p=xmlhttp.responseText;//
+            //进行判断是否有JSON对象
+            //第一种
+            if(window.JSON&&JSON.parse)
+            {
+              
+            }
+            // 第二种
+            try {
+              let json=JSON.parse(strInfo);
+            } catch (error) {
+              // eval();
+            }
+
+          }
+          console.log()
+      }
+    };
+  } 
+};
+</script>
