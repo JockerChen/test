@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var menuArray=[];
+	$(function(){
+		
+		getInfo();
+	})
+	
+	function getInfo(){
+		$.ajax({
+			type: "GET",
+			url: "data/data.json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+				console.timeEnd("加载界面");
+				if (res.rows) {
+					menuArray = res.rows;
+					console.log(menuArray);
+					var filteredArray = menuArray.filter(function (n) {
+						return n.ListItemVisible !== "true" && ListItemUrl !== "add";
+					});
+					var filteredArrayFalse = menuArray.filter(function (n) {
+						return n.ListItemVisible !== "false";
+					});
+					console.log(filteredArray);
+					console.log(filteredArrayFalse);
+					changeArrayInfo(menuArray,1);
+					var addArray=[1,2,3,4,5];
+					var newArrInfo=[];
+					for (var i=0;i<addArray.length;i++){
+						newArrInfo.push(changeArrayInfo(menuArray,addArray[i],"false"));
+					}
+					console.log(newArrInfo);
+					menuArray.forEach((val, key) => {
+						 if (val.ListItemId === newArrInfo.ListItemId) {
+							 Object.assign(val, dataObject);
+						 }
+					})	
+					console.log("新覆盖的菜单数组："+JSON.stringify(menuArray));
+					
+				}
+			}
+		});
+	}
+
+	//更改数组对应的数组信息
+	function changeArrayInfo(menuArray,info,state){
+		//可进行修改
+		let arr2 = menuArray.filter(function (currentValue, index) {
+            // console.log("开始处理第 " + index + " 元素");
+            return currentValue.ListItemId === info;
+        });
+		arr2[0]['ListItemVisible']=state;
+		return arr2[0];
+	}
+	
+</script>
