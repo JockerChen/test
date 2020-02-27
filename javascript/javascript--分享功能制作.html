@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.showDiv{
+				width: 150px;
+				height: 150px;
+				background: #70f3ff;
+				position: absolute;
+				top:100px;
+				left:-150px;
+			}
+			.showDiv .ShowTitle{
+				height: 30px;
+				line-height: 30px;
+				padding: 5px 5px 5px 5px;
+				position: relative;
+				border-bottom:1px solid #ccc;
+				color:red;
+			}
+			.showDiv .ShowContent{
+				position: relative;
+				line-height: 30px;
+				margin:5px 5px 5px 5px;
+				color:red;
+			}
+			.showDiv span{
+				width: 20px;
+				height: 60px;
+				background: blueviolet;
+				position: absolute;
+				top:60px;
+				left:150px;
+				line-height: 40px;
+				color: aliceblue;
+				border-radius: 0 5px 5px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ShowDiv" class="showDiv">
+			<div class="ShowTitle">提示标题</div>
+			<div class="ShowContent">提示内容</div>
+			<span id="Share">tips</span>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	//一定要将timer最开始时进行初始化，不然就会出现因为时间造成的抖动(十分重要)
+	var timeInterval=null;
+	var oDiv=document.getElementById("ShowDiv");
+	window.onload=function(){
+		var oShare=document.getElementById("Share");
+		oDiv.onmouseover=function(){
+			ShareMove(0);
+		}
+		oDiv.onmouseout=function(){
+			ShareMove(-150);
+		}
+	}
+	//封装函数 移除了多余的传入参数
+	function ShareMove(target){
+		var speed=10;
+		console.log(oDiv.offsetLeft);
+		clearInterval(timeInterval);
+		timeInterval=setInterval(function(){
+			if(oDiv.offsetLeft>target){
+				speed=-10;
+			}
+			if(oDiv.offsetLeft==target){
+				clearInterval(timeInterval);
+			}
+			else{
+				//如何慢一点移动对应的DIV呢（修改每次移动的div）速度
+				oDiv.style.left=oDiv.offsetLeft+speed+"px";
+			}
+		},30)
+	}
+</script>
