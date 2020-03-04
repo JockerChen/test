@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>运动中级--缓冲运动</title>
+		<style type="text/css">
+			#div1{
+				width: 100px;
+				height: 100px;
+				background-color: #FF0000;
+				position: absolute;
+				top: 100px;
+				left: 600px
+			}
+			#div2{
+				width: 1px;
+				height: 300px;
+				background-color: #000000;
+				position: absolute;
+				top: 100px;
+				left: 300px
+			}
+		</style>
+	</head>
+	<body>
+		<button id="StartMotion">开始运动</button>
+		<div id="div1">
+			
+		</div>
+		<div id="div2">
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var timer=null;
+	//缓冲运动（速度随着距离成正比） 距离大  速度大  距离小  速度小  有  一定要取整
+	window.onload=function(){
+		var  bStartMotion=document.getElementById("StartMotion");
+		bStartMotion.onclick=function(){
+			startMove(300);
+		}
+	}
+	//开始运动（正向）
+	function startMove(target){
+		var  oDiv1=document.getElementById("div1");
+		var speed=0;
+		clearInterval(timer);
+		timer=setInterval(function(){
+			// if(oDiv1.offsetLeft>=target){
+			// 	clearInterval(timer);
+			// }
+			// else{
+				//Math.ceil向上取整（正向运动）
+				//Math.floor 向下取整（负向运动）（如果用向下取证的话，最后一个单位出现明显的卡顿现象）
+				speed=(target-oDiv1.offsetLeft)/10;
+				speed=speed>0? Math.ceil(speed):Math.floor(speed);
+				//如果css针对像素的话最小单位为1px float对象的像素都直接取整速度不能是小数
+				oDiv1.style.left=oDiv1.offsetLeft+speed+'px';
+				document.title=oDiv1.style.left;
+			// }
+		},30);
+	}
+</script>
