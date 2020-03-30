@@ -1,0 +1,55 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-03-26 16:55:46
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-03-27 10:33:38
+ * @Description: 
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>进行过滤</title>
+         <script src="../js/jquery-1.7.2.min.js"></script>
+     </head>
+     <body>
+         <div id="info">
+             
+         </div>
+         <div class="text">
+             
+         </div>
+     </body>
+ </html>
+ <script>
+     $(function() {
+         var sChineseInfo = "系统语言";
+         var sUrl="../data/englishlanguage.json";
+         var p1=ajaxPromise(sUrl,sChineseInfo);
+         p1.then(function(result){
+             console.log(result);
+         })
+     })
+	 
+     //
+     function ajaxPromise(url,sChineseInfo) {
+         return new Promise(function(resolve, reject){
+             $.getJSON(url,function(json){
+                 var arrayAnswer = json.filter(function(x) {
+                     return x.ChineseValue === sChineseInfo;
+                 })
+                 if(arrayAnswer.length!=0){
+                     var title=arrayAnswer[0].Title;
+                     console.log(title);
+                     resolve(title);
+                 }
+                 else
+                 {
+                     reject("啥也没有");
+                 }
+             })			
+         })   
+     }
+ </script>
+ 

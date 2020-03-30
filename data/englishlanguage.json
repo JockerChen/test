@@ -1,0 +1,242 @@
+[
+  {
+      "Title":"Yes",
+      "ChineseValue":"是",
+      "Description":""
+  },
+  {
+      "Title":"No",
+      "ChineseValue":"否",
+      "Description":""
+  },
+{
+    "Title":"Open",
+    "ChineseValue":"有",
+    "Description":""
+},
+{
+    "Title":"Open",
+    "ChineseValue":"开",
+    "Description":""
+},
+{
+    "Title":"No",
+    "ChineseValue":"无",
+    "Description":""
+},
+{
+    "Title":"BasicSetting",
+    "ChineseValue":"基础设置",
+    "Description":""
+},
+{
+    "Title":"Setting",
+    "ChineseValue":"高级设置",
+    "Description":""
+},
+{
+    "Title":"FaceSetting",
+    "ChineseValue":"人脸识别设置",
+    "Description":""
+},
+{
+    "Title":"CameraSetting",
+    "ChineseValue":"摄像头设置",
+    "Description":""
+},
+{
+    "Title":"ServerPath",
+    "ChineseValue":"服务器地址",
+    "Description":""
+},
+{
+    "Title":"SerialSetting",
+    "ChineseValue":"串口设置",
+    "Description":""
+},
+{
+    "Title":"TempSetting",
+    "ChineseValue":"温感器设置",
+    "Description":""
+},
+{
+    "Title":"SaveSetting",
+    "ChineseValue":"保存参数设置",
+    "Description":""
+},
+{
+    "Title":"EnterSystem",
+    "ChineseValue":"进入应用系统",
+    "Description":""
+  },
+  {
+    "Title":"DeviceNo",
+    "ChineseValue":"设备编号",
+    "Description":""
+  },
+{
+    "Title":"Please Input Service Path",
+    "ChineseValue":"请输入服务器地址",
+    "Description":""
+},
+{
+    "Title":"Please Input DeviceNo",
+    "ChineseValue":"请输入设备编号",
+    "Description":""
+},
+{
+    "Title":"Standard",
+    "ChineseValue":"标准",
+    "Description":""
+},
+{
+    "Title":"Enhance",
+    "ChineseValue":"增强",
+    "Description":""
+},
+{
+    "Title":"ApplicationSystem",
+    "ChineseValue":"应用系统",
+    "Description":""
+},
+{
+    "Title":"SystemLanguage",
+    "ChineseValue":"系统语言",
+    "Description":""
+},
+{
+    "Title":"SystemCore",
+    "ChineseValue":"系统内核",
+    "Description":""
+},
+{
+    "Title":"PlaySound",
+    "ChineseValue":"是否语音播放",
+    "Description":""
+},
+{
+    "Title":"Chinese",
+    "ChineseValue":"中文",
+    "Description":""
+},
+{
+    "Title":"AutoResetTime",
+    "ChineseValue":"自动重启时间",
+    "Description":""
+},
+{
+    "Title":"CloseLampStartTime",
+    "ChineseValue":"关闭照明起始时间",
+    "Description":""
+},
+{
+    "Title":"CloseLampEndTime",
+    "ChineseValue":"关闭照明起始时间",
+    "Description":""
+},
+{
+    "Title":"DataChangeUpload",
+    "ChineseValue":"数据变更是否上传",
+    "Description":""
+},
+{
+    "Title":"DataChangeDownload",
+    "ChineseValue":"数据变更是否接收",
+    "Description":""
+},
+{
+    "Title":"DataChangeDownload",
+    "ChineseValue":"数据变更是否接收",
+    "Description":""
+},
+{
+    "Title":"DownloadPopTips",
+    "ChineseValue":"实时下载弹出提示",
+    "Description":""
+},
+{
+    "Title":"TouchTimeLong",
+    "ChineseValue":"触控清空时长",
+    "Description":""
+},
+{
+    "Title":"FaceVersion",
+    "ChineseValue":"人脸识别版本",
+    "Description":""
+},
+{
+    "Title":"FaceFree",
+    "ChineseValue":"免费版",
+    "Description":""
+},
+{
+    "Title":"FacePro",
+    "ChineseValue":"正式版",
+    "Description":""
+},
+{
+    "Title":"ManyPeopleIdentify",
+    "ChineseValue":"多人脸识别",
+    "Description":""
+},
+{
+    "Title":"ManyPeopleIdentify",
+    "ChineseValue":"视频屏保启用时间",
+    "Description":""
+},
+{
+    "Title":"FaceDistance",
+    "ChineseValue":"人脸识别距离",
+    "Description":""
+},
+{
+    "Title":"FaceActivateMethod",
+    "ChineseValue":"人脸激活方式",
+    "Description":""
+},
+{
+    "Title":"FaceOnlineActivate",
+    "ChineseValue":"在线激活",
+    "Description":""
+},
+{
+    "Title":"OpenFaceSwitch",
+    "ChineseValue":"是否开启人脸识别",
+    "Description":""
+},
+{
+    "Title":"FaceCheckAlive",
+    "ChineseValue":"是否活体检测",
+    "Description":""
+},
+{
+    "Title":"UploadCollectFaceImage",
+    "ChineseValue":"采集时上传拍照",
+    "Description":""
+},
+{
+    "Title":"TemperatureAreaSwitch",
+    "ChineseValue":"是否显示测温区域",
+    "Description":""
+},
+{
+    "Title":"FaceSoftCode",
+    "ChineseValue":"人脸识别注册码",
+    "Description":""
+},
+{
+    "Title":"FaceSaveLog",
+    "ChineseValue":"人脸识别保存日志",
+    "Description":""
+},
+{
+    "Title":"CameraDirection",
+    "ChineseValue":"摄像头方向",
+    "Description":""
+},
+{
+    "Title":"ScreenDirection",
+    "ChineseValue":"屏幕方向",
+    "Description":""
+}
+]

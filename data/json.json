@@ -1,1 +1,36 @@
-{"a":123,"b":"测试","c":[{"name":"小明"}]}
+[
+    {
+        "Sys":"GRZX",
+        "ListItemId":5045,
+        "ListItemName":"个人中心",
+        "ListItemIcon":"GRZX",
+        "ListItemUrl":"../PersonIndex.aspx",
+        "ListItemVisible":"true",
+        "ListItemOrder":1,
+        "ListItemType":"2",
+        "ListltemClass":"GRZX",
+        "ListltemCatalogue":"智慧平台",
+        "ExtranetListItemUrl":"",
+        "accountNumber":"",
+        "thirdPartyCode":"",
+        "ModuleName":"",
+        "platformType":"平台"
+    },
+    {
+        "Sys":"DZBG",
+        "ListItemId":309,
+        "ListItemName":"电子门牌",
+        "ListItemIcon":"dzbg",
+        "ListItemUrl":"../DZBGIndex.aspx",
+        "ListItemVisible":"true",
+        "ListItemOrder":2,
+        "ListItemType":"2",
+        "ListltemClass":"dzbg",
+        "ListltemCatalogue":"智慧平台",
+        "ExtranetListItemUrl":"",
+        "accountNumber":"",
+        "thirdPartyCode":"",
+        "ModuleName":"",
+        "platformType":"平台"
+    }
+]

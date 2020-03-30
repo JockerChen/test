@@ -1,0 +1,77 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-03-27 19:46:56
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-03-28 09:05:25
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <div id="Info">
+    </div>
+</body>
+<script type="text/babel">
+    console.log("123123");
+    //整体组件
+    class TextInfo extends React.Component {
+        constructor(...arg) {
+            super(...arg);
+        }
+        render() {
+            let arrayInfo = [];
+            let filterArray;
+            //promise执行获取数据操作
+            var promiseInfo=Promise.all([
+                $.ajax({ "url": "data/data.json", "contentType": "json" }), $.ajax({ "url": "data/json.json", "contentType": "json" })
+            ]).then(function (array) {
+                //数组解析
+                let firstJson, arrayInfo;
+                [firstJson, arrayInfo] = array;
+                let allArray = [...firstJson.rows, ...arrayInfo];
+                    console.log(allArray);
+            }, function () {
+                console.log("失败了！");
+            })
+            console.log("this.state.arr:"+JSON.stringify(this.state.arr));
+            var info = allArray.map(function (item) {
+                console.log(item.ListItemId);
+                console.log(item.ListItemName);
+                console.log(item.ListItemType);
+                return <LiInfo>{item.ListItemName}</LiInfo>;
+            })
+            return <ul>{info}</ul>;
+        }
+    }
+    //分体组件
+    class LiInfo extends React.Component {
+        constructor(...arg) {
+            super(...arg);
+        }
+        render() {
+            return <li>{this.props.children}</li>;
+        }
+    }
+    //初始化加载
+    window.onload = function () {
+        var Info = document.getElementById("Info");
+        ReactDOM.render(
+            <TextInfo>
+            </TextInfo>
+            ,
+            Info
+        );
+    }
+</script>
+
+</html>
