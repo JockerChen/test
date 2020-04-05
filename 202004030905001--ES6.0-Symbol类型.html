@@ -1,0 +1,68 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-04-03 09:06:08
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-04-03 09:47:57
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbol类型的相关应用</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    //应用场景
+    //由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，
+    // 就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+    window.onload = function () {
+        let s1=Symbol("CheckInfo");
+        typeof s1  // 'symbol'
+        console.log(typeof s1);
+        console.log(s1);
+        const obj = {
+            toString() {
+                return 'abc';
+            }
+        };
+        const sym = Symbol(obj);
+        console.log(sym); 
+
+        let sym111 = Symbol('My symbol');
+
+        String(sym111) // 'Symbol(My symbol)'
+        sym111.toString() // 'Symbol(My symbol)'
+        //可以将对应的Symbol类型的初始化数据直接呈现
+        console.log(sym111.description); //ES2019
+
+        const log = {};
+
+        log.levels = {
+            DEBUG: Symbol('debug'),
+            INFO: Symbol('info'),
+            WARN: Symbol('warn')
+        };
+        console.log(log.levels.DEBUG, 'debug message');
+        console.log(log.levels.INFO, 'info message');
+        // 常量使用 Symbol 值最大的好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的switch语句会按设计的方式工作。
+        const COLOR_RED    = Symbol();
+        const COLOR_GREEN  = Symbol();
+
+        function getComplement(color) {
+        switch (color) {
+            case COLOR_RED:
+            return COLOR_GREEN;
+            case COLOR_GREEN:
+            return COLOR_RED;
+            default:
+            throw new Error('Undefined color');
+            }
+        }
+
+    }
+</script>

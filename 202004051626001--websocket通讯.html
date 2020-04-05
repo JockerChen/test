@@ -1,0 +1,47 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-04-05 09:59:47
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-04-05 12:32:36
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://localhost:8080/socket.io/socket.io.js" charset="utf-8"></script>
+    <script>
+        //http://localhost:8080/socket.io/socket.io.js应用库文件
+        let sock= io.connect("ws://localhost:8080/");
+        //数据发送
+        // emit参数有两个,一个是参数的名字，一个是具体的参数信息。
+        // sock.emit('a',1,2,3,4,5);
+        window.onload=function(){
+            let textSendInfo=document.getElementById('textSendInfo');
+            let btnDisconnect=document.getElementById('btnDisconnect');
+            let btnIdSend=document.getElementById('btnIdSend');
+            btnIdSend.onclick=function(){
+                console.log('点击了发送的按钮！');
+                sock.emit('a',textSendInfo.value);
+            }
+
+            btnDisconnect.onclick=function(){
+                //断开服务
+                console.log('点击了发送的按钮！');
+                sock.emit('a',textSendInfo.value);
+            }
+
+        }
+    </script>
+    <title>聊天室js</title>
+</head>
+    <body>
+        <div>
+            <span>信息</span>
+            <input type="text" id="textSendInfo"  placeholder="请输入发送的信息" /> 
+            <input type="button" id="btnIdSend"  value="发送" /> 
+            <input type="button" id="btnDisconnect"  value="断开连接" /> 
+        </div>
+    </body>
+</html>
