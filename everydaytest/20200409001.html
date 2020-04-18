@@ -1,0 +1,78 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-04-09 16:08:15
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-04-10 17:29:34
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/jquery-1.7.2.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        ShowGuiQinState();
+    })
+    
+    function ShowGuiQinState() {
+		var htmlStr='';
+        $.ajax('../data/sushestate.json', {
+            dataType: 'json', //服务器返回json格式数据
+            type: 'get', //HTTP请求类型
+            timeout: 5000, //超时时间设置为10秒；
+            success: function(data) {
+                console.log('返回的数据格式为：'+JSON.stringify(data));
+                if (!!data){
+                    if (data.resultCode == 0){
+                        var  jsonInfo=data.rows;
+                        console.log(jsonInfo);
+                        // let arrs = jsonInfo.filter(function(ele,index,self){
+                        //     return self.QinShiParentName.indexOf(ele.QinShiParentName) === index;
+                        // });
+                        let info= jsonInfo.filter(function(item) {
+                            return item.QinShiParentName!=='101室';
+                        })
+                        var mySet=new Set();
+                        //
+                        jsonInfo.forEach(function (i) { return mySet.add(i.QinShiParentName); });
+                        console.log(mySet);
+                        var myArr = Array.from(mySet);
+                        for(var i=0;i<jsonInfo.length;i++) {
+                            htmlStr+='<li>';   
+                            htmlStr+='    <p class="DormitoryNum"><i></i>101室</p>';    
+                            htmlStr+='    <p class="PersonList">';
+                            htmlStr+='        <span class="Dorm-ash">朴灿烈</span>';
+                            htmlStr+='        <span class="Dorm-ash">吴世勋</span>';
+                            htmlStr+='        <span class="Dorm-on">边伯贤</span>';
+                            htmlStr+='        <span class="Dorm-null">边伯贤</span>';
+                            htmlStr+='        <span class="Dorm-leave">金钟仁</span>';
+                            htmlStr+='        <span class="Dorm-ash">XiuMin</span>';
+                            htmlStr+='        <span class="Dorm-ash">都暻秀</span>';
+                            htmlStr+='    </p>';
+                            htmlStr+='</li>';
+                        }
+                    }
+                }
+            },
+            error:function(){
+                //异常处理；
+                alert("网络异常，获取宿舍管理人员列表信息失败！");
+                return false;
+            }
+        })
+    }
+	
+	
+</script>

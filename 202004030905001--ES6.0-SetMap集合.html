@@ -1,0 +1,130 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-04-17 13:31:51
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-04-18 11:35:10
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set map集合</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    window.onload = function () {
+        let aInfo= [1, 2, 3, 4, 5,11,1,2,23,11,2,3,5];
+        const mySet = new Set(aInfo);
+
+        console.log(mySet);        
+        console.log(mySet.has(1));
+        mySet.size; // 5
+
+        console.log(mySet);      
+        // expected output: true
+        console.log(mySet.has(5));
+        // expected output: true
+        console.log(mySet.has(6));
+        // expected output: false
+        for (let item of mySet) console.log(item);
+        var myArr = Array.from(mySet);
+        console.log("myArr:" +typeof myArr); 
+        // 按顺序输出：1, "some text", {"a": 1, "b": 2}, {"a": 1, "b": 2} 
+        // for (let item of mySet.keys()) console.log(item);
+        // let sCheck=new Set([{"a": 1, "b": 2}, {"a": 1, "b": 2} ]);
+        // for (let [key, value] of sCheck.entries()) console.log(`key:${key}   value:${value}`);
+
+        
+        // Set的方法
+        mySet.clear();
+        console.log(mySet);     
+        //Set 的add方法
+        mySet.add(500); // Set [ 1 ]
+        console.log(mySet);   
+        //Set 的delete方法     
+        mySet.delete(5);  // true,  从set中移除5
+        console.log(mySet);   
+        // Set.prototype.entries();
+        // Set.prototype.forEach(callbackFn[, thisArg])
+        // Set.prototype.values()
+        // 可以通过如下代码模拟求交集 
+        // let intersection = new Set([...set1].filter(x => set2.has(x)));
+
+        // 可以通过如下代码模拟求差集
+        // let difference = new Set([...set1].filter(x => !set2.has(x)));
+
+        //集合的其他操作
+        // （A是否是B的父集）
+        function isSuperset(set, subset) {
+            for (let elem of subset) {
+                if (!set.has(elem)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function union(setA, setB) {
+            let _union = new Set(setA);
+            for (let elem of setB) {
+                _union.add(elem);
+            }
+            return _union;
+        }
+
+        function intersection(setA, setB) {
+            let _intersection = new Set();
+            for (let elem of setB) {
+                if (setA.has(elem)) {
+                    _intersection.add(elem);
+                }
+            }
+            return _intersection;
+        }
+
+        function symmetricDifference(setA, setB) {
+            let _difference = new Set(setA);
+            for (let elem of setB) {
+                if (_difference.has(elem)) {
+                    _difference.delete(elem);
+                } else {
+                    _difference.add(elem);
+                }
+            }
+            return _difference;
+        }
+
+        function difference(setA, setB) {
+            let _difference = new Set(setA);
+            for (let elem of setB) {
+                _difference.delete(elem);
+            }
+            return _difference;
+        }
+
+        //Examples
+        let setA = new Set([1, 2, 3, 4]),
+            setB = new Set([2, 3]),
+            setC = new Set([3, 4, 5, 6]);
+
+        isSuperset(setA, setB); // => true（A是否是B的父集）
+
+        union(setA, setC); // => Set [1, 2, 3, 4, 5, 6]（并集操作）
+
+        intersection(setA, setC); // => Set [3, 4]（交集操作）
+
+        symmetricDifference(setA, setC); // => Set [1, 2, 5, 6] （差级操作）
+
+        console.log(difference(setA, setC)); // => Set [1, 2] (差集操作后不包含C)
+        // Use to remove duplicate elements from the array 
+        const numbers = [2,3,4,4,2,3,3,4,4,5,5,6,6,7,5,32,3,4,5];
+        console.log([...new Set(numbers)]);
+        // [2, 3, 4, 5, 6, 7, 32]
+    }
+</script>

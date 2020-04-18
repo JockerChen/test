@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-04-03 09:06:08
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-04-03 09:47:57
+ * @LastEditTime: 2020-04-17 09:10:15
  * @Description: 
  -->
 <!DOCTYPE html>
@@ -14,13 +14,19 @@
     <title>Symbol类型的相关应用</title>
 </head>
 <body>
+    Symbol类型
 </body>
 </html>
 <script>
     //应用场景
     //由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，
+
     // 就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
     window.onload = function () {
+       console.log(Symbol("foo") === Symbol("foo")); //
+        //Symbol类型不能用new进行创建
+        // let info=new Symbol();
+        // console.log(info);
         let s1=Symbol("CheckInfo");
         typeof s1  // 'symbol'
         console.log(typeof s1);
@@ -32,16 +38,17 @@
         };
         const sym = Symbol(obj);
         console.log(sym); 
-
-        let sym111 = Symbol('My symbol');
-
+        let sym111 = Symbol('MySymbol');
         String(sym111) // 'Symbol(My symbol)'
         sym111.toString() // 'Symbol(My symbol)'
         //可以将对应的Symbol类型的初始化数据直接呈现
         console.log(sym111.description); //ES2019
-
+        if(sym111.description==="MySymbol")
+        {
+            console.log("确实能返回值");
+        }
         const log = {};
-
+        // 设置一些常量的信息
         log.levels = {
             DEBUG: Symbol('debug'),
             INFO: Symbol('info'),
@@ -56,13 +63,79 @@
         function getComplement(color) {
         switch (color) {
             case COLOR_RED:
-            return COLOR_GREEN;
+                return COLOR_RED;
             case COLOR_GREEN:
-            return COLOR_RED;
+                return COLOR_GREEN;
             default:
-            throw new Error('Undefined color');
+                throw new Error('Undefined color');
             }
         }
 
+        // 全局共享的 Symbol
+        // Symbol.for() 方法和  Symbol.keyFor() 
+
+        // 在对象中查找 Symbol 属性
+        // Object.getOwnPropertySymbols()
+
+        // Symbol属性
+        // Symbol.length
+        // Symbol.prototype
+
+        // Symbol.iterator
+        // 一个返回一个对象默认迭代器的方法。被 for...of 使用。
+        
+        // Symbol.asyncIterator 
+        // 一个返回对象默认的异步迭代器的方法。被 for await of 使用。
+        var infoObj = {};
+        infoObj[Symbol("a")] = "a";
+        infoObj[Symbol.for("b")] = "b";
+        infoObj["c"] = "c";
+        infoObj.d = "d";
+        //不支持IE所有浏览器
+        //当前getOwnPropertyNames()方法不会获取到对应的属性信息
+        // 当使用 JSON.stringify() 时，以 symbol 值作为键的属性会被完全忽略：
+        console.log(JSON.stringify({[Symbol("foo")]: "foo"}));                 
+        // '{}'
+
+        var objectSymbols = Object.getOwnPropertySymbols(infoObj);
+        for (let index = 0; index < objectSymbols.length; index++) {
+            console.log(objectSymbols[index].description); 
+        }
+
+        console.log('foo'.replace(new Replace('bar')));
+        // JavaScript Demo: Symbol.match
+        const regexp = /foo/;
+        // console.log('/foo/'.startsWith(regexp1));
+        // expected output: (Chrome) Error: First argument to String.prototype.startsWith must not be a regular expression
+        // expected output: (Firefox) Error: Invalid type: first can't be a Regular Expression
+        regexp[Symbol.match] = false;
+        console.log('/foo/'.startsWith(regexp));
+        // expected output: true
+        console.log('/baz/'.endsWith(regexp));
+        // expected output: false
+
+        // Symbol.for("MySymbol"); // 创建一个 symbol 并放入 symbol 注册表中，键为 "foo"
+        // Symbol.for("foo"); // 从 symbol 注册表中读取键为"foo"的 symbol
+        console.log(Symbol.for("MySymbol").description);
+        Symbol.for("bar") === Symbol.for("bar"); // true，证明了上面说的
+        Symbol("bar") === Symbol("bar"); // false，Symbol() 函数每次都会返回新的一个 symbol
+
+        var sym1 = Symbol.for("mario");
+        sym1.toString(); 
+        // "Symbol(mario)"，mario 既是该 symbol 在 symbol 注册表中的键名，又是该 symbol 自身的描述字符串
+
+
     }
+
+    //进行确认（Replace）
+    class Replace{   
+        constructor(value){
+            this.value=value;
+        }
+        [Symbol.replace](string){
+            return `s/${string}/${this.value}/g`;
+        }
+    }
+   
+
 </script>

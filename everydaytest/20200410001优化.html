@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="../js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//
+	//
+	var arrayInfo= ['08:00','09:00','12:01','13:00','19:00','20:00'];
+	var info='18:14';
+	arrayInfo.push(info);
+	console.log(arrayInfo.sort());
+	arrayInfo=arrayInfo.sort();
+	var checkIndex=arrayInfo.findIndex(function(item,index){
+		return info===item;
+	})
+	//获取当前的时间戳
+	console.log(arrayInfo);
+	if(checkIndex==arrayInfo.length-1)
+	{
+		console.log("当前已闭寝");
+	}
+	else
+	{
+		var dNowDate='2020-04-10';
+		arrayInfo = arrayInfo[checkIndex+1];
+		var GuiQinMinute = timec(dNowDate+' '+ info,dNowDate+' '+arrayInfo);
+		//获取当前的时间戳
+		console.log(GuiQinMinute);
+	}
+
+	function timec(st, et) {
+	    var time1 = new Date(st);
+	    var time2 = new Date(et);
+	    var date1 = time2.getTime() - time1.getTime(); //时间差的毫秒
+	    //计算出相差天数
+	    var days = Math.floor(date1 / (24 * 3600 * 1000))
+	    //计算出小时数
+	    var leave1 = date1 % (24 * 3600 * 1000) //计算天数后剩余的毫秒数
+	    var hours = Math.floor(leave1 / (3600 * 1000))
+	    //计算相差分钟数
+	    var leave2 = leave1 % (3600 * 1000) //计算小时数后剩余的毫秒数
+	    var minutes = Math.floor(leave2 / (60 * 1000))
+	    //计算相差秒数
+	    var leave3 = leave2 % (60 * 1000) //计算分钟数后剩余的毫秒数
+	    var seconds = Math.round(leave3 / 1000)
+	    //返回时间差的分钟数
+	    return parseInt(days) * 24 * 60 + parseInt(hours) * 60 + parseInt(minutes);
+	}
+</script>
+
+<!-- var arrayInfo= [result[0].LiQinShiJian,result[0].GuiQinShiJian,result[0].LiQinShiJianSecond,result[0].GuiQinShiJian,result[0].LiQinShiJianThird,result[0].GuiQinShiJianThird];
+arrayInfo.push(dNowTime).sort();
+  //获取当前的时间戳
+console.log("arrayInfo:"+arrayInfo);
+var checkIndex=arrayInfo.findIndex(function(item,index){
+	return dNowTime===item;
+})
+//获取当前的时间戳
+console.log(checkIndex);
+if(checkIndex==arrayInfo.length-1){
+	console.log("当前已闭寝");
+	$('#SuShe_CloseMinute').html('0');
+}
+else{
+	arrayInfo = arrayInfo[checkIndex+1];
+	var GuiQinMinute = timec(dNowDate+' '+ dNowTime,dNowDate+' '+arrayInfo);
+	//获取当前的时间戳
+	console.log(GuiQinMinute);
+	$('#SuShe_CloseMinute').html(GuiQinMinute);
+} -->
