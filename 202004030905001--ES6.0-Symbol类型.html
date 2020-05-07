@@ -23,7 +23,7 @@
 
     // 就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
     window.onload = function () {
-       console.log(Symbol("foo") === Symbol("foo")); //
+       console.log(Symbol("foo") === Symbol("foo")); //-
         //Symbol类型不能用new进行创建
         // let info=new Symbol();
         // console.log(info);
@@ -98,6 +98,7 @@
         // '{}'
 
         var objectSymbols = Object.getOwnPropertySymbols(infoObj);
+		
         for (let index = 0; index < objectSymbols.length; index++) {
             console.log(objectSymbols[index].description); 
         }
