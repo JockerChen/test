@@ -1,0 +1,47 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-05-08 12:21:22
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-08 12:33:51
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/jquery-1.7.2.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+    $(function () {
+        ShowGuiQinState();
+    })
+    function ShowGuiQinState() {
+		var htmlStr='';
+        $.ajax('../data/datainfo.json', {
+            dataType: 'json', //服务器返回json格式数据
+            type: 'get', //HTTP请求类型
+            timeout: 5000, //超时时间设置为10秒；
+            success: function(data) {
+              var strTitle= getAttributes("Japan",data);
+                console.log(strTitle);
+            },
+            error:function(){
+                //异常处理；
+                alert("网络异常，获取宿舍管理人员列表信息失败！");
+                return false;
+            }
+        })
+    }
+
+    function getAttributes(language,jsonObj) {
+		console.log(jsonObj[language+'Title']);
+      return jsonObj[language+'Title'];
+    }
+
+</script>

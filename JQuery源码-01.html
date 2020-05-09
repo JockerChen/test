@@ -1,0 +1,71 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-05-09 15:00:59
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-09 16:54:14
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-2.0.3.js"></script>
+  <title>jquery源码</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+(function() {
+    window.$=$;
+    var a="CheckInfo";
+    //line 21~94定义了变量或函数Jquery=function(){}函数重要  
+    //line 96~283 给Jquery添加一些属性和方法 jQuery.fn = jQuery.prototype = function name(params) { }
+    //line 285~347 extend 后面的方法挂在到Jquery上实现对插件的扩展 jquery的继承方法 （实例方法）
+    //line 349~817 Jquery.extend 扩展一些工具方法函数扩展静态属性及方法。（工具方法）   $.trim $.proxy
+    //line 877~2856 Jquery选择器功能Sizzle （复杂选择器的实现） $('ul li+p input.class')
+    //line 2888~3042 Jquery 回调对象:对于函数的统一管理Callbacks对象    var cb=$.Callbacks();
+    //line 3043~3183 Jquery 延迟对象:对于异步的统一管理Defferred对象 利用回调函数进行保存函数
+    //line 3184~3295 Jquery 功能检测对象:对于support对象 获取浏览器相关信息及版本（浏览器的功能检测）
+    //line 3308~3652 Jquery data()方法对象:数据缓存不是挂载到元素身上，防止元素的内存泄露
+    //line 3653~3797 Jquery queue()方法对象:队列管理 queue入队  dequeue出队
+    //line 3803~4299 Jquery attr()方法 prop() val()  addClass 对元素属性的操作
+    //line 4300~5128 Jquery 事件操作的相关方法。 
+    //line 5140~6057 Jquery Dom操作的相关方法，添加、删除、获取、clone
+    //line 6058~6620 Jquery Css的相关方法添加样式
+    //line 6621~7854 Jquery ajax和提交相关操作 ajax  load getJson
+    //line 7855~8584 Jquery animate方法 运动相关的方法 和fadeIn或fadeOut
+    //line 8585~8792 Jquery 位置与尺寸的相关方法
+    //line 8804~8821 Jquery 支持模块化的模式  AMD CMD  sea.js
+    //line 8826   window.jQuery = window.$ = jQuery; 对外提供接口供外部使用
+    function $(params) {
+        console.log(a);
+    }
+
+function fn1() {console.log(1);} 
+function fn2() {console.log(2);} 
+
+    //jquery回调//统一的函数管理
+    var cb=$.Callbacks();
+    cb.add(fn1);
+    cb.add(fn2);
+    cb.fire();//调用
+    cb.remove(fn2);
+    cb.fire();
+})();
+
+//调用
+$();
+/*延迟对象的应用开始 保持同步的感觉*/
+var dfd=$.Defferred();
+setTimeout(function() {
+  alert(1);
+  dfd.resolve();
+}, 1000);
+dfd.done(function(){
+  alert(2);
+})
+/*延迟对象的应用结束*/
+</script>
