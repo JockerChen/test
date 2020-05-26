@@ -1,0 +1,55 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-05-12 14:55:12
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-12 16:24:25
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function(){
+  multiplicationTable(5);
+  digital_root(12363);
+}
+multiplicationTable = function(size) {
+  // insert code here
+  var arrInfo=[];
+  var arrSub=[];
+  for(var i =1;i<=size;i++)
+  {
+      for(var j=1;j<=size;j++)
+      {
+        arrSub.push(i*j);
+      }
+      arrInfo.push(arrSub);
+      arrSub=[];
+  }
+  console.log(arrInfo);
+}
+//第二个
+function digital_root(intInfo) {
+  //字符串转数组
+  // var arrInfo = intInfo.split("");
+
+
+  
+  // let reduceResult= arrInfo.reduce(function(tem,item,index){ 
+	// 		return  tem+item;
+	// })
+
+
+  console.log(reduceResult);
+  
+}
+
+</script>

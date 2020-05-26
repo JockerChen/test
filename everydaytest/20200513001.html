@@ -1,0 +1,32 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-05-13 14:16:59
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-13 14:43:13
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>arrayDiff</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function(){
+  arrayDiff([1,2],[1]);
+
+}
+function arrayDiff(mainarray,subarray) {
+
+  let newArr = mainarray.filter(item=>!subarray.some(ele=>ele===item));
+  console.log(newArr);
+
+  return newArr;
+}
+
+</script>

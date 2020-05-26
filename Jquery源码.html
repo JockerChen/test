@@ -1,0 +1,87 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-05-11 18:07:47
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-12 16:21:24
+ * @Description: 
+ -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+//匿名函数自执行（里面的所有代码都是局部的）
+(function(window,undefined) {
+    //1. 可以提高程序效率
+    //2. 压缩代码时可以进行优化 例：(function( a , b) {} )(window); // window 被优化为 a ；
+    //传参是undefined是防止undefined被修改
+    // 为什么要传入 undefined
+    // js本身有一个bug：undefined能被重写！！
+    // undefined是window下的一个属性，非保留字，非关键字，可以被重写。IE8
+    // "use strict" 严格模式
+
+    
+    var
+	// A central reference to the root jQuery(document)//jquery根目录
+	rootjQuery,
+
+	// The deferred used on DOM ready //Dom的延迟用法（dom加载）
+	readyList,
+
+	// Support: IE9
+	// For `typeof xmlNode.method` instead of `xmlNode.method !== undefined`
+	core_strundefined = typeof undefined,
+
+	// Use the correct document accordingly with window argument (sandbox)
+	location = window.location,  //网址信息
+	document = window.document,  //DOM
+	docElem = document.documentElement, //html节点标签
+
+	// Map over jQuery in case of overwrite
+	_jQuery = window.jQuery,//防冲突方法
+
+	// Map over the $ in case of overwrite
+	_$ = window.$,//防冲突方法
+
+  // [[Class]] -> type pairs ///Jquery的$.type()时的类型
+  // class2type保存数据的类型为
+  // class2type ={'[Object String]':'string','[Object Array]':'array'};
+	class2type = {},
+
+	// List of deleted data cache ids, so we can reuse them
+	core_deletedIds = [],
+ 
+	core_version = "2.0.3",
+
+	// Save a reference to some core methods
+	core_concat = core_deletedIds.concat,
+	core_push = core_deletedIds.push,
+	core_slice = core_deletedIds.slice,
+	core_indexOf = core_deletedIds.indexOf,
+	core_toString = class2type.toString,
+	core_hasOwn = class2type.hasOwnProperty,
+	core_trim = core_version.trim,
+
+
+})(window);
+
+
+window.a == undefined;  //XML情况会有BUG 老版本的浏览器可能不支持。
+
+typeof window.a=='undefined';//全兼容
+
+
+// $(),jQuery
+
+
+
+
+</script>
