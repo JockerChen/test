@@ -1,0 +1,150 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-08 16:26:51
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-10 10:27:33
+ * @Description: 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蓝牙相关开发常用设置项相关中间件开发</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+//动态加载
+window.onload=function(){
+//数据接收端
+//数据信息：（1）类
+//数据信息：（2）属性
+//数据信息：（3）属性对应数据
+//数据信息：（4）方法
+  let sSendMSG1='001-001-2223693632-000';
+  let sSendMSG2='001-002-00240101-000';
+  let sSendMSG3='001-003-1-000';
+  let sSendMSG4='001-004-0-000';
+  
+
+  if(!!sSendMSG1){
+    setProperty(sSendMSG1);
+    setProperty(sSendMSG2);
+    setProperty(sSendMSG3);
+    setProperty(sSendMSG4);
+  }
+}
+  /**
+   * @desc 各个模块命令过滤。
+   * @param   {Function}    CALLBACK
+   *  @property {Object}    1001	用户数据模块 
+   *  @property {Object}    1002   	能源数据模块
+   *  @property {String}    1003    预约模块
+   */
+const MODULAR_COMMAND={
+   '001':'User',
+   '002':'Energy',
+   '003':'Order'
+};
+//User类对应的属性
+const MODULAR_USER_COMMAND={
+   '001':'AccountNo',
+   '002':'TypeId',
+   '003':'Sex', 
+   '004':'SchoolId'   
+};
+
+//模块对应方法
+const MODULAR_USER_METHOD={
+    '000':'Exit',//不调用函数
+    '001':'Add', //数据库添加函数
+    '002':'Update',//数据库更新函数
+    '003':'Delete',//数据库删除函数
+    '004':'Get',//获取属性函数
+    '005':'Set'//获取设置属性函数
+}
+
+//Energy类对应的属性(命名方式)MODULAR_此处是对应的类名的大写_COMMAND
+const MODULAR_ENERGY_COMMAND={ 
+   '002001':'VoltageRange',//电压量程
+   '002002':'CurrentRange',//电流量程
+   '002003':'TotalHighActiveEnergy',//有功总电能(高位)
+   '002004':'TotalLowActiveEnergy',//有功总电能(高位)
+   '002005':'ClearingElectricity',//清电量
+   '002006':'VoltageThreshold',//电压阀值
+   '002007':'CurrentThreshold',//电流阀值
+   '002008':'Voltage',//电压
+   '002009':'Current',//电流
+   '002010':'ActivePower',//有功功率
+   '002011':'ActivePowerTotalEnergy',//有功总电能
+   '002012':'PowerFactor',//功率因素
+   '002013':'RelayStatus',//继电器状态
+   '002014':'Frequency'//频率  
+};
+
+//Order类对应的属性
+const MODULAR_ORDER_COMMAND={ 
+   '003001':'AccountNo',
+   '003002':'TypeId',
+   '003003':'TimeStamp',
+   '003004':'Sex'
+};
+
+class User{
+     //属性
+    constructor(accountNo,schoolId,typeId){
+        this.AccountNo=accountNo;
+        this.SchoolId=schoolId;
+        this.TypeId=typeId;
+    }
+}
+
+//设置属性信息
+function setProperty(sSendMSG) {
+    let msgClass,msgProperty;  
+    //当前类信息
+    msgClass=MODULAR_COMMAND[sSendMSG.split("-")[0]];
+    //动态获取动态类的属性eval(`MODULAR_${msgClass.toUpperCase()}_COMMAND`) 
+    //实际上的含义是MODULAR_COMMAND[MODULAR_USER_COMMAND]
+    msgProperty=eval(`MODULAR_${msgClass.toUpperCase()}_COMMAND`)[sSendMSG.split("-")[1]];
+    console.log(msgClass);
+    console.log(msgProperty);
+    if(!msgProperty){
+        console.log("当前属性未定义");
+        return false;
+    }
+    //字符串转类
+    var classInfo=eval(msgClass);
+    //给对应类进行赋值
+    classInfo[msgProperty]=sSendMSG.split("-")[2];
+    console.log(classInfo[msgProperty]);
+    //确认当前属性是否在属性内
+    // if(classInfo.hasOwnProperty(msgProperty)){
+    //     classInfo[msgProperty]=sSendMSG.split("-")[2];
+    //     console.log(classInfo[msgProperty]);
+    // }
+    // else{
+    //     console.log("属性值不存在");
+    //     return false;
+    // }
+}
+
+
+const ERROR_MESSAFES = {
+  10000: 'not init	未初始化蓝牙适配器',
+  10001: 'not available	当前蓝牙适配器不可用',
+  10002: 'no device	没有找到指定设备',
+  10003: 'connection fail	连接失败',
+  10004: 'no service	没有找到指定服务',
+  10005: 'no characteristic	没有找到指定特征值',
+  10006: 'no connection	当前连接已断开',
+  10007: 'property not support	当前特征值不支持此操作',
+  10008: 'system error	其余所有系统上报的异常',
+  10009: 'system not support	Android 系统特有，系统版本低于 4.3 不支持BLE'
+}
+
+
+
+</script>

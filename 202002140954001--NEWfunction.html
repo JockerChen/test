@@ -1,8 +1,8 @@
 <!--
  * @Author: [JokerChen]
  * @Date: 2020-02-14 14:20:26
- * @LastEditors  : [JokerChen]
- * @LastEditTime : 2020-02-14 14:25:24
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-05-26 10:57:41
  * @Description: 
  -->
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 		"UserPwd":"11112"
 	};
 	//直接通过window访问对应的属性去执行对应的函数
-	window[arrFunction[0]](oInfo);
+	window[arrFunction[1]](oInfo);
 	//通过eval实现
 	function checkInfo(obj){
 		console.log("执行函数checkInfo"+obj.UserName);

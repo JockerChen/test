@@ -1,0 +1,40 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-08 11:15:08
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-08 11:28:11
+ * @Description: 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  window.onload=function(){
+    var data={
+      "bleName":"WH-BLE103",
+      "bleDevice":"9AFF7142-429D-758D-CCA5-B0758F554B03"
+    }
+
+    let info=[{"deviceId":"9AFF7142-429D-758D-CCA5-B0758F554B03","localName":"WH-BLE103","name":"WH-BLE103","RSSI":-57}];
+    info.forEach(device => {
+      if ((!device.name&& !device.localName)||(device.name!=data.bleName||device.deviceId!=data.bleDevice)){
+          return false;
+        }
+        else
+        {
+          alert("开始比对");
+        }
+    });
+    
+  }
+
+  
+</script>

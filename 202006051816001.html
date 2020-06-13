@@ -1,0 +1,30 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-05 18:14:05
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-05 18:27:19
+ * @Description: 
+--> 
+<head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+  <title>Unicode、ASCII相互转换</title>
+  <script type="text/javascript">
+  //AsciiToUnicode("中国");
+  // 将 字符 转换为 ASCII码
+    let str = "A";
+    let res = str.charCodeAt();
+    alert(res);
+    let str1 = "a";
+    let res2 = str1.charCodeAt();
+    alert(res2);
+
+    // 将ASCII码 转换为 字符
+
+    str2 = String.fromCharCode(\u9648);
+    alert(str2);
+  </script>
+  </head>
+  <body>
+  </body>
+  </html>
+  

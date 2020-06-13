@@ -1,0 +1,59 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-05 11:46:00
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-05 14:04:57
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蓝牙类协议</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    class UserInfo {
+        //属性
+        //类：个人信息类
+        constructor(name, pwd,accountNo,openId) {
+            this.Name = name;
+            this.Pwd = pwd;
+            this.AccountNo=accountNo;
+            this.OpenId=openId;           
+        }
+        //方法
+        userLogin() {
+            console.log("用户登录类");
+        }
+        showPwd() {
+            alert(this.Pwd);
+        }
+    }
+    class DeviceInfo {
+        //属性
+        //类：设备信息类
+        //DeviceName:设备名称
+        //DeviceId:设备ID
+        //
+        constructor(name, deviceId,rssi,serviceId,connectState) {
+            this.DeviceName = name;
+            this.DeviceId = deviceId;
+            this.RSSI = rssi;
+            this.ServiceId = serviceId;
+            this.ConnectState = connectState;                     
+        }
+        //方法
+        userLogin() {
+            console.log("用户登录类");
+        }
+        showPwd() {
+            alert(this.Pwd);
+        }
+    }
+
+</script>

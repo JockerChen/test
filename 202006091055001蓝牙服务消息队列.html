@@ -1,0 +1,87 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-09 10:55:22
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-10 20:18:49
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>蓝牙服务信息队列</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+	let mqListArray = [];
+	let DeviceObj1 = {};
+
+	DeviceObj1.deviceState = "已连接";
+	DeviceObj1.deviceId = "1";
+	DeviceObj1.serviceId = "2";
+	DeviceObj1.characteristicId = "3";
+
+	let DeviceObj2 = {};
+	DeviceObj2.deviceState = "已发送状态";
+	DeviceObj2.deviceId = "4";
+	DeviceObj2.serviceId = "5";
+    DeviceObj2.characteristicId = "6";
+
+    let DeviceObj3 = {};
+	DeviceObj3.deviceState = "当前状态";
+	DeviceObj3.deviceId = "9AFF7142-429D-758D-CCA5-B0758F554B03";
+	DeviceObj3.serviceId = "0003CDD0-0000-1000-8000-00805F9B0131";
+    DeviceObj3.characteristicId = "0003CDD2-0000-1000-8000-00805F9B0131";
+
+	mqListArray.push(DeviceObj1);
+    mqListArray.push(DeviceObj2);
+    mqListArray.push(DeviceObj3);
+
+	console.log(mqListArray);
+
+	let filterList = mqListArray.filter(item => {
+		return item.deviceId == '1'
+	})
+
+	//第一次check
+	UpdateDeviceList("1", "serviceId", "服务替换");
+	//数据效验
+	UpdateDeviceList("2222", "deviceState", "插入测试");
+
+	//插入对应的数据信息(通过对应的服务ID和特征ID发送相应的信息)
+	function UpdateDeviceList(deviceId, deviceParameter, valueParameter) {
+		let deviceObj = {};
+		let filterList = mqListArray.filter(item => {
+			return item.deviceId == deviceId;
+		})
+		if (filterList.length == 0) {
+			deviceObj.deviceId = deviceId;
+			deviceObj[deviceParameter] = valueParameter;
+			mqListArray.push(deviceObj);
+		}
+		else {
+			filterList[0][deviceParameter] = valueParameter;
+		}
+    }
+    
+
+   console.log(filterList[0]);
+   let deviceInfo= GetDeviceList("9AFF7142-429D-758D-CCA5-B0758F554B03");
+   console.log("处理后的设备列表："+JSON.stringify(deviceInfo));
+	//进行获取当前id号对应的数据信将对应的数组信息进行返回
+	function GetDeviceList(deviceId) {
+		let deviceObj = {};
+		let filterList = mqListArray.filter(item => {
+			return item.deviceId == deviceId;
+		})
+
+		return filterList;
+	}
+</script>
