@@ -1,0 +1,68 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-15 19:45:22
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-07-01 09:19:04
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象属性映射</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        //自己使用的类库
+        var UserInfo = {
+            "UserName": "JokerChen",
+            "Sex": "男",
+            "StartTime": "2020-06-15",
+            "EndTime": "2020-06-15"
+        }
+        //对象映射关系类
+        var UserMapping = {
+            "UserName": "Name",
+            "Sex": "SexInfo",
+            "StartTime": "Start"
+            // "EndTime": "End"
+        }
+
+        var UserMapping = {
+            "Name": "JokerChen",
+            "SexInfo": "男",
+            "Start": "StartTime"
+            // "EndTime": "End"
+        }
+
+
+        console.log("转换前:"+JSON.stringify(UserInfo));
+        mapRelationship(UserInfo,UserMapping);
+    }
+    
+ //对应的映射关系
+ //baseInfo:基础数据，带对应的数据结构的
+ //userMapping:映射关系，此处对应的映射关系可动态的进行
+ function mapRelationship(baseInfo,userMapping) {
+    //确认对应的映射关系
+    //映射后的对象 objRelationship
+    var objRelationship={};
+    for (var prop in baseInfo) {
+        if (baseInfo.hasOwnProperty(prop)) {
+            //过滤对象中的原型函数，使得只有属性能够进行本地存储
+            if(!userMapping[prop])continue;
+            objRelationship[userMapping[prop]]=baseInfo[prop];
+        }
+    }
+    console.log("转换后:"+JSON.stringify(objRelationship));
+    return objRelationship;
+}
+</script>

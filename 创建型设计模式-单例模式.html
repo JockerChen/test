@@ -1,16 +1,23 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-08 19:06:43
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-28 16:39:44
+ * @Description: 
+--> 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
-		<title></title>
+		<title>创建型设计模式--单例模式</title>
 	</head>
 	<body>
 	</body>
 </html>
 <script type="text/javascript">
 	$(function(){
-		var count=Conf.get("MAX_NUM");
+		var count=Conf.get("MIN_NUM");
 		console.log(count);
 		//惰性加载调用
 		var oLazySingle=LazySingle().publicProperty;

@@ -1,0 +1,62 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-16 11:14:04
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-17 08:41:29
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/sensor.js"></script>
+    <title>202006161113001模拟传感器指令</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //创建一个传感器对象
+    window.onload = function () {
+        //发送数据（基本用量）
+        var strSendInfo = "01030048000645DE";
+        //发送的开闸状态串口信息
+        var strSendInfo1 = "010100000001FDCA";
+        //合闸信息发送
+        var strSendInfo2 = "01050000FF008C3A";
+        //拉闸信息发送
+        var strSendInfo3 = "010500000000CDCA";
+        //接受数据（基础用电信息）
+        var strGetInfo = "01030C57E409D9022D0000034003D63F17";
+        //开闸状态
+        var strGetInfo1 = "010101019048";
+        //拉闸状态
+        var strGetInfo2 = "010101005188";
+        
+        var sensor = new Sensor();
+        sensor.init("ttys1");
+        // var oSensor = sensor.init("ttys1").getSensorData(strSendInfo);
+        // console.log(oSensor);
+        var oSensor1 = sensor.sendSensorData("基础信息");
+        // var oSensor2 =sensor.sendSensorData("继电器状态");
+        // console.log(oSensor2);
+        // var oSensor3 =sensor.sendSensorData("继电器合闸");
+        // console.log(oSensor3);
+        // var oSensor4 =sensor.sendSensorData("继电器拉闸");
+        // console.log(oSensor4);
+        //继电器接受的状态设置
+        var oSensor = sensor.getSensorData(strSendInfo);
+        //console.log(oSensor);
+        // var oSensor1 = sensor.getSensorData(strGetInfo1);
+        // console.log(oSensor1);
+        // var oSensor2 = sensor.getSensorData(strGetInfo2);
+        // console.log(oSensor2);
+    }
+
+
+</script>

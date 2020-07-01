@@ -1,0 +1,113 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-06-17 15:36:03
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-06-18 10:08:58
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/user.js"></script>
+    <script src="js/order.js"></script>
+    <script src="js/moudlemanage.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    window.onload = function () {
+        //创建用户对象
+        var user = new User();
+        //创建订单对象           
+        var orderInfo = new OrderInfo();
+        var objInfo={"01":user,"02":orderInfo};
+        console.log(typeof objInfo['01']);
+        //传递姓名
+        var sBluetoothData1 = "30312D303130322D96485B812D303030";
+        //传递账号
+        var sBluetoothData = "30312D303130312D323033303030343230302D303030";
+        // var changeInfo = BcdToData(sBluetoothData);
+        // var changeInfo2 = BcdToData(sBluetoothData1);
+        // console.log(changeInfo);
+        // console.log(changeInfo2);
+        // var sChineseInfo = sBluetoothData1.split("2D")[2];
+        // console.log("中文数据UNICODE" + sChineseInfo);
+        // console.log("中文数据" + chineseChange(sChineseInfo));
+        // var sCls = changeInfo.split("-")[0];
+        // var sCls2 = changeInfo2.split("-")[0];
+        // if (sCls == "01") {
+        //     objInfo = user;
+        // }
+        // else if (sCls == "02") {
+        //     objInfo = orderInfo;
+        // }
+        // var sProperty =changeInfo.split("-")[1];
+        // var sValue =changeInfo.split("-")[2];
+        // var sMethod =changeInfo.split("-")[3];
+        var info = setProperty(objInfo, sBluetoothData);
+        var info1 = setProperty(objInfo, sBluetoothData1);
+        console.log(JSON.stringify(user));
+    }
+
+    //BCD转码
+    function BcdToData(strData) {
+        var strReturnData = "";
+
+        for (var i = 0; i < strData.length / 2; i++) {
+            strReturnData += String.fromCharCode(HexToDec(strData.substr(2 * i, 2)));
+        }
+        return strReturnData;
+    }
+
+    function HexToDec(str) {
+        return parseInt(str, 16).toString();
+    }
+
+    function DecToHex(str) {
+        return parseInt(str).toString(16);
+    }
+
+    function HexToBin(str) {
+        return parseInt(str, 16).toString(2);
+    }
+
+    function BinToHex(str) {
+        return parseInt(str, 2).toString(16);
+    }
+    //中文转换
+    function chineseChange(str) {
+        var reg = new RegExp("\\w{1,4}", "g");
+        var ma = str.match(reg);
+        str = "\\u" + ma.join("\\u");
+        var character = str.split("\\u");
+        var native1 = character[0];
+        for (var i = 1; i < character.length; i++) {
+            var code = character[i];
+            native1 += String.fromCharCode(parseInt("0x" + code.substring(0, 4)));
+            if (code.length > 4) {
+                native1 += code.substring(4, code.length);
+            }
+        }
+        return native1;
+    }
+    //每四位追加一个/u
+    function sbuInsert(str) {
+        let reg = new RegExp("\\w{1,4}", "g");
+        let ma = str.match(reg);
+        return "/u" + ma.join("/u");
+    }
+//效验对应的信息
+
+
+
+// console.log(sbuInsert("1234567812345678"))
+</script>
