@@ -1,0 +1,49 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-07-11 10:33:55
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-07-11 10:51:07
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组键值对遍历</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    //
+    let funcArray = ['startFunction', 'inFunction', 'endFunction'];
+    const info = funcArray.entries();
+    window.onload = function () {
+        runFunc ()
+    }
+    //起始函数设计
+    function startFunction() {
+        console.log("startFunction函数执行");
+        runFunc ();
+    }
+    //中间处理函数设计
+    function inFunction() {
+        console.log("inFunction函数执行");
+        runFunc ();
+    }
+    //结尾函数设计
+    function endFunction() {
+        console.log("endFunction函数执行");
+        runFunc ();
+    }
+    //执行函数
+    function runFunc () {
+        console.log(typeof info.next().value);
+        window[info.next().value[1]]();
+    }
+</script>

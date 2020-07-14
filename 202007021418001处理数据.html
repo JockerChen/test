@@ -1,0 +1,44 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-07-02 14:18:16
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-07-08 09:45:22
+ * @Description: 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function(){
+ var info= hextoint('AA042D30332D303330312D3030303030312D');
+console.log(info);
+}
+  // 16进制数转10进制
+function hextoint(hex) {
+    var len = hex.length, a = new Array(len), code;
+    for (var i = 0; i < len; i++) {
+        code = hex.charCodeAt(i);
+        if (48 <= code && code < 58) {
+            code -= 48;
+        } else {
+            code = (code & 0xdf) - 65 + 10;
+        }
+        a[i] = code;
+    }
+    return a.reduce(function (acc, c) {
+        acc = 16 * acc + c;
+        return acc;
+    }, 0);
+}
+
+
+
+</script>

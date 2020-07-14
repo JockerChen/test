@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-06-18 11:33:42
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-06-18 11:38:12
+ * @LastEditTime: 2020-07-08 11:27:07
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -19,10 +19,21 @@
 </body>
 <script>
 	//stringObject.replace(regexp/substr,replacement)
-	var info="AA042D30312D303130312D303130323033303330322D303030AA04";
-	var strInfo=info.replace(/AA04/g,"");
+	var info="2D30332D303330312D3030303030312D";
+	var strInfo=BcdToData(info)
 	console.log(strInfo);
 
-	
+	function BcdToData(strData) {
+    var strReturnData = "";
+
+    for (var i = 0; i < strData.length / 2; i++) {
+        strReturnData += String.fromCharCode(HexToDec(strData.substr(2 * i, 2)));
+    }
+    return strReturnData;
+}
+function HexToDec(str) {
+    return parseInt(str, 16).toString();
+}
+
 </script>
 </html>

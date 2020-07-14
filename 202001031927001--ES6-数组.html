@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-01-08 19:06:43
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-06-30 08:20:51
+ * @LastEditTime: 2020-07-11 09:17:33
  * @Description: ES6.0数组功能详解，一共4个功能函数
  -->
 <!DOCTYPE html>
@@ -73,6 +73,16 @@
 		})
 		console.log(reduceResult);
 		console.log(reduceResultA); 
+
+
+		//Array.from 用法将两类对象转为真正的数组
+		//字符串转数组
+		let arrFrom=Array.from('1asdfsdf');
+		console.log(`arrayFrom返回的数组输出:${arrFrom.length}`);
+
+		
+		
+		
 	};
 </script>
 </html>

@@ -1,0 +1,59 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-07-06 13:53:08
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-07-06 14:18:22
+ * @Description: 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>水控传感器整体流程</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+//SensorData:传感器接收的数据
+var SensorWater = function () {
+    this.SensorWaterType= "Direct";
+    //传感器对应串口
+    this.SensorWaterOtherPort= "";
+    //传感器请求数据
+    this.SensorWaterRequestData = "";
+    //传感器相应数据
+    this.SensorWaterResponseData = "";
+    //指令集
+    this.SensorWaterInstruction={
+        "基础信息":"AA0301030048000645DE",
+        "继电器状态":"AA03010100000001FDCA",
+        "继电器合闸":"AA0301050000FF008C3A",
+        "继电器拉闸":"AA03010500000000CDCA",
+        "继电器阈值":"AA0301030020000245DE"
+    }
+    // 传感器当前状态
+    this.SensorWaterState = "";//00
+};
+
+//蓝牙水控传感器初始化
+SensorWater.prototype.init = function () {
+    return this;
+};
+//开启蓝牙水控传感器
+SensorWater.prototype.openSensorWater = function () {
+    return this;
+};
+//关闭蓝牙水控传感器
+SensorWater.prototype.closeSensorWater = function () {
+    return this;
+};
+//蓝牙水控离线记录
+SensorWater.prototype.offLineList = function () {
+    return this;
+};
+
+
+</script>

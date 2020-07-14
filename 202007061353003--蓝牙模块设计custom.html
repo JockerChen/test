@@ -1,0 +1,61 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-07-06 14:24:48
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-07-07 14:38:10
+ * @Description: 
+--> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>消费模块</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //消费模块
+var custom = function () {
+    //消费模块
+    this.customModel = "Water";//水控、电控、气控
+    //消费类别
+    this.customType = "time";//计时 time/计量 quality
+    //个人最大消费
+    this.customMaxAmount = "10";
+    //个人最小消费
+    this.customMinAmount = "0";   
+    //费率
+    this.customRate = "";   
+    //系统最大关断时间
+    this.customSystemMaxTime = "10";//此处记载最大的开合时间（参数）
+    //系统最大关断金额
+    this.customSystemMaxAmount = "";//此处设置当前的记录允许的最小限制金额
+};
+
+  //消费记录模块
+  var customRecords = function () {
+    //设备号
+    this.deviceNo = "";
+    //消费人员卡号
+    this.customCardNo = "";
+    //消费日期
+    this.customDate = "2020/07/06";//计时 time/计量 quality
+    //消费时间（开始）
+    this.customStartTime = "14:30";
+    //消费时间（结束）
+    this.customEndTime = "14:40";
+    //消费类别是（计费的/计时的）
+    this.customType = "time";   
+    //费率
+    this.customRate = "";   
+    //消费总金额
+    this.customTotalAmount = "";      
+    //消费记录是否上传
+    this.customRecordsUpdate = true;      
+};
+
+
+</script>
