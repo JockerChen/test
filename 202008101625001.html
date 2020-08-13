@@ -1,0 +1,57 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-10 16:25:07
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-10 16:33:19
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <Button id="clearDCInfo">清除订餐信息</Button>
+</body>
+</html>
+<script>
+window.onload=function(){
+  var result=[{
+    "accountNo":"1112363324",
+    "personName":"陈宁",
+    "deptname":"高一四班",
+    "personmoney":"20.01",
+    "personimage":"../../img/index001/bgimg.png",   
+    "pwd":"5678"
+  }]
+  var dcObject=new DCObject(result[0]);
+  console.log(dcObject);
+  dcObject.ClearDCInfo();
+  console.log(dcObject);
+}
+
+var DCObject=function(param){
+    this.DC_AccountNo=param.accountNo || "";
+    this.DC_PersonName=param.personName|| "";
+    this.DC_DepartmentName=param.deptname|| "";
+    this.DC_PersonMoney=param.personmoney|| "";
+    this.DC_PersonImage=param.personimage|| "";
+    this.DC_Password=param.pwd|| "";
+}
+//统一清除订餐对象
+DCObject.prototype.ClearDCInfo=function(){
+    var that=this
+    for (var prop in that){
+        if(that.hasOwnProperty(prop)){
+            //过滤对象中的原型函数，使得只有属性能够进行本地存储
+            console.log("jsonObj[" + prop + "]=" + that[prop]);
+            that[prop]="";
+           // androidClient.setValue(prop,"");
+        }
+    }
+}
+
+</script>

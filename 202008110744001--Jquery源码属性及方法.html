@@ -1,0 +1,63 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-11 08:04:09
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-11 08:29:26
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>202008110744001--Jquery源码属性及方法</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+//为jquery扩展一些属性及方法
+// jquery.fn=jquery. prototype={
+  // jquery: "版本",
+  // constructor:"修正指向问题",  //指向jquery的构造函数（js对象创建后自动生成constructor属性）
+  // 很多情况下构造器的这个属性很容易被修改，所以这块的内容需要重新进行指向，指向出现问题，就存在找不到的现象
+  // init() 初始化和参数管理selector(选择器), context(限制条件), rootjQuery
+  // selector:"", 存储选择字符串
+  // length:"",  this对象的长度
+  // toArray(),  转数组
+  // get()   转原生集合
+  // pushStack() jquery对象的入栈
+  // each()  遍历集合
+  // ready() DOM加载接口
+  // slice() 集合的截取
+  // first() 集合的第一项
+  // last()  集合的最后项
+  // eq()    集合的指定项
+  // map()   返回新集合项
+  // end()   返回集合前一个状态
+  // push()  （内部使用）
+  // sort()  （内部使用）
+  // splice()（内部使用）
+// }
+window.onload=function(){
+  //获取Jquery的属性
+  console.log($().jquery);
+}
+
+var Aaa=function(){};
+Aaa.prototype.constructor=Array;
+
+//需要注意的是这种情况相当于对原型的覆盖操作()
+// Aaa.prototype={
+//   name:"",
+//   phone:""
+// }
+
+
+var a1=new Aaa();
+console.log(a1.constructor);
+
+
+</script>

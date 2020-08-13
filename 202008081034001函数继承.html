@@ -1,0 +1,38 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-08 10:35:01
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-08 11:31:42
+ * @Description: 函数继承
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+</body>
+</html>
+<script>
+  window.onload=function(){
+    showToast(wx);
+  }
+  var wx={
+    "number":"1",
+    showToast(){
+      console.log(`执行showToast${this.number}`);
+    }
+  };
+
+function showToast(obj) {
+  return obj.showToast();
+}
+
+
+
+
+
+
+</script>

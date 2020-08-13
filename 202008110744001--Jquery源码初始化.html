@@ -1,0 +1,49 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-11 07:44:52
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-11 08:00:31
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  window.onload=function(){
+    FKClass().check().do();
+    console.log(FKClass());
+  }
+  //jquery比较好的设计（可以同时在创建对象的时候进行初始化）
+  function FKClass() { 
+    return new FKClass.prototype.init()
+  }
+
+  //初始化方法
+  FKClass.prototype.init=function() {
+    //调用初始化方法
+    console.log(`FKClass.prototype.init`);
+  };
+  FKClass.prototype.check=function() {
+    //调用初始化方法
+    console.log(`FKClass.prototype.check`);
+    return this;
+  };
+  //
+  FKClass.prototype.do=function() {
+    //调用初始化方法
+    console.log(`FKClass.prototype.do`);
+     return this;
+  };
+  // 函数引用
+  FKClass.prototype.init.prototype=FKClass.prototype;
+</script>
+

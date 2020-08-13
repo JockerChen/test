@@ -1,0 +1,55 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-08 16:59:27
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-08 17:45:05
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>参数名称</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function() {
+  getArgument("1","n");
+}
+
+
+function getArgument(params,aaa,bbbb) {
+  //获取参数名称
+  //进行判断是否形参和实参长度相同
+  console.log(arguments.length);
+  console.log(arguments.callee.length);
+}
+
+// var page=function () {
+//   var _page=new Page();
+//   //创建应聘者缓存对象(私有对象)
+//   _page.Dormitory=new Dormitory();
+//   //宿舍人员信息列表
+//   return _page;
+// }
+
+// //宿舍楼
+// var Dormitory=function(){};
+// //为原型对象属性进行赋值
+// //展示这本书
+// Dormitory.prototype.init=function(headman,dormitoryName,headmanPhone,headmanImage,dormitoryAllCnt){
+//   this.headman=headman;//宿舍负责人
+//   this.dormitoryName=dormitoryName;//宿舍名称
+//   this.headmanPhone=headmanPhone;//负责人电话
+//   this.headmanImage=headmanImage;//负责人头像
+//   this.dormitoryAllCnt=dormitoryAllCnt;//宿舍总人数
+//   //时间时段设置
+// }
+
+
+
+</script>

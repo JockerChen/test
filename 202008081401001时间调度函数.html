@@ -1,0 +1,107 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-08 14:01:55
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-10 10:21:30
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>时间调度函数</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+//调用
+window.onload=function(){
+  timerTask();
+  // var param={
+  //   url:"data/json.json",
+  //   data:null
+  // }
+  // var promise1=ajaxPromise(param);
+  // promise1.then(function(json){
+  //   console.log(json);
+  // },function(reason){
+  //     //失败
+  //    console.log("网络异常，发送求助请求失败！");
+  // })  
+}
+//设置全局参数
+window['timer']=0;
+window['cnt']=0;
+// var timer=0;
+// var cnt=0
+//Promise ajax封装（有缺陷）
+var ajaxPromise= function(param) {
+  return new Promise(function(resolve, reject){
+    $.ajax(param.url, {
+      data: param&&param.data||{},
+      dataType: param&&param.type||"json", //服务器返回数据格式
+      type: 'post', //HTTP请求类型
+      timeout: param&&param.timeout||5000,  //超时时间
+      success: function(data) {
+          resolve(data);
+      },
+      error: function(xhr, type, errorThrown) {	
+          reject(errorThrown+type);
+      }
+    });
+  })   
+}
+//定时刷新接口
+//event事件，根据对应的时间触发相应的回调函数
+//统一的计时器
+//递归函数
+//eventName:事件名称
+//eventTimer:时间生效时长
+var arrayEvent=[
+  {'eventName':'cheOnlineState','eventTimer':5},
+  {'eventName':'CheckConnectServer','eventTimer':6},
+  {'eventName':'intRefresh','eventTimer':1}
+];
+
+//时间调度函数
+function timerTask(params) {
+  clearTimeout(timer);
+  timer= setTimeout(function() {
+    var eventFiler=arrayEvent.filter(function(item){
+      console.log(`第${cnt}次调用`);
+      return cnt%item.eventTimer==0;
+    })
+    // eventFiler.eventName
+    console.log(eventFiler);
+    for (var value of eventFiler) {
+      if(window[value.eventName] == undefined)continue;
+      window[value.eventName](); 
+    }
+    eventFiler=null;
+    //计数器10万次归零
+    if(cnt>100000){
+      cnt=0;
+      return false;
+    }
+    cnt++;
+    timerTask();
+  },1000);
+}
+//自己进行自己的逻辑
+//进行处理
+function CheckConnectServer(param) { 
+  console.log('触发在线脱机函数');
+}
+//进行处理
+function intRefresh(param) { 
+  console.log('触发刷新函数');
+}
+//进行处理
+function cheOnlineState(param) { 
+  console.log('触发在线标识显示设置');
+}
+</script>

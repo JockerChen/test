@@ -1,0 +1,59 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-12 09:50:32
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-12 17:27:59
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>通知功能共通提取</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //通知模块
+  var NoticeClass=function(){
+    this.NoticeId="";
+    this.NoticeContent="";
+    this.NoticeTitle="";
+    this.DownLoadDate=""; 
+  }
+  //获取通知相关信息   
+  NoticeClass.prototype.getNotice=function(id){
+    var showId=id || "DC_SchoolNotice"
+    var data=androidClient.rawQuery("select * from NoticeInfo order by NoticeId desc");
+    var result = JSON.parse(data);
+    if(result.length > 0){
+      $('#'+showId).html('<span>' + result[0].NoticeContent + '</span>');
+    }
+    else{
+      $('#'+showId).html('<span>暂无通知消息</span>');
+    }
+    return this;
+  }
+    //更新通知信息
+  NoticeClass.prototype.updateNotice=function(data){
+    console.log(data.length);
+    if(data.length){
+      var sNoticeContent=data[0].NoticeContent.replace(/<\/?.+?>/g,"");
+      sNoticeContent=sNoticeContent.replace(/ /g,"");
+      var dNowDateTime = new Date().Format("yyyy-MM-dd HH:mm:ss");
+      var data_Notice=androidClient.rawQuery("select * from NoticeInfo where NoticeId='" + data[0].Id + "'");
+      var result = JSON.parse(data_Notice);
+      if(result.length == 0){
+          androidClient.execSQL("Insert into NoticeInfo(NoticeId,NoticeTitle,NoticeContent,DownLoadDate)Values('" + data[0].Id + "','" + data[0].NoticeTitle + "','" + sNoticeContent + "','" + dNowDateTime + "')");
+          androidClient.execSQL("Delete From NoticeInfo where DownLoadDate<>'" + dNowDateTime + "'");
+      }else{
+          androidClient.execSQL("Update NoticeInfo Set NoticeTitle='" + data[0].NoticeTitle + "',NoticeContent='" + sNoticeContent + "',DownLoadDate='" + dNowDateTime + "' where NoticeId='" + data[0].Id + "'");
+      }
+    }
+    return this;
+  }
+</script>

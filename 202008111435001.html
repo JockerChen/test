@@ -1,0 +1,33 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-11 14:35:20
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-11 14:50:21
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/sysclass.js"></script>
+</head>
+<body>
+    <div id="ShowIndexTime"></div>
+    <div id="ShowIndexWeek"></div>
+    <div id="ShowIndexDate"></div>
+    <div id="startupTime"></div><div id="content"></div>
+
+</body>
+</html>
+<script>
+window.onload=function(){
+  var  oSystemBaseInfo=new SystemBaseInfo();
+  console.log(oSystemBaseInfo);
+  console.log(typeof oSystemBaseInfo)
+}
+
+
+</script>

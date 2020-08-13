@@ -1,0 +1,65 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-12 17:28:17
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-12 19:49:56
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>枚举</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function(){
+  console.log(CardFlag.CardFlagUncoupling);
+  console.log(CardFlag.CardFlagLoss);
+  var system=new System();
+   system.systemBasicInfo.setServerPath("ashx/DZBP/NoticeService.ashx").setControllerNo("0001");
+  console.log(system);
+  //var oSystemBasicInfo=new SystemBasicInfo();
+  // console.log(oSystemBasicInfo.ServerPath);
+  // console.log(oSystemBasicInfo.ControllerNo);
+}
+
+//卡状态（CardFlagUncoupling:解挂，CardFlagLoss：挂失）
+var CardFlag={
+    "CardFlagUncoupling":0,
+    "CardFlagLoss":1
+}
+var SystemInfo=function(){
+    //设备序列号
+    this.SerialNo="";
+    //设备MAC地址
+    this.MacAddress="";
+}
+//整个系统通用模块(此处进行传值然后进行初始化)
+var System=function(){
+  var _systemSet=new SystemInfo();
+   _systemSet.systemBasicInfo=new SystemBasicInfo();
+  return _systemSet;
+}
+
+//系统基础类
+var SystemBasicInfo=function (sServerPath,sControllerNo) {
+  this.ServerPath=sServerPath || "";
+  this.ControllerNo=sControllerNo || "";
+}
+SystemBasicInfo.prototype.setServerPath=function (sServerPath) {
+  this.ServerPath=sServerPath || "";
+  return this;
+}
+SystemBasicInfo.prototype.setControllerNo=function (sControllerNo) {
+  this.ControllerNo=sControllerNo || "";
+  return this;
+}
+
+
+
+</script>

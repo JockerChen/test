@@ -1,0 +1,54 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-13 08:02:33
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-13 09:42:29
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>策略模式在日常场景的应用（表单验证此处提取共通）</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+window.onload=function () { 
+  var info='';
+  console.log(InputStrategy.check('notNull',info));
+}
+
+  //验证策略
+var InputStrategy=function () {
+  var strategy={
+    notNull:function (value) {
+      return /\s+/.test(value) ? '请输入内容' :'';
+    },
+    isNumber:function(value){
+      return /^[0-9]+(\.[0-9]+)?$/.test(value) ? '' :'请输入数字';
+    }
+  }
+  return {
+    //验证接口
+    check:function(type,value){
+      //去掉收尾的空白符
+      console.log(value);
+      // value=value.replace(/^\s+|\s+$/g,'');
+      return strategy[type] ? strategy[type](value) :'没有该类型的检测方法'
+    },
+    addStrategy:function(type,fn){
+        //添加策略(浅拷贝)
+        strategy[type]=fn;
+    }
+  }
+}();
+
+  
+
+
+</script>

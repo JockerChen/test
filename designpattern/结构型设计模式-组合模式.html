@@ -1,3 +1,10 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-08 19:06:43
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-13 16:44:36
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +52,7 @@
 		this.init();
 	}
 	//寄生形式继承父类原型方法
-	inheripPrototype(Container,News);
+	inheritPrototype(Container,News);
 	//容器类重写
 	Container.prototype.init=function(){
 		this.element=document.createElement('ul');
@@ -68,6 +75,21 @@
 	}
 	//显示方法
 	Container.prototype.show=function(){
-		return this.parentthis.child.appendChild(this.element);
+		return this.parent.appendChild(this.element);
+	}
+	//下一层级的内容的呈现
+  var Item=function (className) {
+		News.call(this);
+		this.className=className || '';
+		this.init();
+	} 
+	//寄生形式继承父类原型方法
+	inheritPrototype(Item,News);
+	Item.prototype.init=function(){
+		this.element=document.createElement('li');
+		this.element.className=this.className;
+	}
+	Item.prototype.add=function(child){
+
 	}
 </script>
