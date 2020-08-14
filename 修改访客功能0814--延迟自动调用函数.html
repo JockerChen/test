@@ -1,0 +1,72 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-14 10:22:36
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-14 17:12:24
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>延迟逻辑调用</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //所有回调函数数组
+  var arrayFunCallback=["onReceiveComparisonData","onCheckIDCardInfo"];
+  var arrayFun=['checkFun','submitFun','onReceiveComparisonData','ShowVisitorInfo','onCheckIDCardInfo','InsertVisitorInfo'];
+  window.onload=function(){
+    //初始化
+    changeFunction(arrayFun);
+  }
+
+//功能切换
+function changeFunction(runArrayInfo,json){
+  console.log(runArrayInfo);
+  if(runArrayInfo.length==0){
+    console.log(`数组已经全部执行完`);
+    return false;
+  }else{
+    var method= runArrayInfo.shift();
+    console.log(`预执行函数:`+method);
+    if(arrayFunCallback.indexOf(method)!=-1){
+      console.log(`函数等待:`+method);
+      return false;
+    }else{
+      window[method](json); 
+    }
+  }
+}
+
+function checkFun() {
+  console.log(`执行-----验证函数有效性checkFun`);
+  changeFunction(arrayFun);
+}
+function submitFun() {
+  console.log(`执行-----表单递交有效性submitFun`);
+  changeFunction(arrayFun);
+}
+function onReceiveComparisonData(json) {
+  //回调函数
+  console.log(`执行-----人脸识别回调onReceiveComparisonData`);
+  changeFunction(arrayFun,json);
+}
+function ShowVisitorInfo() {
+  console.log(`执行-----获取访客人员信息ShowVisitorInfo`);
+  changeFunction(arrayFun);
+}
+function onCheckIDCardInfo(json) {
+  //回调函数
+  console.log(`执行-----人证合一回调onCheckIDCardInfo`);
+  changeFunction(arrayFun,json);
+}
+function InsertVisitorInfo(){
+  console.log(`执行-----插入数据InsertVisitorInfo`);
+  changeFunction(arrayFun);
+}
+</script>

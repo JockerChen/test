@@ -1,0 +1,109 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-14 08:04:44
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-14 09:47:02
+ * @Description: 
+(1)类初始化需要消化非常多的资源,这个资源包括数据、硬件资源等,通过原型拷贝避免这些消耗。
+(2)通过new一个对象需要非常繁琐的数据准备或访问权限,可以使用原型模式。
+(3)一个对象需要提供给其他对象访问,而且各个调用者可能需要修改其值,可以考虑使用原型模式拷贝多个对象供调用者使用,即保护性拷贝
+优点：
+* 当创建新的对象实例较为复杂时，使用原型模式可以简化对象的创建过程，通过复制一个已有实例可以提高新实例的创建效率。
+* 扩展性较好
+
+缺点：
+* 对已有类进行改造时需要修改源代码，违背了开关原则。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型模式</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  window.onload=function(){
+    var fadeLoopImg=new FadeLoopImg(['1.jpg','2.jpg'],'list','up');
+    console.log(fadeLoopImg.container);
+    fadeLoopImg.changeImage();
+  }
+  var LoopImages=function(imgArr,container){
+    this.imagesArray=imgArr;  //图片轮播数组
+    this.container=container; //图片轮播容器
+  }
+LoopImages.prototype={
+    createImage:function(){
+      //创建轮播图片
+      console.log(`创建轮播图片`);
+    },
+    changeImage:function () {
+      //切换下一章图片
+      console.log("切换下一章图片");
+    }
+}
+//上下滑动切换类
+var SlideLoopImg=function(imgArr,container){
+  //构造函数继承图片轮播类
+  LoopImages.call(this,imgArr,container);
+}
+SlideLoopImg.prototype=new LoopImages();
+//重写继承的切换下一个图片的方法
+SlideLoopImg.prototype.changeImage=function(){
+  console.log('SlideLoopImg changeImage');
+}
+
+//渐隐切换类
+var FadeLoopImg=function (imgArr,container,arrow) {
+  LoopImages.call(this,imgArr,container);
+  this.arrow=arrow;
+}
+FadeLoopImg.prototype=new LoopImages();
+FadeLoopImg.prototype.changeImage=function(){
+  console.log('FadeLoopImg changeImage');
+}
+FadeLoopImg.prototype.getImageLength=function(){
+  return this.imagesArray.length;
+}
+FadeLoopImg.prototype.getContainer=function(){
+  return this.container;
+}
+
+//高阶原型模式的对象复制方法（浅拷贝）(核心方法)
+function prototypeExtend() {
+    var F=function(){}, //缓存类为实例化返回对象使用
+    args=arguments,     //模板对象参数序列
+    i=0,
+    len=args.length;
+    //遍历对象属性
+    for(;i<len;i++){
+      for(var j in args[i]){
+        F.prototype[j]=args[i][j];
+      }
+    }
+    return new F();
+}
+//核心方法调用（直接调用不用创建对象）
+var penguin=prototypeExtend({
+  speed:'20',
+  swim:function(){
+    console.log("游泳速度"+this.speed);
+  }
+},{ 
+  run:function(speed){
+    console.log("奔跑速度"+speed);
+  }
+},{
+  jump:function(){
+    console.log("跳跃");
+  }
+})
+console.log(penguin);
+penguin.swim();
+penguin.run(11);
+penguin.jump();
+
+</script>

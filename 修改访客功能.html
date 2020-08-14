@@ -1,0 +1,155 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-13 17:58:24
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-14 10:10:34
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>访客功能重构（1）</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var funcConfigArray=['人证合一','登录','审批','下发人脸机','背景'];
+
+var funConfigArrayOther=['陌生人访客','预约访客','员工采集'];//动态获取配置功能
+
+
+var fkSystemConfig=['是否带审批','单机','是否登录','是否预约','是否下发人脸机',]
+  
+var fkConfigInfoJson=[{
+  'FKDataId':'',//界面属性ID  
+  'FKAttributeName':'',//访客属性名
+  'FKTitleName':'',    //标题别名---映射的数据信息
+  'FKField':'',        //访客字段
+  'FKEffect':'',       //是否生效
+}]
+
+
+
+
+//访客人员类
+var FKClass=function(param){}
+
+//为原型对象属性进行赋值
+FKClass.prototype.init=function(param){
+  //证件类型
+  this.FKCardType=param && param.FKCardType || "";
+  //证件号码
+  this.FKCardId=param && param.FKCardId || "";
+  //访客姓名
+  this.FKName=param && param.FKName || "";
+  //访客性别
+  this.FKSex=param && param.FKSex || "";
+  //证件地址
+  this.FKCardAddress=param && param.FKCardAddress || "";
+  //访客电话
+  this.FKPhone=param && param.FKPhone || "";
+  //访客审核状态
+  this.FKCheckState=param && param.FKCheckState || "";
+  //进出次数
+  this.FKInOutCnt=param && param.FKInOutCnt || "";
+  //来访人数
+  this.FKPersonCnt=param && param.FKPersonCnt || "";
+  //有效期限(身份证证件的有效期)
+  this.FKCardIdValidity=param && param.FKCardIdValidity || "";
+  //访客单位
+  this.FKCompany=param && param.FKCompany || "";
+  //来访事由
+  this.FKReason=param && param.FKReason || "";
+  //携带物品
+  this.FKBelongings=param && param.FKBelongings || "";
+  //备注
+  this.FKRemarks=param && param.FKRemarks || "";
+  //人脸识别程度（高、低相似度）
+  this.FKSimilarity=param && param.FKSimilarity || "";
+  //电梯
+  this.FKElevator=param && param.FKElevator || "";
+  //楼层
+  this.FKFloor=param && param.FKFloor || "";
+  //访客通行组
+  this.FKTrafficGroup=param && param.FKTrafficGroup || "";
+  //车牌号码
+  this.FKCarLicense=param && param.FKCarLicense || "";
+  //车辆类型
+  this.FKCarType=param && param.FKCarType || "";
+  //车辆通行组
+  this.FKCarTrafficGroup=param && param.FKCarTrafficGroup || "";
+  //通行有效期
+  this.FKThroughValidity=param && param.FKThroughValidity || "";
+  //访客日期
+  this.FKDate=param && param.FKDate || "";
+  //访客时间
+  this.FKTime=param && param.FKTime || "";
+}
+
+//身份证类别
+var IDCard=function (params) {
+  //身份证识别ON/OFF切换认证比对/手动输入模式
+  this.funEffect='ON'||'OFF';
+  // //证件地址
+  // this.FKCardAddress=param && param.FKCardAddress || "";
+}
+
+//识别结果
+//身份证识别ON/OFF切换认证比对/手动输入模式
+//通行组 (访客可以通行的通行组)
+//车牌号码 
+//车辆类型
+//车辆通行组
+//有效期(访客可以通行的有效期)
+
+
+//被访人员
+var FKAccessedClass=function(param){
+  //被访人工号
+  this.FKAccessedAccountNo=param && param.FKAccessedAccountNo || "";
+  //姓名
+  this.FKAccesseName=param && param.FKAccesseName || "";
+  //部门
+  this.FKAccesseDeptname=param && param.FKAccesseDeptname || "";
+  //被访电话
+  this.FKAccessePhone=param && param.FKAccessePhone || "";
+  //访客证件地址
+  this.FKCardAddress=param && param.FKCardAddress || "";
+}
+
+
+
+附加
+
+//    -------------【省实验版本】
+//-------------------被访人信息
+//被访人电话
+//姓名
+//部门
+
+//-------------------来访人信息
+//姓名
+//电话
+//身份证号
+//车牌号码
+//随行人员
+//拜访类型
+
+
+//---------【政企版本】
+//微信端预约核验界面
+// 来访人信息
+//访客姓名
+//审核状态
+//访客电话
+//来访日期
+//所属公司
+//身份证号
+//来访原因
+
+
+</script>
