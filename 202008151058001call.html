@@ -1,0 +1,41 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-15 10:59:00
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-15 11:25:13
+ * @Description: h
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call函数</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var BasicCls=function () {
+  this.id="";
+  this.ServerPath="";
+  this.ControllerNo="";
+}
+//进行基础信息的初始化
+BasicCls.prototype.init=function(ServerPath,ControllerNo){
+  this.ServerPath="";
+  this.ControllerNo="";
+}
+//扩展的类
+var ExtendCls=function (ServerPath,ControllerNo) {
+  // LoopImages.call(this,ServerPath,ControllerNo);
+  BasicCls.call(this,ServerPath,ControllerNo);
+  this.action="";
+}
+ExtendCls.prototype=new BasicCls();
+var oExtendCls=new ExtendCls("http://111.12.12.21/bzbcs/","1111");
+
+console.log(oExtendCls);
+</script>

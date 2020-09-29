@@ -1,0 +1,220 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-02 07:46:19
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-03 08:02:43
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/jquery-1.7.2.min.js"></script>
+  <title>jquery源码--选择器处理字符串</title>
+</head>
+<body>
+  <ul>
+    <li>0</li>
+    <li>1</li>
+    <li>2</li>
+  </ul>
+</body>
+</html>
+<script>
+$(function () {
+  // $('li').css('background','red');
+  // console.log(typeof $('li').css('background','red'));
+  // console.log($('li').css('background','red'));
+  //可对Jquery对象进行索引获取相应的值
+  // console.log($('li').css('background','red').context.title);
+  // $(li)--->this 这个是一个JQUERY对象
+  // $(li)[1]这是一个原生对象
+  $('li')[1].style.background="red";
+
+//实现的原理
+// var ali=document.getElementsByTagName('li');
+// for (let index = 0; index < ali.length; index++) {
+//   ali[index].style.background="red";
+// }
+
+//jquery的实现是通过this自变量实现局部变量的共享的
+// this={
+//   0:'li',
+//   1:'li',
+//   2:'li',
+//   length:3
+// }
+// for(var i=0;i<this.length;i++){
+//   this[i].style.background='red';
+// }  
+
+//处理字符串的结构
+// $('#div') $('.box')  $('div') $('#div div.box')
+// $('<li>') $('<li>1</li><li>2</li><li>3</li>')
+
+//line 111~117（判断标签里是否有字母）
+// rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,   该正则表达式能处理除了ID选择器的其他内容$('.box')  $('div') $('#div div.box')
+//进行判断是不是标签
+if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
+  // Assume that strings that start and end with <> are HTML and skip the regex check
+  match = [ null, selector, null ];
+
+
+} else {
+  //快速匹配正则rquickExpr
+  // exec是正则中的一个方法
+  match = rquickExpr.exec( selector );
+}
+//line 119~117
+// Match html or make sure no context is specified for #id
+if ( match && (match[1] || !context) ) {
+// HANDLE: $(html) -> $(array)
+  if ( match[1] ) {
+    context = context instanceof jQuery ? context[0] : context;
+  }
+}
+//if() {
+//    $('<li>') 
+//    match = [ null, '', null ];
+//    $('<li>1</li><li>2</li><li>3</li>')
+//    match = [ null, '<li>1</li><li>2</li><li>3</li>', null ];
+//}else {
+//   $('#div') $('.box')  $('div') $('#div div.box')
+//   $('<li>hello')//本质和标签差不多
+// $('#div')匹配后的处理结果为
+// match = [ '#div', null,'div' ];
+// $('<li>hello')
+// match = [ '<li>hello', li,null ];
+//}
+//能通过验证的是
+if ( match && (match[1] || !context) ) {
+  $('#div')
+  $('<li>')
+  if(match[1]) {
+    $('<li>')
+  }
+  else{
+    $('#div')
+  }
+}
+
+
+})
+
+
+
+
+
+
+//jquery源码init方法  101~195
+// init: function( selector, context, rootjQuery ) {
+// 		var match, elem;
+
+// 		// HANDLE: $(""), $(null), $(undefined), $(false)
+// 		if ( !selector ) {
+// 			return this;
+// 		}
+
+// 		// Handle HTML strings
+// 		if ( typeof selector === "string" ) {
+// 			if ( selector.charAt(0) === "<" && selector.charAt( selector.length - 1 ) === ">" && selector.length >= 3 ) {
+// 				// Assume that strings that start and end with <> are HTML and skip the regex check
+// 				match = [ null, selector, null ];
+
+// 			} else {
+// 				match = rquickExpr.exec( selector );
+// 			}
+
+// 			// Match html or make sure no context is specified for #id
+// 			if ( match && (match[1] || !context) ) {
+
+// 				// HANDLE: $(html) -> $(array)
+// 				if ( match[1] ) {
+// 					context = context instanceof jQuery ? context[0] : context;
+
+// 					// scripts is true for back-compat
+// 					jQuery.merge( this, jQuery.parseHTML(
+// 						match[1],
+// 						context && context.nodeType ? context.ownerDocument || context : document,
+// 						true
+// 					) );
+
+// 					// HANDLE: $(html, props)
+// 					if ( rsingleTag.test( match[1] ) && jQuery.isPlainObject( context ) ) {
+// 						for ( match in context ) {
+// 							// Properties of context are called as methods if possible
+// 							if ( jQuery.isFunction( this[ match ] ) ) {
+// 								this[ match ]( context[ match ] );
+
+// 							// ...and otherwise set as attributes
+// 							} else {
+// 								this.attr( match, context[ match ] );
+// 							}
+// 						}
+// 					}
+
+// 					return this;
+
+// 				// HANDLE: $(#id)
+// 				} else {
+// 					elem = document.getElementById( match[2] );
+
+// 					// Check parentNode to catch when Blackberry 4.6 returns
+// 					// nodes that are no longer in the document #6963
+// 					if ( elem && elem.parentNode ) {
+// 						// Inject the element directly into the jQuery object
+// 						this.length = 1;
+// 						this[0] = elem;
+// 					}
+
+// 					this.context = document;
+// 					this.selector = selector;
+// 					return this;
+// 				}
+
+// 			// HANDLE: $(expr, $(...))
+// 			} else if ( !context || context.jquery ) {
+// 				return ( context || rootjQuery ).find( selector );
+
+// 			// HANDLE: $(expr, context)
+// 			// (which is just equivalent to: $(context).find(expr)
+// 			} else {
+// 				return this.constructor( context ).find( selector );
+// 			}
+
+// 		// HANDLE: $(DOMElement)
+// 		} else if ( selector.nodeType ) {
+// 			this.context = this[0] = selector;
+// 			this.length = 1;
+// 			return this;
+
+// 		// HANDLE: $(function)
+// 		// Shortcut for document ready
+// 		} else if ( jQuery.isFunction( selector ) ) {
+// 			return rootjQuery.ready( selector );
+// 		}
+
+// 		if ( selector.selector !== undefined ) {
+// 			this.selector = selector.selector;
+// 			this.context = selector.context;
+// 		}
+
+// 		return jQuery.makeArray( selector, this );
+// 	},
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+

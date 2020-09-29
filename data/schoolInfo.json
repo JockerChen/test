@@ -1,0 +1,34 @@
+{
+  "resultCode": 0, 
+  "resultMsg": "绑定成功", 
+  "total": 1, 
+  "rows": [ 
+      { 
+        "UserId": "E62FB3461208427799EB8F9B81DE9DF8", 
+        "Account": "15009884241", 
+        "PersonName": "雒唯", 
+        "PersonUUID": "E62FB346-1208-4277-99EB-8F9B81DE9DF8",
+        "WxOpenId": "oCLzSjtcLLLLQ0P4XC4gNz_GH4G8", 
+        "AccountNo": "csjs63",  
+        "PersonNo": "csjs6312",
+        "TypeId": 1, 
+        "IdentityCard": "", 
+        "ChildUUID": "", 
+        "ChildName": "", 
+        "Relation": "", 
+        "DeptUUID": "D0C52E83-FBFB-4558-81DD-872BEC186FCA", 
+        "DeptCode": "002401020050",
+        "DeptIndex": "001007001", 
+        "DeptName": "即时通讯2019级1班", 
+        "SchoolUUID": "5913c631-645a-4bc5-b486-bc59547022b1", 
+        "SchoolCode": "00240102",
+        "SchoolName": "门禁管理电子班牌", 
+        "SchoolMode": 0,
+        "SchoolUrl": "http://www.55kad.com:8080/0240102/",
+        "Domain": "www.55kad.com:8080/0240102/",
+        "LastLoginTime": "", 
+        "UserSign": "eJxNjl1PgzAYhf8LtxrXlo623tEODDoXCRgzbxoCZXvlwwqd2TT*d5FsibfPyXnO*fbydXZTlOX7oXfanazxbj3kXc8YKtM7qMEME4wCEkufBpggTgljQkSSx0JyvIrEKubnTmEtVLpw2h*qf6qxavQcTQxThDARLCDn0BwtDEYXtZuXAkQ5uhQddH*X8DJghAjss4sQdhN*jLYqSRXsa6CmNKOK2*PnwZK3EMovJoz-cGUBb6TqMvaybnOVJvvwflfJj8ZsEh*F6m6x7RanJ1ySuM1fG0o475ejytJnXjeZ9-MLJphUoQ__", 
+        "TrtcUserSign": "eJxNjl1PgzAYhf8LtxotpUDrHR8lEJm6DTLdDelKO*qkEugWyeJ-Fwkm3j7Pe855r1aRb*8Y559nbSozdsJ6sIB1O2NVC22UVKKfIPVgEjrIsyHACPo*ITTECQmxHVMSJ3jJsK5TdcVM5fT1v6qhPlWzmpiNAIDQhdhbpPjqVC8qJs28hL3pYFFGtb8f2a7nQ0hsx--rU8cJr*hblK1jwcUN2pt288pD2iTZ0MvdJfooSxjm-ct2dNymTOP9wWdB1gRPrZAHvZaX92I0sDihc95EKzIMdfp4lGP6rO87TgEKtLa*fwD4QVX1" 
+    }
+  ]
+}

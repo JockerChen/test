@@ -1,0 +1,36 @@
+{
+  "OrderNo": "盘点单号",
+  "Date": "盘点日期",
+  "AssetAddress": "盘点地址",
+  "Status": "已盘点/未盘点",
+  "Remarks": "盘点单备注",
+  "info": [{
+   "AssetFixedsNo": "资产编码",
+   "AssetFixedsName": "资产编码",
+   "AssetType": "资产类别",
+   "Model": "规格型号",
+   "EquipmentNo": "设备编号",
+   "ConfigInfo": "配置信息",
+   "DateOfProduction": "出厂日期",
+   "BuyDate": "购置日期",
+   "NCCode": "NC编码",
+   "CardNo": "卡片编号",
+   "CardNo2": "二级卡片编号",
+   "IsInventory": "已盘点/未盘点",
+   "Remarks": "盘点说明"
+  }, {
+   "AssetFixedsNo": "资产编码",
+   "AssetFixedsName": "资产编码",
+   "AssetType": "资产类别",
+   "Model": "规格型号",
+   "EquipmentNo": "设备编号",
+   "ConfigInfo": "配置信息",
+   "DateOfProduction": "出厂日期",
+   "BuyDate": "购置日期",
+   "NCCode": "NC编码",
+   "CardNo": "卡片编号",
+   "CardNo2": "二级卡片编号",
+   "IsInventory": "已盘点/未盘点",
+   "Remarks": "盘点说明"
+  }]
+ }

@@ -12,7 +12,7 @@
     <textarea name="" id="NGCGLValue2" cols="40" rows="10"></textarea>
 
     <textarea name="" id="NGCGLValueHtml" cols="40" rows="10"></textarea>
-    <input type="button" id="NGCGLBtnHtml" value="过滤html" />
+    <input type="button" id="NGCGLBtnHtml" value="过滤html" placeholder="" />
     <textarea name="" id="NGCGLValue2Html" cols="40" rows="10"></textarea>
 
 </body>
@@ -108,6 +108,19 @@ document.getElementById("NGCGLBtnHtml").onclick=function(){
 var re = /\w+@[0-9a-z]+\.[a-z]/;//没加行首和行尾的时候 局部满足则认为都满足
 // 改造后的
 var reChange=/^\w+@[0-9a-z]+\.[a-z]+$/i;
+
+
+var inf ="                                                辽\n                                                A\n                                                2\n                                                0\n                                                C\n                                                5\n                                                K\n                                            ";
+console.log(getLicenceReg(inf));
+
+//过滤获取车辆牌照
+function getLicenceReg (info) {
+    var msg = info.replace(/\n/g, ''); 
+    var reg=/[\(（][^\(（]*[\)）]/g;
+     msg = msg.replace(reg, ''); //去除行尾空格
+    //  msg = msg.replace(/\n/g, ''); 
+     return msg;
+ }
 
 </script>
 </html>

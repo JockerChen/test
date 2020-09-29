@@ -1,0 +1,63 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-25 13:39:00
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-01 10:00:14
+ * @Description: 动态加载不同的js
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title></title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //不同的加载的逻辑
+  var arrInfo=[{
+      "SignType":"TeacherSign",
+      "SignLoadJs":"js/jssign01.js",
+      "SignName":"教师考勤"
+    },{
+      "SignType":"StudentSign",
+      "SignLoadJs":"js/jssign02.js",
+      "SignName":"请假放行"
+    },{
+      "SignType":"ParentSign",
+      "SignLoadJs":"js/jssign03.js",
+      "SignName":"弹性离校"
+    }
+  ];
+  $(function () {
+    var fun='弹性离校';
+  })
+
+//加载函数功能
+function loadFunction(arrInfo,fun) {
+  var filterObject = arrInfo.filter(function (item) {
+    return item.SignName === fun;
+  });
+  if(filterObject.length>0){
+    console.log(filterObject[0].SignLoadJs);
+    $.getScript(filterObject[0].SignLoadJs, function(){
+      // console.log("加载完成");
+      //在线签到
+      onlineSign();
+    });
+  }
+  else{
+    console.log("当前功能加载失败请重新加载");
+    return false;
+  }
+}
+
+
+
+
+</script>

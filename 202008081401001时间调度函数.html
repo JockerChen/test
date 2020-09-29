@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-08 14:01:55
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-08-10 10:21:30
+ * @LastEditTime: 2020-08-24 16:27:37
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -21,40 +21,11 @@
 //调用
 window.onload=function(){
   timerTask();
-  // var param={
-  //   url:"data/json.json",
-  //   data:null
-  // }
-  // var promise1=ajaxPromise(param);
-  // promise1.then(function(json){
-  //   console.log(json);
-  // },function(reason){
-  //     //失败
-  //    console.log("网络异常，发送求助请求失败！");
-  // })  
 }
 //设置全局参数
 window['timer']=0;
 window['cnt']=0;
-// var timer=0;
-// var cnt=0
-//Promise ajax封装（有缺陷）
-var ajaxPromise= function(param) {
-  return new Promise(function(resolve, reject){
-    $.ajax(param.url, {
-      data: param&&param.data||{},
-      dataType: param&&param.type||"json", //服务器返回数据格式
-      type: 'post', //HTTP请求类型
-      timeout: param&&param.timeout||5000,  //超时时间
-      success: function(data) {
-          resolve(data);
-      },
-      error: function(xhr, type, errorThrown) {	
-          reject(errorThrown+type);
-      }
-    });
-  })   
-}
+
 //定时刷新接口
 //event事件，根据对应的时间触发相应的回调函数
 //统一的计时器

@@ -1,0 +1,28 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-31 16:26:58
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-31 16:35:11
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象融合</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //对象融合
+  let user = {name:'无敌人',age:19};
+ let page = {pageSize:10,currentPage:1};
+ let newObj = {};
+ 
+ Object.assign(newObj,user,page);
+console.log(newObj);
+
+</script>

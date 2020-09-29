@@ -1,0 +1,79 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-13 09:29:36
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-05 09:48:43
+ * @Description: 正则表达式
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>正则表达式</title>
+</head>
+<body>
+<textarea name="" id="OriginalInfo" cols="30" rows="10"></textarea>
+<button id="change">过滤</button>
+<textarea name="" id="ChangeInfo" cols="30" rows="10" disabled="true"></textarea>
+</body>
+</html>
+<script>
+  var inf="Aaadfsdf1231232";
+  var str="12 fff 897 er334 233 -=1=fafa";
+  var inifi="aut alt aat act aaa abt act aet";
+// console.log(str.match(/\d+/g));
+// 效验邮箱  规则  一串英文、数字 @ 一串英文、数字  . 一串英文
+var re=new RegExp('a');
+//perl语言
+var rre=/\d/g;
+// console.log(inf.match(/\a+/i));
+//第一个数字出现的位置  字符串+search(正则表达式)
+// console.log(inf.search(rre));
+// console.log(str.match(rre));
+// +是若干的含义
+var rr1=/\d+/;
+// console.log(str.match(rre));
+var rReplace=/a/ig;
+//将查找的内容进行替换  字符串.relpace(正则表达式,需要替换的内容)
+// console.log(inf.replace(rReplace,'0'));
+//敏感词过滤功能
+window.onload=function(){
+  var fillerBtn=document.getElementById("change");
+  var sOriginalText=document.getElementById("OriginalInfo");
+  var sChangeText=document.getElementById("ChangeInfo");
+  fillerBtn.onclick=function(){
+    // console.log(sOriginalText.value);
+    //敏感词过滤
+    var re=/国家|北京|找死|杀人|放火|死亡/g;
+    sChangeText.value=sOriginalText.value.replace(re,"***");
+    console.log(sChangeText.value);
+  }
+}
+//[]作用任意字符[]里面的是包含的所有的任意字符的进行筛选例如  aat alt act abt等这些内容都可以作为包含的内容
+var rer=/a[alcb]t/g;
+// console.log(inifi.match(rer));
+//[]表示范围
+var rerr=/a[a-z]t/g;
+// console.log(inifi.match(rerr));
+//[^a-e]表示^为排除(相当于取反过滤)
+var rerd=/a[^alcb]t/g;
+// console.log(inifi.match(rerd));
+let serverPath=`http://192.168.0.1/`;
+var rerd="/^http(s)?:\\/\\/.+/";
+let getBlockChar=`https`;
+var rerr11=/^htt/g;
+console.log(getBlockChar.match(rerr11));
+
+//进行判断当前的电话号是否有效
+var phone="024-88732075-86";
+var phone1="88732075-86";
+var phone2="88732075a";
+
+let rePhone="/0{2,3}\d-?[0-9]{8}-[0-9]?/"
+// (0\d{2,3}-)?[1-9]\d{7}-/d{1,5}?
+
+
+
+</script>

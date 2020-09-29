@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据处理</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+
+
+//审批状态
+var ResStateEnum={
+    "20":{
+      "ResStateMeaning":"拒绝",
+      "ResStateClass":"pass",      
+    },
+    "30":{
+      "ResStateMeaning":"待核验",
+      "ResStateClass":"audit",      
+    },
+    "40":{
+      "ResStateMeaning":"通过",
+      "ResStateClass":"pass",      
+    }
+}
+console.log(ResStateEnum['20'].ResStateClass);
+
+</script>

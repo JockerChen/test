@@ -1,0 +1,38 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-09 09:24:36
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-09 09:59:09
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>效验是否是16进制的数据</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //16进制部分
+  var str = '64';
+  var re16= /([0-9A-Fa-f]{2})+/;//正则表达式的
+  if(str.search(re16)==-1){
+    console.log(str.toUpperCase());
+  }else{
+    console.log(DecToHex(str));
+  }
+  //16进制转10进制
+  function HexToDec(str) {
+      return parseInt(str, 16).toString();
+  }
+  
+  //10进制转16进制
+  function DecToHex(str) {
+      return ('0x'+parseInt(str).toString(16)).toUpperCase();
+  }
+</script>

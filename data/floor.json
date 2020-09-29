@@ -1,0 +1,18 @@
+{
+  "resultCode":"0",
+  "Msg":"success",
+  "total":"0",
+  "rowsType":[
+      {
+          "PersonCardNO":"0000006969",
+          "CardType":"UserCard"
+      }
+  ],
+  "rows":[
+      {
+          "DeviceNo":"1",
+          "Command":"1,5,0,0,0",
+          "CallType":"HandControl"
+      }
+  ]
+}

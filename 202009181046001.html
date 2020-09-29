@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试过滤</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+  <Input type="text" placeholder="" id="ApproveInput"/>
+  <ul class="select-interviewees-list" id="ApproveList">
+    <li data-phone="15802450560">
+        <dl>
+            <dt>测试1</dt>
+            <dd>15802450560</dd>
+        </dl>
+    </li>
+    <li data-phone="15100236963">
+        <dl>
+            <dt>测试2</dt>
+            <dd>15100236963</dd>
+        </dl>
+    </li>
+    <li data-phone="13294533336">
+        <dl>
+            <dt>测试3</dt>
+            <dd>13294533336</dd>
+        </dl>
+    </li>
+    <li data-phone="13364587891">
+        <dl>
+            <dt>测试4</dt>
+            <dd>13364587891</dd>
+        </dl>
+    </li>
+</ul>
+<div id="plate"><strong>辽</strong><strong>A</strong><strong>8</strong><strong>Q</strong><strong>5</strong><strong>2</strong><strong>9</strong></div>
+</body>
+</html>
+<script>
+  $(function () {
+    $('#ApproveInput').change(function () {
+        var info=$(this).val();
+        // if(info.length==1)
+        // {
+        //   return false;
+        // }
+        // $("#ApproveList li[data-phone*='"+info+"']").siblings().hide();
+        $("#ApproveList li").hide();
+        $("#ApproveList li[data-phone*='"+info+"']").show();
+        // console.log();
+    })
+
+   var plate =$('#plate').html();
+   matchReg(plate);
+  })
+
+ function matchReg(str){
+  var reg=/<\/?.+?\/?>/g;
+  return str.replace(reg,'');
+}
+
+  
+</script>

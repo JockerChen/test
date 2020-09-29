@@ -2,11 +2,10 @@
 /*
  * @Author: [JokerChen]
  * @Date: 2020-01-09 13:52:29
- * @LastEditors  : [JokerChen]
- * @LastEditTime : 2020-01-15 15:44:35
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-08-20 08:55:18
  * @Description: 通过模块化处理
  */
-
 define(function(require,exports,module){
     //require 是引用别的JS
     // let moda=require('a.js');

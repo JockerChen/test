@@ -1,0 +1,68 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-08 14:42:47
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-08 16:49:22
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>202009081442001对象属性本地存储</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+
+
+
+var PersonSignInfo=function(accountNo,cardId,personName,personImage,sdate,stime,captureImage,smsgbox){
+  this.AccountNo=accountNo||"";
+    this.CardId=cardId||"";
+    this.PersonName=personName||"";
+    this.PersonImage=personImage;
+    this.SignDate=sdate;
+    this.SignTime=stime;
+    this.CaptureBase64=captureImage||"";
+    this.Msgbox=smsgbox||"";
+}
+//对象初始化
+PersonSignInfo.prototype.init=function(){
+  var that=this;
+  localStorage.setItem("PersonSignInfo",JSON.stringify(that));
+  return that;
+}
+//一次设置多个属性
+PersonSignInfo.prototype.SetMutityLocalStorage=function(obj){
+  var that=this;
+  console.log(typeof obj);
+  var _obj=JSON.parse(obj);
+  console.log(typeof _obj);
+  for (var prop in _obj){
+    that[prop]=_obj[prop] ;
+  }
+  
+  localStorage.setItem("PersonSignInfo",JSON.stringify(that));
+}
+
+//属性进行本地存储
+PersonSignInfo.prototype.SetLocalStorage=function(key,value){
+  var that=this;
+  if(that.hasOwnProperty(key)&&!!value){
+      that[key]=value;
+  }
+  else{
+    console.log("该类不存在目标属性");
+    return false;
+  }
+  localStorage.setItem("PersonSignInfo",JSON.stringify(that));
+}
+
+
+</script>

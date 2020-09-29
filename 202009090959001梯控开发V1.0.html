@@ -1,0 +1,210 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-09 10:00:12
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-09 11:13:12
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>202009090959001梯控开发V1.0</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <style>
+    body{
+      top:0px;
+    }
+    .CardTypeHead{
+      position:absolute;
+      left: 100px;
+      top: 20px;
+      border:2px solid red;
+    }
+    .CardType,.CallTypeEnum,.ControlEnum,.LayerEnum{
+      position: relative;
+      font-size: 16px;
+      line-height: 16px;
+      margin: 10px 10px 10px 10px;
+    }
+    .active{
+      background:#7FFF00;
+    }
+    button{
+      border-radius:5px;
+      width: 75px;
+      height: 32px;
+    }
+    .showArea{
+      position: absolute;
+      left: 1150px;
+      top: 20px;
+      right: 100px;
+      height: 545px;
+      border: solid 2px #ddd;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .data-list{
+      position: absolute;
+      left: 20px;
+      top: 70px;
+      right: 20px;
+      bottom: 20px;
+      overflow-y: auto;
+    }
+    .data-list p{
+      line-height: 34px;
+      font-size: 14px;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .showArea button{
+      width: 120px;
+      height: 44px;
+      line-height: 42px;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      background: #fafafa;
+      border: solid 1px #eee;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="CardTypeHead">
+    <div>
+      <span><strong>卡类型</strong></span>
+      <button class="CardType" data-type="UserCard">用户卡</button>
+      <button class="CardType" data-type="AdminCard">管理卡</button>
+      <button class="CardType" data-type="SwitchCard">开关卡</button>
+    </div>
+    <div>
+      <span><strong>呼叫方式</strong></span>
+      <button class="CallTypeEnum" data-type="HandControl">手动</button>
+      <button class="CallTypeEnum" data-type="AutoControl">自动</button>
+    </div>
+    <div>
+      <span><strong>设备</strong></span>
+      <button class="ControlEnum" data-type="DeviceControl">设备1</button>
+      <button class="ControlEnum" data-type="DeviceControl">设备2</button>
+      <button class="ControlEnum" data-type="DeviceControl">设备3</button>
+      <button class="ControlEnum" data-type="DeviceControl">设备4</button>
+      <button class="ControlEnum" data-type="DeviceControl">设备5</button>
+    </div>
+    <div>
+      <span><strong>楼层</strong></span>
+    </br>
+      <button class="LayerEnum" data-layer="1">1层</button>
+      <button class="LayerEnum" data-layer="2">2层</button>
+      <button class="LayerEnum" data-layer="3">3层</button>
+      <button class="LayerEnum" data-layer="4">4层</button>
+      <button class="LayerEnum" data-layer="5">5层</button>
+      <button class="LayerEnum" data-layer="6">6层</button>
+      <button class="LayerEnum" data-layer="7">7层</button>
+      <button class="LayerEnum" data-layer="8">8层</button>
+      <button class="LayerEnum" data-layer="9">9层</button>
+      <button class="LayerEnum" data-layer="10">10层</button>
+    </br>
+      <button class="LayerEnum" data-layer="11">11层</button>
+      <button class="LayerEnum" data-layer="12">12层</button>
+      <button class="LayerEnum" data-layer="13">13层</button>
+      <button class="LayerEnum" data-layer="14">14层</button>
+      <button class="LayerEnum" data-layer="15">15层</button>
+      <button class="LayerEnum" data-layer="16">16层</button>
+      <button class="LayerEnum" data-layer="17">17层</button>
+      <button class="LayerEnum" data-layer="18">18层</button>
+      <button class="LayerEnum" data-layer="19">19层</button>
+      <button class="LayerEnum" data-layer="20">20层</button>
+    </br>
+      <button class="LayerEnum" data-layer="21">21层</button>
+      <button class="LayerEnum" data-layer="22">22层</button>
+      <button class="LayerEnum" data-layer="23">23层</button>
+      <button class="LayerEnum" data-layer="24">24层</button>
+      <button class="LayerEnum" data-layer="25">25层</button>
+      <button class="LayerEnum" data-layer="26">26层</button>
+      <button class="LayerEnum" data-layer="27">27层</button>
+      <button class="LayerEnum" data-layer="28">28层</button>
+      <button class="LayerEnum" data-layer="29">29层</button>
+      <button class="LayerEnum" data-layer="30">30层</button>
+    </br>
+      <button class="LayerEnum" data-layer="31">31层</button>
+      <button class="LayerEnum" data-layer="32">32层</button>
+      <button class="LayerEnum" data-layer="33">33层</button>
+      <button class="LayerEnum" data-layer="34">34层</button>
+      <button class="LayerEnum" data-layer="35">35层</button>
+      <button class="LayerEnum" data-layer="36">36层</button>
+      <button class="LayerEnum" data-layer="37">37层</button>
+      <button class="LayerEnum" data-layer="38">38层</button>
+      <button class="LayerEnum" data-layer="39">39层</button>
+      <button class="LayerEnum" data-layer="40">40层</button>
+    </br>
+      <button class="LayerEnum" data-layer="41">41层</button>
+      <button class="LayerEnum" data-layer="42">42层</button>
+      <button class="LayerEnum" data-layer="43">43层</button>
+      <button class="LayerEnum" data-layer="44">44层</button>
+      <button class="LayerEnum" data-layer="45">45层</button>
+      <button class="LayerEnum" data-layer="46">46层</button>
+      <button class="LayerEnum" data-layer="47">47层</button>
+      <button class="LayerEnum" data-layer="48">48层</button>
+      <button class="LayerEnum" data-layer="49">49层</button>
+      <button class="LayerEnum" data-layer="50">50层</button>
+    </br>
+      <button class="LayerEnum" data-layer="51">51层</button>
+      <button class="LayerEnum" data-layer="52">52层</button>
+      <button class="LayerEnum" data-layer="53">53层</button>
+      <button class="LayerEnum" data-layer="54">54层</button>
+      <button class="LayerEnum" data-layer="55">55层</button>
+      <button class="LayerEnum" data-layer="56">56层</button>
+      <button class="LayerEnum" data-layer="57">57层</button>
+      <button class="LayerEnum" data-layer="58">58层</button>
+      <button class="LayerEnum" data-layer="59">59层</button>
+      <button class="LayerEnum" data-layer="60">60层</button>
+    </br>
+      <button class="LayerEnum" data-layer="61">61层</button>
+      <button class="LayerEnum" data-layer="62">62层</button>
+      <button class="LayerEnum" data-layer="63">63层</button>
+      <button class="LayerEnum" data-layer="64">64层</button>
+    </div>
+  </div>
+  <div class="showArea">
+    <button id="CreatBtn">生成</button>
+    <div class="data-list">
+      <p>测试数据!</p>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+$(function () {
+  //点击后处理
+  $('.CardType').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).addClass("active").siblings().removeClass("active");
+  })
+  $('.CallTypeEnum').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).addClass("active").siblings().removeClass("active");
+  })
+  $('.ControlEnum').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).addClass("active").siblings().removeClass("active");
+  })
+
+  $('.LayerEnum').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).toggleClass("active");
+  })
+
+  //点击生成二维码按钮
+  $('#CreatBtn').on("click",function(){
+    
+  })
+
+})
+</script>

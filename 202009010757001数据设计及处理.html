@@ -1,0 +1,148 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-01 07:57:59
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-01 10:58:32
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E校翼家数据设计及处理</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+</body>
+</html>
+<script>
+  $(function () {
+    var jsonInfo= `{
+      "resultCode": 0, 
+      "resultMsg": "绑定成功", 
+      "total": 1, 
+      "rows": 
+      [ 
+        { 
+          "UserId": "E62FB3461208427799EB8F9B81DE9DF8", 
+          "Account": "15009884241", 
+          "PersonName": "雒唯", 
+          "PersonUUID": "E62FB346-1208-4277-99EB-8F9B81DE9DF8",
+          "WxOpenId": "oCLzSjtcLLLLQ0P4XC4gNz_GH4G8", 
+          "AccountNo": "csjs63",  
+          "PersonNo": "csjs6312",
+          "TypeId": 1, 
+          "IdentityCard": "", 
+          "ChildUUID": "", 
+          "ChildName": "", 
+          "Relation": "", 
+          "DeptUUID": "D0C52E83-FBFB-4558-81DD-872BEC186FCA", 
+          "DeptCode": "002401020050",
+          "DeptIndex": "001007001", 
+          "DeptName": "即时通讯2019级1班", 
+          "SchoolUUID": "5913c631-645a-4bc5-b486-bc59547022b1", 
+          "SchoolCode": "00240102",
+          "SchoolName": "门禁管理电子班牌", 
+          "SchoolMode": 0,
+          "SchoolUrl": "http://www.55kad.com:8080/0240102/",
+          "Domain": "www.55kad.com:8080/0240102/",
+          "LastLoginTime": "", 
+          "UserSign": "eJxNjl1PgzAYhf8LtxrXlo623tEODDoXCRgzbxoCZXvlwwqd2TT*d5FsibfPyXnO*fbydXZTlOX7oXfanazxbj3kXc8YKtM7qMEME4wCEkufBpggTgljQkSSx0JyvIrEKubnTmEtVLpw2h*qf6qxavQcTQxThDARLCDn0BwtDEYXtZuXAkQ5uhQddH*X8DJghAjss4sQdhN*jLYqSRXsa6CmNKOK2*PnwZK3EMovJoz-cGUBb6TqMvaybnOVJvvwflfJj8ZsEh*F6m6x7RanJ1ySuM1fG0o475ejytJnXjeZ9-MLJphUoQ__", 
+          "TrtcUserSign": "eJxNjl1PgzAYhf8Ltxotp  UDrHR8lEJm6DTLdDelKO*qkEugWyeJ-Fwkm3j7Pe855r1aRb*8Y559nbSozdsJ6sIB1O2NVC22UVKKfIPVgEjrIsyHACPo*ITTECQmxHVMSJ3jJsK5TdcVM5fT1v6qhPlWzmpiNAIDQhdhbpPjqVC8qJs28hL3pYFFGtb8f2a7nQ0hsx--rU8cJr*hblK1jwcUN2pt288pD2iTZ0MvdJfooSxjm-ct2dNymTOP9wWdB1gRPrZAHvZaX92I0sDihc95EKzIMdfp4lGP6rO87TgEKtLa*fwD4QVX1" 
+        }
+      ]
+    }`;
+    let systemSetInfo=new SystemInfo(JSON.parse(jsonInfo).rows[0]);
+    console.log(`${systemSetInfo.school.dataStorage()}`);  
+    // console.log(`${systemSetInfo.school.getSchoolUUID()}`);  
+  })
+//系统信息
+var SystemBasicInfo=function(){
+  //Version
+  this.systemVersion="";
+}
+  //登录数据
+  class LoginInfo{
+    constructor(param){
+      //LastLoginTime:最后登录时间
+      //UserSign:用户签名
+      //TrtcUserSign:用户签名
+      //Domain:学校域名         
+      this.LastLoginTime=param.LastLoginTime;
+      this.UserSign=param.UserSign;
+      this.TrtcUserSign=param.TrtcUserSign;
+      this.Domain=param.Domain;      
+    }
+  }
+
+  //学校基本信息
+  class SchoolInfo{
+    //属性
+    //SchoolUUID:学校UUID
+    //SchoolCode:学校编号
+    //SchoolName:学校名称
+    //SchoolMode:学校模式  //0-普通(非消费)，1-运营商模式(消费)
+    //SchoolUrl:学校链接域名
+    constructor(param){
+      this.SchoolUUID=param && param.SchoolUUID || ""  ;
+      this.SchoolCode=param && param.SchoolCode || ""  ;
+      this.SchoolName=param && param.SchoolName || ""  ;
+      this.SchoolMode=param && param.SchoolMode || ""  ;
+      this.SchoolUrl=param && param.SchoolUrl || ""  ;
+    }
+    dataStorage(){
+      localStorage.setItem("SchoolInfo",JSON.stringify(this));
+      return this;
+    }    
+  }
+
+//班级基本信息
+class ClassInfo{
+  //属性
+  //DeptUUID:班级UUID
+  //DeptCode:班级编号
+  //DeptIndex:班级Index
+  //DeptName:班级名称
+  constructor(param){
+    this.DeptUUID=param && param.DeptUUID || ""  ;
+    this.DeptCode=param && param.DeptCode || ""  ;
+    this.DeptIndex=param && param.DeptIndex || ""  ;
+    this.DeptName=param && param.DeptName || ""  ;
+  }
+}
+  //人员基本信息
+class UserInfo{
+  //属性
+  //UserId:腾讯云通信(IM)使用的唯一Id，账号
+  //Account:手机号
+  //PersonName:姓名
+  //PersonUUID:人员UUID，用于除云通信外的其他所有功能的唯一标识
+  //WxOpenId:微信OpenId
+  //AccountNo:教师工号/学生学号
+  //PersonNo:当前登录人员学号/工号
+  //TypeId:人员身份，0-学生，1-教师，8-家长
+  //IdentityCard:身份证号
+  constructor(param){
+    this.UserId=param && param.UserId || "";
+    this.Account=param && param.Account || "";
+    this.PersonName=param && param.PersonName || "";
+    this.PersonUUID=param && param.PersonUUID || "";
+    this.WxOpenId=param && param.WxOpenId || "";
+    this.AccountNo=param && param.AccountNo || "";
+    this.PersonNo=param && param.PersonNo || "";
+    this.TypeId=param && param.TypeId || "";
+    this.IdentityCard=param && param.IdentityCard || "";
+  }
+}
+//系统信息
+var SystemInfo=function(param){
+  var _system=new SystemBasicInfo();
+  _system.user=new UserInfo(param);//创建人员类
+  _system.school=new SchoolInfo(param);//创建学校类
+  _system.login=new LoginInfo(param);//创建登录类
+  _system.class=new ClassInfo(param);//创建班级类
+  return _system;
+}
+
+</script>

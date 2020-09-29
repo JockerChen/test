@@ -1,0 +1,66 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-23 11:06:29
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-25 14:55:44
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var htmlStr='';
+  
+//获取当前权限配置
+ var AccessAuthorityEnum={
+    "0":"学生",
+    "1":"老师",
+    "2":"访客",
+    "-1":"陌生人"
+ }
+
+ var AccessAuthorityFun=function() {
+
+ }
+
+
+
+
+ //获取当前状态配置
+ var AccessStatusEnum={
+    "0":{
+      "AccessMeaning":"入校",
+      "AccessStatusClass":"green",
+    },
+    "1":{
+      "AccessMeaning":"出校",
+      "AccessStatusClass":"yellow",
+    },
+    "2":{
+      "AccessMeaning":"禁止通行",
+      "AccessStatusClass":"red",
+    },
+    "-1":{
+      "AccessMeaning":"禁止通行",
+      "AccessStatusClass":"red",
+    }
+ }
+var passingRows=[{"personName":"李艺彤","personIdentityName":1,"passingState":0},{"personName":"李艺彤","personIdentityName":1,"passingState":2},{"personName":"李艺彤","personIdentityName":0,"passingState":0},{"personName":"李艺彤","personIdentityName":0,"passingState":2},{"personName":"李艺彤","personIdentityName":2,"passingState":0},{"personName":"李艺彤","personIdentityName":2,"passingState":2},{"personName":"李艺彤","personIdentityName":-1,"passingState":0}];
+
+for(var k=0;k<passingRows.length;k++){
+    //获取当前通道对应的通信个人原本数据
+    console.log(passingRows[k].personIdentityName);
+               htmlStr+='            <p><span><i class="'+AccessStatusEnum[passingRows[k].personIdentityName].AccessStatusClass+'"></i>'+passingRows[k].personName+'</span><strong class="teacher-bg">'+AccessAuthorityEnum[passingRows[k].personIdentityName]+'</strong></p>';
+    // htmlStr+='            <p><span><i class="red"></i>11111</span><strong class="teacher-bg">教师</strong></p>';
+}
+console.log(htmlStr);
+</script>

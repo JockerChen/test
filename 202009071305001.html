@@ -1,0 +1,53 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-07 13:05:27
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-07 15:03:12
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="https://unpkg.com/video.js/dist/video.min.js"></script>
+  <title>视频播放</title>
+</head>
+<style>
+
+</style>
+<body>
+<video id="videoID" controls="true"
+       style="object-fit:fill"
+       src=""
+       class="horizontal-img"
+       preload="metadata"
+       webkit-playsinline="true"
+       playsinline="true"
+       x-webkit-airplay="allow"
+       x5-video-player-type="h5"
+       x5-video-player-fullscreen="true"
+       x5-video-orientation="landscape"
+       autoplay>
+  抱歉，您的浏览器不支持内嵌视频!+
+</video>
+ 
+</body>
+</html>
+<script type="application/javascript">
+  videoDom.addEventListener('ended', function(event) {
+    if (index === length-1) {
+      videoDom.pause();
+    } else {
+      index += 1;
+      videoDom.src = videos[index].videoUrl;
+      videoDom.play();
+    }
+  })
+ </script>
+
+
+
+</script>

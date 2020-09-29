@@ -1,0 +1,372 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-08-11 18:38:38
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-16 10:22:19
+ * @Description: 追加了对应的梯控的设置，现在暂时支持5个楼层的设置
+ 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>202009090959001梯控开发V1.0</title>
+
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/jquery.qrcode.js"></script>
+  <script src="js/creatbar.js"></script>
+  <script src="js/tkentity.js"></script>
+  <script src="js/tkqrcode.js"></script>
+  <script src="js/tkenqrcode.js"></script>
+
+  <style>
+    body{
+      top:0px;
+    }
+    .CardTypeHead{
+      position:absolute;
+      left: 100px;
+      top: 20px;
+      border:2px solid red;
+    }
+    .CardType,.CallTypeEnum,.ControlEnum,.LayerEnum,.SaveBtn{
+      position: relative;
+      font-size: 16px;
+      line-height: 16px;
+      margin: 10px 10px 10px 10px;
+    }
+    .active{
+      background:#7FFF00;
+    }
+    button{
+      border-radius:5px;
+      width: 75px;
+      height: 32px;
+    }
+    .showArea{
+      position: absolute;
+      left: 1150px;
+      top: 20px;
+      right: 100px;
+      height: 545px;
+      border: solid 2px #ddd;
+      box-sizing: border-box;
+      padding: 20px;
+    }
+    .data-list{
+      position: absolute;
+      left: 20px;
+      top: 70px;
+      right: 20px;
+      bottom: 20px;
+      overflow-y: auto;
+    }
+    .data-list p{
+      line-height: 34px;
+      font-size: 14px;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .showArea button{
+      width: 120px;
+      height: 44px;
+      line-height: 42px;
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      background: #fafafa;
+      border: solid 1px #eee;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="CardTypeHead">
+    <div>
+      <span><strong>卡类型</strong></span>
+      <button class="CardType" data-type="UserCard">用户卡</button>
+      <button class="CardType" data-type="AdminCard">管理卡</button>
+      <button class="CardType" data-type="SwitchCard">开关卡</button>
+    </div>
+    <div>
+      <span><strong>呼叫方式</strong></span>
+      <button class="CallTypeEnum" data-type="HandControl">手动</button>
+      <button class="CallTypeEnum" data-type="AutoControl">自动</button>
+    </div>
+    <div>
+      <span><strong>设备</strong></span>
+      <button class="ControlEnum" data-type="61">设备1</button>
+      <button class="ControlEnum" data-type="73">设备2</button>
+      <button class="ControlEnum" data-type="42">设备3</button>
+      <button class="ControlEnum" data-type="18">设备4</button>
+      <button class="ControlEnum" data-type="25">设备5</button>
+      <button class="SaveBtn" id="SaveBtn">保存</button>
+      <button class="SaveBtn" id="CleanBtn">清除</button>
+    </div>
+    <div>
+      <span><strong>楼层</strong></span>
+    </br>
+      <button class="LayerEnum" data-layer="1">1层</button>
+      <button class="LayerEnum" data-layer="2">2层</button>
+      <button class="LayerEnum" data-layer="3">3层</button>
+      <button class="LayerEnum" data-layer="4">4层</button>
+      <button class="LayerEnum" data-layer="5">5层</button>
+      <button class="LayerEnum" data-layer="6">6层</button>
+      <button class="LayerEnum" data-layer="7">7层</button>
+      <button class="LayerEnum" data-layer="8">8层</button>
+      <button class="LayerEnum" data-layer="9">9层</button>
+      <button class="LayerEnum" data-layer="10">10层</button>
+    </br>
+      <button class="LayerEnum" data-layer="11">11层</button>
+      <button class="LayerEnum" data-layer="12">12层</button>
+      <button class="LayerEnum" data-layer="13">13层</button>
+      <button class="LayerEnum" data-layer="14">14层</button>
+      <button class="LayerEnum" data-layer="15">15层</button>
+      <button class="LayerEnum" data-layer="16">16层</button>
+      <button class="LayerEnum" data-layer="17">17层</button>
+      <button class="LayerEnum" data-layer="18">18层</button>
+      <button class="LayerEnum" data-layer="19">19层</button>
+      <button class="LayerEnum" data-layer="20">20层</button>
+    </br>
+      <button class="LayerEnum" data-layer="21">21层</button>
+      <button class="LayerEnum" data-layer="22">22层</button>
+      <button class="LayerEnum" data-layer="23">23层</button>
+      <button class="LayerEnum" data-layer="24">24层</button>
+      <button class="LayerEnum" data-layer="25">25层</button>
+      <button class="LayerEnum" data-layer="26">26层</button>
+      <button class="LayerEnum" data-layer="27">27层</button>
+      <button class="LayerEnum" data-layer="28">28层</button>
+      <button class="LayerEnum" data-layer="29">29层</button>
+      <button class="LayerEnum" data-layer="30">30层</button>
+    </br>
+      <button class="LayerEnum" data-layer="31">31层</button>
+      <button class="LayerEnum" data-layer="32">32层</button>
+      <button class="LayerEnum" data-layer="33">33层</button>
+      <button class="LayerEnum" data-layer="34">34层</button>
+      <button class="LayerEnum" data-layer="35">35层</button>
+      <button class="LayerEnum" data-layer="36">36层</button>
+      <button class="LayerEnum" data-layer="37">37层</button>
+      <button class="LayerEnum" data-layer="38">38层</button>
+      <button class="LayerEnum" data-layer="39">39层</button>
+      <button class="LayerEnum" data-layer="40">40层</button>
+    </br>
+      <button class="LayerEnum" data-layer="41">41层</button>
+      <button class="LayerEnum" data-layer="42">42层</button>
+      <button class="LayerEnum" data-layer="43">43层</button>
+      <button class="LayerEnum" data-layer="44">44层</button>
+      <button class="LayerEnum" data-layer="45">45层</button>
+      <button class="LayerEnum" data-layer="46">46层</button>
+      <button class="LayerEnum" data-layer="47">47层</button>
+      <button class="LayerEnum" data-layer="48">48层</button>
+      <button class="LayerEnum" data-layer="49">49层</button>
+      <button class="LayerEnum" data-layer="50">50层</button>
+    </br>
+      <button class="LayerEnum" data-layer="51">51层</button>
+      <button class="LayerEnum" data-layer="52">52层</button>
+      <button class="LayerEnum" data-layer="53">53层</button>
+      <button class="LayerEnum" data-layer="54">54层</button>
+      <button class="LayerEnum" data-layer="55">55层</button>
+      <button class="LayerEnum" data-layer="56">56层</button>
+      <button class="LayerEnum" data-layer="57">57层</button>
+      <button class="LayerEnum" data-layer="58">58层</button>
+      <button class="LayerEnum" data-layer="59">59层</button>
+      <button class="LayerEnum" data-layer="60">60层</button>
+    </br>
+      <button class="LayerEnum" data-layer="61">61层</button>
+      <button class="LayerEnum" data-layer="62">62层</button>
+      <button class="LayerEnum" data-layer="63">63层</button>
+      <button class="LayerEnum" data-layer="64">64层</button>
+    </div>
+  </div>
+  <div class="showArea">
+    <button id="CreatBtn">生成</button>
+    <button id="DecodeBtn">解码</button>
+    <div class="data-list">
+      生成二维码:<p id="QrcodeDetial"></p>
+      <div id='QRCodeImg'></div>
+
+      解析二维码:<p id="DeQrcodeDetial"></p>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+// var index=0;
+// var floorqrcodebyte = new Array(32);
+  var sStackArrayList=[];
+$(function () {
+
+    //点击后处理
+  $('.CardType').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).addClass("active").siblings().removeClass("active");
+  })
+  $('.CallTypeEnum').on("click",function () {
+    console.log($(this).data('type'));
+    $(this).addClass("active").siblings().removeClass("active");
+  })
+  $('.ControlEnum').on("click",function () {
+    $(this).addClass("active").siblings().removeClass("active");
+    console.log($(this).data('type'));
+    console.log($('.LayerEnum.active').length);
+  })
+  $('#CleanBtn').on("click",function () {
+    //点击清除按钮
+    localStorage.removeItem("StackArrayList");
+  })
+  
+//保存按钮
+$('#SaveBtn').on('click',function(){
+    console.log('点击保存按钮');
+    //获取设备号
+    var deviceNo=$('.ControlEnum.active').data("type");
+    var floorInfo=[];
+    floorInfo.push(deviceNo);
+    for(var i=0;i<$('.LayerEnum.active').length;i++){
+      floorInfo.push($('.LayerEnum.active').eq(i).data("layer"));
+    }
+    console.log(floorInfo.length)
+    //程序补零功能
+    for(var j=0;j<(5-$('.LayerEnum.active').length);j++){
+      floorInfo.push(0);
+    }
+    
+    console.log(floorInfo);
+    var data={};
+    data.DeviceNo=deviceNo;
+    data.Command=floorInfo;
+    sStackArrayList.push(data);
+    console.log(sStackArrayList);
+    //效验当前设备是不是存放了多个设备
+    localStorage.setItem("StackArrayList",JSON.stringify(sStackArrayList));
+    $('.LayerEnum').removeClass("active");
+})
+
+
+  $('.LayerEnum').on("click",function () {
+    console.log($(this).data('layer'));
+    $(this).toggleClass("active");
+  })
+
+  //点击生成二维码按钮
+  $('#CreatBtn').on("click",function(){
+    var index=0;
+    var floorqrcodebyte = new Array(32);  
+    var cardType="";
+    var callType="";
+    var cardid="";   
+    $.ajax({
+			type: "GET",
+			url: "data/floor.json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+        console.log("ajax:返回数据"+JSON.stringify(res));
+        sStackArrayList=res.rows[0];
+        cardType =res.rowsType[0].CardType;
+        callType =res.rowsType[0].CallType;
+        cardid = res.rowsType[0].PersonCardNO;
+        
+        console.log('生成二维码');
+        // var cardType =$('.CardType.active').data('type');
+        //卡类型（变量）
+        var cardTypeData=CardTypeEnum[cardType];//占用1字节
+        console.log(cardTypeData);
+        floorqrcodebyte[index++] = cardTypeData;
+        console.log("a_cardType:"+floorqrcodebyte);
+        // var callType =$('.CallTypeEnum.active').data('type');  
+        //呼叫方式（变量）
+
+        var callTypeData=CallTypeEnum[callType];//占用1字节
+        floorqrcodebyte[index++] = callTypeData
+        console.log("a_callType:"+floorqrcodebyte);
+        // sStackArrayList=JSON.parse(localStorage.getItem("StackArrayList")); 
+        // console.log("sStackArrayList类型:"+JSON.stringify(sStackArrayList));   
+        // console.log("sStackArrayList类型:"+typeof sStackArrayList);
+        // console.log("sStackArrayList类型:"+sStackArrayList.length);
+        //进行确认当前的对象权限(对应数据部分)开始（对应电梯部分）
+        for(var i=0;i<sStackArrayList.length;i++){
+          console.log(typeof sStackArrayList[i].Command);
+          console.log(sStackArrayList[i].Command)
+          var dataCommand= sStackArrayList[i].Command;//数组
+          console.log(typeof dataCommand);     
+          console.log(dataCommand);
+          for(var j=0;j<dataCommand.length;j++){
+            floorqrcodebyte[index++]=DecToHex(dataCommand[j]);
+          }
+        }
+        /**设备端不足补零逻辑**/
+        //当设备支持小于5个的时候执行
+        if(sStackArrayList.length<5){
+          //如果未设置其他的设备的时候都默认是0
+          for(var l=0;l<(5-sStackArrayList.length)*6;l++){
+            floorqrcodebyte[index++]=DecToHex(0);
+          }
+        }
+        /**设备端不足补零逻辑**/
+        console.log("当前电梯二维码数组:"+floorqrcodebyte);
+        //进行确认当前的对象权限(对应数据部分)结束（对应电梯部分）
+      //生成二维码部分
+
+
+        // cardid = "2365236921";
+      //    var cardid = "3512265146";
+        var currentTime = Date.parse(new Date());//当前日期
+        var slider3 = 0; //0小时
+        var slider4 = 0; //10分钟
+      //    var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+        var time = currentTime;
+        var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+        
+        var sCard = getQrcodeBytes(cardid, time, count,floorqrcodebyte);
+        console.log(sCard);
+        $('#QrcodeDetial').text(sCard);
+        var newQrcode = new qrcode();
+        newQrcode.CreatQrCode('QRCodeImg', sCard);
+			}
+		});
+
+  })
+  //点击按钮
+  $('#DecodeBtn').on("click",function(){
+    $('#DeQrcodeDetial').text(qrDeCodeProject($('#QrcodeDetial').text()));
+  })
+})
+
+
+  //设备机号(第一个)
+  //对应的5层电梯的信息
+  var deviceLength=5;
+  //楼层信息
+  var floorInfo={};
+  // FloorOption
+  function DecToHex(str) {
+    return ('0x'+parseInt(str).toString(16)).toUpperCase();
+  }
+
+ 
+ 
+//将内容转换后为Utf-8
+function toUtf8(str) {    
+    var out, i, len, c;    
+    out = "";    
+    len = str.length;    
+    for(i = 0; i < len; i++) {    
+        c = str.charCodeAt(i);    
+        if ((c >= 0x0001) && (c <= 0x007F)) {    
+            out += str.charAt(i);    
+        } else if (c > 0x07FF) {    
+            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));    
+            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));    
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
+        } else {    
+            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));    
+            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
+        }    
+    }    
+    return out;    
+} 
+</script>

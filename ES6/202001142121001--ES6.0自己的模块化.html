@@ -1,0 +1,96 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-26 16:45:56
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-26 17:10:01
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6.0自己的模块化</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+// aaa.js
+export let myName="laowang";
+
+import {myName} from "./test.js";
+console.log(myName);//laowang
+
+// let myName="laowang";
+// let myAge=90;
+// let myfn=function(){
+//     return "我是"+myName+"！今年"+myAge+"岁了"
+// }
+// export {
+//     myName,
+//     myAge,
+//     myfn
+// }
+
+
+/******************************接收的代码调整为**********************/
+// import {myfn,myAge,myName} from "./test.js";
+// console.log(myfn());//我是laowang！今年90岁了
+// console.log(myAge);//90
+// console.log(myName);//laowang
+
+/******************************导出的代码调整为**********************/
+// 如果你不想暴露模块当中的变量名字，可以通过as来进行操作:
+let myName="laowang";
+let myAge=90;
+let myfn=function(){
+    return "我是"+myName+"！今年"+myAge+"岁了"
+}
+export {
+    myName as name,
+    myAge as age,
+    myfn as fn
+}
+/******************************接收的代码调整为**********************/
+import {fn,age,name} from "./test.js";
+console.log(fn());//我是laowang！今年90岁了
+console.log(age);//90
+console.log(name);//laowang
+/******************************接收的代码调整为**********************/
+
+
+/******************************导出的代码调整为**********************/
+// 也可以直接导入整个模块，将上面的接收代码修改为：
+import * as info from "./test.js";//通过*来批量接收，as 来指定接收的名字
+console.log(info.fn());//我是laowang！今年90岁了
+console.log(info.age);//90
+console.log(info.name);//laowang
+/******************************导出的代码调整为**********************/
+// 默认导出（default export）一个模块只能有一个默认导出，对于默认导出，导入的名称可以和导出的名称不一致。
+/******************************导出**********************/
+// export default function(){
+//     return "默认导出一个方法"
+// }
+/******************************引入**********************/
+import myFn from "./test.js";//注意这里默认导出不需要用{}。
+console.log(myFn());//默认导出一个方法
+// 可以将所有需要导出的变量放入一个对象中，然后通过default export进行导出
+/******************************导出**********************/
+export default {
+    myFn(){
+        return "默认导出一个方法"
+    },
+    myName:"laowang"
+}
+/******************************引入**********************/
+import myObj from "./test.js";
+console.log(myObj.myFn(),myObj.myName);//默认导出一个方法 laowang
+/******************************引入**********************/
+
+
+
+</script>
+
