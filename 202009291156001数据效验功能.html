@@ -1,0 +1,259 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-09-29 11:56:27
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-09-29 17:12:45
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据效验功能</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  //FieldName:'字段',
+  //FieldMeaning':'含义',
+  //FieldMustFillIn':'是否必填',
+  //'FieldInspect':'检查方法',
+//访客基础字段
+var fkDataClass=function(obj){
+  this.ReceivePersonTel=obj && obj.ReceivePersonTel || "";
+  this.ReceiveAccountNo=obj && obj.ReceiveAccountNo || "";
+  this.ReceivePersonName=obj && obj.ReceivePersonName || "";
+  this.ComePersonName=obj && obj.ComePersonName || "";
+  this.ComePersonSex=obj && obj.ComePersonSex || "";
+  this.ComePersonIDCard=obj && obj.ComePersonIDCard || "";
+  this.ComePersonIDCardAddr=obj && obj.ComePersonIDCardAddr || "暂无";
+  this.ComePersonIDCardValidDate=obj && obj.ComePersonIDCardValidDate || "";
+  this.Version=obj && obj.Version || "4.0";
+  this.ResMode=obj && obj.ResMode || "1";
+  this.ResDate=obj && obj.ResDate || "";
+  this.ResTime=obj && obj.ResTime || "";
+  this.ComeTime=obj && obj.ComeTime || "";
+  this.ComePersonTel=obj && obj.ComePersonTel || "";
+  this.InOutTimes=obj && obj.InOutTimes|| "1";
+  this.PersonRetinue=obj && obj.PersonRetinue|| "1";
+  this.OutDateTime=obj && obj.OutDateTime|| "";
+  this.ValidDateTime=obj && obj.ValidDateTime || "";
+  this.ComePersonCompany=obj && obj.ComePersonCompany || "";
+  this.InCategories=obj && obj.InCategories || "";
+  this.TrafficGroup=obj && obj.TrafficGroup || "";
+  this.TrafficGroupName=obj && obj.TrafficGroupName || "";
+  this.VehicleNo=obj && obj.VehicleNo || "";
+  this.VehicleType=obj && obj.VehicleType || "";
+  this.VehiclePassageGroupId=obj && obj.VehiclePassageGroupId || "";
+  this.CarryGoods=obj && obj.CarryGoods || "";
+  this.Remark=obj && obj.Remark || "陌生人访客登记";
+  this.SpecialVersion=obj && obj.SpecialVersion || "K12";
+  this.ReceivePersonDeptName=obj && obj.ReceivePersonDeptName || "";
+  this.FaceImg=obj && obj.FaceImg || "";
+}
+//设置相应的属性
+// fkDataClass.prototype.setEntityValue=function(fieldName,fieldValue){
+//if(this.hasOwnProperty(fieldName)){
+//  this[fieldName]=fieldValue;
+//}
+// }
+
+
+
+var fkDataConfig=[{
+  'FieldName':'ReceivePersonTel',
+  'FieldMeaning':'被访问人电话',
+  'FieldMustFillIn':true,
+  'FieldInspect':false
+},
+{
+  'FieldName':'ReceiveAccountNo',
+  'FieldMeaning':'被访问人账号',
+  'FieldMustFillIn':true,
+  'FieldInspect':false
+},
+{
+  'FieldName':'ReceivePersonName',
+  'FieldMeaning':'被访问人姓名',
+  'FieldMustFillIn':true,
+  'FieldInspect':false
+},
+{
+  'FieldName':'ComePersonName',
+  'FieldMeaning':'访客姓名',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ComePersonSex',
+  'FieldMeaning':'访客性别',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},
+{
+  'FieldName':'ComePersonIDCard',
+  'FieldMeaning':'证件号码',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ComePersonIDCardAddr',
+  'FieldMeaning':'身份证地址',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},
+{
+  'FieldName':'ComePersonIDCardValidDate',
+  'FieldMeaning':'身份证有效期',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'Version',
+  'FieldMeaning':'访客版本',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ResMode',
+  'FieldMeaning':'访客递交方式',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ResDate',
+  'FieldMeaning':'访客递交日期',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+
+},
+{
+  'FieldName':'ResTime',
+  'FieldMeaning':'访客递交时间',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+
+},
+{
+  'FieldName':'ComeTime',
+  'FieldMeaning':'访客递交整体时间信息',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ComePersonTel',
+  'FieldMeaning':'访客电话',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+
+},
+{
+  'FieldName':'InOutTimes',
+  'FieldMeaning':'进出次数',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'PersonRetinue',
+  'FieldMeaning':'来访人数',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'OutDateTime',
+  'FieldMeaning':'离开时间',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},
+{
+  'FieldName':'ValidDateTime',
+  'FieldMeaning':'离开时间',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},{
+  'FieldName':'ComePersonCompany',
+  'FieldMeaning':'访客单位',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'InCategories',
+  'FieldMeaning':'到访事由',
+  'FieldMustFillIn':true,
+  'FieldInspect':true
+},{
+  'FieldName':'TrafficGroup',
+  'FieldMeaning':'通行组ID',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+
+},{
+  'FieldName':'TrafficGroupName',
+  'FieldMeaning':'通行组名称',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'VehicleNo',
+  'FieldMeaning':'车牌号',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'VehicleType',
+  'FieldMeaning':'车型',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'VehiclePassageGroupId',
+  'FieldMeaning':'车辆通行组ID',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'CarryGoods',
+  'FieldMeaning':'携带物品',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'Remark',
+  'FieldMeaning':'陌生人访客登记',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'SpecialVersion',
+  'FieldMeaning':'一体机类型',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'ReceivePersonDeptName',
+  'FieldMeaning':'所属部门',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+},{
+  'FieldName':'FaceImg',
+  'FieldMeaning':'人脸抓拍照片',
+  'FieldMustFillIn':false,
+  'FieldInspect':false
+}];
+// console.log(typeof fkDataEntity);
+// fkDataEntity.prototype.display=function(){
+////进行类检查
+// }
+let oFKDataClass =new fkDataClass();
+oFKDataClass.ReceivePersonTel="15802450560";
+console.log(oFKDataClass);
+// fkDataConfig
+
+for (var prop in oFKDataClass){
+    if(oFKDataClass.hasOwnProperty(prop)){
+        //过滤对象中的原型函数，使得只有属性能够进行本地存储
+        console.log("jsonObj[" + prop + "]=" + oFKDataClass[prop]);
+        
+    }
+}
+
+let greeting
+greetign = {} // Typo!
+console.log(greetign)
+
+</script>
