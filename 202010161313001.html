@@ -1,0 +1,42 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-16 13:13:16
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-16 13:33:20
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/calendar.css">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/calendar.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <input id="selectStartDate" class="star-date" readonly type="text" value="2020-10-01" />
+  <!-- 日历弹窗 -->
+  <div id="calendar" class="calendar-pop"> </div>
+</body>
+</html>
+<script>
+$(function() {
+  $("#selectStartDate").on("click",function(){
+      startDate = $("#selectStartDate").val();
+      $('#calendar').calendar({
+        ifSwitch: true, // 是否切换月份
+        hoverDate: true, // hover是否显示当天信息
+        backToday: true,// 是否返回当天
+        startOrEnd: "#selectStartDate",
+        fnCallback:function(){
+            alert("123");
+        }
+      });
+        $("#calendar").show();
+    })
+})
+
+
+</script>

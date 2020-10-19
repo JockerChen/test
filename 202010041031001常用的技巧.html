@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-04 10:32:06
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-04 10:51:13
+ * @LastEditTime: 2020-10-14 16:54:40
  * @Description: 
 -->
 
@@ -22,7 +22,9 @@
   // --- before ---
   // for (let a = "", i = 7; i--;) a += 0;
   // --- after ---
-  // let b = Array(7).join(0); // "0000000"let c = Array(7).join( La ) // "LaLaLaLaLaLa"
+  var  b = Array(7).join('../'); 
+  console.log(b);
+  // "0000000"let c = Array(7).join( La ) // "LaLaLaLaLaLa"
   // ES6
   // let d = "0".repeat(7); // "0000000"
   // 2、使用.link() 创建链接

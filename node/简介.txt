@@ -1,0 +1,44 @@
+fs:文件模块
+http:服务模块
+path:路径操作模块
+os:操作系统获取信息模块
+https://www.nodejs.red/#/nodejs/base/what-is-nodejs
+在这之前不知道您有没有听说过，Node.js 很擅长 I/O 密集型任务，应对一些 I/O 密集型的高并发场景还是很有优势的，事实也如此，这也是它的定位：提供一种简单安全的方法在 JavaScript 中构建高性能和可扩展的网络应用程序。
+Node.js 的优势主要在于事件循环，非阻塞异步 I/O，只开一个线程，不会每个请求过来我都去创建一个线程，从而产生资源开销。
+https://github.com/cnodejs/nodeclub
+https://cnodejs.org/
+
+├── benchmark                         一些 Node.js 性能测试代码
+├── deps                              Node.js 依赖
+├── doc                               文档
+├── lib                               Node.js 对外暴露的 js 模块源码
+├── src                               Node.js 的 c/c++ 源码文件，内建模块
+├── test                              单元测试
+├── tools                             编译时用到的工具
+├── doc                               api 文档
+├── vcbuild.bat                       win 平台 makefile 文件
+├── node.gyp                          node-gyp 构建编译任务的配置文件                           
+...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

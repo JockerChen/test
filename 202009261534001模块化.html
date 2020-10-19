@@ -2,7 +2,44 @@
  * @Author: [JokerChen]
  * @Date: 2020-09-26 15:34:49
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-09-26 15:49:17
+ * @LastEditTime: 2020-10-15 19:42:56
  * @Description: 
 -->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+ var  menuArray=[];
+  $(function(){ 
+    $.ajax({
+			type: "GET",
+			url: "data/changjson.json",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType: "json",
+			success: function (res) {
+				console.timeEnd("加载界面");
+				if (res.rows) {
+					menuArray = res.rows;
+          console.log(menuArray);
+
+					var filteredArray = menuArray.filter(function (n) {
+						return !n.OutDateTime.match(/23:59:59/);
+					});
+					
+					console.log("过滤后的菜单数组："+JSON.stringify(filteredArray.length));
+					
+				}
+			}
+		});
+  })
+</script>

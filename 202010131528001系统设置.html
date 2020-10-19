@@ -1,0 +1,47 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-13 15:28:41
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-14 11:54:17
+ * @Description: 
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>系统设置默认项目</title>
+</head>
+<body>
+  <ul id="selReadCardPort">
+    <li>1</li>
+    <li>2</li>
+  </ul>
+  <ul id="selReadCardBaudRate">
+    <li>3</li>
+    <li>4</li>
+  </ul>
+  <ul id="selConsumePersonType">
+    <li>5</li>
+    <li>6</li>
+  </ul>
+</body>
+</html>
+<script>
+  var arrTextInfo =["selReadCardPort","selReadCardBaudRate","selConsumePersonType"];
+$(function(){
+  for(var i=0;i<arrTextInfo.length;i++){
+    (function name(params) {
+      $("#"+arrTextInfo[i]).on("click","li",function(event){
+          event.stopPropagation();
+          alert($(this).text());
+      })
+    }(i))
+  }
+})
+
+
+</script>

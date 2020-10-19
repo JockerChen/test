@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-13 17:58:24
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-08-13 19:22:50
+ * @LastEditTime: 2020-10-17 11:43:42
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -32,59 +32,82 @@ var fkConfigInfoJson=[{
   'FKEffect':'',       //是否生效
 }]
 
-
 //访客人员类
 var FKClass=function(param){}
-
 //为原型对象属性进行赋值
 FKClass.prototype.init=function(param){
-  //访客证件类型
-  this.FKCardType=param && param.FKCardType || "";
-  //访客证件号码
-  this.FKCardId=param && param.FKCardId || "";
   //访客姓名
-  this.FKName=param && param.FKName || "";
+  this.ComePersonName=param && param.ComePersonName || "";
+  //访客公司
+  this.ComePersonCompany=param && param.ComePersonCompany || "";
   //访客性别
-  this.FKSex=param && param.FKSex || "";
+  this.ComePersonSex=param && param.ComePersonSex || "";
+  //访客证件号码
+  this.ComePersonIDCard=param && param.ComePersonIDCard || "";
+  //证件号码
+  this.ComePersonIDCardImg=param && param.ComePersonIDCardImg || "";
   //访客证件地址
-  this.FKCardAddress=param && param.FKCardAddress || "";
+  this.ComePersonIDCardAddr=param && param.ComePersonIDCardAddr || "";
+  //访客证件有效期
+  this.ComePersonIDCardValidDate=param && param.ComePersonIDCardValidDate || "";
   //访客电话
-  this.FKPhone=param && param.FKPhone || "";
+  this.ComePersonTel=param && param.ComePersonTel || "";
+  //来访人照片
+  this.FaceImg=param && param.FaceImg || "";
+  //访客日期
+  this.ResDate=param && param.ResDate || "";
+  //访客时间
+  this.ResTime=param && param.ResTime || "";
+  //访客到访详细时间
+  this.ComeTime=param && param.ComeTime || "";
   //访客进出次数
-  this.FKInOutCnt=param && param.FKInOutCnt || "";
+  this.InOutTimes=param && param.InOutTimes || "1";
   //来访人数
-  this.FKPersonCnt=param && param.FKPersonCnt || "";
-  //来访有效期
-  this.FKValidity=param && param.FKValidity || "";
-  //访客单位
-  this.FKCompany=param && param.FKCompany || "";
+  this.PersonRetinue=param && param.PersonRetinue || "1";
   //来访事由
-  this.FKReason=param && param.FKReason || "";
-  //携带物品
-  this.FKBelongings=param && param.FKBelongings || "";
+  this.InCategories=param && param.InCategories || "";
+  //离开时间
+  this.OutDateTime=param && param.OutDateTime || "";
+  //有效时间
+  this.ValidDateTime=param && param.ValidDateTime || "";
   //备注
-  this.FKRemarks=param && param.FKRemarks || "";
-  //人脸识别程度（高、低相似度）
-  this.FKSimilarity=param && param.FKSimilarity || "";
-  //电梯
-  this.FKElevator=param && param.FKElevator || "";
-  //楼层
-  this.FKFloor=param && param.FKFloor || "";
+  this.Remark=param && param.Remark || "";
+  //一体机类型
+  this.SpecialVersion=param && param.SpecialVersion || "单机访客";
+  //被访人电话
+  this.ReceivePersonTel=param && param.ReceivePersonTel || "";
+  //被访人姓名
+  this.ReceivePersonName=param && param.ReceivePersonName || "";
+  //被访人账号
+  this.ReceiveAccountNo=param && param.ReceiveAccountNo || "";
 }
-//收藏次数
-FKClass.prototype.collection=function(){}
-//被访人员
-var FKAccessedClass=function(param){
-  //被访人工号
-  this.FKAccessedAccountNo=param && param.FKAccessedAccountNo || "";
-  //姓名
-  this.FKAccesseName=param && param.FKAccesseName || "";
-  //部门
-  this.FKAccesseDeptname=param && param.FKAccesseDeptname || "";
-  //被访电话
-  this.FKAccessePhone=param && param.FKAccessePhone || "";
+
+//打印功能（具体的访客信息打印）
+FKClass.prototype.printFKInfo=function () {
+  androidClient.printVisitor(this.ComePersonName,
+    this.ComePersonCompany,
+    this.ComePersonTel,
+    this.InCategories,
+    this.ComePersonIDCard,
+    this.ReceivePersonName,
+    this.ReceivePersonTel,
+    this.ReceivePersonDeptName,
+    androidClient.getExternalStoragePath() + "/DZBP_Download/PersonIdCard/" + this.ComePersonIDCard + ".jpg",
+    this.CarryGoods,
+    0, 0);
+}
+//身份证上数更新数据
+FKClass.prototype.printFKInfo=function () {
+  //访客姓名
+  this.ComePersonName=param && param.ComePersonName || "";
+  //访客性别
+  this.ComePersonSex=param && param.ComePersonSex || "";
+  //访客证件号码
+  this.ComePersonIDCard=param && param.ComePersonIDCard || "";
   //访客证件地址
-  this.FKCardAddress=param && param.FKCardAddress || "";
+  this.ComePersonIDCardAddr=param && param.ComePersonIDCardAddr || "";
+  //访客证件有效期
+  this.ComePersonIDCardValidDate=param && param.ComePersonIDCardValidDate || "";
 }
 
 </script>
