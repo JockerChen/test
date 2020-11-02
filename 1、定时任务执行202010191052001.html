@@ -1,0 +1,96 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-19 10:52:31
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-19 14:30:20
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/main.js"></script>
+  <title>定时任务执行</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  $(function() {
+    timerTask();
+  })
+//设置全局参数
+window['timer']=0;
+window['cnt']=0;
+//定时刷新接口
+//event事件，根据对应的时间触发相应的回调函数
+//统一的计时器
+//递归函数
+//eventName:事件名称
+//eventTimer:时间生效时长
+var arrayEvent=[
+  {'eventChineseName':'定时下载','eventName':'downloadBasic','eventCnt':'1','eventTimer':"1423"},
+  {'eventChineseName':'定时上传','eventName':'uploadBasic','eventCnt':'1','eventTimer':"1424"},
+  {'eventChineseName':'设备质检','eventName':'checkBasic','eventCnt':'1','eventTimer':"1425"},
+];
+
+//定时任务执行
+function timerTask(params) {
+  clearTimeout(timer);
+  timer= setTimeout(function() {
+    var nowTime=new Date().Format("HHmm");
+    var eventFiler=arrayEvent.filter(function(item){
+      console.log(`第${cnt}次调用`);
+      return item.eventTimer==nowTime && item.eventCnt!=0;
+    })
+    // eventFiler.eventName
+    console.log(eventFiler);
+    for (var value of eventFiler) {
+      if(window[value.eventName] == undefined)continue;
+
+      window[value.eventName](); 
+    }
+    eventFiler=null;
+    //计数器10万次归零
+    // if(cnt>100000){
+    //   cnt=0;
+    //   return false;
+    // }
+    cnt++;
+    timerTask();
+  },1000);
+}
+
+//自己进行自己的逻辑
+//下载
+function downloadBasic() { 
+  console.log("下载");
+  var func= arguments.callee.name;
+  basicFunc(func);
+}
+//上传
+function uploadBasic() { 
+  console.log("上传");
+  var func= arguments.callee.name;
+  basicFunc(func);
+}
+//质检
+function checkBasic() { 
+  console.log("质检");
+  var func= arguments.callee.name;
+  basicFunc(func);
+}
+
+//公有设置相应函数功能
+function basicFunc(func) {
+  // var eventFiler = arrayEvent.map(item => item.eventName).indexOf(calleeName);
+  var eventFiler=arrayEvent.map(function(item){
+    return item.eventName;
+  }).indexOf(func);
+  arrayEvent[eventFiler].eventCnt=0;
+}
+</script>

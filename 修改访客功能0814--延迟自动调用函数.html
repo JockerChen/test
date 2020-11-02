@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-14 10:22:36
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-08-14 17:12:24
+ * @LastEditTime: 2020-10-27 19:15:29
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -10,26 +10,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
   <title>延迟逻辑调用</title>
 </head>
 <body>
-  
+    <button id="start">开启</button>
+    <button id="init">初始化</button>
 </body>
 </html>
 <script>
   //所有回调函数数组
   var arrayFunCallback=["onReceiveComparisonData","onCheckIDCardInfo"];
   var arrayFun=['checkFun','submitFun','onReceiveComparisonData','ShowVisitorInfo','onCheckIDCardInfo','InsertVisitorInfo'];
-  window.onload=function(){
-    //初始化
-    changeFunction(arrayFun);
-  }
+  var runArrayInfo=arrayFun.concat();
+  $(function () {
+    $('#start').on("click",function () {
+      changeFunction(runArrayInfo);
+    })
+    $('#init').on("click",function () {
+      runArrayInfo= arrayFun.concat();
+      console.log(runArrayInfo);
+      changeFunction(runArrayInfo);
+    })
+  })
+
+  // window.onload=function(){
+  //   //初始化
+  //   changeFunction(arrayFun);
+  // }
 
 //功能切换
-function changeFunction(runArrayInfo,json){
+function changeFunction(json){
   console.log(runArrayInfo);
   if(runArrayInfo.length==0){
     console.log(`数组已经全部执行完`);
+    runArrayInfo=arrayFun;
+    console.log(arrayFun);    
     return false;
   }else{
     var method= runArrayInfo.shift();

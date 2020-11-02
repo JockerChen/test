@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-16 14:09:22
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-16 14:10:49
+ * @LastEditTime: 2020-10-19 13:54:27
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -10,16 +10,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>进行过滤</title>
+  <title>功能进行过滤</title>
 </head>
 <body>
   
 </body>
 </html>
 <script>
-console.log("/login");
-var url='/login';
-var reg
-console.log();
+  var arrayEvent=[
+    {'eventIndex':'0001','eventChineseName':'定时下载','eventName':'downloadBasic','eventCnt':'1','eventTimer':"1110"},
+    {'eventIndex':'0002','eventChineseName':'定时上传','eventName':'uploadBasic','eventCnt':'1','eventTimer':"1115"},
+    {'eventIndex':'0003','eventChineseName':'设备质检','eventName':'checkBasic','eventCnt':'1','eventTimer':"1118"},
+  ];
+  uploadBasic();
 
+function uploadBasic() {
+  var calleeName= arguments.callee.name;
+  // var eventFiler = arrayEvent.map(item => item.eventName).indexOf(calleeName);
+  var eventFiler=arrayEvent.map(function(item){
+    return item.eventName;
+  }).indexOf(calleeName);
+  
+  console.log(eventFiler);
+  arrayEvent[eventFiler].eventCnt=0;
+  console.log(arrayEvent);
+}
+
+//公有设置相应函数功能
+function basicFunc(func) {
+  // var eventFiler = arrayEvent.map(item => item.eventName).indexOf(calleeName);
+  var eventFiler=arrayEvent.map(function(item){
+    return item.eventName;
+  }).indexOf(calleeName);
+  arrayEvent[eventFiler].eventCnt=0;
+}
 </script>

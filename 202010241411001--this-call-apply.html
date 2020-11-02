@@ -1,0 +1,84 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-24 14:11:46
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-24 14:55:29
+ * @Description: 
+ 以上出了 bind 方法后面多了个 () 外 ，结果返回都一致！
+由此得出结论，bind 返回的是一个新的函数，你必须调用它才会被执行。
+微妙的差距！
+从上面四个结果不难看出:
+call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，第二个参数差别就来了：
+call 的参数是直接放进去的，第二第三第 n 个参数全都用逗号分隔，直接放到后面 obj.myFun.call(db,'成都', ... ,'string' )。
+apply 的所有参数都必须放在一个数组里面传进去 obj.myFun.apply(db,['成都', ..., 'string' ])。
+bind 除了返回是函数以外，它 的参数和 call 一样。
+当然，三者的参数不限定是 string 类型，允许是各种类型，包括函数 、 object 等等！
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this 指针及指向</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  $(function () { 
+    showAge();
+
+
+  obj1.myFun.call(db);
+  obj1.myFun.apply(db);
+  obj1.myFun.bind(db)();
+
+  })
+
+var age=12;
+function showAge() {
+  //当前的this指针指向window
+  // console.log(this);
+  // console.log(`当前的年龄为:${this.age};`);
+}
+
+
+//当前this指向的是obj本身
+var ageObj=11;
+var obj={
+  name:"12",
+  age:"",
+  objShow() {
+    // console.log(this);
+    // console.log(this.ageObj);
+  }
+}
+obj.objShow()  // 小张年龄 undefined
+// 1，call()、apply()、bind() 都是用来重定义 this 这个对象的！
+var name='小王',age=11;
+var obj1={
+  name:'校长',
+  objAge:this.age,
+  myFun:function(fm,t){
+    console.log(`${this.name}年龄${this.age}`);
+  }
+
+}
+var db={
+  name:'德玛西亚',
+  age:100
+}
+
+obj1.myFun.call(db,'成都','上海')　　　　 // 德玛 年龄 99  来自 成都去往上海
+obj1.myFun.apply(db,['成都','上海']);      // 德玛 年龄 99  来自 成都去往上海  
+obj1.myFun.bind(db,'成都','上海')();       // 德玛 年龄 99  来自 成都去往上海
+obj1.myFun.bind(db,['成都','上海'])();　　 // 德玛 年龄 99  来自 成都, 上海去往 undefined
+
+
+// obj1.myFun.call(db);
+// obj1.myFun.apply(db);
+// obj1.myFun.bind(db)();
+</script>

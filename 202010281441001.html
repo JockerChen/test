@@ -1,0 +1,35 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-28 14:41:16
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-28 14:59:42
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>事件绑定</title>
+</head>
+<body>
+  <button id="BindInfo">绑定</button>
+  <button id="BindInfoUnset">取消绑定</button>
+</body>
+</html>
+<script>
+var info=1;
+$(function () {
+  $('#BindInfo').on("click",function () {
+    $('#BindInfo').attr('disabled',"true");
+    console.log("执行绑定:"+info++);
+  })
+  $('#BindInfoUnset').on("click",function () {
+    $('#BindInfo').removeAttr('disabled');
+  })
+})
+
+
+</script>

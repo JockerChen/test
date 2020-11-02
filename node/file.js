@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-16 07:41:17
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-16 07:56:43
+ * @LastEditTime: 2020-10-31 10:03:44
  * @Description: 
  */
 var fs=require('fs');
@@ -12,7 +12,7 @@ fs.readFile("../data/changjson.json",function (err,data) {
       console.log("写入文件失败");
       return false;
     }
-    console.log(data.toString());
+    console.log(`读取文件数据成功${data.toString()}`);
 })
 //成功
 
@@ -22,5 +22,4 @@ fs.writeFile("../data/2020101.txt","122333",function (err) {
     console.log("写入文件失败");
     return false;
   }
-  
 })

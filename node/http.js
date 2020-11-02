@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-16 07:56:53
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-19 10:16:32
+ * @LastEditTime: 2020-10-30 08:10:01
  * @Description: http://127.0.0.1:9001/login
  */
 const http= require("http");
@@ -27,10 +27,13 @@ var server=http.createServer();
 
 server.on("request",function (req,res) {
   console.log(`收到请求事件函数:url`+req.url);
+  console.log(`客户端请求服务器的IP地址${req.socket.remoteAddress}`);
+  console.log(`客户端请求服务器的端口号${req.socket.remotePort}`);
+
   console.log(`{resultCode:01,resultMsg:'OK'}`);
   res.write(`{resultCode:01,resultMsg:'OK'}`);
   var url=req.url;
-  var func=changeWeek(url);
+  var func=funcWeek(url);
   res.write(`${JSON.stringify(func)}`);
   res.end();
 })

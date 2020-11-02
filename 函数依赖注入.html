@@ -1,0 +1,83 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-24 11:58:09
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-24 13:53:13
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>函数依赖注入</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  //签到的所有功能的函数
+  var signClsArr = [];
+  $(function () {
+    init();
+    //执行函数（按钮执行）
+    changeFunction(signClsArr);
+  })
+  //数组的功能注入（动态功能注入）
+
+  function init() {
+    //包含的功能（初始化所有的函数状态）
+    var funcObj = {
+      UploadRecvCamera: true,
+      SendSyncData: false,
+      UploadFaceFile: true
+    }
+    for (var prop in funcObj) {
+      if (funcObj.hasOwnProperty(prop)) {
+        //过滤对象中的原型函数，使得只有属性能够进行本地存储
+        // console.log("jsonObj[" + prop + "]=" + funcObj[prop]);
+        //此处注入函数功能
+        if (funcObj[prop]) {
+          signClsArr.push(prop);
+        }
+      }
+    }
+
+  }
+
+  //采集时是否上传拍照
+  function UploadRecvCamera(arr) {
+    console.log("采集时是否上传拍照");
+    changeFunction(arr);
+  }
+
+  //数据变更是否上传
+  function SendSyncData(arr) {
+    console.log("数据变更是否上传");
+    changeFunction(arr);
+  }
+  //更新人脸特征值 
+  function UploadFaceFile(arr) {
+    console.log("更新人脸特征值");
+    changeFunction(arr);
+  }
+
+  //功能切换
+  function changeFunction(signClsArr) {
+    var method = signClsArr.shift();
+    console.log(typeof method);
+    if (typeof method == "string") {
+      console.log("首页执行功能：" + method);
+      eval(method + "();");
+    }
+    else if (typeof method == "undefined") {
+      console.log("执行完成");
+    }
+  }
+
+</script>

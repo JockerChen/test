@@ -1,0 +1,53 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-24 15:21:26
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-24 15:38:12
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>promise</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // 每个Promise对象都有一个 then 方法。
+  function load(src) {
+    let es = document.createElement('script')
+    es.src = src
+    document.body.append(es)
+    return new Promise((resolve, reject) => {
+      es.onload = () => { resolve('success ' + src) }
+      es.onerror = () => { reject(new Error('failed to load ' + src)) }
+    })
+  }
+
+  load('./t1.js')
+    .then(str => {
+      console.log(str);
+      f1();
+      return load('./t2.js')   //这里返回一个Promise
+    })                           // 直接就能用 then
+    .then(str => {
+      console.log(str);
+      f2();
+      return load('./t3.js')		// 再返回一个Promise
+    })
+    .then(str => {
+      console.log(str);
+      f3();
+    })
+    .catch(er => {
+      console.log(er.message);
+    })
+</script>

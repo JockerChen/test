@@ -1,0 +1,52 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-10-22 11:43:58
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-10-22 13:01:39
+ * @Description: 
+ 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>数组删除操作</title>
+</head>
+<body>
+  <button id="delete">删除</button>
+</body>
+</html>
+<script>
+  var arrInfo= [
+      { "Id": 1, "BookName": "《算法导论》", "BookPublish": "2006-9", "BookPrice": "85.00", "BookUrl": "img/sfdl.jpg" },
+      { "Id": 2, "BookName": "《UNIX编程艺术》", "BookPublish": "2006-2", "BookPrice": "59.00", "BookUrl": "img/UNIX.jpg" },
+      { "Id": 3, "BookName": "《编程珠玑》", "BookPublish": "2008-10", "BookPrice": "39.00", "BookUrl": "img/bczj.jpg" },
+      { "Id": 4, "BookName": "《代码大全》", "BookPublish": "2006-3", "BookPrice": "128.00", "BookUrl": "img/dmdq.jpg" }
+  ];
+
+  $(function () {  
+
+    $("#delete").on('click',function () {
+        var id=1;
+        removeArray(id,"Id");
+        console.log(arrInfo);
+    })
+
+  })
+
+//移除数组
+function removeArray(id,field) { 
+  var removeIndex=arrInfo.map(function(item){
+    return item[field];
+  }).indexOf(id);
+  if(removeIndex==-1){
+    return false;
+  }
+  else{
+    console.log(removeIndex);
+    arrInfo.splice(removeIndex,1);
+  }
+}
+</script>

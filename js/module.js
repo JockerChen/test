@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-07-18 13:41:43
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-07-18 13:42:39
+ * @LastEditTime: 2020-10-21 08:09:12
  * @Description: 
  */ 
 const ex1 = 'xxx';
@@ -12,3 +12,4 @@ export let ex2 = 'demo';
 export function multi(x, y) {
     return x * y;
 }
+
