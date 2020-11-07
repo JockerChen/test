@@ -2,11 +2,15 @@
  * @Author: [JokerChen]
  * @Date: 2020-11-06 19:40:16
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-11-07 11:02:36
+ * @LastEditTime: 2020-11-07 14:29:26
  * @Description: DOM3的HTML协议都需要进行addEventListener进行绑定后才能用，否则没办法用
   editable 轻量级别
   FileReader //文件读取
   canvas     //图层描画
+  
+  检测病毒：怎么做
+  文件类型格式
+  二进制和base64互转
 
 -->
 
@@ -20,7 +24,7 @@
     #div1{
       width: 400px;
       height: 200px;
-      background: rgb(253, 253, 253);
+      background: rgb(145, 145, 145);
       border: 1px solid black;
       line-height: 200px;
       margin: 30px auto;
@@ -55,28 +59,47 @@ window.onload=function(){
     // console.log(ev);
   }
     //离开(这个需要注意)如果dragover不阻止默认事件，ondrop一直不执行
-  oDiv1.ondrop=function(ev){
+  oDiv1.ondrop=function(ev){  
     ev.preventDefault();
     console.log(ev.dataTransfer.files);
     //文件控件 和ajax的文件上传联合一起做的
     //此处进行处理  data
     //获取了当前的拖拽的返回文件
     let oFile=ev.dataTransfer.files[0];
+    console.log(`文件${JSON.stringify(oFile)}`);
+    if(oFile.type.indexOf('text')>-1){
+        console.log("上传的是文件");
+    }
+    else if(oFile.type.indexOf('image')>-1){
+      console.log('上传的是图片');
+    }
     //读取
     let reader=new FileReader();
-    reader.readAsDataURL(oFile);
     reader.onload=function (){
-      //alert('成功');
+      //读取成功后加载
       console.log(this.result);
       // oImg.src=this.result;
     };
     reader.onerror=function (){
-      alert('读取失败了');
+      console.log('读取失败了');
     };
-    // reader.readAsArrayBuffer(oFile);
-    // reader.readAsBinaryString(oFile);
-    // reader.readAsText(oFile);
+
+    //JS不擅长处理二进制数据
+    //二进制数据（数组）文件内容是二进制数组（原始）
+    
+    //编辑二进制数据（不实用）
+    // reader.readAsArrayBuffer(oFile);  
+
+    //读取二进制文件（字符串）===》（上传）网络传输 ajax2.0 send方法 
+    //reader.readAsBinaryString(oFile);
+
+    //用于图片
+    // reader.readAsDataURL(oFile);
+    //读取的 文本文件
+    //reader.readAsText(oFile); 
     console.log(reader);
+    // https://www.cnblogs.com/cangqinglang/p/11100646.html base64底层原理
+
   }
   // //进入
   // ondragenter

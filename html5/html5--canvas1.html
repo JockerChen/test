@@ -1,0 +1,59 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-07 14:30:39
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-07 15:11:30
+ * @Description: 画布 支持都IE10  11
+ 什么都能画
+ 性能高（大型动画）游戏
+ canvas必须给定宽高
+ //路径操作 moveTo  lineTo
+
+ //canvas 和svg的区别
+ //canvas 画板
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas</title>
+  <style>
+    body{
+      background:#070707;
+    }
+    #canvas1{
+      background: #f8f7f7;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id='canvas1' width="800" height="600">
+    您的浏览器不支持canvas
+  </canvas>
+</body>
+</html>
+<script>
+  window.onload=function(){
+    var co=document.getElementById('canvas1');
+    //获取上下文(获取图形上下文)绘图用的接口
+    //(1)平面
+    var gb=co.getContext('2d');
+    //(2)选区操作
+    gb.moveTo(0,0);
+    gb.lineTo(100,200);
+    gb.lineTo(200,300);
+    gb.lineTo(0,0);
+
+    //(3)描画操作(更新描画时进行) 
+    gb.fillStyle="yellow"
+    gb.strokeStyle='red';
+    
+    gb.stroke();
+    gb.fill();
+  }
+
+
+</script>
