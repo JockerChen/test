@@ -1,0 +1,83 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2017-11-20 22:57:43
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-07 13:06:59
+ * @Description: 之所以不会出现对应的地理位置信息的主要原因是向不同的浏览器请求
+ 精度相对比较差，这个如果真正的用定位功能则需要用相应的框架
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+    var id, options; 
+    var target = {
+      latitude : 0,
+      longitude: 0
+    };
+    window.onload = function () {
+      let oBtn = document.getElementById('btn1');
+      oBtn.onclick = function () {
+        if (window.navigator.geolocation) {
+          //获取单次地址(获取当前位置)
+          //有3个参数，成功，失败和参数
+          navigator.geolocation.getCurrentPosition(res => {
+            //返回对应的数据
+            var crd = res.coords;
+            //对象返回数据
+            // coords.latitude  十进制数的纬度
+            // coords.longitude 十进制数的经度
+            // coords.accuracy  位置精度
+            // coords.altitude  海拔，海平面以上以米计
+            // coords.altitudeAccuracy 位置的海拔精度
+            // coords.heading   方向，从正北开始以度计
+            // coords.speed 速度，以米/每秒计
+            // timestamp  响应的日期/时间
+            console.log('Your current position is:');
+            console.log('Latitude : ' + crd.latitude);
+            console.log('Longitude: ' + crd.longitude);
+            console.log('More or less ' + crd.accuracy + ' meters.');
+            alert('成功');
+          }, err => {
+            alert('失败');
+          }, {
+            /*
+            enableHighAccuracy          //高精度模式
+            timeout                     //超时时间
+            maximumAge                  //缓存
+            */
+          });
+          //获取动态变化（相当于监听）
+          //有3个参数，成功，失败和参数
+          //此处需要进行处理，将对应的定位对象进行存储，并将
+          //相对于轮训
+          id=navigator.geolocation.watchPosition(res => {
+            var crd = res.coords;
+            if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+              console.log('Congratulations, you reached the target');
+              navigator.geolocation.clearWatch(id);
+            }
+            //成功
+          }, err => {
+            //失败
+          }, {
+            //其他
+            //enableHighAccuracy          //高精度模式
+            //timeout                     //超时时间
+            //maximumAge                  //缓存
+            // frequency:    1000
+          })
+        } else {
+          alert('你的浏览器不支持定位');
+        }
+      };
+    };
+  </script>
+  <title></title>
+</head>
+<body>
+  <input type="button" name="" value="定位" id="btn1">
+</body>
+</html>

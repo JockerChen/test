@@ -1,0 +1,48 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-02 17:43:40
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-02 18:04:52
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ajax2.0</title>
+</head>
+
+<body>
+  <form>
+    <input type="file" id="file" name="icon">
+    <input type="text" id="user" name="user">
+    <input type="button" id="btn" value="发请求" />
+  </form>
+</body>
+
+</html>
+
+<script>
+  //找到表单元素
+  var form = document.querySelector('form');
+  document.getElementById('btn').onclick = function () {
+    //点击事件里我需要发一个异步请求
+    //早期的ajax技术，是不支持异步上传文件的
+    //在后期更新了ajax2.0版本，支持上传文件！它需要借助于一个对象，这个对象叫FormData对象
+    //ajax2.0大体的步骤跟以前是一样的，区别
+    //1. 还是要创建个请求对象
+    var xhr = new XMLHttpRequest();
+    //2. 还是要设置请求行
+    xhr.open('post', 'data.php');
+    //3. ajax2.0 里不需要设置请求头，它内部会自动帮你设置
+    //创建一个FormData对象，并且传入一个表单
+    var fm = new FormData(form);
+    xhr.send(fm);
+    xhr.onload = function () {
+      console.log(xhr.responseText);
+    }
+  }
+</script>

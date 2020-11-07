@@ -1,0 +1,79 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-06 18:39:11
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-07 09:19:37
+ * @Description: Worker 线程所在的全局对象，与主线程不一样，无法读取主线程所在网页的 DOM 对象，
+ 也无法使用document、window、parent这些对象。但是，Worker 线程可以navigator对象和location对象。
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多线程多进程</title>
+</head>
+
+<body>
+  <input type="text" placeholder="请输入加法值1" id="text1" />
+  <input type="text" placeholder="请输入加法值2" id="text2" />
+  <button id="dpControl">计算</button>
+</body>
+
+</html>
+<script>
+  // web Worker 浏览器的多进程
+  // 多任务 windows mac
+  // 多进程 性能低 简单 没有资源竞争问题
+  // 多线程 性能高 复杂
+
+  //在实际工作中用的很少
+  // 主进程 浏览器窗口(UI进程)
+  // 子进程 计算、请求
+
+  // 优点，
+  //1、充分利用资源
+  //2、防止主进程卡主。
+  //缺点
+  //不能执行UI操作，只能执行计算任务
+
+  // 加密数据
+  // 有些加解密的算法比较复杂，或者在加解密很多数据的时候，这会非常耗费计算资源，
+  // 导致UI线程无响应，因此这是使用Web Worker的好时机，使用Worker线程可以让用户更加无缝的操作UI。
+
+  // 预取数据
+  // 有时候为了提升数据加载速度，可以提前使用Worker线程获取数据，因为Worker线程是可以是用 XMLHttpRequest 的。
+
+  // 预渲染
+  // 在某些渲染场景下，比如渲染复杂的canvas的时候需要计算的效果比如反射、折射、光影、材料等，
+  // 这些计算的逻辑可以使用Worker线程来执行，也可以使用多个Worker线程，这里有个射线追踪的示例。
+
+  // 复杂数据处理场景
+  // 某些检索、排序、过滤、分析会非常耗费时间，这时可以使用Web Worker来进行，不占用主线程。
+
+  // 预加载图片
+  // 有时候一个页面有很多图片，或者有几个很大的图片的时候，
+  // 如果业务限制不考虑懒加载，也可以使用Web Worker来加载图片，可以参考一下这篇文章的探索，这里简单提要一下。
+
+  window.onload = function () {
+    var dpBtn = document.getElementById("dpControl");
+    var t1 = document.getElementById("text1");
+    var t2 = document.getElementById("text2");
+    dpBtn.onclick = function () {
+      var firstValue = t1.value;
+      var secondValue = t2.value;
+      console.log(firstValue);
+      console.log(secondValue);
+      //擅长AJAX 请求
+      var w = new Worker('../js/worker1.js');
+      // console.log(w);
+      //2.发送
+      w.postMessage({ firstValue, secondValue });
+      w.onmessage = function (ev) {
+        //将相应的结果进行返回
+        console.log(ev.data);
+      }
+    }
+  }
+</script>

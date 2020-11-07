@@ -1,0 +1,91 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-05 09:01:09
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-07 09:10:52
+ * @Description: 
+ src :地址
+ autoplay:自动播放，加载完成后自动播放
+ loop:循环播放
+ poster:封面地址
+ controls:显示播放器控件
+ video所支持的格式
+  IE --WMV MP4
+  Chrome --Webq mp4
+  Firefox -- ogv mp4
+  audio MP3
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../js/jquery-1.7.2.min.js"></script>
+  <title>video用法</title>
+</head>
+
+<body>
+  <video src="http://192.168.20.19/dzbp/uploadFile/Video/20200812085536.mp4" loop poster="" controls id='VideoInfo'>
+    你的浏览器不支持video
+  </video>
+  <button id='PlayVideo'>播放</button>
+  <button id='PauseVideo'>暂停</button>
+  <button id='ShopVideo'>停止</button>
+  <button id='searchNowCurrent'>查看当前进度</button>
+</body>
+
+</html>
+<SCript>
+  //JS操作video
+  // pause play 属性 
+  //stop 停止---没有功能
+  // currentTime  当前不播放事件
+  // duration 播放进度
+  // volume 音量
+  // .muted 静音
+  //1、播放速度怎么设置（这个正常是不能设置的，网页上的是没法设置（
+  // （1）、视频压制后台(服务器存储多个文件)
+  // 2、点播的时候提升码率（大量占用视频资源）
+  
+  //2、video宽高比怎么设置div宽600height400的容器内视频不变形
+  // w 视频宽
+  // h 视频高
+  // W 播放容器宽  600
+  // H 播放容器高  400
+  if(w/h>W/H){
+    //偏宽一些  让宽度适应容器的宽度
+    h=H*w/W;
+    w=W;
+  }
+  else{
+    // 偏高一些
+    w=W*h/H;
+    h=H;
+  }
+  //3、试听5分钟怎么做(这个指定是不能在客户端做) 浏览器 settings  disable javascript 可以将js关闭
+  //服务器生成时进行切分两段（node可以进行视频切割）
+  //4、怎么把control的属性的下载按钮的功能注掉
+  //通过流视频方式干掉。 src:blob //二进制
+  //全屏，让用户自己点击 优酷PC端是通过flash实现的
+  window.onload = function () {
+    var videoSource = document.getElementById('VideoInfo');
+    $('#PlayVideo').on('click', function () {
+      videoSource.play();
+    })
+    
+    $('#PauseVideo').on('click', function () {
+      videoSource.pause();
+    })
+    //停止
+    $('#ShopVideo').on('click', function () {
+      videoSource.currentTime = 0;
+      videoSource.pause();
+    })
+    //查看当前状态
+    $('#searchNowCurrent').on('click',function () {
+      console.log(videoSource.currentTime);
+      console.log(videoSource.duration);
+    })
+
+  }
+</SCript>

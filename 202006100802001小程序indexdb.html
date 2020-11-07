@@ -2,41 +2,41 @@
  * @Author: [JokerChen]
  * @Date: 2020-06-10 08:02:38
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-06-10 18:53:37
+ * @LastEditTime: 2020-11-03 09:28:26
  * @Description: 
 -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数据存储</title>
 </head>
-
 <body>
+    <button id="AddData">添加</button>
+    <button id="EditData">修改</button>
+    <button id="DeleteData">删除</button>
 </body>
-
 </html>
 <script>
     var db;
     var objectStore;
- 
+
+    //基础配置项（小项目可以走这个数据库）
     var indexedDBConfig = {
-        indexDB : window.indexedDB || window.webkitIndexedDB,
+        indexDB: window.indexedDB || window.webkitIndexedDB,
         db: null,
-        storeName:'person',
-        sessionStoreName :'',
-        dbName:'',
+        storeName: 'person',//数据库名
+        sessionStoreName: '',
+        dbName: '',
         version: '1.1'
     };
     window.onload = function () {
         //进行数据库的创建
         openDB(indexedDBConfig.storeName, indexedDBConfig.version);
-
         setTimeout(() => {
             for (let index = 1; index <= 3; index++) {
-                add(eval("UserInfo"+index));
+                add(eval("UserInfo" + index));
             }
         }, 200);
 
@@ -48,7 +48,6 @@
     // 操作请求：IDBRequest 对象
     // 指针： IDBCursor 对象
     // 主键集合：IDBKeyRange 对象
-
     function openDB(name, version) {
         var version = version || 1;
         var request = window.indexedDB.open(name, version);
@@ -67,8 +66,6 @@
             console.log('DB version changed to ' + version);
         };
     }
-
-
 
     //添加人员信息
     function add(json) {
@@ -150,35 +147,32 @@
         };
     }
 
-
-
-
-//indexDB类封装
-var IndexDBCls=function(storeName,sessionStoreName,dbName,version){
-    this.indexDB=window.indexedDB || window.webkitIndexedDB;
-    this.storeName=storeName;              //应用数据库
-    this.sessionStoreName=sessionStoreName;//缓存数据库
-    this.dbName=dbName;
-    this.version=version || "1.0"
-}
-IndexDBCls.prototype.init=function(){
-    //本地数据库初始化
-}
-IndexDBCls.prototype.Add=function(){
-    //增加
-}
-IndexDBCls.prototype.Delete=function(){
-    //删除
-}
-IndexDBCls.prototype.Update=function(){
-    //修改
-}
-IndexDBCls.prototype.Search=function(){
-    //查
-}
-IndexDBCls.prototype.SearchAll=function(){
-    //查
-}
+    //indexDB类封装
+    var IndexDBCls = function (storeName, sessionStoreName, dbName, version) {
+        this.indexDB = window.indexedDB || window.webkitIndexedDB;
+        this.storeName = storeName;              //应用数据库
+        this.sessionStoreName = sessionStoreName;//缓存数据库
+        this.dbName = dbName;
+        this.version = version || "1.0"
+    }
+    IndexDBCls.prototype.init = function () {
+        //本地数据库初始化
+    }
+    IndexDBCls.prototype.Add = function () {
+        //增加
+    }
+    IndexDBCls.prototype.Delete = function () {
+        //删除
+    }
+    IndexDBCls.prototype.Update = function () {
+        //修改
+    }
+    IndexDBCls.prototype.Search = function () {
+        //查
+    }
+    IndexDBCls.prototype.SearchAll = function () {
+        //查
+    }
 
 
 </script>

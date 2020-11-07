@@ -1,0 +1,92 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-06 19:40:16
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-07 11:02:36
+ * @Description: DOM3的HTML协议都需要进行addEventListener进行绑定后才能用，否则没办法用
+  editable 轻量级别
+  FileReader //文件读取
+  canvas     //图层描画
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文件拖拽</title>
+  <style>
+    #div1{
+      width: 400px;
+      height: 200px;
+      background: rgb(253, 253, 253);
+      border: 1px solid black;
+      line-height: 200px;
+      margin: 30px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="div1">请将文件拖入到指定区域</div>
+  <div><img id="ImgSrc" src="" alt=""></div>
+</body>
+</html>
+<script>
+window.onload=function(){
+  var oDiv1=document.getElementById('div1');
+  var oImg=document.getElementById('ImgSrc');
+  //4个事件
+  //进入拖拽区域
+  oDiv1.ondragenter=function(ev){
+    ev.preventDefault();
+    this.innerText='请松开鼠标';
+  }
+  //拖拽离开
+  oDiv1.ondragleave=function(ev){
+    ev.preventDefault();
+    this.innerText='请将文件拖入到指定区域';
+  }
+  //悬停(没离开一直发生)
+  oDiv1.ondragover=function(ev){
+    ev.preventDefault();
+    // console.log(ev);
+  }
+    //离开(这个需要注意)如果dragover不阻止默认事件，ondrop一直不执行
+  oDiv1.ondrop=function(ev){
+    ev.preventDefault();
+    console.log(ev.dataTransfer.files);
+    //文件控件 和ajax的文件上传联合一起做的
+    //此处进行处理  data
+    //获取了当前的拖拽的返回文件
+    let oFile=ev.dataTransfer.files[0];
+    //读取
+    let reader=new FileReader();
+    reader.readAsDataURL(oFile);
+    reader.onload=function (){
+      //alert('成功');
+      console.log(this.result);
+      // oImg.src=this.result;
+    };
+    reader.onerror=function (){
+      alert('读取失败了');
+    };
+    // reader.readAsArrayBuffer(oFile);
+    // reader.readAsBinaryString(oFile);
+    // reader.readAsText(oFile);
+    console.log(reader);
+  }
+  // //进入
+  // ondragenter
+  // //离开
+  // ondragleave 
+  // //放到何处 
+  // ondragover
+  // //进行放置
+  // ondrop
+}
+
+
+</script>
