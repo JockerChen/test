@@ -1,0 +1,80 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-09 15:48:54
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-09 17:24:52
+ * @Description:画板功能
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas画板功能</title>
+  <style>
+    body{
+      background:#070707;
+    }
+    #canvas1{
+      background: #f8f7f7;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <input type="color" id="colorSel" />
+  <canvas id='canvas1' width="800" height="600">
+    您的浏览器不支持canvas
+  </canvas>
+  <input type="button" id="btnClear" value="清空" />
+</body>
+</html>
+<script type="text/javascript">
+  let last_x,last_y;
+  window.onload=function(){
+   /** @type {HTMLCanvasElement} */ 
+    var co=document.getElementById('canvas1');
+    var colorSel=document.getElementById('colorSel');
+    var obtnClear=document.getElementById('btnClear');
+    
+    var oColor='black';
+    var gb=co.getContext('2d');
+
+    //清除画板
+    obtnClear.onclick=function(){
+      gb.clearRect(0,0,co.width,co.height);
+    }
+
+    //颜色发生变化
+    colorSel.onchange=function(){
+      oColor=this.value;
+    }
+    //鼠标点击
+    co.onmousedown=function(ev){
+      //当前 元素的鼠标位置
+      gb.moveTo(ev.offsetX,ev.offsetY); 
+      last_x=ev.offsetX;
+      last_y=ev.offsetY;
+      //画板功能
+      co.onmousemove=function(ev){
+        //清空路径()
+        gb.beginPath();
+        //增加性能（路径操作）
+        gb.moveTo(last_x,last_y); 
+        gb.lineTo(ev.offsetX,ev.offsetY); //????
+        last_x=ev.offsetX;
+        last_y=ev.offsetY;
+        gb.strokeStyle=oColor;
+        gb.stroke();
+      }
+      co.onmouseup=function(){
+        //释放内存
+        co.onmousemove=null;
+        co.onmouseup=null;
+      }
+    }
+  }
+
+
+</script>

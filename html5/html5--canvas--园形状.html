@@ -1,0 +1,126 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-09 16:36:17
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-10 08:25:53
+ * @Description: 
+ 五角星：
+ canvas自适应屏幕·
+ 1、游戏
+ 2、图表 
+ 柱状图 
+ 饼图 几块占比
+ //数据算总和
+ //3800 152 361 487
+所占百分比
+//占比
+79.17% 3.17% 7.52% 10.15%
+
+圈占比 285度    0~285度
+      11.4度   285度~ 296.4度
+      27度     296.4度~323.4度
+      36.5度   323.4度~360度
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas 圆形</title>
+</head>
+<style>
+  body{
+    background:#070707;
+  }
+  #canvas1{
+    background: #f8f7f7;
+    text-align: center;
+  }
+
+</style>
+<body>
+  <canvas id='canvas1' width="800" height="600">
+    您的浏览器不支持canvas
+  </canvas>
+</body>
+</html>
+<script>
+  let dataArray=[];
+  let startAngle=0;
+  //进行加载
+  let arrayInfo=[3800,152,361,487];
+  //求和
+  let reduceResult= arrayInfo.reduce(function(tem,item,index){ 
+    return  tem+item;
+  })
+  //进行映射（映射出相应的度数）
+  let mapInfo= arrayInfo.map(item=>{
+    return (item/reduceResult*360).toFixed(2);
+  })
+  
+  console.log(mapInfo);
+  //
+  var newMapInfoColor=['#FF00FF','#6495ED','#228B22','#000000'];
+  var newMapInfo=[0,285,296.4,323.4,360];
+  // let mapInfoResult= mapInfo.map(item=>{
+  //   return 
+  // })
+  // 圈占比 285度    0~285度
+  //     11.4度   285度~ 296.4度
+  //     27度     296.4度~323.4度
+  //     36.5度   323.4度~360度
+
+  //计算度数
+
+
+
+  // 圈占比 285度    0~285度
+  //     11.4度   285度~ 296.4度
+  //     27度     296.4度~323.4度
+  //     36.5度   323.4度~360度
+
+  window.onload=function(){
+    /** @type {HTMLCanvasElement} */ 
+    var oCanvas=document.getElementById("canvas1");
+    var og=oCanvas.getContext('2d');
+    //cx:圆心x位置
+    //cY:圆心y位置
+    //r：半径
+    //startArc：起始角度
+    //endArc：终止角度
+
+    //需要进行单位换算
+    //角度 0~360
+    //弧度 2π
+    //角度和弧度进行换算 π=180度
+    //1°=π/180====》30°=30*π/180   90*π
+
+    //是否是逆时针
+    // og.arc(cx,cy,r,startArc,endArc,是否是逆时针);
+
+    // 圈占比 285度    0~285度
+    //   11.4度   285度~ 296.4度
+    //   27度     296.4度~323.4度
+    //   36.5度   323.4度~360度
+
+    //饼形图的角的做法圆心到第一个点的位置，圆心到第二个角的位置 
+
+
+    for (var i=1;i<=newMapInfo.length;i++){
+      og.beginPath();
+      og.arc(400,300,150,newMapInfo[i-1]*Math.PI/180,newMapInfo[i]*Math.PI/180,false);
+      // og.closePath();  
+      og.fillStyle=newMapInfoColor[i-1];
+      // og.strokeStyle=newMapInfoColor[i];
+      og.fill();
+      og.stroke();
+    }
+    // og.arc(400,300,150,0,90*Math.PI/180,false);
+    // og.stroke();
+
+    // og.arc(400,300,150,0,90*Math.PI/180,false);
+
+
+    // og.strokeArc(300,300,200,0,90*Math.PI/180,true)
+  }
+</script>

@@ -1,0 +1,46 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-09 16:19:36
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-09 16:35:13
+ * @Description: 矩形  弧形
+    矩形:路径版
+    图形版
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas 形状</title>
+  <style>
+    body{
+      background:#070707;
+    }
+    #canvas1{
+      background: #f8f7f7;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id='canvas1' width="800" height="600">
+    您的浏览器不支持canvas
+  </canvas>
+</body>
+</html>
+<script>
+  let doc=document.getElementById('canvas1');
+  let og=doc.getContext('2d');
+  // og.rect(100,100,50,50);
+  // og.strokeStyle='red';
+  // og.stroke();
+  // og.fill();
+  //画矩形
+  og.strokeStyle='red';
+  og.strokeRect(100,100,50,50);
+  og.fillStyle='green';
+  og.fillRect(100,100,50,50);
+</script>

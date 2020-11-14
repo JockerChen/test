@@ -1,0 +1,74 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-10 08:27:15
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-12 13:52:22
+ * @Description:手画饼形图 饼图的逻辑是
+ 1、根据路径进行描画先画一条边，起点是圆心，终点是半径终点
+ 2、画弧线。
+ 3、closePath
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style media="screen">
+    body {
+      background: black;
+      text-align: center
+    }
+
+    #c1 {
+      background: white
+    }
+  </style>
+  <script>
+    //degree -> arc
+    function d2a(n) {
+      return n * Math.PI / 180;
+    }
+
+    //arc -> degree
+    function a2d(n) {
+      return n * 180 / Math.PI;
+    }
+
+    window.onload = function () {
+      let oC = document.getElementById('c1');
+      let gd = oC.getContext('2d');
+
+      let cx = 400, cy = 300, r = 150;
+      let startAng = 30, endAng = 70;
+
+      //#1
+      gd.moveTo(cx, cy);
+      //初中三角函数
+      //x=cx+sin(ang)*r
+      let x = cx + Math.sin(d2a(startAng)) * r;
+      //y=cy-cos(ang)*r
+      let y = cy - Math.cos(d2a(startAng)) * r;
+
+      gd.lineTo(x, y);
+
+      //#2
+      //gd.arc(cx, cy, r, startAng, endAng, 逆时针)
+      gd.arc(cx, cy, r, d2a(startAng - 90), d2a(endAng - 90), false);
+
+      //#3
+      gd.closePath();
+
+      //gd.stroke();
+      gd.fillStyle = 'yellow';
+      gd.fill();
+    };
+  </script>
+</head>
+<body>
+  <canvas id="c1" width="800" height="600">
+    您的浏览器并不支持canvas，请<a href="http://chrome.google.com/">下载最新版浏览器</a>
+  </canvas>
+</body>
+</html>

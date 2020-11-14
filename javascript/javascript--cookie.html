@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //赋值操作
+        //不指定过期时间则浏览器关闭清除cookie
+        // 设置过期时间
+        alert(document.cookie);//记住上一次的用户名
+        var oDate=new Date();
+        //8天以后
+        oDate.setDate(oDate.getDate()+14);
+        //设置过期时间 expries
+        //多个名字不覆盖，同名覆盖
+        document.cookie='user=jokerChen;expries='+oDate;//添加
+        document.cookie='pass=123456';
+        //封装cookie
+        function setCookie(name,value,iDay){
+            var oDateInfo=new Date();
+            oDate.setDate(oDate.getDate()+iDay);
+            document.cookie=name+'='+value+';expries='+oDate;
+        }
+        //获取cookie
+        function getCookie(){
+            var arr=document.cookie.split('; ');
+            for(var i= 0;i<arr.length;i++)
+            {
+                var arr2=arr[i].split('=');
+                if(arr2[0]===name)
+                {
+                    return arr2[1];
+                }
+            }
+            return ''; 
+        }
+        //删除cookie
+        function removeCookie(name){
+            //设置昨天的信息过期
+            setCookie(name,1,-1);   
+        }
+    </script>
+</body>
+</html>
