@@ -1,0 +1,39 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-14 10:32:13
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-14 11:57:23
+ * @Description: htm
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组降维</title>
+</head>
+
+<body>
+</body>
+
+</html>
+<script>
+  function reduceDimension(arr) {
+    let ret = [];
+    let toArr = function (arr) {
+      arr.forEach(function (item) {
+        item instanceof Array ? toArr(item) : ret.push(item);
+      });
+    }
+    toArr(arr);
+    return ret;
+  }
+  let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
+  for (let i = 0; i < 100000; i++) {
+    arr.push(i);
+  }
+  let start = new Date().getTime();
+  console.log('reduceDimension: ', reduceDimension(arr));
+  console.log('耗时: ', new Date().getTime() - start);
+</script>

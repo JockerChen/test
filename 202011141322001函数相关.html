@@ -1,0 +1,54 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-14 13:22:54
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-14 16:41:07
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数相关</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  // 对于函数声明解释器会首先读取，并使其在执行任何代码之前可用；
+  // 对于函数表达式，则必须等到解释器执行到它所在的代码行，才会被真正解析。
+  console.log(test1(1, 2)); // 3
+  // console.log(test2(1, 2)); // test2 is not defined
+
+  // //函数声明
+  function test1(a, b) {
+    return a + b;
+  }
+
+  // //函数表达式
+  const test2 = function f(a, b) {
+    return a + b;
+  }
+
+  //阶乘函数(利用函数递归)
+  let functionCheck = (function f(num) {
+    if (num <= 1) { return 1 }
+    else {
+      return num * f(num - 1);
+    }
+  })
+var arr1=[11,2,3,1,1,23,1,23];
+  console.log(functionCheck(10));
+  //push的返回值是数组的长度
+console.log(arr1.push('t'));
+
+
+
+
+</script>

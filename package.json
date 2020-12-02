@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JockerChen/test/issues"
   },
-  "homepage": "https://github.com/JockerChen/test#readme"
+  "homepage": "https://github.com/JockerChen/test#readme",
+  "dependencies": {
+    "koa": "^2.13.0"
+  }
 }

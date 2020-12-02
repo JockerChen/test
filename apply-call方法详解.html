@@ -1,0 +1,76 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-01-08 19:06:43
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-14 14:13:37
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//扩展call方法的作用
+	// 1 继承
+	// 2 修改函数运行时的this指针
+	//
+	// call方法实例
+	$(function(){
+		// f(1,2,3);
+		// o(4);
+		// f.call(o);
+
+		console.log(calculate(11,11,"subtract"));
+		
+	})
+	//父类
+	function f(a,b,c)
+	{
+		var info="name";
+		this.a=a;
+		this.b=b;
+		this.c=c;
+		this.add=function(){
+			console.log("add方法");
+		}
+	}
+	//子类扩展
+	function o(d)
+	{
+		this.d=d;
+		console.log(this);
+	}
+	/**此处是进行对call的说明**/
+function add(a1,a2) {
+	return a1+a2;
+}
+function subtract(a1,a2) {
+	return a1-a2;
+}
+function multiplication(a1,a2) {
+	return a1*a2;
+}
+
+function division(a1,a2) {
+	return a1/a2;
+}
+//进行计算(将相应的方法进行注入)
+function calculate(a1,a2,type) {
+	console.log(typeof type);
+	//字符串
+	return window[type].apply(this,[a1,a2]);
+}
+//call版本
+// function calculate(a1,a2,type) {
+// 	console.log(typeof type);
+// 	//字符串
+// 	return window[type].call(this,a1,a2);
+// }	
+	
+</script>

@@ -1,0 +1,28 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-11-14 16:41:39
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-11-14 16:44:23
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象详解</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  var p=[2,3];
+  var A=new Function();
+  A.prototype=p;
+  console.log(A.prototype);
+
+  var a=new A;
+  console.log(a.__proto__);
+
+</script>
