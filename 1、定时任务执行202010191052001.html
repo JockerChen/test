@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-19 10:52:31
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-19 14:30:20
+ * @LastEditTime: 2020-12-09 18:46:03
  * @Description: 
 -->
 
@@ -36,6 +36,7 @@ var arrayEvent=[
   {'eventChineseName':'定时下载','eventName':'downloadBasic','eventCnt':'1','eventTimer':"1423"},
   {'eventChineseName':'定时上传','eventName':'uploadBasic','eventCnt':'1','eventTimer':"1424"},
   {'eventChineseName':'设备质检','eventName':'checkBasic','eventCnt':'1','eventTimer':"1425"},
+  {'eventChineseName':'1111','eventName':'checkBasic','eventCnt':'1','eventTimer':"1530"},
 ];
 
 //定时任务执行
@@ -79,6 +80,13 @@ function uploadBasic() {
   basicFunc(func);
 }
 //质检
+function checkBasic() { 
+  console.log("质检");
+  var func= arguments.callee.name;
+  basicFunc(func);
+}
+
+//1111
 function checkBasic() { 
   console.log("质检");
   var func= arguments.callee.name;

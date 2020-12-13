@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-11-30 15:28:36
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-11-30 15:50:14
+ * @LastEditTime: 2020-12-10 15:16:32
  * @Description: 测试之前的服务端的相关内容，尝试进行编写相应的接口
  */
 const fs = require('fs');
@@ -13,11 +13,9 @@ let db = mysql.createPool({
   port: 3306,
   user: 'root',
   password: '123456',
-  database: 'imeasy',
+  database: 'test',
   maxConnection: 10
 })
-
-
 const http = require('http');
 const url = require('url');
 let httpServer = http.createServer((req, res) => {
