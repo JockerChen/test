@@ -1,0 +1,62 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-12-15 13:17:03
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2020-12-15 13:42:59
+ * @Description: Reflect
+Reflect.apply
+Reflect.construct
+Reflect.defineProperty      完成
+Reflect.deleteProperty      完成
+Reflect.get                 完成
+Reflect.getOwnPropertyDescriptor
+Reflect.getPrototypeOf
+Reflect.has                 完成
+Reflect.isExtensible
+Reflect.ownKeys             完成
+Reflect.preventExtensions
+Reflect.set                 完成
+Reflect.setPrototypeOf
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reflect</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  let clsObj = {
+    name: "JokerChen",
+    age: 12,
+    types: "小学生"
+  }
+  // 进行检测当前属性是否存在
+  Reflect.has(clsObj, name);
+  console.log(Reflect.has(clsObj, 'name'));
+
+  // [ "name", "color", "greeting" ]
+  //为对象添加一个属性
+  Reflect.set(clsObj, 'eyes', 'black');
+  //返回对象自身属性
+  Reflect.ownKeys(clsObj);
+  console.log(Reflect.ownKeys(clsObj));
+  // returns "true" if successful
+  // "duck" now contains the property "eyes: 'black'"
+
+  console.log(Reflect.get(clsObj, 'types'));
+
+  Reflect.defineProperty(clsObj, 'weight', {value: 40}) 
+  console.log(Reflect.ownKeys(clsObj));
+                                // 7
+  Reflect.deleteProperty(clsObj, "types"); // true
+  console.log(Reflect.ownKeys(clsObj));
+</script>

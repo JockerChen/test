@@ -2,9 +2,12 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-20 14:09:02
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-20 14:43:47
- * @Description: tcp协议服务端
+ * @LastEditTime: 2020-12-15 15:29:50
+ * @Description: tcp服务端，UDP服务有的时候没办法做服务的关闭用如下的操作内容
  */
+
+
+
 const net = require('net');
 const HOST = '127.0.0.1';
 const PORT = 3000;

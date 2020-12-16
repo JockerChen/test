@@ -2,8 +2,8 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-20 14:31:32
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-20 14:44:14
- * @Description: 
+ * @LastEditTime: 2020-12-15 15:26:12
+ * @Description: TCP客户端
  */
 const net = require('net');
 const client = net.createConnection({

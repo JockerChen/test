@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/JockerChen/test#readme",
   "dependencies": {
-    "koa": "^2.13.0"
+    "dgram": "^1.0.1",
+    "koa": "^2.13.0",
+    "mosca": "^2.8.3",
+    "mqtt": "^4.2.6"
   }
 }
