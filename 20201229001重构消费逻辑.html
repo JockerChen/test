@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重构消费整体逻辑</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+  <input type="text" id="allVal" />
+  <input type="button" value="0" />
+  <input type="button" value="1" />
+  <input type="button" value="2" />
+  <input type="button" value="3" />
+  <input type="button" value="4" />
+  <input type="button" value="5" />
+  <input type="button" value="7" />
+  <input type="button" value="8" />
+  <input type="button" value="9" />
+  <input type="button" value="enter" />
+  <input type="button" value="clear" />
+  <input type="button" value="find" />
+  <input type="button" value="+" />
+  <input type="button" value="-" />
+  <input type="button" value="." />
+
+</body>
+
+</html>
+<script>
+  //消费查询界面跳转
+  function executeFind() {
+    console.log("executeFind");
+    //往消费查询界面跳转
+  }
+
+  //进行系统设置弹窗
+  function executeMenu() {
+    console.log("executeMenu");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+  //进行系统设置弹窗
+  function executeEsc() {
+    console.log("executeEsc");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+  //进行系统设置弹窗
+  function executeBack() {
+    console.log("executeBack");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+
+  var info = "enter";
+  var keyBtnArrObject = [
+    {"keyCode": "enter","keyFun":""},
+    {"keyCode": "menu","keyFun":"executeMenu"},
+    {"keyCode": "S","keyFun":"executeMenu"},
+    {"keyCode": "find","keyFun":"executeFind"},
+    {"keyCode": "F","keyFun":"executeFind"},
+    {"keyCode": "esc","keyFun":"executeEsc"},
+    {"keyCode": "A","keyFun":"executeEsc"},
+    {"keyCode": "back","keyFun":"executeBack"},
+  ];
+  //特殊字符
+  var specialChar = ["+", "-", "*", "/"];
+  //进行过滤
+  var price = 0;
+  /*上方为计算器逻辑*/
+  $(function () {
+    console.log(typeof 0.3);
+    $('input[type="button"]').on('click', function () {
+      //此处需要注意数字校验然后*10再进行除10
+      var info = $(this).val();
+      console.log($(this).val());
+      var  fillerKeyBtn = keyBtnArrObject.filter(e => e.keyCode.includes(info));
+      if (fillerKeyBtn.length > 0) {
+        if(fillerKeyBtn[0].keyFun==""){
+            // price=$('#allVal').val();
+            price = eval($('#allVal').val());
+            console.log(price);
+        }
+        else{
+          eval(fillerKeyBtn[0].keyFun+"();");
+        }
+        $('#allVal').val("");
+      }
+      else {
+        $('#allVal').val($('#allVal').val() + $(this).val());
+      }
+    })
+  })
+  /*上方为计算器逻辑*/
+
+  //用户信息
+  var UserCls = function (obj) {
+    this.accountNo = obj.accountNo;//账号
+    this.cardNo = obj.cardNo;//卡号    
+    this.name = obj.name;//卡号 
+    this.typeId = obj.typeId;//身份    
+  }
+  //
+  UserCls.prototype.updateOnlineCustom = function (obj) {
+    //在线（调用接口的模式）
+  }
+
+
+  //消费类
+  var CustomCls = function (customDist, customLimitCount, customQuota, customType, customSure) {
+    this.customDist = customDist;//消费当前餐别
+    this.customLimitTime = customLimitCount;//消费限次
+    this.customQuota = customQuota;//消费限额
+    this.customType = customType;//消费类型 份饭/计算器/消费计算器混合
+    this.customPrice = 0;//份饭的单价是mealNo 计算器的单价是输入的金额
+    this.customSure = customSure;//消费确认模式 确认/不确认
+    this.customSpendType = '人脸';//刷卡或人脸
+    this.customDate = '';//消费日期
+    this.customTime = '';//消费时间 
+  }
+  //在线消费
+  CustomCls.prototype.updateOnlineCustom = function () {
+    //在线（调用接口的模式）
+
+  }
+  //脱机消费
+  CustomCls.prototype.updateOfflineCustom = function () {
+    //记账的模式
+  }
+  //判断当前是否在消费时间内
+  CustomCls.prototype.checkCustomTime = function () {
+
+  }
+
+  //快速修改份饭价格功能
+  CustomCls.prototype.changeCustomPrice = function () {
+    //早午晚夜四个时间段对应的餐别应该按照第一次现在数据为主，平时情况下都是以本地为主.
+    //先更新本地数据库在更新本地表,然后以后台为准
+    this.customPrice = "";
+    return this;
+  }
+
+
+  // //判断消费限次
+  // CustomCls.prototype.checkCustomCount=function () {
+  //   return true;
+  // }
+  // //判断消费限额
+  // CustomCls.prototype.checkCustomQuota=function () {
+  //   return false;
+  // }
+
+  // var CustomDistCls =function (startTime,endTime,deviceType,mealNo) {
+  //   this.StartTime = startTime;//消费当前餐别
+  //   this.EndTime = endTime;//消费限次
+  //   this.DeviceType = deviceType;//消费限额
+  //   this.MealNo = mealNo;//消费限额
+  // }
+
+
+  
+
+</script>
