@@ -56,11 +56,11 @@ function timerTask(params) {
       window[value.eventName](); 
     }
     eventFiler=null;
-    //计数器10万次归零
-    // if(cnt>100000){
-    //   cnt=0;
-    //   return false;
-    // }
+    // 计数器10万次归零
+    if(cnt>100000){
+      cnt=0;
+      return false;
+    }
     cnt++;
     timerTask();
   },1000);

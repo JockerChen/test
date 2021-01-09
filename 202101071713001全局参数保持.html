@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>重构消费整体逻辑</title>
+  <title>全局参数保持</title>
   <script src="js/jquery-1.7.2.min.js"></script>
 </head>
 
@@ -31,7 +31,11 @@
 </html>
 <script>
   //参与计算数据部分
-window['hardKeyboard'] = 0;
+  window['hardKeyboard'] = 0;
+  //消费查询界面跳转
+  function executeEnter() {
+    console.log("executeEnter");
+  }
   //消费查询界面跳转
   function executeFind() {
     console.log("executeFind");
@@ -56,57 +60,39 @@ window['hardKeyboard'] = 0;
     //往消费查询界面跳转
     // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
   }
-
-  var info = "enter";
   var keyBtnArrObject = [
-    {"keyCode": "enter","keyFun":""},
-    {"keyCode": "menu","keyFun":"executeMenu"},
-    {"keyCode": "S","keyFun":"executeMenu"},
-    {"keyCode": "find","keyFun":"executeFind"},
-    {"keyCode": "F","keyFun":"executeFind"},
-    {"keyCode": "esc","keyFun":"executeEsc"},
-    {"keyCode": "A","keyFun":"executeEsc"},
-    {"keyCode": "back","keyFun":"executeBack"},
+    { "keyCode": "enter", "keyFun": "executeEnter" },
+    { "keyCode": "menu", "keyFun": "executeMenu" },
+    { "keyCode": "S", "keyFun": "executeMenu" },
+    { "keyCode": "find", "keyFun": "executeFind" },
+    { "keyCode": "F", "keyFun": "executeFind" },
+    { "keyCode": "esc", "keyFun": "executeEsc" },
+    { "keyCode": "A", "keyFun": "executeEsc" },
+    { "keyCode": "back", "keyFun": "executeBack" }
   ];
-  //特殊字符
-  var specialChar = ["+", "-", "*", "/"];
-  //进行过滤
-  var price = 0;
-  /*上方为计算器逻辑*/
+
+  //处理硬键盘点击操作
+  function operatorKeyPress(key, keyObject,Keyboard, fn) {
+    var fillerKeyBtn = keyObject.filter(function (e) {
+      return e.keyCode == key;
+    });
+    //确认当前点击是否
+    if (fillerKeyBtn.length > 0) {
+      eval(fillerKeyBtn[0].keyFun + "();");
+    } else {
+      if (fn) fn.call(this, Keyboard + key);
+    }
+  }
+
   $(function () {
-    console.log(typeof 0.3);
     $('input[type="button"]').on('click', function () {
-      //此处需要注意数字校验然后*10再进行除10
-      var info = $(this).val();
-      console.log($(this).val());
-      //此处进行修改
-      var  fillerKeyBtn = keyBtnArrObject.filter(function(e){
-        return e.keyCode==info;
+      console.log('1111-----:'+hardKeyboard);
+      //进行过滤
+      operatorKeyPress($(this).val(), keyBtnArrObject,hardKeyboard, function (ret) {
+        hardKeyboard=ret;
+        console.log(hardKeyboard=hardKeyboard);
       });
-      if (fillerKeyBtn.length > 0) {
-        if(fillerKeyBtn[0].keyFun==""){
-            // price=$('#allVal').val();
-            price = eval($('#allVal').val());
-            console.log(price);
-        }
-        else{
-          eval(fillerKeyBtn[0].keyFun+"();");
-        }
-        $('#allVal').val("");
-      }
-      else {
-        $('#allVal').val($('#allVal').val() + $(this).val());
-      }
     })
   })
-  // /*上方为计算器逻辑*/
-  // UserCls.prototype.updateOnlineCustom = function (obj) {
-  //   //在线（调用接口的模式）
-  // }
-
-
-
-
-  
 
 </script>

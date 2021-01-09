@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全局预处理冲突解决</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+//这种情况出现，原因的正常先加入到词发环境的是什么，如果词法环境保存的数据是变量，后续出现函数，则将词法环境的中
+//的变量F进行覆盖
+// alert(f);
+
+// function f() {
+//   console.log('1231231');
+// }
+
+// var f=1;
+
+// 处理函数声明时有冲突会覆盖
+// function f() {
+//   console.log('222222');
+// }
+alert("a:"+a);
+// alert(b);
+alert("h:"+h);
+alert("g:"+g);
+
+/*执行阶段*/
+var a=5;
+ b=6;
+//声明
+alert("b:"+b);
+function h() { 
+  console.log('ff');
+ }
+//函数表达式
+var g=function(){
+  console.log('g');
+}
+alert("g:"+g);
+</script>

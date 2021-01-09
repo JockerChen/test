@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时间调度函数封装</title>
+</head>
+<body>
+</body>
+</html>
+<script src="js/timer.js"></script>
+<script>
+//设置全局参数
+window['timer']=0;
+window['cnt']=0;
+  //调用
+window.onload=function(){
+  timerTask(cnt,timer,arrayEvent);
+}
+
+var arrayEvent=[
+  {'eventName':'cheOnlineState','eventTimer':5},
+  {'eventName':'CheckConnectServer','eventTimer':6},
+  {'eventName':'intRefresh','eventTimer':1}
+];
+
+function CheckConnectServer() { 
+  console.log('触发在线脱机函数5s执行一次');
+}
+//进行处理  
+function intRefresh() { 
+  console.log('触发刷新函数1s执行一次');
+}
+//进行处理
+function cheOnlineState() { 
+  console.log('触发在线标识显示设置6s执行一次');
+}
+
+
+</script>
+
