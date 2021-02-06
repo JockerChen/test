@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>翻转字符串</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // 输入：["h","e","l","l","o"]s
+  // 输出：["o","l","l","e","h"]
+  let info = ["h", "e", "l", "l", "o"];
+  var reverseString = function (s) {
+    for (var i = 0; i < Math.ceil(s.length / 2); i++) {
+      let tmp = '';
+      tmp = s[i];
+      s[i] = s[s.length - 1 - i];
+      s[s.length - 1 - i] = tmp;
+    }
+    return s;
+  };
+
+  console.log(reverseString(info));
+
+  /**
+   * @param {character[]} s
+   * @return {void} Do not return anything, modify s in-place instead.
+   */
+  // var reverseString = function (s) {
+  //   for (var i = 0; i < Math.ceil(s.length / 2); i++) {
+  //     let tmp = '';
+  //     tmp = s[i];
+  //     s[i] = s[s.length - 1 - i];
+  //     s[s.length - 1 - i] = tmp;
+  //   }
+  //   return s;
+  // };
+</script>

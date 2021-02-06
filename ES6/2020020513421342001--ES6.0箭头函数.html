@@ -7,31 +7,49 @@
  -->
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+</body>
+
 </html>
 <script type="text/javascript">
-	
+
 	//只有一个参数的话 ()可以省略
 	//只有一句话 只有一个 return {}可以省略
 	//数组操作的时候箭头函数异常的好用
-	
-	let arr=[12,5,8,99,13,14,26];
-	let showInfo=(params)=>{
-		 console.log(params);
+
+	let arr = [12, 5, 8, 99, 13, 14, 26];
+	let showInfo = (params) => {
+		console.log(params);
 	}
 	// 转换后的代码
 	// x=>x*x;
 	showInfo(1);
 
-	console.log(arr.sort(function (n1,n2) {
-		return n1-n2;
-	}));	
-	console.log(arr.sort((n1,n2)=> n1-n2));	
-	
-	
+	console.log(arr.sort(function (n1, n2) {
+		return n1 - n2;
+	}));
+	console.log(arr.sort((n1, n2) => n1 - n2));
+
+//给全局对象设置一个属性name，值为 李四
+	window.name = '李四'
+	function fn() {
+		//此处有个this，指向全局对象，被箭头函数所绑定
+		return () => {
+			console.log(this.name)
+			return () => {
+				console.log(this.name)
+			}
+		}
+	}
+//调用fn内的第一个箭头函数
+fn()()             //返回 '李四'
+//调用fn内第二个箭头函数
+fn()()()           //返回 '李四'
+
 </script>

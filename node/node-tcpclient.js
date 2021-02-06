@@ -21,11 +21,11 @@ client.on('connect', () => {
         {
             "img":"",
             "tw":"34.6",
-            "idcard":"",
+            "idcard":"210104198805012030",
             "name":"陈宁",
             "term_id":"00011800202007001148",
-            "type":"1",
-            "healthCardid":"397D143BC0733905DFFF686D1C86F4059C9CB3E62D22E613FD38A8B1C6BFE2B0:0:4A0BC609CC42AC1541DC392AD048AB82"
+            "type":"3",
+            "healthCardid":""
         },
         "h":
         {

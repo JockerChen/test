@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>旋转数组</title>
+  <script src="../../js/jquery-1.7.2.min.js"></script>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+
+ var nums = [1,2,3,4,5,6,7,8,9,10,11,11,16], k = 4;
+// 输出: [5,6,7,1,2,3,4]
+var rotate = function(nums, k) {
+  //通过翻转进行处理，换角标
+  nums=nums.splice((nums.length-k),k).concat(nums.splice(0,nums.length));
+  console.log(nums);
+};
+
+$(function () {
+    // console.log(nums.splice((nums.length-k),k).concat(nums.splice(0,nums.length)));
+   rotate(nums,k);
+})
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>返回当前第一个字符</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  let sInfo = "loveleetcode";
+  var firstUniqChar = function (s) {
+    for (let i = 0; i < s.length; i++) {
+      console.log(s.substring(1,s.length-1).indexOf(s[i]),s[i]); 
+      if(s.substring(1,s.length-1).indexOf(s[i])==-1)
+      {
+        return i;
+      }
+    }
+  };
+  window.onload = function () {
+   console.log( firstUniqChar(sInfo));
+  }
+
+</script>
