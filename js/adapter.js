@@ -4,6 +4,7 @@
 // 3、别人app
 // 4、IOS
 //设备类型父类（）
+
 var DeviceType=function(ServicePath)
 {
 	this.ServicePath=ServicePath;

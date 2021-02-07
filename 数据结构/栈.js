@@ -1,3 +1,9 @@
+/*
+ * @Author: JokerChen 
+ * @Date: 2021-02-Sa 08:09:11 
+ * @Last Modified by:   JokerChen 
+ * @Last Modified time: 2021-02-Sa 08:09:11 
+ */
 // 栈是一种遵从先进后出 (LIFO) 原则的有序集合；新添加的或待删除的元素都保存在栈的末尾，
 // 称作栈顶，另一端为栈底。在栈里，新元素都靠近栈顶，旧元素都接近栈底。 通俗来讲，
 // 一摞叠起来的书或盘子都可以看做一个栈，我们想要拿出最底下的书或盘子，一定要现将上面的移走才可以。
@@ -8,6 +14,7 @@ class Stack {
   push (element) {
     this.items.push(element);
   }
+  
   pop () {
     return this.items.pop();
   }
