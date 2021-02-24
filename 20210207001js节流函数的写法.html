@@ -1,0 +1,54 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-02-07 15:01:32
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-02-07 15:09:42
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>函数节流</title>
+</head>
+
+<body>
+  <button id="clickBtn">点击</button>
+</body>
+
+</html>
+<script>
+  //
+  window.onload = function () {
+    var pBtn=document.getElementById('clickBtn');
+    pBtn.onclick=function () {
+      // console.log("用户点击");
+      throttle(function() {
+        console.log("用户点击");
+      },1000);
+    }
+  }
+  //函数节流
+  function throttle(fn, delay) {
+    let valid = true;
+    console.log("执行节流");
+    return function () {
+      if (!valid) {
+        //休息时间 暂不接客
+        return false
+      }
+      // 工作时间，执行函数并且在间隔期内把状态位设为无效
+      valid = false
+      setTimeout(() => {
+        fn()
+        valid = true;
+      }, delay)
+    }
+  }
+
+
+</script>

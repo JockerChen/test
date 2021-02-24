@@ -1,0 +1,30 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-02-18 19:50:53
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-02-18 20:28:18
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>字符串动态过滤</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var aInfo=['aaa','bbb','ccc'];
+var textInfo='00240101bbb123';
+var filterArray = aInfo.filter(function (item,index) {
+  var re = new RegExp(item, 'g');
+  console.log(textInfo.match(re));
+  return textInfo.match(re);
+});
+console.log(filterArray);
+
+</script>
