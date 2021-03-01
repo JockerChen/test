@@ -1,0 +1,35 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-02-24 16:56:24
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-02-24 16:58:46
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script src="js/core.js"></script>
+  <script src="js/enc-base64.js"></script>
+  <script src="js/hmac.js"></script>
+  <script src="js/sha256.js"></script>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  let appSecret = "5oAp5re6BUxKDvPOmlcRHSX4gbX5LxoRxAQvoxLcN8g=";
+  let SEP1 = '&';
+  let appKey = '';
+  let method = 'POST';
+  let stage = '3';
+  let time = new Date().getTime();
+  let auths = appKey + SEP1 + method + SEP1 + stage + SEP1 + time;
+  let hash = CryptoJS.HmacSHA256(auths, CryptoJS.enc.Base64.parse(appSecret));
+  let hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+  console.log('签名：', hashInBase64);
+</script>
