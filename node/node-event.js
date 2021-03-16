@@ -2,8 +2,8 @@
  * @Author: [JokerChen]
  * @Date: 2020-11-13 14:38:00
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-11-28 11:14:16
- * @Description: node js事件监听事件监听器
+ * @LastEditTime: 2021-03-02 10:47:27
+ * @Description: node js事件监听事件监听器(自定义)
  */
 // 引入 events 模块
 var events = require('events');
@@ -22,7 +22,12 @@ var connectHandler = function connected() {
 eventEmitter.on('connection', connectHandler);
  
 // 使用匿名函数绑定 data_received 事件
-eventEmitter.on('data_received', function(){
+eventEmitter.on('data_received', function(data){
+   console.log('数据接收成功。');
+});
+// 使用匿名函数绑定 bedUp 事件
+eventEmitter.on('bedUp', function(data){
+   console.log(data);
    console.log('数据接收成功。');
 });
  
@@ -31,6 +36,6 @@ eventEmitter.emit('connection');
  
 console.log("程序执行完毕。");
 //事件发送
-// setTimeout(() => {
-//   emitter.emit('bedUp','06:00');
-// }, 5000);
+setTimeout(() => {
+   eventEmitter.emit('bedUp','06:00');
+}, 5000);
