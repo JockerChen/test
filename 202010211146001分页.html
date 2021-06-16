@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-21 11:47:01
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-10-22 09:03:43
+ * @LastEditTime: 2021-05-28 17:08:28
  * @Description: 
 -->
 
@@ -41,12 +41,15 @@
       }
     })
   })
+  
   //分页类
   var PageCls = function () {
     this.arrayList = [];//基础数据源
     this.nowCnt = 1;//当前页码数      
     this.everyCnt = 3; //一页几个 
+    this.allCnt=0;
   }
+  
   //初始化
   PageCls.prototype.init = function (arrayList, nowPageCnt, everyCnt) {
     this.arrayList = arrayList;//基础数据源
@@ -123,11 +126,12 @@
           menuArray = res.rows;
           // returnArrayInfo(JSON.stringify(menuArray),res.rows.length,10,1)
           pageCls.init(menuArray, 1, 3);
-          console.log(pageCls);
+          console.log( );
         }
       }
     });
-  }
+  }      
+  
   // //获取每一页的数据
   // function returnArrayInfo(arrList,allCnt,everyCnt,nowPage) {
   //   var arr=arrList;

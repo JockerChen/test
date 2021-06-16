@@ -1,0 +1,69 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-05-19 15:11:23
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-05-19 15:45:40
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jquery</title>
+</head>
+<body>
+  <!-- 题1 获取第二个li的text值 -->
+  <ul>
+    <li data-info="1">1</li>
+    <li data-info="0">2</li>
+    <li data-info="3">3</li>
+  </ul>
+  
+  <!-- 题2 获取input的输入的值 -->
+  <input type="text" id="phoneValue" />
+  <input type="button" id="btnPhone" value="获取"/>
+  <!-- 题3 将相应的json数据拼接到Ul中-->
+  <ul id="Courselist">
+      <li>
+        <span>星期一</span>
+        <span>2021-04-01</span>
+        <span>软件一班</span>
+      </li>
+  </ul>
+    <!-- 题4 在第三题的基础上过滤一下课程日志是 2021-04-01的课程-->
+
+
+    <!-- 题5 将周四的课程插入到UL1，中将周五的课程插入到UL2中-->
+  <ul id="Ul1">
+
+  </ul>
+  <ul id="Ul2">
+
+  </ul>  
+  <!-- 题6 移除当前没有学科名成的学科-->
+
+  <!-- 题7 根据返回的数据进行过滤不同状态的人员信息 先过滤数组在进行操作-->
+  <ul id="absentpersonList"></ul>
+  <ul id="signpersonList"></ul>
+  <ul id="leavecountList"></ul>
+</body>
+</html>
+<script>
+// 1、答案区
+
+// 2、答案区
+
+// 3、答案区
+//插入数据 {"total":18,"rows":[{"Id":"48650402","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"1","SubjectName":"驱动开发","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"姜丽丽","CourseTeacherAccountNo":"L0003","StartTime":"08:00","EndTime":"08:45"},{"Id":"48650502","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"1","SubjectName":"Android基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"张丽珍","CourseTeacherAccountNo":"L0007","StartTime":"08:00","EndTime":"08:45"},{"Id":"486501102","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"2","SubjectName":"PHP基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"杨洋","CourseTeacherAccountNo":"L0005","StartTime":"09:00","EndTime":"09:45"},{"Id":"486501202","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"2","SubjectName":"Java开发","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"宋霄雪","CourseTeacherAccountNo":"L0002","StartTime":"09:00","EndTime":"09:45"},{"Id":"486501802","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"3","SubjectName":"马克思主义哲学","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"张明发","CourseTeacherAccountNo":"L0012","StartTime":"10:00","EndTime":"10:45"},{"Id":"486501902","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"3","SubjectName":"高数","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"周海亮","CourseTeacherAccountNo":"L0011","StartTime":"10:00","EndTime":"10:45"},{"Id":"486502502","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"4","SubjectName":"大学英语","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"洪利军","CourseTeacherAccountNo":"L0010","StartTime":"11:00","EndTime":"11:45"},{"Id":"486502602","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"4","SubjectName":"马克思主义哲学","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"张明发","CourseTeacherAccountNo":"L0012","StartTime":"11:00","EndTime":"11:45"},{"Id":"486503202","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"5","SubjectName":"计算机应用基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"冯秀玲","CourseTeacherAccountNo":"L0009","StartTime":"13:00","EndTime":"13:45"},{"Id":"486503302","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"5","SubjectName":"大学英语","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"洪利军","CourseTeacherAccountNo":"L0010","StartTime":"13:00","EndTime":"13:45"},{"Id":"486503902","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"6","SubjectName":"高数","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"周海亮","CourseTeacherAccountNo":"L0011","StartTime":"14:00","EndTime":"14:45"},{"Id":"486504002","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"6","SubjectName":"计算机应用基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"冯秀玲","CourseTeacherAccountNo":"L0009","StartTime":"14:00","EndTime":"14:45"},{"Id":"486504602","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"7","SubjectName":"Ps基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"张景瑞","CourseTeacherAccountNo":"L0006","StartTime":"15:00","EndTime":"15:45"},{"Id":"486504702","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"7","SubjectName":"PHP基础","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"杨洋","CourseTeacherAccountNo":"L0005","StartTime":"15:00","EndTime":"15:45"},{"Id":"486505302","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"8","SubjectName":"大学英语","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"洪利军","CourseTeacherAccountNo":"L0010","StartTime":"16:00","EndTime":"16:45"},{"Id":"486505402","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"8","SubjectName":"驱动开发","RoomName":"软件一班","deptname":"教师部门","CourseTeacherName":"姜丽丽","CourseTeacherAccountNo":"L0003","StartTime":"16:00","EndTime":"16:45"},{"Id":"0","WeekName":"星期四","CourseDate":"2021-04-01","TimeName":"9","SubjectName":"","RoomName":"","deptname":"","CourseTeacherName":"","CourseTeacherAccountNo":"","StartTime":"17:00","EndTime":"17:45"},{"Id":"0","WeekName":"星期五","CourseDate":"2021-04-02","TimeName":"9","SubjectName":"","RoomName":"","deptname":"","CourseTeacherName":"","CourseTeacherAccountNo":"","StartTime":"17:00","EndTime":"17:45"}],"timetable":[{"Id":1,"TimeName":1,"StartTime":"08:00","EndTime":"08:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"08:40","CDEndTime":"08:10","StartSK":"07:30","EndSK":"08:50","TimeSpan":45},{"Id":2,"TimeName":2,"StartTime":"09:00","EndTime":"09:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"09:45","CDEndTime":"09:10","StartSK":"08:55","EndSK":"09:50","TimeSpan":45},{"Id":3,"TimeName":3,"StartTime":"10:00","EndTime":"10:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"10:40","CDEndTime":"10:10","StartSK":"09:55","EndSK":"10:50","TimeSpan":45},{"Id":4,"TimeName":4,"StartTime":"11:00","EndTime":"11:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"11:40","CDEndTime":"11:10","StartSK":"10:55","EndSK":"11:50","TimeSpan":45},{"Id":5,"TimeName":5,"StartTime":"13:00","EndTime":"13:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"13:40","CDEndTime":"13:10","StartSK":"12:50","EndSK":"13:50","TimeSpan":45},{"Id":6,"TimeName":6,"StartTime":"14:00","EndTime":"14:45","IsQD":"","IsQT":"否","IsRY":"","ZTStart":"14:40","CDEndTime":"14:10","StartSK":"13:55","EndSK":"14:50","TimeSpan":45},{"Id":10,"TimeName":7,"StartTime":"15:00","EndTime":"15:45","IsQD":"","IsQT":"","IsRY":"","ZTStart":"15:45","CDEndTime":"15:45","StartSK":"14:55","EndSK":"15:45","TimeSpan":45},{"Id":11,"TimeName":8,"StartTime":"16:00","EndTime":"16:45","IsQD":"","IsQT":"","IsRY":"","ZTStart":"16:45","CDEndTime":"16:45","StartSK":"15:55","EndSK":"16:45","TimeSpan":45},{"Id":12,"TimeName":9,"StartTime":"17:00","EndTime":"17:45","IsQD":"","IsQT":"","IsRY":"","ZTStart":"17:45","CDEndTime":"17:45","StartSK":"16:55","EndSK":"17:45","TimeSpan":45}]}
+// 4、答案区
+
+// 5、答案区
+
+// 6、答案区
+
+// 7、答案区
+// {"result":0,"msg":"成功","total":25,"rows":[{"accountNo":"A004","personName":"郑爽","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A004.jpg","SignTime":"10:39:41","Temperature":"","AttendanceStatus":"迟到","LeaveCount":0},{"accountNo":"A007","personName":"朴叙俊","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A007.jpg","SignTime":"10:39:38","Temperature":"","AttendanceStatus":"迟到","LeaveCount":0},{"accountNo":"A006","personName":"顾佳艺","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A006.jpg","SignTime":"10:39:34","Temperature":"","AttendanceStatus":"迟到","LeaveCount":0},{"accountNo":"A003","personName":"杨幂","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A003.jpg","SignTime":"08:56:30","Temperature":"","AttendanceStatus":"迟到","LeaveCount":0},{"accountNo":"A005","personName":"吴添","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A005.jpg","SignTime":"08:56:25","Temperature":"","AttendanceStatus":"迟到","LeaveCount":0},{"accountNo":"A016","personName":"王霏雯","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A016.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A002","personName":"魏大勋","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A002.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A010","personName":"赵亮","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A010.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A008-111","personName":"朱亚文","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A008-111.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A011","personName":"李白","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A011.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A012","personName":"李黎","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A012.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A023","personName":"周天赐","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A023.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A013","personName":"张易宁","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A013.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A021","personName":"孟凡宇","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A021.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A015","personName":"鲁从安","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A015.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A022","personName":"刘星","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A022.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A025","personName":"兰非夜","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A025.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A046","personName":"白起","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A046.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A009","personName":"宋昭阳","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A009.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A014","personName":"孙思淼","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A014.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A017","personName":"严珂","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A017.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A018","personName":"葛欣祺","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A018.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A020","personName":"王璐","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A020.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A019","personName":"陈珂","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A019.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0},{"accountNo":"A024","personName":"虞卓妍","departmentindex":"001002001","department":"软件一班","personimg":"uploadFile\/PersonInfo\/A024.jpg","SignTime":"","Temperature":"","AttendanceStatus":"缺勤","LeaveCount":0}],"absentperson":"'A016','A002','A010','A008-111','A011','A012','A023','A013','A021','A015','A022','A025','A046','A009','A014','A017','A018','A020','A019','A024'","signperson":"'A005','A003','A006','A007','A004'","signcount":5,"leavecount":0,"AbsentCount":20}
+
+</script>

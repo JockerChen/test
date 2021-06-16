@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-11-14 08:55:09
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-11-14 09:45:09
+ * @LastEditTime: 2021-05-27 19:29:49
  * @Description: 常用数组去重方法
 -->
 <!DOCTYPE html>
@@ -17,16 +17,16 @@
 </body>
 </html>
 <script>
-  // ES6.0做法
-  var info=[1,22,22,11,2,3,111,22];
+// ES6.0做法
+var info=[1,22,22,11,2,3,111,22];
 // console.log(new Set(info));
-
 var arr = [1, 1, 8, 8, 12, 12, 15, 15, 16, 16];
+
 function unlink(arr) {
   return arr.filter(function (item, index, arr) {
       //当前元素，在原始数组中的第一个索引==当前索引值，否则返回当前元素
       return arr.indexOf(item, 0) === index;
   });
 }
-console.log(unlink(arr));
+
 </script>

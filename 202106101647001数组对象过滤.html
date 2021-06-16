@@ -1,0 +1,37 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-10 16:47:39
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-10 16:57:19
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组过滤</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  var arr = { "resultCode": "200", "resultMsg": "成功", "rows": { "normalSignCount": 5, "lateCount": 4, "leaveCount": 1, "absentCount": 280, "leaveAndLatePersonRows": [{ "signState": "请假", "accountNo": "A202004", "imgURL": "http://tx03.55kad.com/bzbcs/uploadFile/PersonInfo/A202004.jpg", "name": "姜璐璐", "className": "2020级1班", "signTime": "" }, { "signState": "迟到", "accountNo": "z002", "imgURL": "http://tx03.55kad.com/bzbcs/uploadFile/PersonInfo/z002.jpg", "name": "张昊鹏2", "className": "2020级2班", "signTime": "13:30:00" }, { "signState": "迟到", "accountNo": "z003", "imgURL": "http://tx03.55kad.com/bzbcs/uploadFile/PersonInfo/z003.jpg", "name": "张昊鹏3", "className": "2020级2班", "signTime": "13:30:00" }, { "signState": "迟到", "accountNo": "C00044", "imgURL": "http://tx03.55kad.com/bzbcs/uploadFile/PersonInfo/C00044.jpg", "name": "张昊鹏1", "className": "2020级2班", "signTime": "13:30:00" }, { "signState": "迟到", "accountNo": "C0005", "imgURL": "http://tx03.55kad.com/bzbcs/uploadFile/PersonInfo/C0005.jpg", "name": "张昊鹏4", "className": "2020级2班", "signTime": "13:30:00" }] } };
+  var aLeaveAndLatePersonRows = arr.rows.leaveAndLatePersonRows;
+  console.log(aLeaveAndLatePersonRows);
+  var arr1=arrFiller(aLeaveAndLatePersonRows,"请假");
+  console.log(arr1);
+  function arrFiller(arr,key) {
+    var fillerArr = arr.filter(function (e) {
+      return e.signState == key;
+    });
+    return fillerArr;
+  }
+
+
+</script>

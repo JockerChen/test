@@ -1,0 +1,71 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-11 14:06:27
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-11 15:32:51
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>充值功能重构</title>
+</head>
+
+<body>
+</body>
+
+</html>
+
+<script>
+window.onload=function(){
+  alert(11);
+  var person1=new PersonCls();
+  person1.init("A0001","教师","三年一班","A0001.jpg");
+  console.log("测试",person1);
+  person1.clearPerson(person1);
+  console.log("测试2",person1);
+}
+
+  //人员类
+  var PersonCls = function () {
+    this.accountNo = "";
+    this.identity = "";
+    this.department = "";
+    this.personImg = "";
+    this.balance=0;
+  }
+  //人员初始化接口
+  PersonCls.prototype.init = function (sAccountNo,sIdentity,sDepartment,sPersonImg) {
+    this.accountNo = sAccountNo;
+    this.identity = sIdentity;
+    this.department = sDepartment;
+    this.personImg = sPersonImg;
+    this.balance=0;
+  }
+  //进行充值操作
+  PersonCls.prototype.doPayOnline = function () {
+    //进行充值操作
+    
+  }
+
+  //清空信息
+  PersonCls.prototype.clearPersonInfo = function (obj) {
+    this.accountNo = "";
+    this.identity = "";
+    this.department = "";
+    this.personImg = "";
+  }
+
+    //充值类
+    var ChargeCls = function () {
+    //充值类型：支付宝、微信、第三方充值
+    this.chargeType = "";
+    //接口地址
+    this.interfaceUrl = "";
+  }
+
+</script>

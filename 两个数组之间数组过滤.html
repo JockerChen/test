@@ -1,47 +1,52 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2020-03-30 20:48:03
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-03-25 09:27:57
+ * @Description: 
+-->
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
-		<title></title>
-	</head>
-	<body>
-	</body>
+
+<head>
+	<meta charset="utf-8">
+	<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+	<title></title>
+</head>
+
+<body>
+</body>
+
 </html>
 <script type="text/javascript">
-	$(function(){
+	$(function () {
 		//初始化设备
-		var json_path="data/systemmenu.data";
+		var json_path = "data/systemmenu.data";
 		//需要隐藏的数组
-		var arrayHideInfo=["采集时上传拍照","转换时上传特征值","人脸识别保存日志","识别告警时长","识别失败上传拍照"];
+		var arrayHideInfo = ["采集时上传拍照", "转换时上传特征值", "人脸识别保存日志", "识别告警时长", "识别失败上传拍照"];
 		//var arrayInfo=["menuServerPath","menuControllerNo","menuFunctionType","menuSystemCore"];
-		$.getJSON(json_path,function(json){
+		$.getJSON(json_path, function (json) {
 			//数组过滤
 			console.log(json);
 			var add = json.filter(function (item) {
-			  return arrayHideInfo.some(function (ele) {
-			    return ele === item.MenuName;
-			  });
+				return arrayHideInfo.some(function (ele) {
+					return ele === item.MenuName;
+				});
 			});
 			console.log(add);
 		})
-		
-		var type="TemperatureType";
-		var json_path="data/systemmenu.data";
-		$.getJSON(json_path,function(json){
+
+		var type = "TemperatureType";
+		var json_path = "data/systemmenu.data";
+		$.getJSON(json_path, function (json) {
 			//返回隐藏项目
 			console.log(json);
 			var filterArray = json.filter(function (item) {
 				return item.MenuType === type;
 			});
 			console.log(filterArray);
-			// for(var i=0;i<json.length;i++){
-			// 	$('li[data-menu='+add[i].MenuLiInfo+']').hide();
-			// }
-			
-			// if (fn) fn.call();
 		})
-		
+
 	})
 	//
 </script>

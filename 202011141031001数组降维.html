@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-11-14 10:32:13
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-11-14 11:57:23
+ * @LastEditTime: 2021-05-27 20:00:24
  * @Description: htm
 -->
 <!DOCTYPE html>
@@ -19,21 +19,26 @@
 
 </html>
 <script>
-  function reduceDimension(arr) {
+  
+function reduceDimension(arr){
     let ret = [];
-    let toArr = function (arr) {
-      arr.forEach(function (item) {
-        item instanceof Array ? toArr(item) : ret.push(item);
-      });
+    let toArr = function(arr){
+        arr.forEach(function(item){
+            item instanceof Array ? toArr(item) : ret.push(item);
+        });
     }
     toArr(arr);
     return ret;
   }
-  let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
-  for (let i = 0; i < 100000; i++) {
-    arr.push(i);
-  }
-  let start = new Date().getTime();
+  // let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
+  let arr = [[12], 4,5,6,7, [333, [4444, 5555,[1,2,3]]], [9, [111, 222]]];
+  // for (let i = 0; i < 100000; i++) {
+  //   arr.push(i);
+  // }
+  // let start = new Date().getTime();
   console.log('reduceDimension: ', reduceDimension(arr));
-  console.log('耗时: ', new Date().getTime() - start);
+
+
+
+
 </script>

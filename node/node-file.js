@@ -2,8 +2,8 @@
  * @Author: [JokerChen]
  * @Date: 2020-10-16 07:41:17
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-12-01 10:35:50
- * @Description: 
+ * @LastEditTime: 2021-03-16 14:05:17
+ * @Description: 文件读取功能优化
  */
 var fs=require('fs');
 //读取文件
@@ -14,7 +14,10 @@ fs.readFile("../data/changjson.json",function (err,data) {
     }
     console.log(`读取文件数据成功${data.toString()}`);
 })
-//成功
+//同步
+fs.readFileSync("../data/changjson.json",function (err,data) {
+  
+})
 
 //追加写入
 fs.writeFile("../data/2020101.txt","122333",function (err) {
@@ -25,7 +28,10 @@ fs.writeFile("../data/2020101.txt","122333",function (err) {
 })
 //追加写入信息
 fs.appendFile("../data/20200101.txt","11111","utf-8",(err,data)=>{
-  
+  if(err){
+    console.log("写入文件失败");
+    return false;
+  }
 })
 //文件删除
 fs.unlink("../data/20200101.txt",(err)=>{
