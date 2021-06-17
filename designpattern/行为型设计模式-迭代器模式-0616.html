@@ -1,0 +1,157 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-16 15:44:20
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-16 17:12:44
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>迭代器模式</title>
+</head>
+
+<body>
+  <ul id="container">
+
+  </ul>
+</body>
+
+</html>
+<script>
+  var Iterator = function (items, container) {
+    //獲取父級容器若container參數存在
+    var container = container && document.getElementById(container) || document;
+
+    var items = container.getElementsByTagName(items);
+    //獲取元素長度
+    var length = items.length;
+    //當前索引值
+    var index = 0;
+
+    var splice = [].splice;
+    return {
+      first: function () {
+        //獲取第一個元素
+        index = 0;            //校正當前索引
+        return items[index];//獲取第一元素
+      },
+      second: function () {
+        //獲取最後一個元素 
+        index = length - 1;
+        return items[length - 1];
+      },
+      pre: function () {
+        //獲取上一個元素 
+        if (--index > 0) {
+          return items[index];
+        }
+        else {
+          index = 0;
+          return null;
+        }
+      },
+      next: function () {
+        //獲取下一個元素 
+        if (++index > 0) {
+          return items[index];
+        }
+        else {
+          index = length - 1;
+          return null;
+        }
+      },
+      //獲取某個元素
+      get: function (num) {
+        //如果num>=0再獲取正向獲取，否則反向獲取
+        index = num >= 0 ? num % length : num % length + length;
+        return items[index];
+      },
+      //對每個元素執行一個方法
+      dealEach: function (fn) {
+        var args = splice.call(arguments, 1);
+        for (var i = 0; i < length; i++) {
+          fn.apply(items[i], args);
+        }
+      },
+      dealItem: function (num, fn) {
+        //
+        fn.apply(this.get(num), splice.call(arguments, 2));
+      },
+      //排他方式處理某一個元素
+      exclusive: function (num, allFn, numFn) {
+        //對所有元素執行回調函數
+        this.dealEach(allFn);
+        if (Object.prototype.toString.call(num) === "object Array") {
+          for (var i = 0, len = num.length; i < len; i++) {
+            this.dealItem(num[i], numFn);
+          }
+        }
+        else {
+          //處理第num個元素
+          this.dealItem(num, numFn);
+        }
+      }
+    }
+  }
+  //數組迭代器
+  var eachArray = function (arr, fn) {
+    var i = 0;
+    var len = arr.length;
+    for (; i < len; i++) {
+      if (fn.call(arr[i], i, arr[i]) === false) {
+        break;
+      }
+    }
+  }
+  //對象迭代器
+  var eachObject = function (obj, fn) {
+    for (var i in obj) {
+      if (fn.call(obj[i], i, obj[i]) === false) {
+        break;
+      }
+    }
+  }
+
+  // 同步對象A
+  var A = {
+    //所有用戶共有
+    common: {},
+    client: {
+      user: {
+        username: "",
+        uid: "111"
+      }
+    },
+    server: {
+
+    }
+  }
+
+  //同步變量迭代器
+  var AGetter = function (key) {
+    if (!A) {
+      return undefined;
+    }
+    var result = A;
+    //解析屬性層次序列
+    key = key.split('.');
+    for (var i = 0, len = key.length; i < len; i++) {
+      if (result[key[i] !== undefined]) {
+        result = result[key[i]];
+      }
+      else {
+        return undefined;
+      }
+
+      return result;
+    }
+  }
+
+
+</script>
