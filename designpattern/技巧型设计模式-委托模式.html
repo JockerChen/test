@@ -1,0 +1,40 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-17 19:36:38
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-17 19:57:10
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <title>委托模式</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  var Deal = {
+    banner: function () { },
+    aside: function () { },
+    article: function () { },
+    member: function () { },
+    message: function () { }
+  }
+  $.get('.deal/ashx?', function (res) {
+    for (var index in res) {
+      Deal[index] && Deal[index](res[index]);
+    }
+  })
+
+
+</script>

@@ -1,0 +1,80 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-25 19:37:28
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-26 08:59:12
+ * @Description: 高级类其中包含类的初始化静态变量、私有变量的定义、OOP的封装
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高级类</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  (function () {
+    function Shape() {
+      //私有变量
+      var x = 1;
+      var y = 2;
+      //公有变量
+      // this.x=2;
+      // this.y=3;
+      //可以用var 定义私有函数
+      var draw = function () {
+
+      }
+      //公有函数
+      this.draw = function () {
+
+      }
+    }
+
+    //通过new关键字
+    var aShape = new Shape();
+
+
+    //模仿oop编程（封装）类的对象的属性和方法的隐藏
+    function UserInfo(ax, ay) {
+      var x = 0;
+      var y = 1;
+      var init = function () {
+        x = ax;
+        y = ay;
+      }
+      //获取x的值
+      this.getX = function () {
+        return x;
+      }
+      //获取y的值
+      this.getY = function () {
+        return y;
+      }
+      init();
+    }
+
+    //静态属性和方法（作用到类身上的）而不是对象
+    function Person() {
+      this.Name = "adfsafdds";
+    }
+    Person.age = 11;
+    Person.showName = function (obj) {
+      new Person();
+      alert(obj.Name);
+    }
+
+    //简单类的建议方法
+    var a = {};
+    var arr = [];
+    a['name'] = "USPCAT.COM";
+  })();
+</script>

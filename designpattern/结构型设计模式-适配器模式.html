@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-01-08 19:06:43
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-08-15 11:50:02
+ * @LastEditTime: 2021-06-24 18:03:15
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>结构型设计模式-适配器模式</title>
-		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 	</body>
@@ -39,20 +39,20 @@
 // （2）适配器：用来连接客户端接口和提供服务的接口的类
 // （3）适配者：提供服务，但是却与客户端接口需求不兼容服务类。
 	$(function(){
-		var arrayAdapter={
-			name:'测试1',
-			title:'设计模式1',
-			age:5,
-			prize:302
-		};
-		
-		var info= doSomeThing(arrayAdapter);
+		var arr=['javascript','book','前端逻辑','1月1日']
+
+		var info= doSomeThing(arr);
 		console.log(info)
 	})
 	//适配器模式样例
 	function doSomeThing(obj)
 	{
-		var _adapter={};
+		var _adapter={
+			name:'测试1',
+			title:'设计模式1',
+			age:5,
+			prize:302
+		};
 		for(var i in obj)
 		{
 			_adapter[i]=obj[i] || _adapter[i];
@@ -60,12 +60,12 @@
 		return _adapter;
 	}
 	//jquery的ajax方法 理想数据是一个一位数组
-	function ajaxAdapter(data)
-	{
-		return [data['key1'],data['key2'],data['key2']]
-	}
-	var strServerIp="http://192.168.20.13/newdzbp/";
-    var strControlNo="02";
+	// function ajaxAdapter(data)
+	// {
+	// 	return [data['key1'],data['key2'],data['key2']]
+	// }
+	// var strServerIp="http://192.168.20.13/newdzbp/";
+  //   var strControlNo="02";
 	// $.ajax({
 	// 	type: "POST",
 	// 	url: strServerIp + "ashx/DZBP/SController.ashx",

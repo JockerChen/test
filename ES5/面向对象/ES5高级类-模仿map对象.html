@@ -1,0 +1,59 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-26 08:12:39
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-26 09:00:40
+ * @Description: 手写ES5.0实现ES5.0场景下的map对象的使用并封装常用方法
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟map对象</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  (function () {
+    //模拟jMap
+    function jMap() {
+      //私有变量
+      var arr = {};
+      //增加方法
+      this.put = function (key, value) {
+        arr[key] = value;
+      }
+      //查询
+      this.get = function (key) {
+        return arr[key];
+      }
+      //删除
+      this.remove = function (key) {
+        delete arr[key];
+      }
+      //遍历
+      this.eachMap = function (fn) {
+        for (var key in arr) {
+          fn(key, arr[key]);
+        }
+      }
+    }
+    var jMapTest = new jMap();
+    jMapTest.put("Name", "JokerChen");
+    jMapTest.put("age", 11);
+    jMapTest.put("work", "123123123");
+    console.log(jMapTest.get("age"));
+    console.log(jMapTest.get("Name"));
+    jMapTest.eachMap(function (key, value) {
+      console.log(`key:${key}------->value:${value}`);
+    })
+  })();
+</script>

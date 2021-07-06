@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2021-06-11 14:06:27
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-06-11 15:32:51
+ * @LastEditTime: 2021-07-03 08:19:21
  * @Description: 
 -->
 <!DOCTYPE html>
@@ -67,5 +67,14 @@ window.onload=function(){
     //接口地址
     this.interfaceUrl = "";
   }
+  const bindAll = (obj, ...fns) =>
+    fns.forEach(
+      fn => (
+        (f = obj[fn]),
+        (obj[fn] = function() {
+          return f.apply(obj);
+        })
+      )
+    );
 
 </script>

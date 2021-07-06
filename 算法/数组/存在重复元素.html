@@ -1,0 +1,40 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-07-01 09:41:31
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-07-01 11:06:35
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>存在重复元素</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  /*确认是否有重复的数据*/
+  var containsDuplicate = function (nums) {
+    var setInfo = Array.from(new Set(nums));
+    if (setInfo.length === nums.length) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  };
+  var info = [1, 2, 3, 1];
+  var info1 = [1, 2, 3, 4];
+  var info2 = [1, 2, 3, 1];
+  console.log(containsDuplicate(info1));
+
+
+</script>

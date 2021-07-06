@@ -1,0 +1,58 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-25 09:52:05
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-25 10:11:31
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组过滤</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  var faceFormatConfig = [{
+    width: 1280,
+    height: 800,
+    faceType: "CirCle",
+    faceLocation: [434, 161, 412, 412]
+  },{
+    width: 1280,
+    height: 720,
+    faceType: "CirCle",
+    faceLocation: [456, 146, 368, 368]
+  }]
+  var widthText = 1280;
+  var heightText = 800;
+
+  var arr = faceFormatConfig.filter(function (item) {
+    return item.width == widthText && item.height == heightText;
+  });
+  if (arr.length > 0) {
+    console.log(typeof arr[0].faceLocation);
+    console.log(...arr[0].faceLocation);
+    showCirCleFace.apply(this, arr[0].faceLocation);
+    // showCirCleFace(...arr[0].faceLocation); 
+  }
+  else {
+    androidClient.showText("人脸识别分辨率未适配");
+  }
+
+function showCirCleFace() {
+  console.log("测试:"+arguments[0]+' '+arguments[1]+' '+arguments[2]+' '+arguments[3]);
+  
+
+}
+
+
+</script>

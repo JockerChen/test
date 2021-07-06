@@ -1,0 +1,41 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-23 18:58:53
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-28 09:55:11
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>身高体重相关代码</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  //
+  var arr=[]; 
+  var stringInfo='';
+  var byteArray = ['57', '3A', '30', '36', '36', '2E', '33', '20', '48', '3A', '31', '38', '31', '2E', '30', '0D', '0A'];
+  for (var i = 0; i < byteArray.length - 1; i++) {
+    stringInfo+=String.fromCharCode(parseInt(byteArray[i], 16));
+  }
+console.log(stringInfo);
+var weight=stringInfo.trim().split(' ')[0].split(':')[1];
+var high=stringInfo.trim().split(' ')[1].split(':')[1]/100;
+var bmi=weight/(high*high)
+
+console.log(`weight:${weight}`);
+console.log(`high:${high}`);
+console.log(`BMI:${bmi}`);
+
+
+</script>

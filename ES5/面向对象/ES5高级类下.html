@@ -1,0 +1,49 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-26 09:02:06
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-26 14:56:22
+ * @Description: 类的原型原型模式，
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES5高级类下</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // 普通对象
+  //每一个通过函数和new操作符生成出来的prototype都有一个_proto_
+  
+  //每个属性保存了创建扩展普通对象的对象方法实现原理
+var objCls={};
+//隐式调用
+objCls.info="1";//=======>相当于objCls.__proto__.info="1";
+
+//方式1
+Object.getPrototypeOf(objCls).name="dfasdfsfsd";
+//方法2
+objCls.__proto__.master="dfasdfsfsd";
+
+
+//函数
+function nameCls(params) {
+  
+}
+nameCls.prototype.getName=function(){
+
+}
+/*继承*/
+
+
+
+</script>

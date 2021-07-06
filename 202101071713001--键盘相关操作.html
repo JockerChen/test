@@ -1,0 +1,169 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-01-07 17:14:34
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-25 14:26:41
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>键盘封装</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <style>
+    .inputKey {
+      margin: 0 20px;
+      width: 250px;
+    }
+
+    #allVal {
+      width: 200px;
+      height: 32px;
+      line-height: 32px;
+      text-align: left;
+
+    }
+
+    .numberKey {
+      width: 250px;
+      height: 250px;
+    }
+
+    .keyboard {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+    }
+
+    .funKey {
+      width: 250px;
+      height: 250px;
+    }
+
+    .keyboardFun {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="inputKey">
+    <input type="text" id="allVal" />
+  </div>
+  <div class="numberKey">
+    <input class="keyboard" type="button" value="0" />
+    <input class="keyboard" type="button" value="1" />
+    <input class="keyboard" type="button" value="2" />
+    <input class="keyboard" type="button" value="3" />
+    <input class="keyboard" type="button" value="4" />
+    <input class="keyboard" type="button" value="5" />
+    <input class="keyboard" type="button" value="7" />
+    <input class="keyboard" type="button" value="8" />
+    <input class="keyboard" type="button" value="9" />
+  </div>
+  <div class="funKey">
+    <input type="button" class="keyboardFun" value="enter" />
+    <input type="button" class="keyboardFun" value="clear" />
+    <input type="button" class="keyboardFun" value="find" />
+    <input type="button" class="keyboardFun" value="+" />
+    <input type="button" class="keyboardFun" value="-" />
+    <input type="button" class="keyboardFun" value="." />
+  </div>
+</body>
+
+</html>
+<script>
+  //参与计算数据部分
+  window['hardKeyboard'] = '';
+  //所有键盘功能（硬件键盘）
+  var keyBtnArrObject = [
+    { "keyCode": "menu", "keyFun": "executeMenu" }, //设置按键
+    { "keyCode": "S", "keyFun": "executeMenu" },
+    { "keyCode": "find", "keyFun": "executeFind" }, //查询按键    
+    { "keyCode": "F", "keyFun": "executeFind" }, //查询按键
+    { "keyCode": "esc", "keyFun": "executeEsc" },//返回按键
+    { "keyCode": "A", "keyFun": "executeEsc" },   // 
+    { "keyCode": "back", "keyFun": "executeBack" },//清除按键
+    { "keyCode": "enter", "keyFun": "executeEnter" },
+    { "keyCode": "find", "keyFun": "executeFind" },
+    { "keyCode": "clear", "keyFun": "executeClear" },
+    { "keyCode": "up", "keyFun": "executeUp" },//上一个
+    { "keyCode": "down", "keyFun": "executeDown" },//下一个
+    { "keyCode": "+", "keyFun": "executeAdd" }//加号操作
+    // { "keyCode": ".", "keyFun": "executePoint" },//小数点操作
+  ];
+
+  //消费查询界面跳转
+  function executeEnter() {
+    console.log("executeEnter");
+    console.log("hardKeyboard:" + hardKeyboard);
+  }
+  //消费查询界面跳转
+  function executeFind() {
+    console.log("executeFind");
+    //往消费查询界面跳转
+  }
+
+  //进行系统设置弹窗
+  function executeMenu() {
+    console.log("executeMenu");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+  //进行系统设置弹窗
+  function executeEsc() {
+    console.log("executeEsc");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+  //进行系统设置弹窗
+  function executeBack() {
+    console.log("executeBack");
+    //往消费查询界面跳转
+    // androidClient.showSystemManagerDialog(androidClient.getLanguage("系统菜单"),"00","systemmenu");
+  }
+
+  //加功能
+  function executeAdd() {
+    hardKeyboard = '';
+  }
+   //点功能
+   function executePoint() {
+    hardKeyboard = '';
+  }
+  
+  //处理硬键盘点击操作
+  //硬件key值
+  //
+  function operatorKeyPress(key, keyObject, Keyboard, fn) {
+    var fillerKeyBtn = keyObject.filter(function (e) {
+      return e.keyCode == key;
+    });
+    //确认当前点击是否
+    if (fillerKeyBtn.length > 0) {
+      eval(fillerKeyBtn[0].keyFun + "();");
+    } else {
+      if (fn) fn.call(this, Keyboard + key);
+    }
+  }
+
+  $(function () {
+    $('input[type="button"]').on('click', function () {
+      if (hardKeyboard.length>6){
+          return false;
+      }
+      //进行过滤
+      operatorKeyPress($(this).val().toUpperCase(), keyBtnArrObject, hardKeyboard, function (ret) {
+        hardKeyboard = ret;
+        $('#allVal').val(hardKeyboard);
+      });
+      console.log('硬件键盘输入值-----:' + hardKeyboard);
+    })
+  })
+
+</script>

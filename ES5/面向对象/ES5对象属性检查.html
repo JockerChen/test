@@ -1,0 +1,36 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-06-28 20:23:45
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-06-28 20:27:53
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象属性检查</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  
+// {value: 1, writable: true, enumerable: true, configurable: true}
+// value 属性值
+// writable 属性值是否可以修改
+// enumerable 是否希望某些属性出现在枚举中
+// configurable 属性是否可以配置，如果是可配置，可以结合 Object.defineProperty() 方法使用
+  var obj={
+    "Name":"123123S"    
+  }
+
+  console.log('Name' in obj); // true
+
+  console.log(obj.hasOwnProperty('Name')); // true
+  
+  
+</script>

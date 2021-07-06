@@ -1,0 +1,30 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-07-02 18:41:38
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-07-02 20:04:27
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常用日志功能封装</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  var strUrl=window.location.href;
+  console.log(strUrl);
+  window.onload = function(){
+    Log("智慧校园","人脸识别","初始化完成");
+  }
+  //前端的日志
+  function Log(TAG,FUNCTION,STATE) {
+    console.log("[JS-"+TAG+"-"+FUNCTION+"]:"+STATE);
+  }
+</script>

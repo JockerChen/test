@@ -2,36 +2,42 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-08 10:35:01
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-08-08 11:31:42
+ * @LastEditTime: 2021-06-26 15:08:47
  * @Description: 函数继承
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>ES5函数继承</title>
 </head>
+
 <body>
 </body>
+
 </html>
 <script>
-  window.onload=function(){
-    showToast(wx);
+  window.onload = function () {
+    var a = {};
+    //a继承于wx
+    a.__proto__ = wx.prototype;
+    a.getAge(2);
   }
-  var wx={
-    "number":"1",
-    showToast(){
-      console.log(`执行showToast${this.number}`);
+  function wx() {
+    this.getName = function (name) {
+      console.log(name);
     }
-  };
+  }
 
-function showToast(obj) {
-  return obj.showToast();
-}
-
-
-
+  //为类扩展对象
+  wx.prototype.getAge = function (age) {
+    console.log(age);
+  }
+  /*简单的形式实现继承
+  b继承至per
+  无法试下多继承的*/
 
 
 
