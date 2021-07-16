@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-05 17:06:25
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-07-05 18:11:45
+ * @LastEditTime: 2021-07-16 13:26:24
  * @Description:
  */
 
@@ -24,8 +24,8 @@ enum Color {
   Green = 3,
   Blue = 5,
 }
-let c: Color = Color.Green;
-console.log(`枚举数据类型${c}`);
+let colorInfo: Color = Color.Green;
+console.log(`枚举数据类型${colorInfo}`);
 
 //模糊数据类型
 let i: any = "adfasdfds";
@@ -59,3 +59,14 @@ let thingLength: number = (<String>someValue).length;
 //写法2
 let thingLength1: number = (someValue as string).length;
 console.log(`断言:长度${thingLength1}`);
+//
+function getLength(something: string | number) :string {
+  return something.toString();
+}
+
+console.log(`当前输出的字符串为：${getLength("asdfasdfsadf")}`);
+/*对象相关属性赋值*/
+//
+// let info: { name: string, [propName: string]: any };
+// info = { name: "小明", age: 13 };
+let funD: (num1: number, num2: number) => number;

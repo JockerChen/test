@@ -2,10 +2,10 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-06 08:25:11
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-07-06 08:50:33
+ * @LastEditTime: 2021-07-16 19:07:12
  * @Description:接口相关
  */
-export const numberRegexp = /^[0-9]+$/;
+const numberRegexp = /^[0-9]+$/;
 interface StringValidator {
   isAcceptable(s: string): void;
 }
