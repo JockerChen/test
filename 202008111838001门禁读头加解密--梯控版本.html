@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-11 18:38:38
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-12-10 11:06:49
+ * @LastEditTime: 2021-07-26 17:56:02
  * @Description: 追加了对应的梯控的设置，现在暂时支持5个楼层的设置
  
 -->
@@ -20,25 +20,25 @@
 <script>
 window.onload=function(){
   //加密部分
-   var cardid = "1258641926";
-   var flour1 = "280306021";
-   var flour2 = "";
-   var flour3 = "";
-   var flour4 = "";
-   var flour5 = "";
+//    var cardid = "1258641926";
+//    var flour1 = "280306021";
+//    var flour2 = "";
+//    var flour3 = "";
+//    var flour4 = "";
+//    var flour5 = "";
 //    var flourArray=[flour1,flour2,flour3,flour4,flour5];
 
-//    var cardid = "3512265146";
-//    var currentTime = Date.parse(new Date());//当前日期
-//    var slider3 = 0; //0小时
-//    var slider4 = 1; //10分钟
-//     var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+   var cardid = "2365236921";
+   var currentTime = Date.parse(new Date());//当前日期
+   var slider3 = 0; //0小时
+   var slider4 = 10; //10分钟
+    var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
 //    var time = currentTime;
-//    var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+   var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
    
-//    var sCard = getQrcodeBytes(cardid, time, count);
-//    console.log(sCard);
-var info ="F1204538E36E7335A9AB6D5867EA18E818A5E747";
+   var sCard = getQrcodeBytes(cardid, time, count);
+   console.log(sCard);
+// var info ="F1204538E36E7335A9AB6D5867EA18E818A5E747";
   //解密
 console.log(qrDeCodeProject(info));
   
@@ -142,11 +142,11 @@ function qrDeCodeProject(codeString) {
     for (var i = 4; i < 8; i++) {
         byte4.push(seekByte20[i]);
     }
+    
     for (var i = 12; i < 16; i++) {
         byte4Time.push(seekByte20[i]);
     }
-    console.log(seekByte20);
-    
+    console.log("生成："+seekByte20);
     //楼层1
     for (var i = 16; i < 20; i++) {
         byte1Flour.push(seekByte20[i]);

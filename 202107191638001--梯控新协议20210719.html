@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/jquery.qrcode.js"></script>
+  <script src="js/creatbar.js"></script>
+  <script src="js/tkentity.js"></script>
+  <script src="js/tkqrcode.js"></script>
+  <script src="js/tkenqrcode.js"></script>
+  <meta name="viewport" content="width=\, initial-scale=1.0">
+  <title>Document</title>
+  <style lang="">
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .mainCls {
+      left: 150px;
+      top: 50px;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      text-align: center;
+
+    }
+    .SecondCls {
+      left: 150px;
+      top: 300px;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      text-align: center;
+
+    }
+    .ThirdCls {
+      left: 150px;
+      top: 500px;
+      width: 300px;
+      height: 300px;
+      position: absolute;
+      text-align: center;
+
+    }
+    
+
+    .buttonCls {
+      position: relative;
+      top:50px;
+      width: 75px;
+      height: 75px;
+      float: left;
+      padding: 5px;
+    }
+
+    .divCls {
+      position: relative;
+    }
+
+    #QRCodeImg {}
+  </style>
+</head>
+
+<body>
+  <div class="mainCls">
+    <button class="buttonCls" id="CreatQRCode">生成梯控二维码</button>
+    <div class="divCls">梯控二维码</div>
+
+    <div id="QRCodeImg">
+
+    </div>
+  </div>
+  <div class="SecondCls">
+    <button class="buttonCls" id="SetTime">校时</button>
+    <div class="divCls">校时二维码</div>
+
+    <div id="QRCodeSetTimeImg">
+
+    </div>
+  </div>
+  <div class="ThirdCls">
+    <button class="buttonCls" id="SetDeviceNo">设置设备号</button>
+    <div class="divCls">设置设备号</div>
+
+    <div id="QRCodeSetDevice">
+
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+  $(function () {
+    $('#CreatQRCode').on('click',function () {
+      var cardid = "2365236921";
+      //    var cardid = "3512265146";
+      var currentTime = Date.parse(new Date());//当前日期
+      var slider3 = 0; //0小时
+      var slider4 = 1; //10分钟
+      var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+      // var time = currentTime;
+      var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+
+      var sCard = getQrcodeBytes(cardid, time, count, arrElevatorList);
+      console.log(sCard);
+      var newQrcode = new qrcode();
+      newQrcode.CreatQrCode('QRCodeImg', sCard);
+    })
+
+    $('#SetTime').on('click',function () {
+      var iPlotEstate = "32";
+      var changeArray = [];
+      changeArray.push('0xAA');
+      changeArray.push('0x01');
+      changeArray.push(...Array(45).fill('0x00'));
+      changeArray.push(DecToHex(iPlotEstate));
+      changeArray.push("0X0D");
+      changeArray.push("0X0A");
+      console.log(`当前字节：${changeArray},字节长度：${changeArray.length}`);
+
+      //特定卡号
+      var cardid = "1111111111";
+      //    var cardid = "3512265146";
+      var currentTime = Date.parse(new Date());//当前日期
+      var slider3 = 0; //0小时
+      var slider4 = 0; //10分钟
+      var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+      // var time = currentTime;
+      var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+      var sCard = getQrcodeBytes(cardid, time, count, changeArray);
+      console.log(sCard);
+      var newQrcode = new qrcode();
+      newQrcode.CreatQrCode('QRCodeSetTimeImg', sCard);
+    })
+    $('#SetDeviceNo').on('click',function () {
+      var iPlotEstate = "32";
+      var changeArray = [];
+      changeArray.push('0xAA');
+      changeArray.push('0x01');
+      changeArray.push(...Array(45).fill('0x00'));
+      changeArray.push(DecToHex(iPlotEstate));
+      changeArray.push("0X0D");
+      changeArray.push("0X0A");
+      console.log(`当前字节：${changeArray},字节长度：${changeArray.length}`);
+
+      //特定卡号
+      var cardid = "2365236921";
+      //    var cardid = "3512265146";
+      var currentTime = Date.parse(new Date());//当前日期
+      var slider3 = 0; //0小时
+      var slider4 = 1; //10分钟
+      var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+      // var time = currentTime;
+      var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+      var sCard = getQrcodeBytes(cardid, time, count, changeArray);
+      console.log(sCard);
+      var newQrcode = new qrcode();
+      newQrcode.CreatQrCode('QRCodeSetDevice', sCard);
+    })
+  })
+  //呼叫方式
+  // HandControl:手动呼叫
+  // AutoControl:自动呼叫
+  var CallTypeEnum = {
+    "HandControl": "0X00",
+    "AutoControl": "0X01"
+  }
+  //卡类型
+  // UserCard:用户卡
+  // AdminCard:管理卡
+  // SwitchCard:开关卡
+  var CardTypeEnum = {
+    "UserCard": "0XBB",
+    "AdminCard": "0XCC",
+    "SwitchCard": "0XDD"
+  }
+  var floorInfo = `{
+    "resultCode": "0",
+    "Msg": "success",
+    "total": "0",
+    "rowsType": [{
+        "PersonCardNO": "0000006969",
+        "CardType": "UserCard"
+    }],
+    "rows": [{
+            "DeviceNo": "1",
+            "Command": "1,5,12,13,14,15,16,17,19,20,31,40,45,60",
+            "CallType": "HandControl"
+        },
+        {
+            "DeviceNo": "2",
+            "Command": "1,12,15,23,41",
+            "CallType": "HandControl"
+        },
+        {
+            "DeviceNo": "3",
+            "Command": "1,10,13,32,44",
+            "CallType": "HandControl"
+        }
+    ]
+}`;
+  //elevator
+  var arrElevatorList = [];
+  var floorObj = JSON.parse(floorInfo);
+  var info = floorObj.rowsType[0].CardType;
+  //楼信息
+  var arrFloorTempList = [];
+
+  var arrFloorList = [];
+  var arrElevatorList = [];
+  arrElevatorList.push(CardTypeEnum[floorObj.rowsType[0]?.CardType]);
+  arrElevatorList.push(CallTypeEnum[floorObj.rows[0]?.CallType]);
+  for (var buildingIndex = 0; buildingIndex < 5; buildingIndex++) {
+    arrFloorList = floorObj.rows[buildingIndex]?.Command.split(',');
+    arrFloorTempList.push(DecToHex(floorObj.rows[buildingIndex]?.DeviceNo || 0));
+    var arrTemp = creatQRCode(arrFloorList);
+    // console.log(`临时数组:${arrTemp}`);
+    arrElevatorList.push(...arrTemp);
+  }
+  arrElevatorList.push(...arrFloorTempList);
+  arrElevatorList.push('0x0d');
+  arrElevatorList.push('0x0a');
+  console.log(`最终数组:${arrElevatorList}`);
+  function creatQRCode(arrFloorList) {
+    var changeArray = Array(64).fill(0);
+    for (var i = 0; i < arrFloorList?.length; i++) {
+      changeArray[arrFloorList[i] - 1] = 1;
+    }
+    //颠倒前的数据
+    // console.log(`颠倒前${changeArray}`);
+    var changeAAAAAA = changeArray.reverse();
+    //颠倒后的数据
+    // console.log(`反转数组：${changeAAAAAA}`);
+    var spliceValue = '';
+    //进行截取（每8位截取一次）截取后的结果（8位截取开始）（一组楼号对应的）
+    var arrNew = [];
+    for (var index = 0; index < changeAAAAAA.length; index++) {
+      // console.log(`index:${index} value:${changeAAAAAA[index]}`);
+      if (((index + 1) % 8 == 0) && (index != 0)) {
+        spliceValue += changeAAAAAA[index];
+        arrNew.push(spliceValue)
+        spliceValue = '';
+      }
+      else {
+        spliceValue += changeAAAAAA[index];
+      }
+    }
+    // console.log(`arrNew:${arrNew}`);
+    /**************************每8位截取结束*************************/
+    var arr3 = []
+    /*字符串进行拼接*/
+    for (let indexNew = 0; indexNew < arrNew.length; indexNew++) {
+      const element = parseInt(arrNew[indexNew], 2).toString(16);
+      arr3.push("0x" + padding2(element, 2));
+    }
+    // console.log(`一个楼:${arr3}`);
+    return arr3;
+  }
+
+  //补齐两位
+  function padding2(num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+
+
+
+  // FloorOption
+  function DecToHex(str) {
+    return ('0x' + parseInt(str).toString(16)).toUpperCase();
+  }
+
+//管理员配置
+//
+
+
+
+</script>

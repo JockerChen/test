@@ -1,18 +1,51 @@
+//接口1  获取电梯数据
 {
-  "resultCode":"0",
-  "Msg":"success",
-  "total":"0",
-  "rowsType":[
-      {
-          "PersonCardNO":"0000006969",
-          "CardType":"UserCard"
-      }
-  ],
-  "rows":[
-      {
-          "DeviceNo":"1",
-          "Command":"1,5,0,0,0",
-          "CallType":"HandControl"
-      }
-  ]
+    "resultCode": "0",
+    "Msg": "success",
+    "total": "0",
+    "rowsType": [{
+        "PersonCardNO": "0000006969",
+        "CardType": "UserCard"
+    }],
+    "rows": [{
+            "DeviceNo": "1",
+            "Command": "1,5,0,0,0",
+            "CallType": "HandControl"
+        },
+        {
+            "DeviceNo": "2",
+            "Command": "1,12,15,23,41",
+            "CallType": "HandControl"
+        },
+        {
+            "DeviceNo": "3",
+            "Command": "1,10,13,32,44",
+            "CallType": "HandControl"
+        }
+    ]
 }
+
+//接口2 获取家属相关信息（这个返回当前的业主信息，第一个数据返回的是）
+{
+    "resultCode": "0",
+    "Msg": "success",
+    "total": "0",
+    "rows": [{
+        "PersonName": "陈宁",
+        "PersonPhone": "15802450560",
+        "PersonAccountNo": "5223322111",
+        "PersonTypeId": "业主",
+        "PersonImage": "https:www.55kad.com/dzbptgys/uploadfile/20222012.jpg",
+        "PersonCardId": "1233522210",
+        "PersonBindState": "1",
+    }, {
+        "PersonName": "小****",
+        "PersonPhone": "15640194562",
+        "PersonAccountNo": "5223322222",
+        "PersonTypeId": "家属",
+        "PersonImage": "https:www.55kad.com/dzbptgys/uploadfile/20212112.jpg",
+        "PersonCardId": "1646814614",
+        "PersonBindState": "0",
+    }]
+}
+//接口3

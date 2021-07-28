@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-09-09 13:26:34
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-09-09 16:08:46
+ * @LastEditTime: 2021-07-26 20:17:02
  * @Description:二维码加密函数 
  */
 //
@@ -89,7 +89,9 @@ function getQrcodeBytes(cardid, time, count,flourArray) {
   var index = 0;
   //根据不同的楼层信息进行处理
   var flourLength=flourArray.length;
-  var qrcodebyte = new Array(52);
+  console.log("flour:index"+flourLength,flourArray);
+  
+  var qrcodebyte = new Array(65);
   console.log("数组长度："+qrcodebyte.length);
   qrcodebyte[index++] = 0x26;// 头
   qrcodebyte[index++] = 0x18;// 头
@@ -101,33 +103,34 @@ function getQrcodeBytes(cardid, time, count,flourArray) {
   for (var i = 0; i < 4; i++) {
       qrcodebyte[index++] = b_cardid[i]
   }
-  console.log("b_cardid:"+qrcodebyte);
+  console.log("b_cardid:index"+qrcodebyte,index);
   // 厂商 3 + count 1
   var b_company = new Array(0XFF, 0XFF, 0XFF, count);
   for (var i = 0; i < 4; i++) {
       qrcodebyte[index++] = b_company[i]
   }
-  console.log("b_company:"+qrcodebyte);
+  console.log("b_company:index"+qrcodebyte,index);
       
   // TIME 4
   var b_time = long_byte4(time / 1000);
   for (var i = 0; i < 4; i++) {
       qrcodebyte[index++] = b_time[i]
   }
-  console.log("b_time:"+qrcodebyte);
+  console.log("b_time:index"+qrcodebyte,index);
   //楼层
   console.log('flour:'+flourArray);
+  console.log('flour长度:'+flourArray.length);
   for(var j=0;j<flourArray.length;j++){
       qrcodebyte[index++] = flourArray[j];
   }
 
-  console.log("b_flour:"+qrcodebyte);
+  console.log("b_flour:index"+qrcodebyte,index);
   // crc32 4
-  var crcCheck = new Array(48);
+  var crcCheck = new Array(70);
   for (var i = 0; i < crcCheck.length; i++) {
       crcCheck[i] = qrcodebyte[i];
   }
-  var crcValue = CrcGen_STM32(crcCheck, 4);
+  var crcValue = CrcGen_STM32(crcCheck, 4); 
 
   var b_crc = long_byte4(crcValue);
   for (var i = 0; i < 4; i++) {

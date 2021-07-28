@@ -1,0 +1,103 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-07-27 10:59:17
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-07-27 13:07:54
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/jquery.qrcode.js"></script>
+  <script src="js/creatbar.js"></script>
+  <script src="js/tkentity.js"></script>
+  <script src="js/tkqrcode.js"></script>
+  <script src="js/tkenqrcode.js"></script>
+  <title>Document</title>
+  
+</head>
+
+<body>
+  <div class="mainCls">
+  <button>生成梯控二维码</button>
+  <div>梯控二维码</div>
+
+  <div id="QRCodeImg">
+
+  </div>
+</div>
+</body>
+
+</html>
+<script>
+  //呼叫方式
+  // HandControl:手动呼叫
+  // AutoControl:自动呼叫
+  var CallTypeEnum = {
+    "HandControl": "0X00",
+    "AutoControl": "0X01"
+  }
+  //卡类型
+  // UserCard:用户卡
+  // AdminCard:管理卡
+  // SwitchCard:开关卡
+  var CardTypeEnum = {
+    "UserCard": "0XBB",
+    "AdminCard": "0XCC",
+    "SwitchCard": "0XDD"
+  }
+  //小区号
+  var iPlotEstate = "32";
+  var changeArray = [];
+  changeArray.push('0xAA');
+  changeArray.push('0x01');
+  changeArray.push(...Array(45).fill('0x00'));
+  changeArray.push(DecToHex(iPlotEstate));
+  changeArray.push("0X0D");
+  changeArray.push("0X0A");
+  console.log(`当前字节：${changeArray},字节长度：${changeArray.length}`);
+  //补齐两位
+  function padding2(num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+
+  //特定卡号
+  var cardid = "1111111111";
+  //    var cardid = "3512265146";
+  var currentTime = Date.parse(new Date());//当前日期
+  var slider3 = 0; //0小时
+  var slider4 = 0; //10分钟
+  var time = currentTime + (slider3 * 60 + slider4) * 60 * 1000;//毫秒
+  // var time = currentTime;
+  var count = 1; //（校时秒数）///普通卡模式的话这个值对应的时间是分钟
+  var sCard = getQrcodeBytes(cardid, time, count, changeArray);
+  console.log(sCard);
+  $('#QrcodeDetial').text(sCard);
+  var newQrcode = new qrcode();
+  newQrcode.CreatQrCode('QRCodeImg', sCard);
+  // FloorOption
+  function DecToHex(str) {
+    return ('0x' + parseInt(str).toString(16)).toUpperCase();
+  }
+
+//管理员配置
+//
+
+
+
+
+
+
+
+
+
+
+</script>

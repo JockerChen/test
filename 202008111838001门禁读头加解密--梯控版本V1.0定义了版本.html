@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2020-08-11 18:38:38
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2020-09-16 09:58:14
+ * @LastEditTime: 2021-07-21 13:36:05
  * @Description: 追加了对应的梯控的设置，现在暂时支持5个楼层的设置
  
 -->
@@ -329,27 +329,4 @@ var floorqrcodebyte = new Array(32);
 
  
 
-
-
- 
-//将内容转换后为Utf-8
-function toUtf8(str) {    
-    var out, i, len, c;    
-    out = "";    
-    len = str.length;    
-    for(i = 0; i < len; i++) {    
-        c = str.charCodeAt(i);    
-        if ((c >= 0x0001) && (c <= 0x007F)) {    
-            out += str.charAt(i);    
-        } else if (c > 0x07FF) {    
-            out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));    
-            out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));    
-            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
-        } else {    
-            out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));    
-            out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));    
-        }    
-    }    
-    return out;    
-} 
 </script>
