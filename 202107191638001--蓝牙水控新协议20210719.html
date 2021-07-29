@@ -1,0 +1,291 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-07-28 18:46:01
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-07-29 17:39:15
+ * @Description: 蓝牙水控新协议
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蓝牙水控新协议 </title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  
+  //命令头
+  const commandHead = {
+    "SetDeviceNo": "A0",
+    "SetParameter": "A1",
+    "OpenValve": "A2",
+    "CloseValve": "A3"
+  }
+  /*
+  Measure:计量类型设备
+  Timing:计时类型设备
+  */
+  const deviceType = {
+    "Measure": "06",
+    "Timing": "07"
+  }
+  /*
+    pulseSelection:脉冲当量
+  */
+  const pulseSelection = ["0400", "0500", "0600", "0700", "0800"];
+  /*
+    sectorNo:扇区号
+  */
+  const sectorNo = ["02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f"];
+  /*
+    sectorNo:加密方式
+    Standard:标准密钥
+    OneCardEncrypt:一卡一密
+  */
+  const encryptMethod = {
+    "Standard": "00",
+    "OneCardEncrypt": "01"
+  }
+
+  /*
+    valveType:阀门类型
+    Electromagnetism:电磁阀
+    ElectricForce:电动阀
+  */
+  const valveType = {
+    "Electromagnetism": "00",
+    "ElectricForce": "01"
+  }
+  /*
+      cardType:卡类型
+      All:全扇区
+      SectorCard:扇区卡
+    */
+  const cardType = {
+    "All": "00",
+    "CPU": "01",
+    "SectorCard": ["02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17"]
+  }
+
+  /*
+    copySwitch:防复制
+    Close:关
+    Open:开
+  */
+  const copyPreventSwitch = {
+    "Close": "00",
+    "Open": "01"
+  }
+  //费率
+  const rate = "";
+  //water-control
+  class WaterControl {
+    constructor() {
+      
+    }
+  }
+
+  /****************************设置机号****************************/
+  //第一组：设置机号
+  let info = "123456";
+  let deviceArrTemp = [];
+  //数据区头
+  deviceArrTemp.push(commandHead.SetDeviceNo);
+  deviceArrTemp.push(padding2((info.length / 2), 2));
+  deviceArrTemp.push(...arrTwoCut(info));
+
+  let setDeviceArr = deviceArrTemp.map(function (item, index, array) {
+    return '0x' + item;
+  });
+  console.log(`设置机号:${setDeviceArr}`);
+  /****************************设置机号****************************/
+  
+  /****************************开阀出水****************************/
+  //2 开阀出水
+  let deviceNo = "123456";
+  let cardNo = "1234567890";
+  let balance = 0.59;
+  //处理余额
+  // let balanceArrTemp=arrTwoCut(changeBalance(balance));
+
+  let openValveArrTemp = [];
+  openValveArrTemp.push(commandHead.OpenValve);
+
+  //数据区
+  let dataArrOpenValve = [];
+  dataArrOpenValve.push(...arrTwoCut(deviceNo));
+  dataArrOpenValve.push(...arrTwoCut(cardNo));
+  dataArrOpenValve.push(...arrTwoCut(changeBalance(balance)));
+  
+  //计算数据区的长度并转成16进制，不足两位进行补齐
+  openValveArrTemp.push(DecToHex(dataArrOpenValve.length));
+  openValveArrTemp.push(...dataArrOpenValve);
+  // A2 0B 12 34 56 12 34 56 78 90 00 90 00
+  let openValveArr = openValveArrTemp.map(function (item, index, array) {
+    return '0x' + item;
+  });
+  console.log(`开阀:${openValveArr}`);
+  // 0xA2,0x0B,0x12,0x34,0x56,0x12,0x34,0x56,0x78,0x90,0x00,0x00,0x59
+  /****************************开阀出水****************************/
+  
+  /****************************关阀结账****************************/
+  let deviceNoClose = "123456";
+  let cardNoClose = "1234567890";
+
+  let closeValveArrTemp = [];
+  closeValveArrTemp.push(commandHead.CloseValve);
+  //数据区
+  let dataArrCloseValve = [];
+  dataArrCloseValve.push(...arrTwoCut(deviceNoClose));
+  dataArrCloseValve.push(...arrTwoCut(cardNoClose));
+
+  //计算数据区的长度并转成16进制，不足两位进行补齐
+  closeValveArrTemp.push(DecToHex(dataArrCloseValve.length));
+  closeValveArrTemp.push(...dataArrCloseValve);
+
+
+  let closeValveArr = closeValveArrTemp.map(function (item, index, array) {
+    return '0x' + item;
+  });
+  console.log(`关阀:${closeValveArr}`);
+  /****************************关阀结账****************************/
+
+  /****************************设置费率****************************/
+  console.log(`******************************设置费率**********************************`);
+  let deviceNoSetting = "123456";
+  //卡号
+  let cardNoSetting = "1234567890";
+  //卡秘钥
+  let cardSecretKeySetting="236556988554";
+  //费率
+  let rateSetting="0001";
+  //最小消费
+  let minCustom="1";
+  //最大消费
+  let maxCustom="010";
+  //机型
+  let sDeviceType=deviceType["Measure"];
+  //6为圈存上线
+  let maxRechargeLine="105000";
+  //脉冲当量
+  let sPulseSelection="0600";
+  //阀形
+  let sValveType=valveType["Electromagnetism"];
+  //扇区
+  let sSectorNo="11";
+  //加密方式
+  let sEncryptMethod=encryptMethod["Standard"];
+
+  //卡类型
+  let sCardType=cardType["CPU"];
+  
+  //卡类型
+  let sSwitch=copyPreventSwitch["Close"];
+  //预留
+  let sBak="00000000";
+  //设置区
+  let settingArrTemp=[];
+  settingArrTemp.push(commandHead.SetParameter);
+
+  //扇区
+  let sOutRangeCnt="11";
+  console.log(`******************************设置费率数据区**********************************`);
+  //数据区
+  let dataArrSetting = [];
+  dataArrSetting.push(...arrTwoCut(rateSetting));
+  console.log(`设置--费率:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(padding2(minCustom,2));
+  console.log(`设置--最小金额:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(padding2(maxCustom,4)));
+  console.log(`设置--最大金额:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(cardNoSetting));
+  console.log(`设置--卡号:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(cardSecretKeySetting));
+  console.log(`设置--卡秘钥:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sDeviceType.toString());
+  console.log(`设置--机型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(maxRechargeLine));
+  console.log(`设置--最大圈存限额:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(sPulseSelection));
+  console.log(`设置--脉冲当量:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sValveType.toString());
+  console.log(`设置--阀门类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sSectorNo.toString());
+  console.log(`设置--扇区类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sEncryptMethod.toString());
+  console.log(`设置--加密类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sCardType.toString());
+  console.log(`设置--卡类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(sSwitch.toString());
+  console.log(`设置--防复制开关类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(padding2(DecToHex(sOutRangeCnt),2));
+  console.log(`设置--防复制容限次数类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  dataArrSetting.push(...arrTwoCut(sBak));
+  console.log(`设置--预留位:${dataArrSetting},当前长度${dataArrSetting.length}`);
+  console.log(`******************************设置费率数据区**********************************`);
+    //计算数据区的长度并转成16进制，不足两位进行补齐
+  settingArrTemp.push(DecToHex(dataArrSetting.length));
+  settingArrTemp.push(...dataArrSetting);
+  let settingArr = settingArrTemp.map(function (item, index, array) {
+    return '0x' + item;
+  });
+  // dataArrSetting.push(...arrTwoCut(padding2(deviceNoSetting,4)));
+  console.log(`设置费率:${settingArr}`);
+
+  
+  console.log(`******************************设置费率**********************************`);
+
+
+
+
+
+
+
+
+
+
+
+
+  /****************************设置费率****************************/
+  
+  /****************************功能函数****************************/
+  //2位补齐
+  function padding2(num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+
+  //两位截取
+  function arrTwoCut(info) {
+    let arr = [];
+    //每两位截取
+    for (let i = 0; i < info.length / 2; i++) {
+      arr.push(info.substring(i * 2, (i + 1) * 2));
+    }
+    return arr;
+  }
+
+  //处理金钱
+  function changeBalance(str) {
+    let arrBalanceInfo = str.toString().replace(".", "");
+    arrBalanceInfo = padding2(parseInt(arrBalanceInfo), 6)
+    return arrBalanceInfo;
+  }
+  //十进制转16进制
+  function DecToHex(str) {
+    return padding2((parseInt(str).toString(16)).toUpperCase(), 2);
+  }
+
+
+  /****************************功能函数****************************/
+</script>
