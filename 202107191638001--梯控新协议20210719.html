@@ -96,7 +96,7 @@
 <script>
   $(function () {
     $('#CreatQRCode').on('click',function () {
-      var cardid = "2365236921";
+      var cardid = "3511613098";
       //    var cardid = "3512265146";
       var currentTime = Date.parse(new Date());//当前日期
       var slider3 = 0; //0小时
@@ -112,6 +112,7 @@
     })
 
     $('#SetTime').on('click',function () {
+      //社区ID
       var iPlotEstate = "32";
       var changeArray = [];
       changeArray.push('0xAA');
@@ -137,6 +138,7 @@
       newQrcode.CreatQrCode('QRCodeSetTimeImg', sCard);
     })
     $('#SetDeviceNo').on('click',function () {
+      //社区ID
       var iPlotEstate = "32";
       var changeArray = [];
       changeArray.push('0xAA');
@@ -183,24 +185,16 @@
     "Msg": "success",
     "total": "0",
     "rowsType": [{
-        "PersonCardNO": "0000006969",
+        "PersonCardNO": "3511613098",
         "CardType": "UserCard"
     }],
     "rows": 
       [{
-          "DeviceNo": "1",
-          "Command": "1,5,12,13,14,15,16,17,19,20,31,40,45,60",
-          "CallType": "HandControl"
-      },
-      {
-          "DeviceNo": "2",
-          "Command": "1,12,15,23,41",
-          "CallType": "HandControl"
-      },
-      {
-          "DeviceNo": "3",
-          "Command": "1,10,13,32,44",
-          "CallType": "HandControl"
+          "DeviceNo": "12",
+          "Command": "1,2,3,4,5,6,19,20,21,22,23,24,13,14,15,16,17,18,7,8,9,10,11,12",
+          "CallType": "HandControl",
+          "callType":"HandControl",
+          "isAutomation":"0"
       }
     ]
 }`;

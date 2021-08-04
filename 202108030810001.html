@@ -1,0 +1,30 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-03 08:11:04
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-03 08:15:19
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>根据属性获取数据</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  let arrObj = [{ "depIndex": 1, "depName": "阳光100物业" }, { "depIndex": 2, "depName": "青山书院" }, { "depIndex": 3, "depName": "大河铭著" }];
+  var arr = arrObj.filter(function (item) {
+    return item.depIndex === 3;
+  })
+  console.log(arr[0].depName);
+
+</script>

@@ -2,6 +2,95 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-14 17:39:53
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-07-14 17:41:08
- * @Description: 
+ * @LastEditTime: 2021-07-30 09:40:01
+ * @Description: 两位反转
 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两位反转</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  let arrInfo = ['12', '34', '56'];
+  arrInfo.reverse();
+  console.log(arrInfo);
+
+  //水控器相关类
+  /**
+    deviceNo:水控设备号
+    
+    deviceType
+    Measure:计量类型设备06 
+    Timing:计时类型设备07
+
+    valveType:阀门类型
+    Electromagnetism:电磁阀
+    ElectricForce:电动阀
+
+    rateSetting:费率 四位
+    pulseSelection:脉冲当量 四位
+  */
+  class WaterControl {
+    constructor(obj) {
+      this.deviceNo = obj && obj.deviceNo || "000000";
+      this.deviceType = obj && obj.deviceType || "Measure";
+      this.valveType = obj && obj.valveType || "Electromagnetism";
+      this.rateSetting = obj && obj.rateSetting || "0001";
+      this.pulseSelection = obj && obj.pulseSelection || "0600";    
+      
+    }
+  }
+  //卡
+  /**
+    cardId:卡号 十位
+    cardPassword:十二位卡密钥 
+
+    deviceType
+    Measure:计量类型设备06 
+    Timing:计时类型设备07
+
+    valveType:阀门类型
+    Electromagnetism:电磁阀
+    ElectricForce:电动阀
+
+    rateSetting:费率 四位
+
+  */
+
+  class CardControl {
+    constructor(obj) {
+      this.cardId = obj && obj.cardId || "";
+      this.cardPassword = obj && obj.cardPassword || "";
+      this.cardType = obj && obj.cardType || "CPU";
+      this.copyPreventSwitch = obj && obj.copyPreventSwitch || "Close";
+      this.sectorNo = obj && obj.sectorNo || "11";
+      this.encryptMethod = obj && obj.encryptMethod || "Standard";
+      this.outRangeCnt = obj && obj.outRangeCnt || "00";
+    }
+  }
+    /** 消费类
+    minCustom:2位最低余额
+    maxCustom:4位最大消费
+    maxRechargeLine:6位圈存上限(最大余额)
+    
+  */
+  class Consume {
+    constructor(obj) {
+      this.minCustom = obj && obj.minCustom || "1";
+      this.maxCustom = obj && obj.maxCustom || "010";
+      this.maxRechargeLine = obj && obj.maxRechargeLine || "999999";
+      
+    }
+  }
+  
+</script>

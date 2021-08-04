@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-28 18:46:01
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-07-29 17:39:15
+ * @LastEditTime: 2021-08-03 15:08:55
  * @Description: 蓝牙水控新协议
 -->
 <!DOCTYPE html>
@@ -21,7 +21,73 @@
 
 </html>
 <script>
-  
+//水控器相关类
+  /**
+    deviceNo:水控设备号
+    
+    deviceType
+    Measure:计量类型设备06 
+    Timing:计时类型设备07
+
+    valveType:阀门类型
+    Electromagnetism:电磁阀
+    ElectricForce:电动阀
+
+    rateSetting:费率 四位
+    pulseSelection:脉冲当量 四位
+  */
+  class WaterControl {
+    constructor(obj) {
+      this.deviceNo = obj && obj.deviceNo || "000000";
+      this.deviceType = obj && obj.deviceType || "Measure";
+      this.valveType = obj && obj.valveType || "Electromagnetism";
+      this.rateSetting = obj && obj.rateSetting || "0001";
+      this.pulseSelection = obj && obj.pulseSelection || "0600";    
+      
+    }
+  }
+  //卡
+  /**
+    cardId:卡号 十位
+    cardPassword:十二位卡密钥 
+
+    deviceType
+    Measure:计量类型设备06 
+    Timing:计时类型设备07
+
+    valveType:阀门类型
+    Electromagnetism:电磁阀
+    ElectricForce:电动阀
+
+    rateSetting:费率 四位
+
+  */
+
+  class CardControl {
+    constructor(obj) {
+      this.cardId = obj && obj.cardId || "";
+      this.cardPassword = obj && obj.cardPassword || "";
+      this.cardType = obj && obj.cardType || "CPU";
+      this.copyPreventSwitch = obj && obj.copyPreventSwitch || "Close";
+      this.sectorNo = obj && obj.sectorNo || "11";
+      this.encryptMethod = obj && obj.encryptMethod || "Standard";
+      this.outRangeCnt = obj && obj.outRangeCnt || "00";
+    }
+  }
+    /** 消费类
+    minCustom:2位最低余额
+    maxCustom:4位最大消费
+    maxRechargeLine:6位圈存上限(最大余额)
+    
+  */
+  class Consume {
+    constructor(obj) {
+      this.minCustom = obj && obj.minCustom || "1";
+      this.maxCustom = obj && obj.maxCustom || "010";
+      this.maxRechargeLine = obj && obj.maxRechargeLine || "999999";
+      
+    }
+  }
   //命令头
   const commandHead = {
     "SetDeviceNo": "A0",
@@ -84,33 +150,25 @@
     "Close": "00",
     "Open": "01"
   }
-  //费率
-  const rate = "";
-  //water-control
-  class WaterControl {
-    constructor() {
-      
-    }
-  }
 
   /****************************设置机号****************************/
   //第一组：设置机号
-  let info = "123456";
+  let deviceNo = "991133";
   let deviceArrTemp = [];
   //数据区头
   deviceArrTemp.push(commandHead.SetDeviceNo);
-  deviceArrTemp.push(padding2((info.length / 2), 2));
-  deviceArrTemp.push(...arrTwoCut(info));
+  deviceArrTemp.push(padding2((deviceNo.length / 2), 2));
+  deviceArrTemp.push(...arrTwoCut(deviceNo).reverse());
 
   let setDeviceArr = deviceArrTemp.map(function (item, index, array) {
     return '0x' + item;
   });
   console.log(`设置机号:${setDeviceArr}`);
   /****************************设置机号****************************/
-  
+
   /****************************开阀出水****************************/
   //2 开阀出水
-  let deviceNo = "123456";
+  let deviceNoOpen = "123456";
   let cardNo = "1234567890";
   let balance = 0.59;
   //处理余额
@@ -121,10 +179,10 @@
 
   //数据区
   let dataArrOpenValve = [];
-  dataArrOpenValve.push(...arrTwoCut(deviceNo));
+  dataArrOpenValve.push(...arrTwoCut(deviceNoOpen));
   dataArrOpenValve.push(...arrTwoCut(cardNo));
   dataArrOpenValve.push(...arrTwoCut(changeBalance(balance)));
-  
+
   //计算数据区的长度并转成16进制，不足两位进行补齐
   openValveArrTemp.push(DecToHex(dataArrOpenValve.length));
   openValveArrTemp.push(...dataArrOpenValve);
@@ -135,7 +193,7 @@
   console.log(`开阀:${openValveArr}`);
   // 0xA2,0x0B,0x12,0x34,0x56,0x12,0x34,0x56,0x78,0x90,0x00,0x00,0x59
   /****************************开阀出水****************************/
-  
+
   /****************************关阀结账****************************/
   let deviceNoClose = "123456";
   let cardNoClose = "1234567890";
@@ -160,51 +218,52 @@
 
   /****************************设置费率****************************/
   console.log(`******************************设置费率**********************************`);
+  /*****************************************变量区域***********************************/
   let deviceNoSetting = "123456";
   //卡号
   let cardNoSetting = "1234567890";
   //卡秘钥
-  let cardSecretKeySetting="236556988554";
-  //费率
-  let rateSetting="0001";
+  let cardSecretKeySetting = "236556988554";
+  //费率0.01
+  let rateSetting = "0001";
   //最小消费
-  let minCustom="1";
+  let minCustom = "1";
   //最大消费
-  let maxCustom="010";
+  let maxCustom = "010";
   //机型
-  let sDeviceType=deviceType["Measure"];
+  let sDeviceType = deviceType["Measure"];
   //6为圈存上线
-  let maxRechargeLine="105000";
+  let maxRechargeLine = "105000";
   //脉冲当量
-  let sPulseSelection="0600";
+  let sPulseSelection = "0600";
   //阀形
-  let sValveType=valveType["Electromagnetism"];
+  let sValveType = valveType["Electromagnetism"];
   //扇区
-  let sSectorNo="11";
+  let sSectorNo = "11";
   //加密方式
-  let sEncryptMethod=encryptMethod["Standard"];
+  let sEncryptMethod = encryptMethod["Standard"];
+  //卡类型
+  let sCardType = cardType["CPU"];
 
   //卡类型
-  let sCardType=cardType["CPU"];
-  
-  //卡类型
-  let sSwitch=copyPreventSwitch["Close"];
+  let sSwitch = copyPreventSwitch["Close"];
   //预留
-  let sBak="00000000";
+  let sBak = "00000000";
   //设置区
-  let settingArrTemp=[];
+  let settingArrTemp = [];
   settingArrTemp.push(commandHead.SetParameter);
 
   //扇区
-  let sOutRangeCnt="11";
+  let sOutRangeCnt = "11";
+    /*****************************************变量区域***********************************/
   console.log(`******************************设置费率数据区**********************************`);
   //数据区
   let dataArrSetting = [];
   dataArrSetting.push(...arrTwoCut(rateSetting));
   console.log(`设置--费率:${dataArrSetting},当前长度${dataArrSetting.length}`);
-  dataArrSetting.push(padding2(minCustom,2));
+  dataArrSetting.push(padding2(minCustom, 2));
   console.log(`设置--最小金额:${dataArrSetting},当前长度${dataArrSetting.length}`);
-  dataArrSetting.push(...arrTwoCut(padding2(maxCustom,4)));
+  dataArrSetting.push(...arrTwoCut(padding2(maxCustom, 4)));
   console.log(`设置--最大金额:${dataArrSetting},当前长度${dataArrSetting.length}`);
   dataArrSetting.push(...arrTwoCut(cardNoSetting));
   console.log(`设置--卡号:${dataArrSetting},当前长度${dataArrSetting.length}`);
@@ -226,12 +285,12 @@
   console.log(`设置--卡类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
   dataArrSetting.push(sSwitch.toString());
   console.log(`设置--防复制开关类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
-  dataArrSetting.push(padding2(DecToHex(sOutRangeCnt),2));
+  dataArrSetting.push(padding2(DecToHex(sOutRangeCnt), 2));
   console.log(`设置--防复制容限次数类型:${dataArrSetting},当前长度${dataArrSetting.length}`);
   dataArrSetting.push(...arrTwoCut(sBak));
   console.log(`设置--预留位:${dataArrSetting},当前长度${dataArrSetting.length}`);
   console.log(`******************************设置费率数据区**********************************`);
-    //计算数据区的长度并转成16进制，不足两位进行补齐
+  //计算数据区的长度并转成16进制，不足两位进行补齐
   settingArrTemp.push(DecToHex(dataArrSetting.length));
   settingArrTemp.push(...dataArrSetting);
   let settingArr = settingArrTemp.map(function (item, index, array) {
@@ -240,22 +299,11 @@
   // dataArrSetting.push(...arrTwoCut(padding2(deviceNoSetting,4)));
   console.log(`设置费率:${settingArr}`);
 
-  
+
   console.log(`******************************设置费率**********************************`);
 
-
-
-
-
-
-
-
-
-
-
-
   /****************************设置费率****************************/
-  
+
   /****************************功能函数****************************/
   //2位补齐
   function padding2(num, length) {
@@ -285,7 +333,5 @@
   function DecToHex(str) {
     return padding2((parseInt(str).toString(16)).toUpperCase(), 2);
   }
-
-
   /****************************功能函数****************************/
 </script>
