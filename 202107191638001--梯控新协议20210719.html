@@ -190,14 +190,48 @@
     }],
     "rows": 
       [{
-          "DeviceNo": "12",
-          "Command": "1,2,3,4,5,6,19,20,21,22,23,24,13,14,15,16,17,18,7,8,9,10,11,12",
+          "DeviceNo": "1",
+          "Command": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24",
+          "CallType": "HandControl",
+          "callType":"HandControl",
+          "isAutomation":"0"
+      },
+      {
+          "DeviceNo": "3",
+          "Command": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+          "CallType": "HandControl",
+          "callType":"HandControl",
+          "isAutomation":"0"
+      },
+      {
+          "DeviceNo": "4",
+          "Command": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
           "CallType": "HandControl",
           "callType":"HandControl",
           "isAutomation":"0"
       }
     ]
 }`;
+
+
+//   var floorInfo = `{
+//     "resultCode": "0",
+//     "Msg": "success",
+//     "total": "0",
+//     "rowsType": [{
+//         "PersonCardNO": "3511613098",
+//         "CardType": "UserCard"
+//     }],
+//     "rows": 
+//       [{
+//           "DeviceNo": "12",
+//           "Command": "1,2,3,4,5,6,19,20,21,22,23,24,13,14,15,16,17,18,7,8,9,10,11,12",
+//           "CallType": "HandControl",
+//           "callType":"HandControl",
+//           "isAutomation":"0"
+//       }
+//     ]
+// }`;
   //elevator
   var arrElevatorList = [];
   var floorObj = JSON.parse(floorInfo);
@@ -217,6 +251,8 @@
     arrElevatorList.push(...arrTemp);
   }
   arrElevatorList.push(...arrFloorTempList);
+  //社区号
+  arrElevatorList.push('0x01');
   arrElevatorList.push('0x0d');
   arrElevatorList.push('0x0a');
   console.log(`最终数组:${arrElevatorList}`);
