@@ -1,0 +1,61 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-30 09:48:52
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-30 13:27:24
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据栈处理</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  // class StatusCls {
+  //   constructor() {
+  //     this._nowStatus = "";
+  //   }
+  //   changeStatus(status) {
+  //     this._nowStatus="";
+  //   }
+  // }
+
+  // 安全的工厂方法
+  var Factory = function (type, content) {
+    if (this instanceof Factory) {
+      var s = new this[type](content);
+      return s;
+    }
+    else {
+      return new Factory(type, content);
+    }
+  }
+  //工厂原型中创建所有类型的数据对象的基类
+  Factory.prototype = {
+    Java: function (content) {
+      //具体实现
+      console.log("Javacontent:" + content);
+    },
+    Net: function (content) {
+      //具体实现
+      console.log("NetContent:" + content);
+    },
+    Python: function (content) {
+      //具体实现
+      console.log("PythonContent:" + content);
+    }
+  }
+
+  var sFactory2 = new Factory('Net', 'HelloWorld Net');
+</script>

@@ -1,0 +1,82 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-27 08:50:06
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-30 13:58:39
+ * @Description: eval执行相关的函数方法
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eval</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+  // 安全的工厂方法
+  var FactoryCls = function (type) {
+    if (this instanceof FactoryCls) {
+      var s = new this[type]();
+      return s;
+    }
+    else {
+      return new FactoryCls(type);
+    }
+  }
+  //工厂原型中创建所有类型的数据对象的基类
+  FactoryCls.prototype = {
+    openAt: function () {
+      console.log("1、openAt函数执行了");
+      changeFunction(funcArrayInfo, arrayFunCallback);
+      console.log("当前数组：" + funcArrayInfo);
+    },
+    setBleName: function () {
+      console.log("2、setBleName函数执行了");
+      changeFunction(funcArrayInfo, arrayFunCallback);
+      console.log("当前数组：" + funcArrayInfo);
+    },
+    exitAT: function () {
+      console.log("3、setBleName函数执行了");
+      changeFunction(funcArrayInfo, arrayFunCallback);
+      console.log("当前数组：" + funcArrayInfo);
+    }
+  }
+
+  const arrayFunCallback = ["waitingNotice"];
+  let funcArrayInfo = ["openAt", "waitingNotice", "setBleName", "waitingNotice", "exitAT", "waitingNotice"];
+  changeFunction(funcArrayInfo, arrayFunCallback);
+  //功能切换
+  function changeFunction(localArray, arrayFunCallback) {
+    console.log("执行函数数组：" + funcArrayInfo);
+    if (localArray.length == 0) {
+      console.log("数组已经全部执行完");
+      return false;
+    } else {
+      var method = localArray.shift();
+      console.log("执行函数名：" + method);
+      if (arrayFunCallback.indexOf(method) != -1) {
+        return false;
+      } else {
+        var sFactory2 = FactoryCls(method);
+      }
+      console.log("执行函数名：" + funcArrayInfo);
+    }
+  }
+
+  //回调函数
+  function waitingNotice() {
+    changeFunction(funcArrayInfo, arrayFunCallback);
+    console.log("当前数组：" + funcArrayInfo);
+  }
+
+
+</script>

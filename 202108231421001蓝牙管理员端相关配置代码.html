@@ -1,0 +1,101 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-23 14:21:35
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-23 15:42:45
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <title>蓝牙管理员端相关配置代码</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  var decToHex = function (str) {
+    return padding2((parseInt(str).toString(16)).toUpperCase(), 2);
+  }
+  //2位补齐
+  const padding2 = function (num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+
+  //16进制--->arraybuffer
+  const hex2ab = function (str) {
+    if (!str) {
+      return new ArrayBuffer(0);
+    }
+    var buffer = new ArrayBuffer(str.length);
+    let dataView = new DataView(buffer);
+    let pos = 0;
+    for (var i = 0, len = str.length; i < len; i += 2) {
+      let code = parseInt(str.substr(i, 2), 16);
+      dataView.setUint8(pos, code);
+      pos++;
+    }
+    return buffer;
+  }
+/******************************AT指令开启**************************************/
+  //
+  var str = "+++a";
+  let arrAtOpen = [];
+  for (let i = 0; i < str.length; i++) {
+    arrAtOpen.push(decToHex(str[i].charCodeAt()))
+  }
+  arrAtOpen.push('0D');
+  arrAtOpen.push('0A');
+  console.log(`当前生成数组：${arrAtOpen}`);
+  let infoab = hex2ab(...arrAtOpen);
+  console.log(`当前生成的---->AB：${infoab}`);
+
+/******************************AT指令开启结束**************************************/
+
+
+
+
+/******************************AT修改蓝牙名称**************************************/
+  //修改蓝牙名称变量（输入）
+  var strChangeBleName = "AT+NAME=WH-chenn";
+  let arrAtChange = [];
+  for (let i = 0; i < strChangeBleName.length; i++) {
+    arrAtChange.push(decToHex(strChangeBleName[i].charCodeAt()));
+  }
+  arrAtChange.push('0D');
+  arrAtChange.push('0A');
+  console.log(`修改蓝牙名称生成数组：${arrAtChange.join('')}`);
+  let infoabChange = hex2ab(...arrAtChange);
+  console.log(`修改蓝牙名称---->AB：${infoabChange}`);
+
+/******************************AT修改蓝牙名称结束***********************************/
+
+
+
+
+/******************************退出AT命令**************************************/
+  //修改蓝牙名称变量（输入）
+  var strExitAT = "AT+ENTM";
+  let arrExitAT = [];
+  for (let i = 0; i < strExitAT.length; i++) {
+    arrExitAT.push(decToHex(strExitAT[i].charCodeAt()));
+  }
+  arrExitAT.push('0D');
+  arrExitAT.push('0A');
+  console.log(`修改蓝牙名称生成数组：${arrExitAT.join('')}`);
+  let infoabExitAT = hex2ab(...arrExitAT);
+  console.log(`修改蓝牙名称---->AB：${infoabExitAT}`);
+
+/******************************退出AT命令*************************************/
+</script>

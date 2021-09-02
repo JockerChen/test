@@ -1,0 +1,150 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-23 15:50:49
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-30 14:28:06
+ * @Description: 状态机管理
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>状态机管理</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  const CorrectStateEnum = [{
+    "StateCode": "01",
+    "StateName": "设置机号指令",
+    "StateToast": "设置机号成功",
+  },
+  {
+    "StateCode": "02",
+    "StateName": "设置配置指令",
+    "StateToast": "设置配置费率指令成功",
+  },
+  {
+    "StateCode": "03",
+    "StateName": "开闸指令",
+    "StateToast": "开闸指令发送成功",
+  },
+  {
+    "StateCode": "04",
+    "StateName": "关闸指令",
+    "StateToast": "关闸指令发送成功",
+    "StateBak": "",
+  }
+  ]
+
+  //ERROR状态枚举
+  const ErrorStateEnum = [{
+    "StateCode": "01",
+    "StateName": "设置机号指令",
+    "StateToast": "设置机号指令失败",
+  },
+  {
+    "StateCode": "02",
+    "StateName": "设置配置指令",
+    "StateToast": "设置配置费率指令失败",
+  },
+  {
+    "StateCode": "03",
+    "StateName": "开闸指令",
+    "StateToast": "发送的卡号存储失败",
+  },
+  {
+    "StateCode": "04",
+    "StateName": "开闸指令",
+    "StateToast": "发送的机号与本机机号不一致",
+  },
+  {
+    "StateCode": "05",
+    "StateName": "关闸指令",
+    "StateToast": " 发送的卡号与本机存储的卡号不一致",
+  },
+  {
+    "StateCode": "06",
+    "StateName": "关闸指令",
+    "StateToast": " 发送的机号与本机机号不一致",
+  },
+  {
+    "StateCode": "07",
+    "StateName": "关闸指令",
+    "StateToast": " 本机存储的卡号有误（CRC校验错）",
+  },
+  {
+    "StateCode": "08",
+    "StateName": "通用指令",
+    "StateToast": "余额>大于最大圈存余额",
+  },
+  {
+    "StateCode": "09",
+    "StateName": "通用指令",
+    "StateToast": "余额<最低余额",
+  },
+  {
+    "StateCode": "10",
+    "StateName": "通用指令",
+    "StateToast": "设置时钟失败",
+  },
+  {
+    "StateCode": "11",
+    "StateName": "通用指令",
+    "StateToast": "控水数据超过有效时间",
+  }
+  ]
+  //正确状态码枚举
+  const headState = {
+    "C200": CorrectStateEnum,
+    "E500": ErrorStateEnum,
+    "A+OK": "进入AT指令成功",
+    "+ENTM:OK": "退出AT指令成功"
+  }
+
+  function retStateToast(event) {
+    let money = null;
+    let eventHead = event.substring(0, 4);
+    console.log(typeof headState[eventHead]);
+    if (typeof headState[eventHead] === "string") {
+      return headState[eventHead];
+    }
+    console.log(headState[eventHead]);
+    let arr = Array.from(headState[eventHead])
+    console.log(typeof arr);
+    let eventBody = event.substring(4, 6);
+    let ret = arr.filter(function (item) {
+      return item.StateCode === eventBody;
+    })
+    if (ret[0].hasOwnProperty("StateBak")) {
+      money = event.substring(6, 18);
+      console.log(money, money.length);
+    }
+    return money === null ? ret[0].StateToast : money;
+  }
+
+  // var event = "C20004000010000000";
+  var event = "A+OK";
+  console.log(`【水控】${retStateToast(event)}`);
+  let ret = retStateToast(event);
+  console.log(ret, typeof ret);
+  var regex = /\d/;
+  if (ret.match(regex)) {
+    alert("数字");
+  }
+  else {
+    alert("文字");
+  }
+
+
+
+
+</script>

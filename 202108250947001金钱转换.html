@@ -1,0 +1,54 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-25 09:48:05
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-25 14:15:19
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>金钱转换</title>
+  <script src="js/jquery-1.7.2.min.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+  //处理金钱
+  var changeBalance = function (str) {
+    str = parseFloat(str).toFixed(2);
+    str = padding2(parseInt(str.split('.')[0]), 4) + str.split('.')[1];
+    let arrBalanceInfo = str.toString().replace(".", "");
+    console.log('【处理金钱函数】', arrBalanceInfo);
+    return arrBalanceInfo;
+  }
+  var str1 = "0.1";
+  console.log(changeBalance(str1));
+  //2位补齐
+  function padding2(num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+
+
+
+  //BCD码转化成金钱
+let str="000000323100";
+function insertStr(str,index,add){
+  var arr=str.split('');
+  arr.splice(index, 0, add);
+  return arr.join(''); 
+}
+console.log(parseFloat(insertStr(str,6,'.')).toFixed(2));
+</script>

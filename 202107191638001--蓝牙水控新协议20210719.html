@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-28 18:46:01
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-08-03 15:08:55
+ * @LastEditTime: 2021-08-18 15:25:18
  * @Description: 蓝牙水控新协议
 -->
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
     Measure:计量类型设备06 
     Timing:计时类型设备07
 
-    valveType:阀门类型
+     Type:阀门类型
     Electromagnetism:电磁阀
     ElectricForce:电动阀
 
@@ -170,13 +170,12 @@
   //2 开阀出水
   let deviceNoOpen = "123456";
   let cardNo = "1234567890";
-  let balance = 0.59;
+  let balance = 5000.00;
   //处理余额
   // let balanceArrTemp=arrTwoCut(changeBalance(balance));
 
   let openValveArrTemp = [];
   openValveArrTemp.push(commandHead.OpenValve);
-
   //数据区
   let dataArrOpenValve = [];
   dataArrOpenValve.push(...arrTwoCut(deviceNoOpen));

@@ -1,0 +1,47 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-08-24 09:04:01
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-08-24 09:46:24
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>设置蓝牙读写通道数据</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  let BleCharacteristics = {
+    notify: "",
+    write: ""
+  };
+  let chartList = [
+    { properties: { notify: true, write: false, indicate: false, read: false }, uuid: "0003CDD1-0000-1000-8000-00805F9B0131" },
+    { properties: { notify: false, write: true, indicate: false, read: false }, uuid: "0003CDD2-0000-1000-8000-00805F9B0131" }
+  ];
+  let type = ["notify", "write", "read"];
+  for (let typeIndex = 0; typeIndex < type.length; typeIndex++) {
+    let ret = chartList.filter(function (item) {
+      return item.properties[type[typeIndex]] === true;
+    })
+    if (ret.length == 0) {
+      continue;
+    }
+    BleCharacteristics[type[typeIndex]] = ret[0].uuid;
+  }
+
+  console.log(BleCharacteristics);
+
+
+</script>
