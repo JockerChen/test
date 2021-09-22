@@ -1,40 +1,27 @@
 /*
  * @Author: [JokerChen]
- * @Date: 2021-07-03 17:06:53
+ * @Date: 2021-09-02 14:46:15
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-07-06 10:32:10
+ * @LastEditTime: 2021-09-02 16:46:33
  * @Description: 
  */
-'use strict';
-import React from 'react';
-import Comment from './Comment'
-
+import React from 'react'
+import CommentItem from './CommentItem'
 class CommentList extends React.Component {
   render () {
-    var commentNode = this.props.data.map(comment => {
+    let commentNodes=this.props.data.map(comments=>{
       return (
-        <Comment author={comment.author} date={comment.date}>{comment.text}</Comment>
+        <CommentItem author={comments.author} time={comments.time}>
+          {comments.content}
+        </CommentItem>
       )
     });
 
     return (
       <div>
-        {commentNode}
+        {commentNodes}
       </div>
-    )
-    // return (
-    //   <div>
-    //     {/* 其中aaaaa部分为子组件的this.props.children的属性值 */}
-
-    //     for(var i =0;i<commentNode.length;i++)        {
-    //       <Comment author="{commentNode.author}" date="{commentNode.date}">{commentNode.text}</Comment>
-    //     }
-    //     {/* <Comment author="Joker" date="1分钟前">aaaaa</Comment>
-    //     <Comment author="JokerC" date="3分钟前">bbbbb</Comment>
-    //     <Comment author="JokerN" date="6分钟前">cccc</Comment> */}
-    //   </div>
-    // )
+    );
   }
 }
-
 export { CommentList as default };
