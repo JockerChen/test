@@ -25,3 +25,4 @@ User.prototype.collection=function(){
     //console.log("ID:"+this.id+"收藏次数:100");
 
 }
+U
