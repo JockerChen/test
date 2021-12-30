@@ -1,0 +1,58 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-12-29 09:51:54
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-12-29 09:55:13
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+let cardTypeEnum = [{
+    "TypeName":"全兼容卡",
+    "TypeText":"All",
+    "TypeValue":"00",
+    "TypeRetValue":"0",
+  },
+  {
+    "TypeName":"CPU卡",
+    "TypeText":"CPU",
+    "TypeValue":"01",
+    "TypeRetValue":"1",
+  },
+  {
+    "TypeName":"扇区卡",
+    "TypeText":"SectorCard",
+    "TypeValue":["02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"],
+    "TypeRetValue":"1",
+  }];
+  function getTypeName(arr, value, key) {
+    let filterArr = arr.filter(function(item,index,array){
+      console.log(1);
+      if( item.TypeValue instanceof Array){
+        console.log(item.TypeValue);
+        console.log(item.TypeValue.indexOf(value));
+        return item.TypeValue[item.TypeValue.indexOf(value)];
+      }
+      else
+      {
+        return item.TypeValue==value;
+      }
+      console.log(3);
+    });
+    return filterArr[0]?.[key];
+    // return arr.filter(item=>  item.TypeValue==value)[0]?.[key];
+  }
+console.log(getTypeName(cardTypeEnum, "02", "TypeName"));
+  
+</script>

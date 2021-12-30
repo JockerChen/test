@@ -2,7 +2,7 @@
  * @Author: [JokerChen]
  * @Date: 2021-07-28 18:46:01
  * @LastEditors: [JokerChen]
- * @LastEditTime: 2021-08-18 15:25:18
+ * @LastEditTime: 2021-12-24 14:18:16
  * @Description: 蓝牙水控新协议
 -->
 <!DOCTYPE html>
@@ -43,7 +43,6 @@
       this.valveType = obj && obj.valveType || "Electromagnetism";
       this.rateSetting = obj && obj.rateSetting || "0001";
       this.pulseSelection = obj && obj.pulseSelection || "0600";    
-      
     }
   }
   //卡
@@ -85,7 +84,6 @@
       this.minCustom = obj && obj.minCustom || "1";
       this.maxCustom = obj && obj.maxCustom || "010";
       this.maxRechargeLine = obj && obj.maxRechargeLine || "999999";
-      
     }
   }
   //命令头
@@ -112,7 +110,7 @@
   */
   const sectorNo = ["02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f"];
   /*
-    sectorNo:加密方式
+    encryptMethod:加密方式
     Standard:标准密钥
     OneCardEncrypt:一卡一密
   */

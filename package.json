@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JockerChen/test#readme",
   "dependencies": {
+    "axios": "^0.24.0",
     "dgram": "^1.0.1",
     "eslint": "^7.30.0",
     "koa": "^2.13.0",

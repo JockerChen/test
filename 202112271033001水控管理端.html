@@ -1,0 +1,251 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-12-27 10:33:21
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-12-28 19:25:49
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>水控费率设置</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+let info=`{
+  "resultCode": "200",
+  "resultMsg": "成功",
+  "data": [
+    {
+      "deviceNo": "123456",
+      "deviceName": "水控",
+      "deviceType": "6",
+      "rateSetting": "1",
+      "minCustom": "1",
+      "maxCustom": "1000",
+      "pulseSelection": "0400",
+      "sectorNo": "02",
+      "encryptMethod": "0",
+      "cardEncryption": "1E010EFFFFFF",
+      "valveType": "0",
+      "cardType": "0",
+      "copySwitch": "0",
+      "copySwitchNum": "0"
+    }
+  ]
+}`;
+
+
+
+class WaterControl {
+  constructor(obj) {
+    this.deviceNo = obj && obj.deviceNo || "000000";//自己手动设置
+    this.deviceType = obj && obj.deviceType || "Measure";
+    this.valveType = obj && obj.valveType || "Electromagnetism";
+    this.rateSetting = obj && obj.rateSetting || "0001";
+    this.pulseSelection = obj && obj.pulseSelection || "0600";    
+  }
+  
+  //设置设备号
+  setDeviceNo(sDeviceNo){
+    this.deviceNo =sDeviceNo;
+    return this;
+  }
+  //获取设备号
+  getDeviceNo(){
+    return this.deviceNo;
+  }
+  //设置设备类型
+  setDeviceType(sDeviceType){
+    this.deviceType =sDeviceType;
+    return this;
+  }
+  //获取设备类型
+  getDeviceType(){
+    return this.deviceNo;
+  }
+  //设置水控类型
+  setValveType(sValveType){
+    this.valveType =sValveType;
+    return this;
+  }
+  //获取水控类型
+  getValveType(){
+    return this.valveType;
+  }
+
+  //设置消费费率
+  setRateSetting(sRateSetting){
+    this.rateSetting =sRateSetting;
+    return this;
+  }
+  //获取消费费率
+  getRateSetting(){
+    return this.rateSetting;
+  }
+  
+  //设置脉冲当量
+  setPulseSelection(sPulseSelection){
+    this.pulseSelection =sPulseSelection;
+    return this;
+  }
+  //获取脉冲当量
+  getPulseSelection(){
+    return this.pulseSelection;
+  }
+
+  
+}
+/**
+    cardId:卡号
+    cardPassword：卡密码
+    cardType:卡类型 0----全兼容     1----CPU卡      2-----17扇区卡
+    copyPreventSwitch:防复制开关 0----关      1----开
+    copyPreventCount:防复制容限次数
+    sectorNo：扇区号
+    encryptMethod：加密方式 0----全兼容     1----CPU卡      2-----17扇区卡
+    rateSetting :费率 四位
+    outRangeCnt：超限次数
+  */
+
+class CardControl {
+  constructor(obj) {
+    this.cardId = obj && obj.cardId || "";
+    this.cardPassword = obj && obj.cardPassword || "";
+    this.cardType = obj && obj.cardType || "CPU";
+    this.copyPreventSwitch = obj && obj.copyPreventSwitch || "Close";
+    this.copyPreventCount = obj && obj.copyPreventCount || "0";//防复制容限次数
+    this.sectorNo = obj && obj.sectorNo || "11";
+    this.encryptMethod = obj && obj.encryptMethod || "Standard";
+    this.outRangeCnt = obj && obj.outRangeCnt || "00";
+    
+    
+  }
+}
+
+class Consume {
+  constructor(obj) {
+    //最小消费金额
+    this.minCustom = obj && obj.minCustom || "1";
+    //最大消费金额
+    this.maxCustom = obj && obj.maxCustom || "010";
+    //6位圈存上线
+    this.maxRechargeLine = obj && obj.maxRechargeLine || "999999";
+  }
+}
+
+/*
+  Measure:计量类型设备
+  Timing:计时类型设备
+*/
+const deviceType = [{
+  "TypeName":"计量型",
+  "TypeText":"Measure",
+  "TypeValue":"06",
+  "TypeRetValue":"6",
+},
+{
+  "TypeName":"计时型",
+  "TypeText":"Timing",
+  "TypeValue":"07",
+  "TypeRetValue":"7",
+}]
+/*
+  pulseSelection:脉冲当量
+*/
+const pulseSelection = ["0400", "0500", "0600", "0700", "0800"];
+/*
+  sectorNo:扇区号
+*/
+const sectorNo = ["02", "03", "04", "05", "06", "07", "08", "09", "0a", "0b", "0c", "0d", "0e", "0f"];
+/*
+  sectorNo:加密方式
+  Standard:标准密钥
+  OneCardEncrypt:一卡一密
+*/
+const encryptMethod = [{
+  "TypeName":"标准密钥",
+  "TypeText":"Standard",
+  "TypeValue":"00",
+  "TypeRetValue":"0",
+},
+{
+  "TypeName":"一卡一密",
+  "TypeText":"OneCardEncrypt",
+  "TypeValue":"01",
+  "TypeRetValue":"1",
+}];
+
+
+/*
+  valveType:阀门类型
+  Electromagnetism:电磁阀
+  ElectricForce:电动阀
+*/
+const valveType = [{
+  "TypeName":"电磁阀",
+  "TypeText":"Electromagnetism",
+  "TypeValue":"00",
+  "TypeRetValue":"0",
+},
+{
+  "TypeName":"电动阀",
+  "TypeText":"ElectricForce",
+  "TypeValue":"01",
+  "TypeRetValue":"1",
+}];
+
+const cardTypeEnum = [{
+  "TypeName":"全兼容卡",
+  "TypeText":"All",
+  "TypeValue":"00",
+  "TypeRetValue":"0",
+},
+{
+  "TypeName":"CPU卡",
+  "TypeText":"CPU",
+  "TypeValue":"01",
+  "TypeRetValue":"1",
+},
+{
+  "TypeName":"扇区卡",
+  "TypeText":"SectorCard",
+  "TypeValue":["02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"],
+  "TypeRetValue":"1",
+}];
+/*
+    cardType:卡类型
+    All:全扇区
+    SectorCard:扇区卡
+  */
+const cardType = {
+  "All": "00",
+  "CPU": "01",
+  "SectorCard": ["02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15"]
+}
+
+/*
+  copySwitch:防复制
+  Close:关
+  Open:开
+*/
+const copyPreventSwitch = [{
+  "TypeName":"防复制关",
+  "TypeText":"Close",
+  "TypeValue":"00",
+  "TypeRetValue":"0",
+},
+{
+  "TypeName":"防复制开",
+  "TypeText":"Open",
+  "TypeValue":"01",
+  "TypeRetValue":"1",
+}];
+
+</script>

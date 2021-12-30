@@ -1,0 +1,64 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-12-28 13:29:28
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-12-28 14:07:35
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性重置后输出</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+let dataInfo=`{
+  "resultCode": "200",
+  "resultMsg": "成功",
+  "data": [
+    {
+      "deviceNo": "123456",
+      "deviceName": "水控",
+      "deviceType": "6",
+      "rateSetting": "1",
+      "minCustom": "1",
+      "maxCustom": "1000",
+      "pulseSelection": "0400",
+      "sectorNo": "02",
+      "encryptMethod": "0",
+      "cardEncryption": "1E010EFFFFFF",
+      "valveType": "0",
+      "cardType": "0",
+      "copySwitch": "0",
+      "copySwitchNum": "0"
+    }
+  ]
+}`;
+ //2位补齐
+ const padding2 = function (num, length) {
+  if ((num + "").length >= length) {
+    return num;
+  }
+  return padding2("0" + num, length)
+}
+
+console.log(dataFilter(JSON.parse(dataInfo).data[0]));
+//数据同化
+function dataAssimilationFun(obj) {
+  let dataInfo ={};
+  for (var prop in obj){
+      if(obj.hasOwnProperty(prop)){
+          dataInfo[prop]=padding2(obj[prop],2);
+      }
+  }
+  return dataInfo;
+}
+
+
+</script>

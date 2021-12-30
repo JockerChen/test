@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+var info=[{"deviceNo":"1","deviceName":"1#一单元","command":"1,2,3,4,5,6,7","callType":"HandControl","isAutomation":"2","checked":true},{"deviceNo":"5","deviceName":"3#一单元","command":"2,3","callType":"HandControl","isAutomation":"2","checked":true},{"deviceNo":"6","deviceName":"3#二单元","command":"6","callType":"HandControl","isAutomation":"2","checked":true},{"deviceNo":"7","deviceName":"4#一单元","command":"5","callType":"HandControl","isAutomation":"2","checked":true},{"deviceNo":"8","deviceName":"5#一单元","command":"4","callType":"HandControl","isAutomation":"2","checked":true},{"deviceNo":"9","deviceName":"6#一单元","command":"7","callType":"HandControl","isAutomation":"2","checked":false}];
+
+let bbb=info.filter(function (item) {
+  return true === item.checked;
+});
+
+console.log(bbb);
+</script>

@@ -1,0 +1,52 @@
+<!--
+ * @Author: [JokerChen]
+ * @Date: 2021-12-28 13:13:10
+ * @LastEditors: [JokerChen]
+ * @LastEditTime: 2021-12-28 13:25:39
+ * @Description: 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象数组过滤</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+    //根据当前的设备信息获取相关的设备类型
+  const deviceType = [{
+    "TypeName":"计量型",
+    "TypeText":"Measure",
+    "TypeValue":"06",
+    "TypeRetValue":"6",
+  },
+  {
+    "TypeName":"计时型",
+    "TypeText":"Timing",
+    "TypeValue":"07",
+    "TypeRetValue":"7",
+  }];
+
+  console.log(getTypeName(deviceType, "5",'TypeName'));
+  //需要过滤的数据类型arr
+  //对应的返回值
+  //需要用到的返回值
+  
+  function getTypeName(arr, value, key) {
+    return arr.filter(item=>item.TypeRetValue==value)[0]?.[key];
+  }
+
+  //2位补齐
+  const padding2 = function (num, length) {
+    if ((num + "").length >= length) {
+      return num;
+    }
+    return padding2("0" + num, length)
+  }
+</script>

@@ -1,15 +1,9 @@
-<!--
- * @Author: [JokerChen]
- * @Date: 2020-01-08 19:43:57
- * @LastEditors  : [JokerChen]
- * @LastEditTime : 2020-01-08 20:11:22
- * @Description: ES6.0面向对象相关学习及介绍
- -->
-#ES6.0面向对象
+# ES6.0面向对象
+
   ES6.0面向对象：
     - 声明部分：在ES6中面向对象进行了优化
     - 继承部分
-###声明部分
+### 声明部分
 ```javascript
 //类声明
 class UserInfo{
@@ -32,7 +26,7 @@ user.showName();
 user.showPwd();
 ```
 
-###继承部分
+### 继承部分
 ```javascript
 //教师信息继承用户信息
 class TeacherUserInfo extends UserInfo{
